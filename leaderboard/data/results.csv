@@ -1,0 +1,2 @@
+﻿config_id,harness_id,model_version,track,split,pass_at_budget,first_pass_rate,m2_f1,m3_regression_pass,wall_clock_s,repair_rounds,tokens_out,unverified_claims,time_to_first_runnable_s,self_check_actions,F,R,V,E,quality_given_pass,cost_to_pass_usd,ci_low,ci_high,significance_group,notes
+PLACEHOLDER_NO_RUN,—,—,CE-Frozen,POST,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—,no evaluated configuration exists; every cell is an explicit placeholder; do not replace by hand

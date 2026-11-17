@@ -1,0 +1,1891 @@
+{
+  "task_count": 111,
+  "domains": {
+    "visualization": 73,
+    "frontend": 67,
+    "svg-art": 51,
+    "3d": 38,
+    "audio": 28,
+    "animation-video": 23,
+    "game": 20,
+    "composite": 4
+  },
+  "tasks": [
+    {
+      "task_id": "case-001",
+      "title": "制作日式樱花山谷",
+      "domains": [
+        "3d",
+        "animation-video",
+        "frontend",
+        "game"
+      ],
+      "code2_tags": [
+        "code2game",
+        "code23d",
+        "code2world",
+        "code2video",
+        "code2html",
+        "code2css",
+        "code2frontend"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T01:07:10+00:00",
+      "prompt_chars": 2237
+    },
+    {
+      "task_id": "case-009",
+      "title": "复刻 QQ 飞车",
+      "domains": [
+        "3d",
+        "game"
+      ],
+      "code2_tags": [
+        "code2game",
+        "code23d"
+      ],
+      "prompt_status": "transcribed",
+      "published_at": "2026-09-23T02:24:37+00:00",
+      "prompt_chars": 107
+    },
+    {
+      "task_id": "case-010",
+      "title": "复刻运输船枪战地图",
+      "domains": [
+        "3d",
+        "game"
+      ],
+      "code2_tags": [
+        "code2game",
+        "code23d"
+      ],
+      "prompt_status": "transcribed",
+      "published_at": "2026-09-23T02:24:37+00:00",
+      "prompt_chars": 84
+    },
+    {
+      "task_id": "case-011",
+      "title": "3D 鹈鹕海岸骑行",
+      "domains": [
+        "3d"
+      ],
+      "code2_tags": [
+        "code23d"
+      ],
+      "prompt_status": "transcribed",
+      "published_at": "2026-09-23T02:24:37+00:00",
+      "prompt_chars": 64
+    },
+    {
+      "task_id": "case-027",
+      "title": "极光玻璃呼吸冥想页",
+      "domains": [
+        "3d",
+        "frontend",
+        "visualization"
+      ],
+      "code2_tags": [
+        "code23d",
+        "code2canvas",
+        "code2frontend"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 1083
+    },
+    {
+      "task_id": "case-028",
+      "title": "赛博朋克雨夜街景",
+      "domains": [
+        "animation-video",
+        "audio",
+        "frontend",
+        "game",
+        "visualization"
+      ],
+      "code2_tags": [
+        "code2game",
+        "code2canvas",
+        "code2frontend",
+        "code2audio",
+        "code2video"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 1042
+    },
+    {
+      "task_id": "case-029",
+      "title": "瑞士风格海报生成器",
+      "domains": [
+        "composite"
+      ],
+      "code2_tags": [],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 1024
+    },
+    {
+      "task_id": "case-030",
+      "title": "黄铜太阳系仪",
+      "domains": [
+        "3d",
+        "audio",
+        "svg-art",
+        "visualization"
+      ],
+      "code2_tags": [
+        "code23d",
+        "code2world",
+        "code2svg",
+        "code2viz",
+        "code2audio"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 1159
+    },
+    {
+      "task_id": "case-031",
+      "title": "水中晕染的水墨",
+      "domains": [
+        "svg-art",
+        "visualization"
+      ],
+      "code2_tags": [
+        "code2svg",
+        "code2canvas",
+        "code2viz"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 1049
+    },
+    {
+      "task_id": "case-032",
+      "title": "新粗野主义唱片杂志",
+      "domains": [
+        "audio",
+        "frontend",
+        "svg-art"
+      ],
+      "code2_tags": [
+        "code2svg",
+        "code2css",
+        "code2frontend",
+        "code2audio"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 1034
+    },
+    {
+      "task_id": "case-033",
+      "title": "拟态多声部合成器",
+      "domains": [
+        "audio",
+        "frontend",
+        "game",
+        "visualization"
+      ],
+      "code2_tags": [
+        "code2game",
+        "code2canvas",
+        "code2frontend",
+        "code2viz",
+        "code2audio"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 1148
+    },
+    {
+      "task_id": "case-034",
+      "title": "灯塔守望者长篇专题",
+      "domains": [
+        "3d",
+        "frontend",
+        "svg-art"
+      ],
+      "code2_tags": [
+        "code23d",
+        "code2svg",
+        "code2frontend"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 1126
+    },
+    {
+      "task_id": "case-035",
+      "title": "自由绘制星座",
+      "domains": [
+        "3d",
+        "visualization"
+      ],
+      "code2_tags": [
+        "code23d",
+        "code2viz"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 1048
+    },
+    {
+      "task_id": "case-036",
+      "title": "液态金属音频工作室",
+      "domains": [
+        "audio",
+        "game",
+        "svg-art",
+        "visualization"
+      ],
+      "code2_tags": [
+        "code2game",
+        "code2svg",
+        "code2canvas",
+        "code2viz",
+        "code2audio"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 997
+    },
+    {
+      "task_id": "case-037",
+      "title": "程序化植物标本柜",
+      "domains": [
+        "svg-art"
+      ],
+      "code2_tags": [
+        "code2svg"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 1110
+    },
+    {
+      "task_id": "case-038",
+      "title": "海岸城市天气面板",
+      "domains": [
+        "animation-video",
+        "frontend",
+        "svg-art",
+        "visualization"
+      ],
+      "code2_tags": [
+        "code2svg",
+        "code2frontend",
+        "code2viz",
+        "code2video"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 996
+    },
+    {
+      "task_id": "case-039",
+      "title": "针织风格生命游戏",
+      "domains": [
+        "game",
+        "svg-art",
+        "visualization"
+      ],
+      "code2_tags": [
+        "code2game",
+        "code2svg",
+        "code2canvas",
+        "code2viz"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 938
+    },
+    {
+      "task_id": "case-040",
+      "title": "滚动驱动的动态排版",
+      "domains": [
+        "3d",
+        "animation-video",
+        "frontend"
+      ],
+      "code2_tags": [
+        "code23d",
+        "code2css",
+        "code2frontend",
+        "code2video"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 973
+    },
+    {
+      "task_id": "case-041",
+      "title": "装饰艺术风格酒店页",
+      "domains": [
+        "3d",
+        "frontend",
+        "svg-art"
+      ],
+      "code2_tags": [
+        "code23d",
+        "code2svg",
+        "code2frontend"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 988
+    },
+    {
+      "task_id": "case-042",
+      "title": "蒸汽波未来商场",
+      "domains": [
+        "3d",
+        "audio",
+        "svg-art",
+        "visualization"
+      ],
+      "code2_tags": [
+        "code23d",
+        "code2svg",
+        "code2viz",
+        "code2audio"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 966
+    },
+    {
+      "task_id": "case-043",
+      "title": "摆锤波物理模拟",
+      "domains": [
+        "3d",
+        "audio",
+        "visualization"
+      ],
+      "code2_tags": [
+        "code23d",
+        "code2viz",
+        "code2audio"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 991
+    },
+    {
+      "task_id": "case-044",
+      "title": "层叠剪纸森林",
+      "domains": [
+        "frontend",
+        "svg-art"
+      ],
+      "code2_tags": [
+        "code2svg",
+        "code2frontend"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 942
+    },
+    {
+      "task_id": "case-045",
+      "title": "复古 CRT 终端",
+      "domains": [
+        "audio",
+        "frontend",
+        "game",
+        "visualization"
+      ],
+      "code2_tags": [
+        "code2game",
+        "code2css",
+        "code2canvas",
+        "code2frontend",
+        "code2viz",
+        "code2audio"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 1012
+    },
+    {
+      "task_id": "case-046",
+      "title": "世界河流数据艺术",
+      "domains": [
+        "3d",
+        "svg-art",
+        "visualization"
+      ],
+      "code2_tags": [
+        "code23d",
+        "code2svg",
+        "code2viz"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 1126
+    },
+    {
+      "task_id": "case-047",
+      "title": "包豪斯构图玩具",
+      "domains": [
+        "frontend"
+      ],
+      "code2_tags": [
+        "code2frontend"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 998
+    },
+    {
+      "task_id": "case-048",
+      "title": "从海面潜入深海",
+      "domains": [
+        "frontend",
+        "svg-art",
+        "visualization"
+      ],
+      "code2_tags": [
+        "code2svg",
+        "code2canvas",
+        "code2frontend"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 1148
+    },
+    {
+      "task_id": "case-049",
+      "title": "径向对称画板",
+      "domains": [
+        "visualization"
+      ],
+      "code2_tags": [
+        "code2canvas"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 993
+    },
+    {
+      "task_id": "case-050",
+      "title": "极简奢华腕表页",
+      "domains": [
+        "frontend",
+        "svg-art"
+      ],
+      "code2_tags": [
+        "code2svg",
+        "code2frontend"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 1041
+    },
+    {
+      "task_id": "case-051",
+      "title": "等距迷你城市建造",
+      "domains": [
+        "frontend",
+        "game",
+        "visualization"
+      ],
+      "code2_tags": [
+        "code2game",
+        "code2canvas",
+        "code2frontend"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 963
+    },
+    {
+      "task_id": "case-052",
+      "title": "生成式音频可视化",
+      "domains": [
+        "audio",
+        "frontend",
+        "visualization"
+      ],
+      "code2_tags": [
+        "code2canvas",
+        "code2frontend",
+        "code2viz",
+        "code2audio"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 1112
+    },
+    {
+      "task_id": "case-053",
+      "title": "折叠一只 3D 纸鹤",
+      "domains": [
+        "3d",
+        "animation-video",
+        "frontend",
+        "visualization"
+      ],
+      "code2_tags": [
+        "code23d",
+        "code2css",
+        "code2canvas",
+        "code2frontend",
+        "code2viz",
+        "code2video"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 984
+    },
+    {
+      "task_id": "case-054",
+      "title": "交互式元素周期表",
+      "domains": [
+        "visualization"
+      ],
+      "code2_tags": [
+        "code2viz"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 1033
+    },
+    {
+      "task_id": "case-055",
+      "title": "复古打字机写信",
+      "domains": [
+        "audio",
+        "svg-art"
+      ],
+      "code2_tags": [
+        "code2svg",
+        "code2audio"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 1132
+    },
+    {
+      "task_id": "case-056",
+      "title": "N 体引力沙盒",
+      "domains": [
+        "frontend",
+        "visualization"
+      ],
+      "code2_tags": [
+        "code2canvas",
+        "code2frontend",
+        "code2viz"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 1026
+    },
+    {
+      "task_id": "case-057",
+      "title": "二十四节气日历",
+      "domains": [
+        "svg-art",
+        "visualization"
+      ],
+      "code2_tags": [
+        "code2svg",
+        "code2viz"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 1106
+    },
+    {
+      "task_id": "case-058",
+      "title": "全息收藏卡片",
+      "domains": [
+        "3d",
+        "composite",
+        "frontend",
+        "game",
+        "svg-art"
+      ],
+      "code2_tags": [
+        "code2game",
+        "code23d",
+        "code2svg",
+        "code2frontend",
+        "code2deck"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 1021
+    },
+    {
+      "task_id": "case-059",
+      "title": "古代石阵迷宫游戏",
+      "domains": [
+        "game",
+        "visualization"
+      ],
+      "code2_tags": [
+        "code2game",
+        "code2canvas"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 962
+    },
+    {
+      "task_id": "case-060",
+      "title": "粒子流场工作室",
+      "domains": [
+        "frontend",
+        "visualization"
+      ],
+      "code2_tags": [
+        "code2canvas",
+        "code2frontend",
+        "code2viz"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 991
+    },
+    {
+      "task_id": "case-061",
+      "title": "咖啡烘焙品牌页",
+      "domains": [
+        "animation-video",
+        "frontend",
+        "svg-art"
+      ],
+      "code2_tags": [
+        "code2svg",
+        "code2frontend",
+        "code2video"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 1082
+    },
+    {
+      "task_id": "case-062",
+      "title": "动态城市地铁图",
+      "domains": [
+        "animation-video",
+        "svg-art",
+        "visualization"
+      ],
+      "code2_tags": [
+        "code2svg",
+        "code2viz",
+        "code2video"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 1082
+    },
+    {
+      "task_id": "case-063",
+      "title": "扩散生长的冰晶",
+      "domains": [
+        "visualization"
+      ],
+      "code2_tags": [
+        "code2canvas",
+        "code2viz"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 957
+    },
+    {
+      "task_id": "case-064",
+      "title": "霓虹打砖块游戏",
+      "domains": [
+        "audio",
+        "game",
+        "visualization"
+      ],
+      "code2_tags": [
+        "code2game",
+        "code2canvas",
+        "code2viz",
+        "code2audio"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 1034
+    },
+    {
+      "task_id": "case-065",
+      "title": "CSS 3D 虚拟美术馆",
+      "domains": [
+        "3d",
+        "frontend",
+        "visualization"
+      ],
+      "code2_tags": [
+        "code23d",
+        "code2css",
+        "code2canvas"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 1005
+    },
+    {
+      "task_id": "case-066",
+      "title": "柠檬挞交互食谱",
+      "domains": [
+        "audio",
+        "frontend",
+        "svg-art"
+      ],
+      "code2_tags": [
+        "code2svg",
+        "code2frontend",
+        "code2audio"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 1104
+    },
+    {
+      "task_id": "case-067",
+      "title": "雨夜窗上的水滴",
+      "domains": [
+        "animation-video",
+        "audio",
+        "frontend",
+        "visualization"
+      ],
+      "code2_tags": [
+        "code2canvas",
+        "code2frontend",
+        "code2audio",
+        "code2video"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 995
+    },
+    {
+      "task_id": "case-068",
+      "title": "Mandelbrot 与 Julia 分形",
+      "domains": [
+        "frontend",
+        "visualization"
+      ],
+      "code2_tags": [
+        "code2canvas",
+        "code2frontend"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 997
+    },
+    {
+      "task_id": "case-069",
+      "title": "高定时装画册",
+      "domains": [
+        "frontend",
+        "svg-art"
+      ],
+      "code2_tags": [
+        "code2svg",
+        "code2css",
+        "code2frontend"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 1067
+    },
+    {
+      "task_id": "case-070",
+      "title": "月相与潮汐时钟",
+      "domains": [
+        "svg-art",
+        "visualization"
+      ],
+      "code2_tags": [
+        "code2svg",
+        "code2canvas",
+        "code2viz"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 1075
+    },
+    {
+      "task_id": "case-071",
+      "title": "哥特彩色玻璃生成器",
+      "domains": [
+        "frontend",
+        "svg-art",
+        "visualization"
+      ],
+      "code2_tags": [
+        "code2svg",
+        "code2frontend",
+        "code2viz"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 999
+    },
+    {
+      "task_id": "case-072",
+      "title": "习惯养成植物花园",
+      "domains": [
+        "frontend",
+        "svg-art",
+        "visualization"
+      ],
+      "code2_tags": [
+        "code2svg",
+        "code2frontend",
+        "code2viz"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 1046
+    },
+    {
+      "task_id": "case-073",
+      "title": "横向滚动太阳系",
+      "domains": [
+        "3d",
+        "frontend",
+        "visualization"
+      ],
+      "code2_tags": [
+        "code2world",
+        "code2canvas",
+        "code2frontend"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 992
+    },
+    {
+      "task_id": "case-074",
+      "title": "黏土风格 UI 组件",
+      "domains": [
+        "3d",
+        "frontend",
+        "svg-art"
+      ],
+      "code2_tags": [
+        "code23d",
+        "code2svg",
+        "code2css",
+        "code2frontend"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 1034
+    },
+    {
+      "task_id": "case-075",
+      "title": "Riso 半色调印刷室",
+      "domains": [
+        "visualization"
+      ],
+      "code2_tags": [
+        "code2canvas",
+        "code2viz"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 993
+    },
+    {
+      "task_id": "case-076",
+      "title": "16 款加载与微交互",
+      "domains": [
+        "3d",
+        "animation-video",
+        "frontend",
+        "svg-art"
+      ],
+      "code2_tags": [
+        "code23d",
+        "code2svg",
+        "code2css",
+        "code2frontend",
+        "code2video"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 974
+    },
+    {
+      "task_id": "case-077",
+      "title": "冬夜木屋交互场景",
+      "domains": [
+        "animation-video",
+        "audio",
+        "frontend",
+        "svg-art",
+        "visualization"
+      ],
+      "code2_tags": [
+        "code2svg",
+        "code2css",
+        "code2canvas",
+        "code2audio",
+        "code2video"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 1015
+    },
+    {
+      "task_id": "case-078",
+      "title": "DNA 双螺旋讲解",
+      "domains": [
+        "3d",
+        "visualization"
+      ],
+      "code2_tags": [
+        "code23d",
+        "code2canvas",
+        "code2viz"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 1020
+    },
+    {
+      "task_id": "case-079",
+      "title": "三张塔罗牌互动",
+      "domains": [
+        "3d",
+        "composite",
+        "frontend",
+        "svg-art"
+      ],
+      "code2_tags": [
+        "code23d",
+        "code2svg",
+        "code2frontend",
+        "code2deck"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 1042
+    },
+    {
+      "task_id": "case-080",
+      "title": "弹簧驱动的字形",
+      "domains": [
+        "frontend",
+        "visualization"
+      ],
+      "code2_tags": [
+        "code2canvas",
+        "code2frontend"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 977
+    },
+    {
+      "task_id": "case-081",
+      "title": "落沙物理沙盒",
+      "domains": [
+        "3d",
+        "game",
+        "visualization"
+      ],
+      "code2_tags": [
+        "code2game",
+        "code23d",
+        "code2canvas",
+        "code2viz"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 944
+    },
+    {
+      "task_id": "case-082",
+      "title": "建筑蓝图绘制动画",
+      "domains": [
+        "3d",
+        "animation-video",
+        "svg-art"
+      ],
+      "code2_tags": [
+        "code23d",
+        "code2svg",
+        "code2video"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 989
+    },
+    {
+      "task_id": "case-083",
+      "title": "胡桃木黑胶唱片机",
+      "domains": [
+        "3d",
+        "audio",
+        "frontend",
+        "svg-art"
+      ],
+      "code2_tags": [
+        "code23d",
+        "code2svg",
+        "code2css",
+        "code2audio"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 990
+    },
+    {
+      "task_id": "case-084",
+      "title": "孟菲斯设计节页面",
+      "domains": [
+        "frontend",
+        "svg-art"
+      ],
+      "code2_tags": [
+        "code2svg",
+        "code2frontend"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 1026
+    },
+    {
+      "task_id": "case-085",
+      "title": "枯山水沙庭",
+      "domains": [
+        "audio",
+        "frontend",
+        "visualization"
+      ],
+      "code2_tags": [
+        "code2canvas",
+        "code2frontend",
+        "code2audio"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 894
+    },
+    {
+      "task_id": "case-086",
+      "title": "模拟交易数据终端",
+      "domains": [
+        "frontend",
+        "visualization"
+      ],
+      "code2_tags": [
+        "code2canvas",
+        "code2frontend",
+        "code2viz"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 925
+    },
+    {
+      "task_id": "case-087",
+      "title": "暮色草甸与萤火虫",
+      "domains": [
+        "animation-video",
+        "audio",
+        "frontend",
+        "visualization"
+      ],
+      "code2_tags": [
+        "code2canvas",
+        "code2frontend",
+        "code2audio",
+        "code2video"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 925
+    },
+    {
+      "task_id": "case-088",
+      "title": "熔岩灯元球模拟",
+      "domains": [
+        "svg-art",
+        "visualization"
+      ],
+      "code2_tags": [
+        "code2svg",
+        "code2viz"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 928
+    },
+    {
+      "task_id": "case-089",
+      "title": "飞行历史时间线",
+      "domains": [
+        "animation-video",
+        "svg-art",
+        "visualization"
+      ],
+      "code2_tags": [
+        "code2svg",
+        "code2viz",
+        "code2video"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 1182
+    },
+    {
+      "task_id": "case-090",
+      "title": "冰箱磁贴诗歌",
+      "domains": [
+        "frontend"
+      ],
+      "code2_tags": [
+        "code2frontend"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 1010
+    },
+    {
+      "task_id": "case-091",
+      "title": "生成式拼布艺术",
+      "domains": [
+        "svg-art"
+      ],
+      "code2_tags": [
+        "code2svg"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 962
+    },
+    {
+      "task_id": "case-092",
+      "title": "程序化行星生成器",
+      "domains": [
+        "3d",
+        "visualization"
+      ],
+      "code2_tags": [
+        "code23d",
+        "code2world",
+        "code2canvas",
+        "code2viz"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 1029
+    },
+    {
+      "task_id": "case-093",
+      "title": "ASCII 海浪动画",
+      "domains": [
+        "animation-video",
+        "game",
+        "visualization"
+      ],
+      "code2_tags": [
+        "code2game",
+        "code2canvas",
+        "code2viz",
+        "code2video"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 926
+    },
+    {
+      "task_id": "case-094",
+      "title": "Bento 作品集网站",
+      "domains": [
+        "frontend",
+        "svg-art"
+      ],
+      "code2_tags": [
+        "code2svg",
+        "code2css",
+        "code2frontend"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 1076
+    },
+    {
+      "task_id": "case-095",
+      "title": "交互蜂巢艺术",
+      "domains": [
+        "svg-art",
+        "visualization"
+      ],
+      "code2_tags": [
+        "code2svg",
+        "code2canvas"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 984
+    },
+    {
+      "task_id": "case-096",
+      "title": "双人国际象棋",
+      "domains": [
+        "audio",
+        "game",
+        "svg-art",
+        "visualization"
+      ],
+      "code2_tags": [
+        "code2game",
+        "code2svg",
+        "code2viz",
+        "code2audio"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 1008
+    },
+    {
+      "task_id": "case-097",
+      "title": "配色方案工作室",
+      "domains": [
+        "frontend"
+      ],
+      "code2_tags": [
+        "code2css"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 1035
+    },
+    {
+      "task_id": "case-098",
+      "title": "双重曝光人物艺术",
+      "domains": [
+        "svg-art"
+      ],
+      "code2_tags": [
+        "code2svg"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 996
+    },
+    {
+      "task_id": "case-099",
+      "title": "会呼吸的电路板",
+      "domains": [
+        "animation-video",
+        "frontend",
+        "svg-art"
+      ],
+      "code2_tags": [
+        "code2svg",
+        "code2frontend",
+        "code2video"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 947
+    },
+    {
+      "task_id": "case-100",
+      "title": "虹彩肥皂泡",
+      "domains": [
+        "animation-video",
+        "audio",
+        "frontend",
+        "visualization"
+      ],
+      "code2_tags": [
+        "code2canvas",
+        "code2frontend",
+        "code2audio",
+        "code2video"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 965
+    },
+    {
+      "task_id": "case-101",
+      "title": "水墨书法画板",
+      "domains": [
+        "composite",
+        "svg-art"
+      ],
+      "code2_tags": [
+        "code2svg",
+        "code2deck"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 929
+    },
+    {
+      "task_id": "case-102",
+      "title": "火星任务控制台",
+      "domains": [
+        "audio",
+        "frontend",
+        "svg-art",
+        "visualization"
+      ],
+      "code2_tags": [
+        "code2svg",
+        "code2frontend",
+        "code2viz",
+        "code2audio"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 1075
+    },
+    {
+      "task_id": "case-103",
+      "title": "黑色电影侦探故事",
+      "domains": [
+        "audio",
+        "frontend",
+        "game",
+        "svg-art",
+        "visualization"
+      ],
+      "code2_tags": [
+        "code2game",
+        "code2svg",
+        "code2canvas",
+        "code2frontend",
+        "code2audio"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 959
+    },
+    {
+      "task_id": "case-104",
+      "title": "四季分形树",
+      "domains": [
+        "visualization"
+      ],
+      "code2_tags": [
+        "code2canvas",
+        "code2viz"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 932
+    },
+    {
+      "task_id": "case-105",
+      "title": "脉冲山脊线条动画",
+      "domains": [
+        "3d",
+        "animation-video",
+        "audio",
+        "visualization"
+      ],
+      "code2_tags": [
+        "code2world",
+        "code2canvas",
+        "code2audio",
+        "code2video"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 978
+    },
+    {
+      "task_id": "case-106",
+      "title": "光瀑钢琴",
+      "domains": [
+        "audio",
+        "game",
+        "visualization"
+      ],
+      "code2_tags": [
+        "code2game",
+        "code2viz",
+        "code2audio"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 1006
+    },
+    {
+      "task_id": "case-107",
+      "title": "故障艺术家作品集",
+      "domains": [
+        "frontend",
+        "visualization"
+      ],
+      "code2_tags": [
+        "code2canvas",
+        "code2frontend"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 1064
+    },
+    {
+      "task_id": "case-108",
+      "title": "香水品牌产品页",
+      "domains": [
+        "3d",
+        "frontend",
+        "svg-art"
+      ],
+      "code2_tags": [
+        "code23d",
+        "code2svg",
+        "code2frontend"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 922
+    },
+    {
+      "task_id": "case-109",
+      "title": "3D 点阵地球",
+      "domains": [
+        "3d",
+        "visualization"
+      ],
+      "code2_tags": [
+        "code23d",
+        "code2canvas",
+        "code2viz"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 995
+    },
+    {
+      "task_id": "case-110",
+      "title": "六重对称雪花",
+      "domains": [
+        "frontend",
+        "svg-art",
+        "visualization"
+      ],
+      "code2_tags": [
+        "code2svg",
+        "code2canvas",
+        "code2frontend"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 1000
+    },
+    {
+      "task_id": "case-111",
+      "title": "新艺术风格茶馆",
+      "domains": [
+        "frontend",
+        "svg-art",
+        "visualization"
+      ],
+      "code2_tags": [
+        "code2svg",
+        "code2frontend",
+        "code2viz"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 987
+    },
+    {
+      "task_id": "case-112",
+      "title": "元胞自动机织锦",
+      "domains": [
+        "frontend",
+        "visualization"
+      ],
+      "code2_tags": [
+        "code2frontend",
+        "code2viz"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 969
+    },
+    {
+      "task_id": "case-113",
+      "title": "插画师手账作品集",
+      "domains": [
+        "3d",
+        "frontend",
+        "svg-art"
+      ],
+      "code2_tags": [
+        "code23d",
+        "code2svg",
+        "code2css",
+        "code2frontend"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 995
+    },
+    {
+      "task_id": "case-114",
+      "title": "物理沙漏计时器",
+      "domains": [
+        "3d",
+        "audio",
+        "svg-art",
+        "visualization"
+      ],
+      "code2_tags": [
+        "code23d",
+        "code2svg",
+        "code2viz",
+        "code2audio"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 974
+    },
+    {
+      "task_id": "case-115",
+      "title": "雷达与声呐控制台",
+      "domains": [
+        "audio",
+        "frontend",
+        "visualization"
+      ],
+      "code2_tags": [
+        "code2canvas",
+        "code2frontend",
+        "code2viz",
+        "code2audio"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 1026
+    },
+    {
+      "task_id": "case-116",
+      "title": "文字时钟",
+      "domains": [
+        "frontend",
+        "visualization"
+      ],
+      "code2_tags": [
+        "code2frontend",
+        "code2viz"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 964
+    },
+    {
+      "task_id": "case-117",
+      "title": "阿尔卑斯山的一天",
+      "domains": [
+        "animation-video",
+        "frontend"
+      ],
+      "code2_tags": [
+        "code2frontend",
+        "code2video"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 999
+    },
+    {
+      "task_id": "case-118",
+      "title": "自然环境声混音器",
+      "domains": [
+        "audio",
+        "frontend",
+        "svg-art",
+        "visualization"
+      ],
+      "code2_tags": [
+        "code2svg",
+        "code2frontend",
+        "code2viz",
+        "code2audio"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 1041
+    },
+    {
+      "task_id": "case-119",
+      "title": "风力行走机械雕塑",
+      "domains": [
+        "visualization"
+      ],
+      "code2_tags": [
+        "code2viz"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 1019
+    },
+    {
+      "task_id": "case-120",
+      "title": "生成式水彩风景",
+      "domains": [
+        "frontend"
+      ],
+      "code2_tags": [
+        "code2frontend"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 1018
+    },
+    {
+      "task_id": "case-121",
+      "title": "磁场交互实验室",
+      "domains": [
+        "frontend",
+        "visualization"
+      ],
+      "code2_tags": [
+        "code2canvas",
+        "code2frontend",
+        "code2viz"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 1008
+    },
+    {
+      "task_id": "case-122",
+      "title": "建筑与景观工作室",
+      "domains": [
+        "frontend",
+        "svg-art"
+      ],
+      "code2_tags": [
+        "code2svg",
+        "code2frontend"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 1031
+    },
+    {
+      "task_id": "case-123",
+      "title": "摆锤绘图机",
+      "domains": [
+        "svg-art",
+        "visualization"
+      ],
+      "code2_tags": [
+        "code2svg",
+        "code2viz"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 996
+    },
+    {
+      "task_id": "case-124",
+      "title": "交互式儿童绘本",
+      "domains": [
+        "3d",
+        "animation-video",
+        "frontend",
+        "svg-art"
+      ],
+      "code2_tags": [
+        "code23d",
+        "code2svg",
+        "code2css",
+        "code2video"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 998
+    },
+    {
+      "task_id": "case-125",
+      "title": "无限递归房间",
+      "domains": [
+        "animation-video",
+        "frontend",
+        "visualization"
+      ],
+      "code2_tags": [
+        "code2canvas",
+        "code2frontend",
+        "code2video"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 1078
+    },
+    {
+      "task_id": "case-126",
+      "title": "水波干涉实验室",
+      "domains": [
+        "frontend",
+        "visualization"
+      ],
+      "code2_tags": [
+        "code2frontend",
+        "code2viz"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "prompt_chars": 1103
+    },
+    {
+      "task_id": "x-2102665046568673765",
+      "title": "漫游《清明上河图》汴京",
+      "domains": [
+        "3d",
+        "animation-video",
+        "audio",
+        "frontend",
+        "game",
+        "visualization"
+      ],
+      "code2_tags": [
+        "code2game",
+        "code23d",
+        "code2video",
+        "code2html",
+        "code2css",
+        "code2canvas",
+        "code2frontend",
+        "code2viz",
+        "code2audio"
+      ],
+      "prompt_status": "repository",
+      "published_at": "2026-09-23T07:43:07+00:00",
+      "prompt_chars": 5514
+    },
+    {
+      "task_id": "gpt6-astra-2102565403109085669",
+      "title": "制作日式樱花山谷",
+      "domains": [
+        "3d",
+        "animation-video",
+        "frontend",
+        "game"
+      ],
+      "code2_tags": [
+        "code2game",
+        "code23d",
+        "code2world",
+        "code2video",
+        "code2html",
+        "code2css",
+        "code2frontend"
+      ],
+      "prompt_status": "full",
+      "published_at": "2026-09-23T01:07:10+00:00",
+      "prompt_chars": 2237
+    },
+    {
+      "task_id": "gpt6-sol-2102665046568673765",
+      "title": "漫游《清明上河图》汴京",
+      "domains": [
+        "3d",
+        "animation-video",
+        "audio",
+        "frontend",
+        "game",
+        "visualization"
+      ],
+      "code2_tags": [
+        "code2game",
+        "code23d",
+        "code2video",
+        "code2html",
+        "code2css",
+        "code2canvas",
+        "code2frontend",
+        "code2viz",
+        "code2audio"
+      ],
+      "prompt_status": "repository",
+      "published_at": "2026-09-23T07:43:07+00:00",
+      "prompt_chars": 5514
+    },
+    {
+      "task_id": "b24-astra-2098105648106078541",
+      "title": "人头与大脑三维解剖图谱",
+      "domains": [
+        "3d",
+        "frontend",
+        "visualization"
+      ],
+      "code2_tags": [
+        "code23d",
+        "code2html",
+        "code2viz"
+      ],
+      "prompt_status": "repository",
+      "published_at": "2026-09-10T17:45:42+00:00",
+      "prompt_chars": 2622
+    },
+    {
+      "task_id": "b24-astra-2098841316591346006",
+      "title": "切尔诺贝利核电站教学图谱",
+      "domains": [
+        "3d",
+        "frontend",
+        "visualization"
+      ],
+      "code2_tags": [
+        "code23d",
+        "code2html",
+        "code2frontend",
+        "code2viz"
+      ],
+      "prompt_status": "repository",
+      "published_at": "2026-09-12T18:28:59+00:00",
+      "prompt_chars": 961
+    },
+    {
+      "task_id": "b24-sol-2102509273393627524",
+      "title": "卡通星球 · 同背景笔记重测",
+      "domains": [
+        "3d",
+        "visualization"
+      ],
+      "code2_tags": [
+        "code23d",
+        "code2world",
+        "code2viz"
+      ],
+      "prompt_status": "context",
+      "published_at": "2026-09-22T21:24:08+00:00",
+      "prompt_chars": 228
+    },
+    {
+      "task_id": "b24-luna-2102509273393627524",
+      "title": "卡通星球 · 同背景笔记重测",
+      "domains": [
+        "3d",
+        "visualization"
+      ],
+      "code2_tags": [
+        "code23d",
+        "code2world",
+        "code2viz"
+      ],
+      "prompt_status": "context",
+      "published_at": "2026-09-22T21:24:08+00:00",
+      "prompt_chars": 228
+    }
+  ],
+  "results_state": "PLACEHOLDER"
+}

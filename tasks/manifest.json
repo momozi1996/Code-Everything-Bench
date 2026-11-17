@@ -1,0 +1,2942 @@
+{
+  "schema_version": "1.0",
+  "source": "momozi1996/Code-Everything",
+  "task_count": 111,
+  "funnel": {
+    "main_library": 739,
+    "with_prompt_text": 305,
+    "with_runnable_html": 111,
+    "admissible_full_measurement": 111,
+    "rejected": {
+      "no_prompt_text": 434,
+      "no_runnable_html": 194,
+      "no_post_or_timestamp": 0
+    }
+  },
+  "prompt_status_distribution": {
+    "full": 102,
+    "transcribed": 3,
+    "repository": 4,
+    "context": 2
+  },
+  "strict_d1_tasks": 102,
+  "replay_annotated_tasks": 9,
+  "code2_tag_counts": {
+    "code2frontend": 61,
+    "code2viz": 52,
+    "code2svg": 51,
+    "code2canvas": 45,
+    "code23d": 36,
+    "code2audio": 28,
+    "code2video": 23,
+    "code2game": 20,
+    "code2css": 18,
+    "code2world": 8,
+    "code2html": 6,
+    "code2deck": 3
+  },
+  "domain_counts": {
+    "visualization": 73,
+    "frontend": 67,
+    "svg-art": 51,
+    "3d": 38,
+    "audio": 28,
+    "animation-video": 23,
+    "game": 20,
+    "composite": 4
+  },
+  "single_source_warning": {
+    "note": "100/111 tasks point to one Opus collection; results must be stratified by source.",
+    "collection": "miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files"
+  },
+  "tasks": [
+    {
+      "task_id": "case-001",
+      "title": "制作日式樱花山谷",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code2game",
+        "code23d",
+        "code2world",
+        "code2video",
+        "code2html",
+        "code2css",
+        "code2frontend"
+      ],
+      "domains": [
+        "3d",
+        "animation-video",
+        "frontend",
+        "game"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 2237,
+      "published_at": "2026-09-23T01:07:10+00:00",
+      "demo_url": "https://s.baoyu.io/files/sakura-valley-opus-5-5.html",
+      "source_post_url": "https://x.com/dotey/status/2102565403109085669",
+      "author": "宝玉 @dotey",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [
+        "gpt6-astra-2102565403109085669"
+      ],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-009",
+      "title": "复刻 QQ 飞车",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code2game",
+        "code23d"
+      ],
+      "domains": [
+        "3d",
+        "game"
+      ],
+      "prompt_status": "transcribed",
+      "evidence_level": "B",
+      "prompt_chars": 107,
+      "published_at": "2026-09-23T02:24:37+00:00",
+      "demo_url": "https://lf3-static.bytednsdoc.com/obj/eden-cn/nulojnulwlo/qqfeiche3d/index.html",
+      "source_post_url": "https://x.com/riba2534/status/2102584893909930258",
+      "author": "riba2534 @riba2534",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-010",
+      "title": "复刻运输船枪战地图",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code2game",
+        "code23d"
+      ],
+      "domains": [
+        "3d",
+        "game"
+      ],
+      "prompt_status": "transcribed",
+      "evidence_level": "B",
+      "prompt_chars": 84,
+      "published_at": "2026-09-23T02:24:37+00:00",
+      "demo_url": "https://lf3-static.bytednsdoc.com/obj/eden-cn/nulojnulwlo/cf-transport-ship/transport-ship.html",
+      "source_post_url": "https://x.com/riba2534/status/2102584893909930258",
+      "author": "riba2534 @riba2534",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-011",
+      "title": "3D 鹈鹕海岸骑行",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code23d"
+      ],
+      "domains": [
+        "3d"
+      ],
+      "prompt_status": "transcribed",
+      "evidence_level": "B",
+      "prompt_chars": 64,
+      "published_at": "2026-09-23T02:24:37+00:00",
+      "demo_url": "https://lf3-static.bytednsdoc.com/obj/eden-cn/nulojnulwlo/pelican-bike/index.html",
+      "source_post_url": "https://x.com/riba2534/status/2102584893909930258",
+      "author": "riba2534 @riba2534",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-027",
+      "title": "极光玻璃呼吸冥想页",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code23d",
+        "code2canvas",
+        "code2frontend"
+      ],
+      "domains": [
+        "3d",
+        "frontend",
+        "visualization"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 1083,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/001-aurora-glass.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-028",
+      "title": "赛博朋克雨夜街景",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code2game",
+        "code2canvas",
+        "code2frontend",
+        "code2audio",
+        "code2video"
+      ],
+      "domains": [
+        "animation-video",
+        "audio",
+        "frontend",
+        "game",
+        "visualization"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 1042,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/002-neon-rain.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-029",
+      "title": "瑞士风格海报生成器",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [],
+      "domains": [
+        "composite"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 1024,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/003-swiss-poster-machine.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-030",
+      "title": "黄铜太阳系仪",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code23d",
+        "code2world",
+        "code2svg",
+        "code2viz",
+        "code2audio"
+      ],
+      "domains": [
+        "3d",
+        "audio",
+        "svg-art",
+        "visualization"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 1159,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/004-brass-orrery.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-031",
+      "title": "水中晕染的水墨",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code2svg",
+        "code2canvas",
+        "code2viz"
+      ],
+      "domains": [
+        "svg-art",
+        "visualization"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 1049,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/005-sumi-ink-in-water.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-032",
+      "title": "新粗野主义唱片杂志",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code2svg",
+        "code2css",
+        "code2frontend",
+        "code2audio"
+      ],
+      "domains": [
+        "audio",
+        "frontend",
+        "svg-art"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 1034,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/006-brutalist-zine.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-033",
+      "title": "拟态多声部合成器",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code2game",
+        "code2canvas",
+        "code2frontend",
+        "code2viz",
+        "code2audio"
+      ],
+      "domains": [
+        "audio",
+        "frontend",
+        "game",
+        "visualization"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 1148,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/007-neumorphic-synth.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-034",
+      "title": "灯塔守望者长篇专题",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code23d",
+        "code2svg",
+        "code2frontend"
+      ],
+      "domains": [
+        "3d",
+        "frontend",
+        "svg-art"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 1126,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/008-lighthouse-longform.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-035",
+      "title": "自由绘制星座",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code23d",
+        "code2viz"
+      ],
+      "domains": [
+        "3d",
+        "visualization"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 1048,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/009-constellation-mapper.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-036",
+      "title": "液态金属音频工作室",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code2game",
+        "code2svg",
+        "code2canvas",
+        "code2viz",
+        "code2audio"
+      ],
+      "domains": [
+        "audio",
+        "game",
+        "svg-art",
+        "visualization"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 997,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/010-liquid-mercury.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-037",
+      "title": "程序化植物标本柜",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code2svg"
+      ],
+      "domains": [
+        "svg-art"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 1110,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/011-victorian-herbarium.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-038",
+      "title": "海岸城市天气面板",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code2svg",
+        "code2frontend",
+        "code2viz",
+        "code2video"
+      ],
+      "domains": [
+        "animation-video",
+        "frontend",
+        "svg-art",
+        "visualization"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 996,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/012-nimbus-weather.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-039",
+      "title": "针织风格生命游戏",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code2game",
+        "code2svg",
+        "code2canvas",
+        "code2viz"
+      ],
+      "domains": [
+        "game",
+        "svg-art",
+        "visualization"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 938,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/013-knitted-life.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-040",
+      "title": "滚动驱动的动态排版",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code23d",
+        "code2css",
+        "code2frontend",
+        "code2video"
+      ],
+      "domains": [
+        "3d",
+        "animation-video",
+        "frontend"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 973,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/014-kinetic-manifesto.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-041",
+      "title": "装饰艺术风格酒店页",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code23d",
+        "code2svg",
+        "code2frontend"
+      ],
+      "domains": [
+        "3d",
+        "frontend",
+        "svg-art"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 988,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/015-art-deco-hotel.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-042",
+      "title": "蒸汽波未来商场",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code23d",
+        "code2svg",
+        "code2viz",
+        "code2audio"
+      ],
+      "domains": [
+        "3d",
+        "audio",
+        "svg-art",
+        "visualization"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 966,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/016-vaporwave-mall.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-043",
+      "title": "摆锤波物理模拟",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code23d",
+        "code2viz",
+        "code2audio"
+      ],
+      "domains": [
+        "3d",
+        "audio",
+        "visualization"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 991,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/017-pendulum-wave.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-044",
+      "title": "层叠剪纸森林",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code2svg",
+        "code2frontend"
+      ],
+      "domains": [
+        "frontend",
+        "svg-art"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 942,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/018-paper-cut-diorama.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-045",
+      "title": "复古 CRT 终端",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code2game",
+        "code2css",
+        "code2canvas",
+        "code2frontend",
+        "code2viz",
+        "code2audio"
+      ],
+      "domains": [
+        "audio",
+        "frontend",
+        "game",
+        "visualization"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 1012,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/019-phosphor-terminal.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-046",
+      "title": "世界河流数据艺术",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code23d",
+        "code2svg",
+        "code2viz"
+      ],
+      "domains": [
+        "3d",
+        "svg-art",
+        "visualization"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 1126,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/020-rivers-of-the-world.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-047",
+      "title": "包豪斯构图玩具",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code2frontend"
+      ],
+      "domains": [
+        "frontend"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 998,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/021-bauhaus-composer.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-048",
+      "title": "从海面潜入深海",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code2svg",
+        "code2canvas",
+        "code2frontend"
+      ],
+      "domains": [
+        "frontend",
+        "svg-art",
+        "visualization"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 1148,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/022-deep-sea-descent.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-049",
+      "title": "径向对称画板",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code2canvas"
+      ],
+      "domains": [
+        "visualization"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 993,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/023-symmetry-painter.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-050",
+      "title": "极简奢华腕表页",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code2svg",
+        "code2frontend"
+      ],
+      "domains": [
+        "frontend",
+        "svg-art"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 1041,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/024-luxury-watch.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-051",
+      "title": "等距迷你城市建造",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code2game",
+        "code2canvas",
+        "code2frontend"
+      ],
+      "domains": [
+        "frontend",
+        "game",
+        "visualization"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 963,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/025-isometric-city.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-052",
+      "title": "生成式音频可视化",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code2canvas",
+        "code2frontend",
+        "code2viz",
+        "code2audio"
+      ],
+      "domains": [
+        "audio",
+        "frontend",
+        "visualization"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 1112,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/026-pulse-visualizer.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-053",
+      "title": "折叠一只 3D 纸鹤",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code23d",
+        "code2css",
+        "code2canvas",
+        "code2frontend",
+        "code2viz",
+        "code2video"
+      ],
+      "domains": [
+        "3d",
+        "animation-video",
+        "frontend",
+        "visualization"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 984,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/027-origami-crane.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-054",
+      "title": "交互式元素周期表",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code2viz"
+      ],
+      "domains": [
+        "visualization"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 1033,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/028-periodic-table.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-055",
+      "title": "复古打字机写信",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code2svg",
+        "code2audio"
+      ],
+      "domains": [
+        "audio",
+        "svg-art"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 1132,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/029-typewriter-letters.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-056",
+      "title": "N 体引力沙盒",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code2canvas",
+        "code2frontend",
+        "code2viz"
+      ],
+      "domains": [
+        "frontend",
+        "visualization"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 1026,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/030-gravity-sandbox.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-057",
+      "title": "二十四节气日历",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code2svg",
+        "code2viz"
+      ],
+      "domains": [
+        "svg-art",
+        "visualization"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 1106,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/031-twenty-four-seasons.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-058",
+      "title": "全息收藏卡片",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code2game",
+        "code23d",
+        "code2svg",
+        "code2frontend",
+        "code2deck"
+      ],
+      "domains": [
+        "3d",
+        "composite",
+        "frontend",
+        "game",
+        "svg-art"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 1021,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/032-holographic-card.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-059",
+      "title": "古代石阵迷宫游戏",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code2game",
+        "code2canvas"
+      ],
+      "domains": [
+        "game",
+        "visualization"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 962,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/033-stone-labyrinth.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-060",
+      "title": "粒子流场工作室",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code2canvas",
+        "code2frontend",
+        "code2viz"
+      ],
+      "domains": [
+        "frontend",
+        "visualization"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 991,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/034-flow-field-studio.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-061",
+      "title": "咖啡烘焙品牌页",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code2svg",
+        "code2frontend",
+        "code2video"
+      ],
+      "domains": [
+        "animation-video",
+        "frontend",
+        "svg-art"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 1082,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/035-coffee-roasters.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-062",
+      "title": "动态城市地铁图",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code2svg",
+        "code2viz",
+        "code2video"
+      ],
+      "domains": [
+        "animation-video",
+        "svg-art",
+        "visualization"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 1082,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/036-transit-map.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-063",
+      "title": "扩散生长的冰晶",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code2canvas",
+        "code2viz"
+      ],
+      "domains": [
+        "visualization"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 957,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/037-frost-garden.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-064",
+      "title": "霓虹打砖块游戏",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code2game",
+        "code2canvas",
+        "code2viz",
+        "code2audio"
+      ],
+      "domains": [
+        "audio",
+        "game",
+        "visualization"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 1034,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/038-neon-breakout.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-065",
+      "title": "CSS 3D 虚拟美术馆",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code23d",
+        "code2css",
+        "code2canvas"
+      ],
+      "domains": [
+        "3d",
+        "frontend",
+        "visualization"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 1005,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/039-virtual-gallery.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-066",
+      "title": "柠檬挞交互食谱",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code2svg",
+        "code2frontend",
+        "code2audio"
+      ],
+      "domains": [
+        "audio",
+        "frontend",
+        "svg-art"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 1104,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/040-lemon-tart-recipe.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-067",
+      "title": "雨夜窗上的水滴",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code2canvas",
+        "code2frontend",
+        "code2audio",
+        "code2video"
+      ],
+      "domains": [
+        "animation-video",
+        "audio",
+        "frontend",
+        "visualization"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 995,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/041-rain-on-glass.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-068",
+      "title": "Mandelbrot 与 Julia 分形",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code2canvas",
+        "code2frontend"
+      ],
+      "domains": [
+        "frontend",
+        "visualization"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 997,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/042-fractal-explorer.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-069",
+      "title": "高定时装画册",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code2svg",
+        "code2css",
+        "code2frontend"
+      ],
+      "domains": [
+        "frontend",
+        "svg-art"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 1067,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/043-fashion-lookbook.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-070",
+      "title": "月相与潮汐时钟",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code2svg",
+        "code2canvas",
+        "code2viz"
+      ],
+      "domains": [
+        "svg-art",
+        "visualization"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 1075,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/044-tide-moon-clock.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-071",
+      "title": "哥特彩色玻璃生成器",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code2svg",
+        "code2frontend",
+        "code2viz"
+      ],
+      "domains": [
+        "frontend",
+        "svg-art",
+        "visualization"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 999,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/045-stained-glass.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-072",
+      "title": "习惯养成植物花园",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code2svg",
+        "code2frontend",
+        "code2viz"
+      ],
+      "domains": [
+        "frontend",
+        "svg-art",
+        "visualization"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 1046,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/046-habit-garden.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-073",
+      "title": "横向滚动太阳系",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code2world",
+        "code2canvas",
+        "code2frontend"
+      ],
+      "domains": [
+        "3d",
+        "frontend",
+        "visualization"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 992,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/047-solar-system-scale.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-074",
+      "title": "黏土风格 UI 组件",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code23d",
+        "code2svg",
+        "code2css",
+        "code2frontend"
+      ],
+      "domains": [
+        "3d",
+        "frontend",
+        "svg-art"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 1034,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/048-claymorphism-kit.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-075",
+      "title": "Riso 半色调印刷室",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code2canvas",
+        "code2viz"
+      ],
+      "domains": [
+        "visualization"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 993,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/049-riso-halftone-lab.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-076",
+      "title": "16 款加载与微交互",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code23d",
+        "code2svg",
+        "code2css",
+        "code2frontend",
+        "code2video"
+      ],
+      "domains": [
+        "3d",
+        "animation-video",
+        "frontend",
+        "svg-art"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 974,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/050-loader-atelier.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-077",
+      "title": "冬夜木屋交互场景",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code2svg",
+        "code2css",
+        "code2canvas",
+        "code2audio",
+        "code2video"
+      ],
+      "domains": [
+        "animation-video",
+        "audio",
+        "frontend",
+        "svg-art",
+        "visualization"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 1015,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/051-winter-cabin.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-078",
+      "title": "DNA 双螺旋讲解",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code23d",
+        "code2canvas",
+        "code2viz"
+      ],
+      "domains": [
+        "3d",
+        "visualization"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 1020,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/052-dna-helix.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-079",
+      "title": "三张塔罗牌互动",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code23d",
+        "code2svg",
+        "code2frontend",
+        "code2deck"
+      ],
+      "domains": [
+        "3d",
+        "composite",
+        "frontend",
+        "svg-art"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 1042,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/053-tarot-reading.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-080",
+      "title": "弹簧驱动的字形",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code2canvas",
+        "code2frontend"
+      ],
+      "domains": [
+        "frontend",
+        "visualization"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 977,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/054-elastic-letters.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-081",
+      "title": "落沙物理沙盒",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code2game",
+        "code23d",
+        "code2canvas",
+        "code2viz"
+      ],
+      "domains": [
+        "3d",
+        "game",
+        "visualization"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 944,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/055-falling-sand.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-082",
+      "title": "建筑蓝图绘制动画",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code23d",
+        "code2svg",
+        "code2video"
+      ],
+      "domains": [
+        "3d",
+        "animation-video",
+        "svg-art"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 989,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/056-architectural-blueprint.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-083",
+      "title": "胡桃木黑胶唱片机",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code23d",
+        "code2svg",
+        "code2css",
+        "code2audio"
+      ],
+      "domains": [
+        "3d",
+        "audio",
+        "frontend",
+        "svg-art"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 990,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/057-vinyl-listening-room.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-084",
+      "title": "孟菲斯设计节页面",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code2svg",
+        "code2frontend"
+      ],
+      "domains": [
+        "frontend",
+        "svg-art"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 1026,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/058-memphis-fest.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-085",
+      "title": "枯山水沙庭",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code2canvas",
+        "code2frontend",
+        "code2audio"
+      ],
+      "domains": [
+        "audio",
+        "frontend",
+        "visualization"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 894,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/059-zen-sand-garden.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-086",
+      "title": "模拟交易数据终端",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code2canvas",
+        "code2frontend",
+        "code2viz"
+      ],
+      "domains": [
+        "frontend",
+        "visualization"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 925,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/060-trading-terminal.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-087",
+      "title": "暮色草甸与萤火虫",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code2canvas",
+        "code2frontend",
+        "code2audio",
+        "code2video"
+      ],
+      "domains": [
+        "animation-video",
+        "audio",
+        "frontend",
+        "visualization"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 925,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/061-firefly-meadow.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-088",
+      "title": "熔岩灯元球模拟",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code2svg",
+        "code2viz"
+      ],
+      "domains": [
+        "svg-art",
+        "visualization"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 928,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/062-lava-lamp.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-089",
+      "title": "飞行历史时间线",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code2svg",
+        "code2viz",
+        "code2video"
+      ],
+      "domains": [
+        "animation-video",
+        "svg-art",
+        "visualization"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 1182,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/063-history-of-flight.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-090",
+      "title": "冰箱磁贴诗歌",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code2frontend"
+      ],
+      "domains": [
+        "frontend"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 1010,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/064-magnetic-poetry.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-091",
+      "title": "生成式拼布艺术",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code2svg"
+      ],
+      "domains": [
+        "svg-art"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 962,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/065-generative-quilt.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-092",
+      "title": "程序化行星生成器",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code23d",
+        "code2world",
+        "code2canvas",
+        "code2viz"
+      ],
+      "domains": [
+        "3d",
+        "visualization"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 1029,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/066-planet-forge.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-093",
+      "title": "ASCII 海浪动画",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code2game",
+        "code2canvas",
+        "code2viz",
+        "code2video"
+      ],
+      "domains": [
+        "animation-video",
+        "game",
+        "visualization"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 926,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/067-ascii-tides.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-094",
+      "title": "Bento 作品集网站",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code2svg",
+        "code2css",
+        "code2frontend"
+      ],
+      "domains": [
+        "frontend",
+        "svg-art"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 1076,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/068-bento-portfolio.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-095",
+      "title": "交互蜂巢艺术",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code2svg",
+        "code2canvas"
+      ],
+      "domains": [
+        "svg-art",
+        "visualization"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 984,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/069-honeycomb-apiary.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-096",
+      "title": "双人国际象棋",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code2game",
+        "code2svg",
+        "code2viz",
+        "code2audio"
+      ],
+      "domains": [
+        "audio",
+        "game",
+        "svg-art",
+        "visualization"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 1008,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/070-chess-study.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-097",
+      "title": "配色方案工作室",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code2css"
+      ],
+      "domains": [
+        "frontend"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 1035,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/071-palette-studio.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-098",
+      "title": "双重曝光人物艺术",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code2svg"
+      ],
+      "domains": [
+        "svg-art"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 996,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/072-double-exposure.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-099",
+      "title": "会呼吸的电路板",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code2svg",
+        "code2frontend",
+        "code2video"
+      ],
+      "domains": [
+        "animation-video",
+        "frontend",
+        "svg-art"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 947,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/073-circuit-board.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-100",
+      "title": "虹彩肥皂泡",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code2canvas",
+        "code2frontend",
+        "code2audio",
+        "code2video"
+      ],
+      "domains": [
+        "animation-video",
+        "audio",
+        "frontend",
+        "visualization"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 965,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/074-soap-bubbles.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-101",
+      "title": "水墨书法画板",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code2svg",
+        "code2deck"
+      ],
+      "domains": [
+        "composite",
+        "svg-art"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 929,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/075-calligraphy-pad.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-102",
+      "title": "火星任务控制台",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code2svg",
+        "code2frontend",
+        "code2viz",
+        "code2audio"
+      ],
+      "domains": [
+        "audio",
+        "frontend",
+        "svg-art",
+        "visualization"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 1075,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/076-mission-control.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-103",
+      "title": "黑色电影侦探故事",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code2game",
+        "code2svg",
+        "code2canvas",
+        "code2frontend",
+        "code2audio"
+      ],
+      "domains": [
+        "audio",
+        "frontend",
+        "game",
+        "svg-art",
+        "visualization"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 959,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/077-noir-story.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-104",
+      "title": "四季分形树",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code2canvas",
+        "code2viz"
+      ],
+      "domains": [
+        "visualization"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 932,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/078-fractal-tree-seasons.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-105",
+      "title": "脉冲山脊线条动画",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code2world",
+        "code2canvas",
+        "code2audio",
+        "code2video"
+      ],
+      "domains": [
+        "3d",
+        "animation-video",
+        "audio",
+        "visualization"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 978,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/079-pulsar-ridges.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-106",
+      "title": "光瀑钢琴",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code2game",
+        "code2viz",
+        "code2audio"
+      ],
+      "domains": [
+        "audio",
+        "game",
+        "visualization"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 1006,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/080-falling-notes-piano.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-107",
+      "title": "故障艺术家作品集",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code2canvas",
+        "code2frontend"
+      ],
+      "domains": [
+        "frontend",
+        "visualization"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 1064,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/081-glitch-portfolio.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-108",
+      "title": "香水品牌产品页",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code23d",
+        "code2svg",
+        "code2frontend"
+      ],
+      "domains": [
+        "3d",
+        "frontend",
+        "svg-art"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 922,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/082-perfume-rosee.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-109",
+      "title": "3D 点阵地球",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code23d",
+        "code2canvas",
+        "code2viz"
+      ],
+      "domains": [
+        "3d",
+        "visualization"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 995,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/083-dot-globe.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-110",
+      "title": "六重对称雪花",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code2svg",
+        "code2canvas",
+        "code2frontend"
+      ],
+      "domains": [
+        "frontend",
+        "svg-art",
+        "visualization"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 1000,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/084-snowflake-generator.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-111",
+      "title": "新艺术风格茶馆",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code2svg",
+        "code2frontend",
+        "code2viz"
+      ],
+      "domains": [
+        "frontend",
+        "svg-art",
+        "visualization"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 987,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/085-art-nouveau-botanicals.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-112",
+      "title": "元胞自动机织锦",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code2frontend",
+        "code2viz"
+      ],
+      "domains": [
+        "frontend",
+        "visualization"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 969,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/086-cellular-tapestry.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-113",
+      "title": "插画师手账作品集",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code23d",
+        "code2svg",
+        "code2css",
+        "code2frontend"
+      ],
+      "domains": [
+        "3d",
+        "frontend",
+        "svg-art"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 995,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/087-sketchbook-portfolio.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-114",
+      "title": "物理沙漏计时器",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code23d",
+        "code2svg",
+        "code2viz",
+        "code2audio"
+      ],
+      "domains": [
+        "3d",
+        "audio",
+        "svg-art",
+        "visualization"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 974,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/088-hourglass-timer.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-115",
+      "title": "雷达与声呐控制台",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code2canvas",
+        "code2frontend",
+        "code2viz",
+        "code2audio"
+      ],
+      "domains": [
+        "audio",
+        "frontend",
+        "visualization"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 1026,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/089-radar-console.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-116",
+      "title": "文字时钟",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code2frontend",
+        "code2viz"
+      ],
+      "domains": [
+        "frontend",
+        "visualization"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 964,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/090-word-clock.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-117",
+      "title": "阿尔卑斯山的一天",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code2frontend",
+        "code2video"
+      ],
+      "domains": [
+        "animation-video",
+        "frontend"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 999,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/091-alpenglow-day-cycle.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-118",
+      "title": "自然环境声混音器",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code2svg",
+        "code2frontend",
+        "code2viz",
+        "code2audio"
+      ],
+      "domains": [
+        "audio",
+        "frontend",
+        "svg-art",
+        "visualization"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 1041,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/092-soundscape-mixer.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-119",
+      "title": "风力行走机械雕塑",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code2viz"
+      ],
+      "domains": [
+        "visualization"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 1019,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/093-strandbeest-walker.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-120",
+      "title": "生成式水彩风景",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code2frontend"
+      ],
+      "domains": [
+        "frontend"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 1018,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/094-watercolor-landscapes.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-121",
+      "title": "磁场交互实验室",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code2canvas",
+        "code2frontend",
+        "code2viz"
+      ],
+      "domains": [
+        "frontend",
+        "visualization"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 1008,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/095-magnetic-field.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-122",
+      "title": "建筑与景观工作室",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code2svg",
+        "code2frontend"
+      ],
+      "domains": [
+        "frontend",
+        "svg-art"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 1031,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/096-concrete-monolith.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-123",
+      "title": "摆锤绘图机",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code2svg",
+        "code2viz"
+      ],
+      "domains": [
+        "svg-art",
+        "visualization"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 996,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/097-harmonograph.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-124",
+      "title": "交互式儿童绘本",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code23d",
+        "code2svg",
+        "code2css",
+        "code2video"
+      ],
+      "domains": [
+        "3d",
+        "animation-video",
+        "frontend",
+        "svg-art"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 998,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/098-paper-moon-storybook.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-125",
+      "title": "无限递归房间",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code2canvas",
+        "code2frontend",
+        "code2video"
+      ],
+      "domains": [
+        "animation-video",
+        "frontend",
+        "visualization"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 1078,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/099-droste-infinite-zoom.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "case-126",
+      "title": "水波干涉实验室",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code2frontend",
+        "code2viz"
+      ],
+      "domains": [
+        "frontend",
+        "visualization"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 1103,
+      "published_at": "2026-09-23T03:45:10+00:00",
+      "demo_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/100-organic-wave-lab.html",
+      "source_post_url": "https://x.com/DavidSilgado_/status/2102605163257381124",
+      "author": "@DavidSilgado_",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "x-2102665046568673765",
+      "title": "漫游《清明上河图》汴京",
+      "model_label": "Claude Opus 5.5",
+      "code2_tags": [
+        "code2game",
+        "code23d",
+        "code2video",
+        "code2html",
+        "code2css",
+        "code2canvas",
+        "code2frontend",
+        "code2viz",
+        "code2audio"
+      ],
+      "domains": [
+        "3d",
+        "animation-video",
+        "audio",
+        "frontend",
+        "game",
+        "visualization"
+      ],
+      "prompt_status": "repository",
+      "evidence_level": "B",
+      "prompt_chars": 5514,
+      "published_at": "2026-09-23T07:43:07+00:00",
+      "demo_url": "https://silentfleetkk.github.io/qingming-bianjing/opus-5.5/qingming-bianjing.html",
+      "source_post_url": "https://x.com/KKaWSB/status/2102665046568673765",
+      "author": "KK.aWSB @KKaWSB",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [
+        "gpt6-sol-2102665046568673765"
+      ],
+      "contamination_split": null
+    },
+    {
+      "task_id": "gpt6-astra-2102565403109085669",
+      "title": "制作日式樱花山谷",
+      "model_label": "GPT-6 Astra",
+      "code2_tags": [
+        "code2game",
+        "code23d",
+        "code2world",
+        "code2video",
+        "code2html",
+        "code2css",
+        "code2frontend"
+      ],
+      "domains": [
+        "3d",
+        "animation-video",
+        "frontend",
+        "game"
+      ],
+      "prompt_status": "full",
+      "evidence_level": "A",
+      "prompt_chars": 2237,
+      "published_at": "2026-09-23T01:07:10+00:00",
+      "demo_url": "https://s.baoyu.io/files/sakura-valley-gpt-6-astra.html",
+      "source_post_url": "https://x.com/dotey/status/2102565403109085669",
+      "author": "宝玉 @dotey",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [
+        "case-001"
+      ],
+      "contamination_split": null
+    },
+    {
+      "task_id": "gpt6-sol-2102665046568673765",
+      "title": "漫游《清明上河图》汴京",
+      "model_label": "GPT-6 Sol",
+      "code2_tags": [
+        "code2game",
+        "code23d",
+        "code2video",
+        "code2html",
+        "code2css",
+        "code2canvas",
+        "code2frontend",
+        "code2viz",
+        "code2audio"
+      ],
+      "domains": [
+        "3d",
+        "animation-video",
+        "audio",
+        "frontend",
+        "game",
+        "visualization"
+      ],
+      "prompt_status": "repository",
+      "evidence_level": "B",
+      "prompt_chars": 5514,
+      "published_at": "2026-09-23T07:43:07+00:00",
+      "demo_url": "https://silentfleetkk.github.io/qingming-bianjing/gpt-6-sol/qingming-bianjing.html",
+      "source_post_url": "https://x.com/KKaWSB/status/2102665046568673765",
+      "author": "KK.aWSB @KKaWSB",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [
+        "x-2102665046568673765"
+      ],
+      "contamination_split": null
+    },
+    {
+      "task_id": "b24-astra-2098105648106078541",
+      "title": "人头与大脑三维解剖图谱",
+      "model_label": "GPT-6 Astra",
+      "code2_tags": [
+        "code23d",
+        "code2html",
+        "code2viz"
+      ],
+      "domains": [
+        "3d",
+        "frontend",
+        "visualization"
+      ],
+      "prompt_status": "repository",
+      "evidence_level": "B",
+      "prompt_chars": 2622,
+      "published_at": "2026-09-10T17:45:42+00:00",
+      "demo_url": "https://bubblik525.github.io/head/human-head-anatomy.html",
+      "source_post_url": "https://x.com/k1rallik/status/2098105648106078541",
+      "author": "BuBBliK @k1rallik",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "b24-astra-2098841316591346006",
+      "title": "切尔诺贝利核电站教学图谱",
+      "model_label": "GPT-6 Astra",
+      "code2_tags": [
+        "code23d",
+        "code2html",
+        "code2frontend",
+        "code2viz"
+      ],
+      "domains": [
+        "3d",
+        "frontend",
+        "visualization"
+      ],
+      "prompt_status": "repository",
+      "evidence_level": "B",
+      "prompt_chars": 961,
+      "published_at": "2026-09-12T18:28:59+00:00",
+      "demo_url": "https://bubblik525.github.io/Chernobyl_Atlas/ATELIER-Reactor.html",
+      "source_post_url": "https://x.com/k1rallik/status/2098841316591346006",
+      "author": "BuBBliK @k1rallik",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [],
+      "contamination_split": null
+    },
+    {
+      "task_id": "b24-sol-2102509273393627524",
+      "title": "卡通星球 · 同背景笔记重测",
+      "model_label": "GPT-6 Sol",
+      "code2_tags": [
+        "code23d",
+        "code2world",
+        "code2viz"
+      ],
+      "domains": [
+        "3d",
+        "visualization"
+      ],
+      "prompt_status": "context",
+      "evidence_level": "B",
+      "prompt_chars": 228,
+      "published_at": "2026-09-22T21:24:08+00:00",
+      "demo_url": "https://ohmyunicorn.com/labs/dream-loop/planet-gpt6/sol2.html",
+      "source_post_url": "https://x.com/Tim_LB/status/2102509273393627524",
+      "author": "Timothée Le Borgne @Tim_LB",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [
+        "demo-034",
+        "b24-luna-2102509273393627524"
+      ],
+      "contamination_split": null
+    },
+    {
+      "task_id": "b24-luna-2102509273393627524",
+      "title": "卡通星球 · 同背景笔记重测",
+      "model_label": "GPT-6 Luna",
+      "code2_tags": [
+        "code23d",
+        "code2world",
+        "code2viz"
+      ],
+      "domains": [
+        "3d",
+        "visualization"
+      ],
+      "prompt_status": "context",
+      "evidence_level": "B",
+      "prompt_chars": 228,
+      "published_at": "2026-09-22T21:24:08+00:00",
+      "demo_url": "https://ohmyunicorn.com/labs/dream-loop/planet-gpt6/luna2.html",
+      "source_post_url": "https://x.com/Tim_LB/status/2102509273393627524",
+      "author": "Timothée Le Borgne @Tim_LB",
+      "license": null,
+      "failed": false,
+      "related_case_ids": [
+        "demo-034",
+        "b24-sol-2102509273393627524"
+      ],
+      "contamination_split": null
+    }
+  ]
+}

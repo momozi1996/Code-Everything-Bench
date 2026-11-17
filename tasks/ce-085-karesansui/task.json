@@ -1,0 +1,26 @@
+{
+  "task_id": "ce-085-karesansui",
+  "source_case_id": "case-085",
+  "title": "Karesansui — interactive zen sand garden (single-file HTML)",
+  "prompt_status": "full",
+  "evidence_level": "A",
+  "mode": "Replay",
+  "track": "CE-Frozen",
+  "code2_tags": ["code2frontend", "code2canvas", "code2audio"],
+  "four_dimensions": {
+    "interaction_span": "single-turn",
+    "execution_span": "long",
+    "trigger": "user-initiated",
+    "deliverable": "objective-artifact"
+  },
+  "prompt_chars": 894,
+  "published_at": null,
+  "published_at_note": "populated from the corpus by scripts/build_manifest.py",
+  "reference_url": "https://miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files/059-zen-sand-garden.html",
+  "source_post_url": null,
+  "contamination_split": null,
+  "assertion_target": 12,
+  "full_measurement": true,
+  "license": "see reference/SOURCE.md",
+  "notes": "Example task pack. Verbatim prompt text is fetched by scripts/sync_corpus.py and is intentionally not vendored."
+}

@@ -1,0 +1,15 @@
+# Everything here is OPTIONAL. The cebench core (L0 assertions, scoring,
+# trace schema, CLI selftest) runs on the Python standard library alone.
+#
+#   pip install -r requirements.txt
+#   playwright install chromium
+#
+# Pinned browser version matters: scrollWidth and font metrics vary across
+# Chromium releases, which would make the 360px-overflow assertion drift.
+# The exact version used for published runs is recorded in Dockerfile.
+
+playwright==1.49.1
+PyYAML==6.0.2
+numpy==2.1.3
+scipy==1.14.1
+pytest==8.3.4

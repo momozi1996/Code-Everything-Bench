@@ -1,0 +1,30 @@
+cff-version: 1.2.0
+message: "If you use this benchmark, please cite the paper and this artifact."
+type: software
+title: "Code-Everything Bench: Can Agents Deliver and Verify What Real Users Actually Ask For?"
+authors:
+  - family-names: momozi1996
+    name-particle: ""
+year: 2027
+url: "https://github.com/momozi1996/Code-Everything-Bench"
+repository-code: "https://github.com/momozi1996/Code-Everything-Bench"
+abstract: >-
+  A living benchmark of 111 community-authored prompt-to-artifact tasks with
+  executable evidence. Separates generation, verification, repair and
+  calibration as measurable constructs, with contamination-aware POST/PRE
+  splits and at least 80 percent of the score derived from deterministic
+  assertions.
+keywords:
+  - code generation benchmark
+  - agentic evaluation
+  - self-verification
+  - executable evidence
+  - community-sourced tasks
+license: MIT
+preferred-citation:
+  type: article
+  title: "Code-Everything Bench: Can Agents Deliver and Verify What Real Users Actually Ask For?"
+  authors:
+    - family-names: momozi1996
+  year: 2027
+  note: "Pre-registration; preprint forthcoming"

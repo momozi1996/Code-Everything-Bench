@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CE-Bench L0 pass fixture — miniature zen garden</title>
+<style>
+  html, body { margin: 0; height: 100%; background: #e8e0cf; color: #3b3630;
+               font: 14px/1.5 system-ui, sans-serif; }
+  main { max-width: 100%; padding: 12px; box-sizing: border-box; }
+  canvas { width: 100%; max-width: 100%; height: 46vh; display: block;
+           border: 1px solid #c9bfa8; background: #efe9da; touch-action: none; }
+  .bar { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+  button { font: inherit; padding: 6px 12px; border: 1px solid #9c917a;
+           border-radius: 6px; background: #faf7ef; cursor: pointer; }
+  @media (prefers-reduced-motion: reduce) {
+    canvas { filter: saturate(0.8); }
+  }
+</style>
+</head>
+<body>
+<main>
+  <h1>Zen garden</h1>
+  <p>Click / tap the sand or press <kbd>R</kbd> to rake. Pointer and keyboard do the same thing.</p>
+  <canvas id="sand" width="900" height="420" aria-label="rakeable sand"></canvas>
+  <div class="bar">
+    <button id="rake" type="button">Rake (R)</button>
+    <button id="chime" type="button">Wind chime</button>
+  </div>
+  <p id="status" role="status">ready</p>
+</main>
+<script>
+(() => {
+  const canvas = document.getElementById('sand');
+  const ctx = canvas.getContext('2d');
+  const status = document.getElementById('status');
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const state = { strokes: 0, phase: 0, stones: [] };
+  window.__cebenchFixtureState = state;   // optional explicit probe target
+
+  function draw() {
+    ctx.fillStyle = '#efe9da';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.strokeStyle = '#d3c7ab';
+    ctx.lineWidth = 2;
+    for (let i = 0; i < 14; i++) {
+      ctx.beginPath();
+      for (let x = 0; x <= canvas.width; x += 8) {
+        const y = 26 + i * 27 + Math.sin((x / 90) + state.phase + i * 0.4) * 6;
+        if (x === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+    }
+    ctx.fillStyle = '#8a8375';
+    state.stones.forEach(s => { ctx.beginPath(); ctx.arc(s.x, s.y, 9, 0, Math.PI * 2); ctx.fill(); });
+  }
+
+  function rake(x, y) {
+    state.strokes += 1;
+    state.stones.push({ x: x % canvas.width, y: y % canvas.height });
+    status.textContent = 'strokes: ' + state.strokes;
+    draw();
+  }
+
+  function frame() {
+    if (!reduced) state.phase += 0.004;
+    draw();
+    window.requestAnimationFrame(frame);
+  }
+
+  // Pointer path
+  canvas.addEventListener('click', (e) => {
+    const r = canvas.getBoundingClientRect();
+    rake((e.clientX - r.left) * canvas.width / r.width,
+         (e.clientY - r.top) * canvas.height / r.height);
+  });
+  document.getElementById('rake').addEventListener('click', () => rake(120, 90));
+
+  // Keyboard path — same behaviour, parity with pointer
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'r' || e.key === 'R') rake(120, 90);
+  });
+
+  // Web Audio only starts inside a user gesture
+  document.getElementById('chime').addEventListener('click', () => {
+    const Ctor = window.AudioContext || window.webkitAudioContext;
+    if (!Ctor) return;
+    const ac = new Ctor();
+    const osc = ac.createOscillator();
+    const gain = ac.createGain();
+    osc.frequency.value = 660;
+    gain.gain.value = 0.03;
+    osc.connect(gain).connect(ac.destination);
+    osc.start();
+    osc.stop(ac.currentTime + 0.35);
+  });
+
+  window.requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>

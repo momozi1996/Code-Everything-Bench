@@ -1,0 +1,47 @@
+name: Assertion meta-test gate
+
+# Publication gate. A task may enter scoring only when every applicable L0+L1
+# assertion passes on its reference implementation. The reference is an oracle
+# for the ASSERTIONS, not a scoring target for models: if a known-good artifact
+# fails, the assertion is wrong.
+#
+# This is the executable version of paper §4.4 (spec–assertion–oracle alignment).
+# It also guards the verifiability budget: F+R+E must remain >= 0.75.
+
+on:
+  push:
+    paths:
+      - 'cebench/**'
+      - 'tasks/**'
+      - 'tests/**'
+  pull_request:
+    paths:
+      - 'cebench/**'
+      - 'tasks/**'
+      - 'tests/**'
+  workflow_dispatch:
+
+jobs:
+  meta-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.11' }
+      - name: Verify contract constants were not silently changed
+        run: PYTHONPATH=. python3 -m cebench.cli selftest
+      - name: Every L0 assertion passes on the known-good fixture
+        run: PYTHONPATH=. python3 scripts/reproduce_main_table.py --check
+      - name: Task pack integrity
+        run: |
+          PYTHONPATH=. python3 - <<'PY'
+          import json, pathlib
+          root = pathlib.Path('tasks')
+          m = json.loads((root / 'manifest.json').read_text())
+          assert m['task_count'] == 111, m['task_count']
+          f = m['funnel']
+          assert (f['main_library'], f['with_prompt_text'],
+                  f['with_runnable_html'], f['admissible_full_measurement']) == (739, 305, 111, 111), f
+          assert m['strict_d1_tasks'] == 102, m['strict_d1_tasks']
+          print('manifest: 739 -> 305 -> 111 -> 111, 102 strict-D1 tasks, OK')
+          PY

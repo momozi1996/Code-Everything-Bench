@@ -1,0 +1,29 @@
+# macOS (explicitly excluded from every commit)
+*.DS_Store
+.DS_Store
+**/.DS_Store
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Browser / runner scratch (never commit transient traces)
+.playwright/
+playwright-report/
+test-results/
+tmp/
+*.log
+
+# Local secrets
+.env
+.env.local
+
+# NOTE: results/, leaderboard/data/ and tasks/manifest.json are intentionally
+# NOT ignored. Reproducibility requires that traces and placeholder data are
+# versioned. Only the transient paths above are excluded.

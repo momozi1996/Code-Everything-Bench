@@ -1,0 +1,45 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  core:
+    name: Contract + unit tests (stdlib only)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Contract selftest
+        run: PYTHONPATH=. python3 -m cebench.cli selftest
+      - name: Unit tests
+        run: PYTHONPATH=. python3 -m unittest discover -s tests -v
+      - name: Refuse fabricated reports
+        run: |
+          if PYTHONPATH=. python3 -m cebench.cli report; then
+            echo "ERROR: report succeeded on placeholder data" && exit 1
+          else
+            echo "OK: placeholder data correctly refused"
+          fi
+
+  browser:
+    name: Full browser assertions (pinned Chromium)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install pinned dependencies
+        run: |
+          pip install -r requirements.txt
+          playwright install --with-deps chromium
+      - name: Unit tests including runtime L0-03 / L0-04
+        run: PYTHONPATH=. python3 -m unittest discover -s tests -v
+      - name: Assertion meta-test gate
+        run: PYTHONPATH=. python3 scripts/reproduce_main_table.py --check

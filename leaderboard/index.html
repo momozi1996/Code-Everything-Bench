@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Code-Everything Bench · Leaderboard</title>
+<meta name="description" content="A living benchmark of 111 community-authored prompt-to-artifact tasks with executable evidence.">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">CE-BENCH · PRE-REGISTRATION</div>
+    <h1>Code-Everything Bench</h1>
+    <p class="question">Can Agents Deliver and Verify What Real Users Actually Ask For?</p>
+    <p class="tagline">面向用户的最后一次真实考验</p>
+
+    <div class="numbers">
+      <div class="num"><strong>111</strong><span>community-authored tasks</span></div>
+      <div class="num"><strong>8</strong><span>shared global assertions</span></div>
+      <div class="num"><strong>3</strong><span>measurement modes · M1/M2/M3</span></div>
+    </div>
+
+    <div class="badges">
+      <span>Real Community Prompts</span>
+      <span>Single-File Artifacts</span>
+      <span>Runtime State Probes</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <div class="notice" role="status">
+    <div class="notice-mark">PLACEHOLDER</div>
+    <div>
+      <strong>No model results have been published yet.</strong>
+      Every value below is an empty slot. Scores will be generated from committed
+      execution traces by <code>scripts/reproduce_main_table.py</code> after the
+      first run (111 tasks × 5 configurations × 3 repetitions, scheduled 2027-Q1).
+      Publishing illustrative numbers here would itself be an unverified claim —
+      the exact failure mode this benchmark measures.
+    </div>
+  </div>
+
+  <section id="leaderboard">
+    <div class="section-head">
+      <h2>Leaderboard</h2>
+      <div class="controls">
+        <label>Domain
+          <select id="filter-domain"><option value="all">All domains</option></select>
+        </label>
+        <label>Contamination split
+          <select id="filter-split">
+            <option value="post">POST (published after cutoff)</option>
+            <option value="pre">PRE</option>
+            <option value="all">POST + PRE</option>
+          </select>
+        </label>
+        <label>Track
+          <select id="filter-track">
+            <option value="frozen">CE-Frozen</option>
+            <option value="live">CE-Live</option>
+            <option value="hidden">CE-Hidden</option>
+          </select>
+        </label>
+      </div>
+    </div>
+
+    <p class="hint">Three metric groups, reported side by side and <strong>never merged into a total</strong>.
+       Rankings use paired-test significance groups (a / b / c); configurations sharing
+       a letter are not ordered.</p>
+
+    <div class="table-scroll">
+      <table class="lb">
+        <thead>
+          <tr class="group-row">
+            <th rowspan="2" class="sticky-col">Configuration</th>
+            <th colspan="4" class="g-result">Result metrics</th>
+            <th colspan="6" class="g-process">Process metrics</th>
+            <th colspan="6" class="g-quality">Quality metrics</th>
+          </tr>
+          <tr class="col-row">
+            <th class="g-result">Pass@Budget <sup>†</sup></th>
+            <th class="g-result">First-pass rate</th>
+            <th class="g-result">M2 F1</th>
+            <th class="g-result">M3 regression</th>
+            <th class="g-process">Wall clock</th>
+            <th class="g-process">Repair rounds</th>
+            <th class="g-process">Tokens out</th>
+            <th class="g-process">Unverified claims</th>
+            <th class="g-process">Time-to-first-runnable</th>
+            <th class="g-process">Self-check actions</th>
+            <th class="g-quality">F</th>
+            <th class="g-quality">R</th>
+            <th class="g-quality">V</th>
+            <th class="g-quality">E</th>
+            <th class="g-quality">Quality | Pass</th>
+            <th class="g-quality">Cost-to-Pass</th>
+          </tr>
+        </thead>
+        <tbody id="lb-body">
+          <tr class="placeholder-row">
+            <td class="sticky-col"><span class="pill">awaiting run 01</span></td>
+            <td colspan="16" class="empty-cell">— no evaluated configuration — every cell is an explicit placeholder —</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="footnote"><sup>†</sup> Binary main metric, gated only: artifact loads · core interaction works ·
+      no unverified claims · no forbidden shortcut · a deliverable file exists.
+      Quality scores are reported <em>conditional on passing</em> and never enter Pass@Budget.
+      Each published number will carry a bootstrap 95% CI.</p>
+  </section>
+
+  <section id="distribution">
+    <div class="section-head"><h2>Task distribution</h2>
+      <span class="meta">8-domain reporting rollup · multi-label · counts exceed 111</span></div>
+    <div id="domain-chart" class="chart"></div>
+    <p class="hint">Counts are measured from the pinned corpus by
+      <code>scripts/build_manifest.py</code>. <code>code2Tags</code> is multi-label
+      (155 observed combinations) and is <strong>not</strong> used as a sampling
+      stratum; balanced comparisons use four orthogonal task dimensions.</p>
+  </section>
+
+  <section id="tasks">
+    <div class="section-head"><h2>Task browser</h2>
+      <div class="controls">
+        <label>Filter by domain <select id="task-domain"><option value="all">All domains</option></select></label>
+        <label>Evidence <select id="task-evidence">
+          <option value="all">All grades</option>
+          <option value="full">strict D1 (full)</option>
+          <option value="other">Replay (annotated)</option>
+        </select></label>
+        <span class="meta" id="task-count">—</span>
+      </div>
+    </div>
+    <div id="task-grid" class="grid"></div>
+    <p class="hint">Prompt text and reference HTML are referenced by URL, not redistributed.
+      Clicking a card will open its assertion breakdown, failure class, trace summary
+      and self-assessment vs actual outcome once results exist.</p>
+  </section>
+
+  <section id="protocol">
+    <div class="section-head"><h2>Evaluation protocol at a glance</h2></div>
+    <ol class="steps">
+      <li><b>1 Task Packaging</b><span>verbatim prompt · budget B=(T,K,C) · <em>8 public L0 assertions</em> · L1 interaction assertions</span></li>
+      <li><b>2 Agent Generation</b><span>L2 sandbox: screenshots, console, build log, self-authored tests · full trace recorded</span></li>
+      <li><b>3 Launch Gate</b><span>pinned Chromium · console zero-error · reward-hacking audit · <em>failure → Fail</em></span></li>
+      <li><b>4 Interactive Verification</b><span>Playwright recordings · harness-side state probes · sampled frames @2FPS · L1 execution</span></li>
+      <li><b>5 Score &amp; Aggregation</b><span>0.35F + 0.30R + 0.20V + 0.15E (0.80 deterministic) · 3-judge median · bootstrap CI</span></li>
+    </ol>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p><strong>Code-Everything Bench</strong> · companion artifact of the paper
+      <em>Can Agents Deliver and Verify What Real Users Actually Ask For?</em></p>
+    <p>
+      <a href="https://github.com/momozi1996/Code-Everything-Bench">benchmark repository</a> ·
+      <a href="https://github.com/momozi1996/Code-Everything">source case library</a> ·
+      <a href="../docs/benchmark-spec.md">protocol</a> ·
+      <a href="../data/croissant.json">Croissant metadata</a>
+    </p>
+    <p class="small">Status: pre-registration · no model scores published · task metadata is real, results are placeholders.</p>
+  </div>
+</footer>
+
+<script src="assets/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+{
+  "task_id": "ce-085-karesansui",
+  "tier": "L1",
+  "minimum_auto_assertions": 8,
+  "assertions": [
+    {"id": "L1-01", "name": "sand surface is a live canvas", "kind": "source_contains",
+     "pattern": "<canvas", "dimension": "F"},
+    {"id": "L1-02", "name": "five tools exposed", "kind": "source_contains",
+     "pattern": "(?:tool|tools)\\s*[:=]", "dimension": "R"},
+    {"id": "L1-03", "name": "vertical title treatment", "kind": "source_contains",
+     "pattern": "writing-mode\\s*:\\s*vertical", "dimension": "R"},
+    {"id": "L1-04", "name": "sand palette #e8e0cf", "kind": "source_contains",
+     "pattern": "#e8e0cf", "dimension": "R"},
+    {"id": "L1-05", "name": "Web Audio chime present", "kind": "source_contains",
+     "pattern": "AudioContext", "dimension": "F"},
+    {"id": "L1-06", "name": "no static image standing in for the garden", "kind": "source_absent",
+     "pattern": "<img[^>]+src=['\"]https?://", "dimension": "F"},
+    {"id": "L1-07", "name": "raking changes runtime state", "kind": "interaction_delta",
+     "selector": "#sand", "action": "click", "dimension": "F",
+     "evidence_grade": "E1/E3"},
+    {"id": "L1-08", "name": "rake tool button is reachable", "kind": "selector_exists",
+     "selector": "#rake", "dimension": "F"},
+    {"id": "L1-09", "name": "keyboard rake changes runtime state", "kind": "interaction_delta",
+     "selector": "body", "action": "key:r", "dimension": "F"},
+    {"id": "L1-10", "name": "chime is gesture-bound", "kind": "source_contains",
+     "pattern": "addEventListener\\(\\s*['\"]click", "dimension": "E"},
+    {"id": "L1-11", "name": "visual composition review", "kind": "visual_review",
+     "dimension": "V", "rubric": "closed questions on interaction recording"},
+    {"id": "L1-12", "name": "tool labels legible at 360px", "kind": "visual_review",
+     "dimension": "V", "rubric": "screenshot-only closed question"}
+  ],
+  "notes": "L1-07/09 are harness-side state probes: a DOM node existing is not evidence of behaviour (WorldCoder tau_b = -0.02). L1-11/12 are never auto-scored."
+}

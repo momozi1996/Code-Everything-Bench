@@ -1,0 +1,91 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "cr": "https://mlcommons.org/croissant/",
+    "rai": "https://mlcommons.org/croissant/rai/",
+    "sc": "https://schema.org/",
+    "dataType": {"@id": "cr:dataType", "@type": "@id"},
+    "examples": {"@id": "cr:examples", "@type": "@id"},
+    "extract": "cr:extract",
+    "field": {"@id": "cr:field", "@type": "@id"},
+    "fileObject": {"@id": "cr:fileObject", "@type": "@id"},
+    "fileProperty": "cr:fileProperty",
+    "fileSet": {"@id": "cr:fileSet", "@type": "@id"},
+    "format": "cr:format",
+    "includes": "cr:includes",
+    "isLiveDataset": "cr:isLiveDataset",
+    "jsonPath": "cr:jsonPath",
+    "key": {"@id": "cr:key", "@type": "@id"},
+    "parentField": {"@id": "cr:parentField", "@type": "@id"},
+    "path": "cr:path",
+    "recordSet": {"@id": "cr:recordSet", "@type": "@id"},
+    "references": {"@id": "cr:references", "@type": "@id"},
+    "regex": "cr:regex",
+    "repeated": "cr:repeated",
+    "separator": "cr:separator",
+    "source": {"@id": "cr:source", "@type": "@id"},
+    "subField": {"@id": "cr:subField", "@type": "@id"}
+  },
+  "@type": "sc:Dataset",
+  "name": "Code-Everything Bench",
+  "description": "111 community-authored prompt-to-single-file-HTML tasks with runnable reference implementations, publication timestamps and per-record attribution. Companion artifact of the paper 'Can Agents Deliver and Verify What Real Users Actually Ask For?'.",
+  "url": "https://github.com/momozi1996/Code-Everything-Bench",
+  "license": "https://creativecommons.org/licenses/by-nc/4.0/",
+  "keywords": ["code generation", "agentic benchmark", "self-verification", "community-sourced tasks", "single-file HTML"],
+  "creator": {"@type": "sc:Person", "name": "momozi1996"},
+  "datePublished": "2026-11-17",
+  "version": "0.1.0-pre-registration",
+  "cr:isLiveDataset": true,
+  "distribution": [
+    {
+      "@type": "cr:FileObject",
+      "@id": "manifest",
+      "name": "Task manifest",
+      "contentUrl": "tasks/manifest.json",
+      "encodingFormat": "application/json",
+      "sha256": "PLACEHOLDER_REPLACED_ON_RELEASE"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "global-assertions",
+      "name": "Shared L0 assertion suite",
+      "contentUrl": "cebench/assertions/global_suite.py",
+      "encodingFormat": "text/x-python"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "leaderboard-tasks",
+      "name": "Leaderboard task index",
+      "contentUrl": "leaderboard/data/tasks.json",
+      "encodingFormat": "application/json"
+    }
+  ],
+  "recordSet": [
+    {
+      "@type": "cr:RecordSet",
+      "@id": "tasks",
+      "name": "tasks",
+      "description": "One row per admitted task. Prompt text and reference HTML are referenced by URL, not redistributed.",
+      "field": [
+        {"@type": "cr:Field", "@id": "tasks/task_id", "name": "task_id", "dataType": "sc:Text",
+         "source": {"fileObject": {"@id": "manifest"}, "extract": {"jsonPath": "tasks[*].task_id"}}},
+        {"@type": "cr:Field", "@id": "tasks/title", "name": "title", "dataType": "sc:Text",
+         "source": {"fileObject": {"@id": "manifest"}, "extract": {"jsonPath": "tasks[*].title"}}},
+        {"@type": "cr:Field", "@id": "tasks/domains", "name": "domains", "dataType": "sc:Text", "repeated": true,
+         "source": {"fileObject": {"@id": "manifest"}, "extract": {"jsonPath": "tasks[*].domains"}}},
+        {"@type": "cr:Field", "@id": "tasks/prompt_status", "name": "prompt_status", "dataType": "sc:Text",
+         "source": {"fileObject": {"@id": "manifest"}, "extract": {"jsonPath": "tasks[*].prompt_status"}}},
+        {"@type": "cr:Field", "@id": "tasks/published_at", "name": "published_at", "dataType": "sc:Date",
+         "source": {"fileObject": {"@id": "manifest"}, "extract": {"jsonPath": "tasks[*].published_at"}}},
+        {"@type": "cr:Field", "@id": "tasks/demo_url", "name": "demo_url", "dataType": "sc:URL",
+         "source": {"fileObject": {"@id": "manifest"}, "extract": {"jsonPath": "tasks[*].demo_url"}}},
+        {"@type": "cr:Field", "@id": "tasks/license", "name": "license", "dataType": "sc:Text",
+         "source": {"fileObject": {"@id": "manifest"}, "extract": {"jsonPath": "tasks[*].license"}}}
+      ]
+    }
+  ],
+  "rai:dataCollection": "Tasks are verbatim community prompts harvested from public posts on X by momozi1996/Code-Everything; prompts themselves are not redistributed here.",
+  "rai:dataPreprocessing": "Measured census: 739 -> 305 (prompt text exists) -> 111 (runnable .html reference). Traceability verified on 111/111.",
+  "rai:dataLimitations": "100/111 tasks come from a single collection produced with one model family; results should be stratified by source. Video-only and mathematics sub-collections are out of scope.",
+  "rai:dataUsesAndSensitiveApplications": "Evaluation of code-generation agents. Not intended for training on protected user content; per-record attributions and takedown channel are preserved in the source corpus."
+}

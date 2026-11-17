@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CE-Bench negative fixture — 360px overflow</title>
+<style>
+  .fixed { width: 800px; background: #efe9da; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Broken mobile layout</h1>
+  <div class="fixed">This element forces horizontal scrolling at 360px.</div>
+  <button id="go" type="button">Do something</button>
+</main>
+<script>
+  document.getElementById('go').addEventListener('click', () => {});
+  document.addEventListener('keydown', () => {});
+  window.requestAnimationFrame(() => {});
+</script>
+</body>
+</html>
