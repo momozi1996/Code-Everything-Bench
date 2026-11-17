@@ -10,6 +10,8 @@
 
 > **⚠️ NO RESULTS YET.** This repository is the companion artifact of a pre-registered study. Every number on the leaderboard is an explicit `PLACEHOLDER`. No model scores are published until the evaluation run defined in [`docs/benchmark-spec.md`](docs/benchmark-spec.md) has been executed and its traces are committed under `results/`. Filling in a score by hand is a violation of the benchmark contract.
 
+**Live leaderboard (placeholder):** <https://momozi1996.github.io/Code-Everything-Bench/> — deployed from `leaderboard/` by `.github/workflows/pages.yml`. It only ever reads `leaderboard/data/results.csv` and `tasks.json`; no score is hard-coded in the page.
+
 ---
 
 ## What this is
@@ -124,7 +126,7 @@ leaderboard. Full field reference: [`config/README.md`](config/README.md).
 │   ├── reproducibility.md    one-command reproduction contract
 │   └── figures/              six figure specs (mermaid + layout + data provenance)
 ├── data/croissant.json       Croissant dataset metadata (NeurIPS E&D requirement)
-└── .github/workflows/        CI: unit tests + assertion meta-test gate
+└── .github/workflows/        CI: unit tests + meta-test gate + Pages deployment
 ```
 
 ## Relation to the source corpus
@@ -144,7 +146,7 @@ Third-party reference implementations are **not vendored**. Each task pack recor
 | **Generation + run orchestration scripts** | ✅ committed — `--check` / `--dry-run` / real batch |
 | Harness-side state probe, D1–D6 mutation operators | ✅ implemented (task-specific configs pending) |
 | Trace schema, unverified-claim audit | ✅ implemented |
-| Leaderboard site, filters, drill-down | ✅ implemented, **PLACEHOLDER data** |
+| Leaderboard site, filters, drill-down | ✅ deployed at [momozi1996.github.io/Code-Everything-Bench](https://momozi1996.github.io/Code-Everything-Bench/), **PLACEHOLDER data** |
 | 111 task-specific L1 assertion packs | ⬜ pipeline in progress |
 | 111 mutation configs + reference self-check | ⬜ pipeline in progress |
 | Model runs (M1/M2/M3) and `[R#]` result slots | ⬜ first run scheduled 2027-Q1 |
