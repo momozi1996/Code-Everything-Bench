@@ -67,6 +67,36 @@ playwright install chromium
 python3 scripts/reproduce_main_table.py --check   # full reproduction contract (requires results/)
 ```
 
+## Running a real evaluation — you supply the keys
+
+The repository ships **templates and scripts only**. No API key, no base URL and
+no model result is committed. Fill them in locally when you are ready:
+
+```bash
+cp config/models.example.json config/models.json   # git-ignored: base_url, model, api_key_env
+cp config/run.example.json   config/run.json       # git-ignored: task set, repetitions, budget, split
+cp .env.example              .env                  # git-ignored: the actual key values
+set -a; source .env; set +a
+
+python3 scripts/sync_corpus.py --ref <commit-hash>     # fetch verbatim prompts (not vendored)
+python3 scripts/run_evaluation.py --check               # validate config; no API call
+python3 scripts/run_evaluation.py --dry-run             # rehearse offline; writes nothing
+python3 scripts/run_evaluation.py --task case-001 --limit 1   # one real generation
+python3 scripts/run_evaluation.py                       # full 111 x N x 3 batch
+```
+
+Supported protocols: **`openai-compatible`** (OpenAI, vLLM/SGLang, Ollama shim,
+most gateways) and **`anthropic`**. Each entry names an environment variable via
+`api_key_env`; a literal key anywhere in the config is rejected by validation.
+`--dry-run` uses a stub client whose output is explicitly non-scoreable, so a
+rehearsal can never leak into the leaderboard. Without a pinned Chromium,
+runtime assertions return `SKIP` and **no score is written**.
+
+Outputs land in `results/<run-id>/` (artifacts, traces, delivery notes,
+`outcomes.csv`, and a **sanitised** `config.json` with no key values). Then
+`python3 scripts/reproduce_main_table.py --run <run-id>` regenerates the
+leaderboard. Full field reference: [`config/README.md`](config/README.md).
+
 ## Repository layout
 
 ```
@@ -82,6 +112,10 @@ python3 scripts/reproduce_main_table.py --check   # full reproduction contract (
 │   └── ce-085-karesansui/    one complete example task pack
 ├── scripts/                  corpus sync, manifest build, one-command reproduction
 ├── analysis/                 IRT (2PL), inter-rater agreement, bootstrap / effect sizes
+├── config/                   API + run templates (filled-in copies are git-ignored)
+├── cebench/providers.py      unified API client (openai-compatible / anthropic / dry-run)
+├── cebench/generate.py       M1 generation, delivery-note parsing, trace events
+├── cebench/evaluation.py     run orchestration -> sanitised results/<run-id>/
 ├── tests/                    runnable fixtures (pass + targeted failures)
 ├── leaderboard/              static site + CSV — all values PLACEHOLDER until first run
 ├── docs/
@@ -106,6 +140,8 @@ Third-party reference implementations are **not vendored**. Each task pack recor
 | Task bank metadata (111 tasks, real fields) | ✅ committed |
 | L0 global assertion suite (8 rules) + runnable fixtures | ✅ committed, tested |
 | Gate / Cap / rubric / aggregation formula | ✅ committed, tested |
+| **Model API input layer (config templates + env-var keys + provider clients)** | ✅ committed, tested — **you fill in key / base_url / model** |
+| **Generation + run orchestration scripts** | ✅ committed — `--check` / `--dry-run` / real batch |
 | Harness-side state probe, D1–D6 mutation operators | ✅ implemented (task-specific configs pending) |
 | Trace schema, unverified-claim audit | ✅ implemented |
 | Leaderboard site, filters, drill-down | ✅ implemented, **PLACEHOLDER data** |

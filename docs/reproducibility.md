@@ -23,6 +23,29 @@ placeholder row. `python3 -m cebench.cli report` exits non-zero for the same
 reason. This is intentional: an empty table is honest, an illustrative one is
 not.
 
+## 1.5 Supplying model credentials (done by the run owner)
+
+No credential is part of this repository. Copy the templates, then supply the
+values locally:
+
+```bash
+cp config/models.example.json config/models.json   # base_url, model, api_key_env, harness, cutoff
+cp config/run.example.json   config/run.json       # task set, repetitions, budget, split
+cp .env.example              .env                  # actual key values
+set -a; source .env; set +a
+```
+
+`config/models.json`, `config/run.json` and `.env` are git-ignored. A literal
+key in the config is rejected. `configs` support `openai-compatible` and
+`anthropic`; add another protocol by subclassing `BaseClient` in
+`cebench/providers.py`. The published `results/<run-id>/config.json` is
+sanitised — it records `api_key_env` names but never key values, so anyone can
+reproduce the run with their own credentials.
+
+Validation sequence: `--check` (no API call) → `--dry-run` (offline, nothing
+written, output explicitly non-scoreable) → one task → full batch. See
+[`config/README.md`](../config/README.md).
+
 ## 2. What is pinned
 
 | Component | Pin | Why |

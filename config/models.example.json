@@ -1,0 +1,54 @@
+{
+  "_comment": "Copy to config/models.json (git-ignored) and fill in. NEVER put a literal API key in this file — use api_key_env, which names an environment variable. Config validation rejects literal keys.",
+  "defaults": {
+    "protocol": "openai-compatible",
+    "timeout_seconds": 120,
+    "max_retries": 3,
+    "temperature": 0.7,
+    "max_tokens": 16000,
+    "top_p": 1.0
+  },
+  "models": [
+    {
+      "id": "cfg-01-closure-frontier",
+      "protocol": "openai-compatible",
+      "base_url": "https://api.openai.com/v1",
+      "api_key_env": "OPENAI_API_KEY",
+      "model": "gpt-5.1",
+      "harness": "single-shot-l2",
+      "training_cutoff": "2025-09-30",
+      "params": { "temperature": 0.7, "max_tokens": 16000 }
+    },
+    {
+      "id": "cfg-02-anthropic",
+      "protocol": "anthropic",
+      "base_url": "https://api.anthropic.com",
+      "api_key_env": "ANTHROPIC_API_KEY",
+      "model": "claude-opus-4-5",
+      "harness": "single-shot-l2",
+      "training_cutoff": "2025-08-31",
+      "params": { "temperature": 0.7, "max_tokens": 16000 }
+    },
+    {
+      "id": "cfg-03-open-weight",
+      "protocol": "openai-compatible",
+      "base_url": "http://localhost:8000/v1",
+      "api_key_env": "CEBENCH_LOCAL_API_KEY",
+      "model": "your-open-weight-model",
+      "harness": "agent-harness-l2",
+      "training_cutoff": "2026-01-31",
+      "params": { "temperature": 0.7, "max_tokens": 16000 }
+    },
+    {
+      "id": "cfg-04-custom-gateway",
+      "protocol": "openai-compatible",
+      "base_url": "https://your-gateway.example.com/v1",
+      "api_key_env": "CEBENCH_CUSTOM_API_KEY",
+      "model": "your-model-id",
+      "harness": "single-shot-l2",
+      "training_cutoff": "2026-06-30",
+      "extra_headers": { "X-Project": "cebench" },
+      "params": { "temperature": 0.7, "max_tokens": 16000 }
+    }
+  ]
+}

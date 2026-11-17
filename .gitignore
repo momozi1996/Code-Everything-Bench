@@ -20,9 +20,16 @@ test-results/
 tmp/
 *.log
 
-# Local secrets
+# Local secrets and personal run configuration — templates are tracked,
+# filled-in copies are not. Keys are read from environment variables only.
 .env
-.env.local
+.env.*
+!.env.example
+config/models.json
+config/run.json
+
+# Corpus snapshot fetched on demand by scripts/sync_corpus.py
+data/corpus/
 
 # NOTE: results/, leaderboard/data/ and tasks/manifest.json are intentionally
 # NOT ignored. Reproducibility requires that traces and placeholder data are

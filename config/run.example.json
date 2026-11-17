@@ -1,0 +1,25 @@
+{
+  "_comment": "Copy to config/run.json (git-ignored). This is the run plan; it must be committed in sanitised form under results/<run-id>/config.json when you publish scores.",
+  "run_id": "2027-q1-pilot",
+  "track": "CE-Frozen",
+  "mode": "Replay",
+  "split": "POST",
+  "task_set": "all",
+  "task_ids": [],
+  "repetitions": 3,
+  "seed": 2027,
+  "budget": {
+    "wall_clock_minutes": 30,
+    "max_repair_rounds": 15,
+    "max_output_tokens": 60000,
+    "network": "deny"
+  },
+  "measurements": ["M1", "M2"],
+  "limit": null,
+  "output": {
+    "write_artifacts": true,
+    "write_traces": true,
+    "write_delivery_notes": true
+  },
+  "notes": "Start with --check, then --dry-run, then a single task via --task before the full 111 x N x 3 batch."
+}
