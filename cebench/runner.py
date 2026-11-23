@@ -23,12 +23,31 @@ from .assertions.state_probe import INIT_JS, probe
 from .config import DEFAULT_BUDGET, ROOT, VERSION
 
 
+_BROWSER_CACHE: dict[str, bool] = {}
+
+
 def playwright_available() -> bool:
+    """True only when the package *and* a launchable browser binary are present.
+
+    Checking the import alone is not enough: `pip install playwright` without
+    `playwright install chromium` imports fine but cannot launch, which used to
+    abort a whole batch instead of degrading to static mode.
+    """
+    if "v" in _BROWSER_CACHE:
+        return _BROWSER_CACHE["v"]
     try:
-        import playwright.sync_api  # noqa: F401
-        return True
+        from playwright.sync_api import sync_playwright  # type: ignore
     except ImportError:
+        _BROWSER_CACHE["v"] = False
         return False
+    try:
+        with sync_playwright() as pw:
+            exe = pw.chromium.executable_path
+            ok = bool(exe) and Path(exe).exists()
+    except Exception:
+        ok = False
+    _BROWSER_CACHE["v"] = ok
+    return ok
 
 
 @contextmanager
@@ -79,17 +98,28 @@ def verify_artifact(artifact: str | Path, task_dir: str | Path | None = None,
     want_browser = playwright_available() if use_browser is None else use_browser
     page = None
     state: dict[str, Any] = {}
+    browser_error = ""
+    l0: list[Any] | None = None
+    l1_results: list[Any] = []
     if want_browser and playwright_available():
-        with browser_page(artifact) as pg:
-            page = pg
-            state = probe(pg)
-            l0 = run_global_suite(source, pg)
+        try:
+            with browser_page(artifact) as pg:
+                page = pg
+                state = probe(pg)
+                l0 = run_global_suite(source, pg)
+                if task_dir:
+                    from .config import load_config
+                    specs = load_config(Path(task_dir) / "assertions" / "task.json").get("assertions", [])
+                    l1_results = run_task_assertions(specs, source, pg)
+        except Exception as exc:
+            # A missing or mismatched browser binary must degrade to static mode.
+            # Raising here would abort a whole batch over an environment problem,
+            # and pretending the browser ran would fabricate runtime evidence.
+            browser_error = f"{type(exc).__name__}: {exc}"[:240]
+            page = None
+            l0 = None
             l1_results = []
-            if task_dir:
-                from .config import load_config
-                specs = load_config(Path(task_dir) / "assertions" / "task.json").get("assertions", [])
-                l1_results = run_task_assertions(specs, source, pg)
-    else:
+    if l0 is None:
         l0 = run_global_suite(source, None)
         l1_results = []
         if task_dir:
@@ -105,7 +135,8 @@ def verify_artifact(artifact: str | Path, task_dir: str | Path | None = None,
         "schema_version": VERSION,
         "artifact": str(Path(artifact).resolve()),
         "task_id": Path(task_dir).name if task_dir else None,
-        "browser_available": want_browser and playwright_available(),
+        "browser_available": want_browser and playwright_available() and not browser_error,
+        "browser_error": browser_error,
         "evaluation_ready": bool(l0s["coverage_complete"]),
         "budget": DEFAULT_BUDGET,
         "l0": [r.to_dict() for r in l0],

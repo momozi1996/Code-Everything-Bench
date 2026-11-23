@@ -1,0 +1,45 @@
+{
+  "task_id": "case-126",
+  "substrate": "reference/SOURCE.md",
+  "difficulty_ladder": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "operators": [
+    {
+      "class": "D1",
+      "status": "needs_review",
+      "note": "selector/DOM removal"
+    },
+    {
+      "class": "D2",
+      "status": "needs_review",
+      "note": "external dependency substitution"
+    },
+    {
+      "class": "D3",
+      "status": "needs_review",
+      "note": "silent no-op interaction"
+    },
+    {
+      "class": "D4",
+      "status": "needs_review",
+      "note": "layout collapse"
+    },
+    {
+      "class": "D5",
+      "status": "needs_review",
+      "note": "asset 404"
+    },
+    {
+      "class": "D6",
+      "status": "needs_review",
+      "note": "claim/behaviour divergence"
+    }
+  ],
+  "ground_truth_policy": "exactly the applied records returned by cebench.defect.apply_mutations; no hidden rubric",
+  "meta_test": "each injected artifact must be detected by at least one L0/L1 assertion or Gate rule before this config is admitted"
+}

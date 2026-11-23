@@ -1,0 +1,2 @@
+config_id,harness,model,task_id,repetition,split,track,pass_at_budget,final_score,F,R,V,E,quality_given_pass,unverified_claims,claimed_checks,trace_verified_checks,self_assessed_completion,l0_pass,l0_fail,l0_skip,l1_pass,l1_fail,tokens_out,evaluation_ready,dry_run,error,notes
+cfg-glm53flash,single-shot-l2,z-ai/glm-5.3-flash,case-085,1,POST,CE-Frozen,False,0.0,0.7857142857142857,1.0,,,,0,3,3,0.88,7,1,0,7,3,12370,True,False,,core_interaction_unusable

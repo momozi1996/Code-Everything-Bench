@@ -1,0 +1,36 @@
+{
+  "task_id": "b24-astra-2098841316591346006",
+  "status": "ok",
+  "bytes": 750146,
+  "l0_failed": [
+    {
+      "id": "L0-08",
+      "name": "Web Audio requires a user gesture",
+      "evidence": "AudioContext starts without a gated gesture (autoplay risk)"
+    }
+  ],
+  "l1_failed": [],
+  "l0_summary": {
+    "total": 8,
+    "passed": 5,
+    "failed": 1,
+    "skipped": 2,
+    "na": 0,
+    "effective_assertions": 6,
+    "pass_rate": 0.8333333333333334,
+    "all_effective_passed": false,
+    "coverage_complete": false
+  },
+  "l1_summary": {
+    "total": 9,
+    "passed": 7,
+    "failed": 0,
+    "skipped": 1,
+    "na": 1,
+    "effective_assertions": 7,
+    "pass_rate": 1.0,
+    "all_effective_passed": true,
+    "coverage_complete": false
+  },
+  "assertions_ok": false
+}

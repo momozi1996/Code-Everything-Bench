@@ -1,0 +1,96 @@
+{
+  "task_id": "gpt6-astra-2102565403109085669",
+  "tier": "L1",
+  "minimum_auto_assertions": 8,
+  "assertions": [
+    {
+      "id": "L1-01",
+      "name": "Three.js runtime referenced",
+      "kind": "source_contains",
+      "dimension": "F",
+      "derived_from": "prompt-keyword",
+      "auto_derived": true,
+      "pattern": "THREE\\.|three(?:\\.module|\\.min)?\\.js"
+    },
+    {
+      "id": "L1-02",
+      "name": "WebGL context requested",
+      "kind": "source_contains",
+      "dimension": "F",
+      "derived_from": "prompt-keyword",
+      "auto_derived": true,
+      "pattern": "getContext\\(\\s*['\\\"]webgl"
+    },
+    {
+      "id": "L1-03",
+      "name": "audio path exists",
+      "kind": "source_contains",
+      "dimension": "F",
+      "derived_from": "prompt-keyword",
+      "auto_derived": true,
+      "pattern": "AudioContext|new\\s+Audio\\("
+    },
+    {
+      "id": "L1-04",
+      "name": "drag/pointer interaction",
+      "kind": "source_contains",
+      "dimension": "F",
+      "derived_from": "prompt-keyword",
+      "auto_derived": true,
+      "pattern": "draggable|mousedown|pointerdown|touchstart"
+    },
+    {
+      "id": "L1-05",
+      "name": "responsive layout declared",
+      "kind": "source_contains",
+      "dimension": "R",
+      "derived_from": "prompt-keyword",
+      "auto_derived": true,
+      "pattern": "@media|width=device-width"
+    },
+    {
+      "id": "L1-06",
+      "name": "3D rendering path",
+      "kind": "source_contains",
+      "dimension": "R",
+      "derived_from": "prompt-keyword",
+      "auto_derived": true,
+      "pattern": "perspective|transform\\s*:\\s*.*3d|THREE\\.|webgl"
+    },
+    {
+      "id": "L1-07",
+      "name": "no remote image standing in for the artifact",
+      "kind": "source_absent",
+      "dimension": "F",
+      "derived_from": "prompt-keyword",
+      "auto_derived": true,
+      "pattern": "<img[^>]+src=['\\\"]https?://"
+    },
+    {
+      "id": "L1-08",
+      "name": "a pointer interaction changes runtime state",
+      "kind": "interaction_delta",
+      "dimension": "F",
+      "derived_from": "prompt-keyword",
+      "auto_derived": true,
+      "selector": "body",
+      "action": "click",
+      "settle_ms": 250,
+      "evidence_grade": "E1/E3"
+    },
+    {
+      "id": "L1-09",
+      "name": "visual fidelity review",
+      "kind": "visual_review",
+      "dimension": "V",
+      "rubric": "closed questions on rendered screenshots",
+      "derived_from": "policy",
+      "auto_derived": true
+    }
+  ],
+  "status": "auto_derived_needs_review",
+  "review_required": true,
+  "auto_assertable": 8,
+  "full_measurement": true,
+  "notes": "Derived from the verbatim prompt by scripts/generate_assertions.py. L0 covers the shared contract; these are task-specific. Run the reference meta-test before publishing: an assertion the reference implementation fails is a wrong assertion."
+}

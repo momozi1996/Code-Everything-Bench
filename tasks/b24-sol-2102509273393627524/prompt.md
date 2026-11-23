@@ -1,0 +1,3 @@
+<!-- verbatim prompt from momozi1996/Code-Everything (id=b24-sol-2102509273393627524) -->
+
+output a ThreeJS 3D cartoony/comics-like planet, with vibrant life on it: clouds, mountains, city buildings, cars and plane romaing it. It should be possible to orbit around and zoom and see the details. No harness is to be used

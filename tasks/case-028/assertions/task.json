@@ -1,0 +1,96 @@
+{
+  "task_id": "case-028",
+  "tier": "L1",
+  "minimum_auto_assertions": 8,
+  "assertions": [
+    {
+      "id": "L1-01",
+      "name": "canvas surface present",
+      "kind": "source_contains",
+      "dimension": "F",
+      "derived_from": "prompt-keyword",
+      "auto_derived": true,
+      "pattern": "<canvas\\b"
+    },
+    {
+      "id": "L1-02",
+      "name": "audio path exists",
+      "kind": "source_contains",
+      "dimension": "F",
+      "derived_from": "prompt-keyword",
+      "auto_derived": true,
+      "pattern": "AudioContext|new\\s+Audio\\("
+    },
+    {
+      "id": "L1-03",
+      "name": "particle system referenced",
+      "kind": "source_contains",
+      "dimension": "R",
+      "derived_from": "prompt-keyword",
+      "auto_derived": true,
+      "pattern": "particle|粒子"
+    },
+    {
+      "id": "L1-04",
+      "name": "canvas element reachable",
+      "kind": "selector_exists",
+      "dimension": "F",
+      "derived_from": "prompt-keyword",
+      "auto_derived": true,
+      "selector": "canvas"
+    },
+    {
+      "id": "L1-05",
+      "name": "a pointer interaction changes runtime state",
+      "kind": "interaction_delta",
+      "dimension": "F",
+      "derived_from": "prompt-keyword",
+      "auto_derived": true,
+      "selector": "body",
+      "action": "click",
+      "settle_ms": 250,
+      "evidence_grade": "E1/E3"
+    },
+    {
+      "id": "L1-06",
+      "name": "artifact is a complete HTML document",
+      "kind": "source_contains",
+      "dimension": "F",
+      "pattern": "<!doctype\\s+html|<html",
+      "derived_from": "L0-aligned",
+      "auto_derived": true
+    },
+    {
+      "id": "L1-07",
+      "name": "artifact declares a body",
+      "kind": "source_contains",
+      "dimension": "F",
+      "pattern": "<body\\b",
+      "derived_from": "L0-aligned",
+      "auto_derived": true
+    },
+    {
+      "id": "L1-08",
+      "name": "styling is present",
+      "kind": "source_contains",
+      "dimension": "R",
+      "pattern": "<style\\b|style\\s*=",
+      "derived_from": "prompt-keyword",
+      "auto_derived": true
+    },
+    {
+      "id": "L1-09",
+      "name": "visual fidelity review",
+      "kind": "visual_review",
+      "dimension": "V",
+      "rubric": "closed questions on rendered screenshots",
+      "derived_from": "policy",
+      "auto_derived": true
+    }
+  ],
+  "status": "auto_derived_needs_review",
+  "review_required": true,
+  "auto_assertable": 8,
+  "full_measurement": true,
+  "notes": "Derived from the verbatim prompt by scripts/generate_assertions.py. L0 covers the shared contract; these are task-specific. Run the reference meta-test before publishing: an assertion the reference implementation fails is a wrong assertion."
+}

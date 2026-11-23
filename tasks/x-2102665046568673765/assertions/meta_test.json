@@ -1,0 +1,36 @@
+{
+  "task_id": "x-2102665046568673765",
+  "status": "ok",
+  "bytes": 212239,
+  "l0_failed": [
+    {
+      "id": "L0-01",
+      "name": "Single file / no external resources",
+      "evidence": "external references: external <link href>"
+    }
+  ],
+  "l1_failed": [],
+  "l0_summary": {
+    "total": 8,
+    "passed": 5,
+    "failed": 1,
+    "skipped": 2,
+    "na": 0,
+    "effective_assertions": 6,
+    "pass_rate": 0.8333333333333334,
+    "all_effective_passed": false,
+    "coverage_complete": false
+  },
+  "l1_summary": {
+    "total": 13,
+    "passed": 10,
+    "failed": 0,
+    "skipped": 2,
+    "na": 1,
+    "effective_assertions": 10,
+    "pass_rate": 1.0,
+    "all_effective_passed": true,
+    "coverage_complete": false
+  },
+  "assertions_ok": false
+}

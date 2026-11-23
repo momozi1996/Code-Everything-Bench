@@ -65,6 +65,7 @@ class ModelConfig:
     extra_headers: dict[str, str] = field(default_factory=dict)
     timeout_seconds: int = 120
     max_retries: int = 3
+    role: str = "target"  # "target" (generates artifacts) | "judge" (scores L2)
 
     @classmethod
     def from_dict(cls, d: dict[str, Any], defaults: dict[str, Any] | None = None) -> "ModelConfig":
@@ -89,6 +90,7 @@ class ModelConfig:
             extra_headers=d.get("extra_headers") or {},
             timeout_seconds=int(defaults.get("timeout_seconds", 120)),
             max_retries=int(defaults.get("max_retries", 3)),
+            role=str(d.get("role") or defaults.get("role") or "target"),
         )
 
     def sanitized(self) -> dict[str, Any]:
@@ -96,7 +98,8 @@ class ModelConfig:
         return {"id": self.id, "protocol": self.protocol, "base_url": self.base_url,
                 "api_key_env": self.api_key_env, "model": self.model,
                 "harness": self.harness, "training_cutoff": self.training_cutoff,
-                "params": self.params, "timeout_seconds": self.timeout_seconds}
+                "params": self.params, "timeout_seconds": self.timeout_seconds,
+                "role": self.role}
 
 
 def load_model_configs(path: str | Path) -> list[ModelConfig]:
@@ -206,6 +209,14 @@ class OpenAICompatibleClient(BaseClient):
                 "top_p": params.get("top_p", 1.0)}
         if params.get("seed") is not None:
             body["seed"] = params["seed"]
+        # Optional generation controls, passed through only from a fixed
+        # allow-list. Reasoning-style models otherwise spend the whole output
+        # budget on hidden tokens and return an empty message. Nothing here can
+        # carry a credential.
+        for key in ("reasoning_effort", "thinking", "thinking_budget",
+                    "frequency_penalty", "presence_penalty", "stop"):
+            if params.get(key) is not None:
+                body[key] = params[key]
         headers = {"Authorization": f"Bearer {self._api_key}", **self.cfg.extra_headers}
         data = self._post(f"{self.cfg.base_url}/chat/completions", headers, body)
         try:

@@ -1,0 +1,30 @@
+{
+  "task_id": "case-052",
+  "status": "ok",
+  "bytes": 54185,
+  "l0_failed": [],
+  "l1_failed": [],
+  "l0_summary": {
+    "total": 8,
+    "passed": 6,
+    "failed": 0,
+    "skipped": 2,
+    "na": 0,
+    "effective_assertions": 6,
+    "pass_rate": 1.0,
+    "all_effective_passed": true,
+    "coverage_complete": false
+  },
+  "l1_summary": {
+    "total": 9,
+    "passed": 6,
+    "failed": 0,
+    "skipped": 2,
+    "na": 1,
+    "effective_assertions": 6,
+    "pass_rate": 1.0,
+    "all_effective_passed": true,
+    "coverage_complete": false
+  },
+  "assertions_ok": true
+}

@@ -128,7 +128,8 @@ def main(argv: list[str] | None = None) -> int:
         plan.repetitions = 1
         print("\n  DRY RUN — offline stub client, synthetic prompt, nothing written.")
         rows = run_evaluation(configs, plan, tasks, dry_run=True, verbose=True)
-        expected = len(configs) * len(tasks) * plan.repetitions
+        n_target = len([c for c in configs if getattr(c, "role", "target") == "target"])
+        expected = n_target * len(tasks) * plan.repetitions
         scoreable = [r for r in rows
                      if r.get("pass_at_budget") not in ("", None, False)
                      or r.get("final_score") not in ("", None)]
@@ -162,7 +163,8 @@ def main(argv: list[str] | None = None) -> int:
     if plan.limit:
         tasks = tasks[:plan.limit]
     print(f"\n  tasks selected       : {len(tasks)}")
-    print(f"  total generations    : {len(tasks) * len(configs) * plan.repetitions}")
+    n_target = len([c for c in configs if getattr(c, "role", "target") == "target"])
+    print(f"  total generations    : {len(tasks) * n_target * plan.repetitions}")
     print("  starting...\n")
     rows = run_evaluation(configs, plan, tasks, dry_run=False, verbose=True)
     print(f"\n  Completed {len(rows)} rows -> results/{plan.run_id}/")

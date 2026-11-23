@@ -156,7 +156,12 @@ def run_evaluation(configs: list[ModelConfig], plan: RunPlan, tasks: list[TaskSp
         })
 
     rows: list[dict[str, Any]] = []
-    for cfg in configs:
+    # Only "target" configurations generate artifacts. A "judge" configuration
+    # scores L2 visual reviews and must never be asked to build the artifact.
+    target_configs = [c for c in configs if getattr(c, "role", "target") == "target"]
+    if not target_configs:
+        raise ValueError("no target configuration to evaluate (all entries are role=judge)")
+    for cfg in target_configs:
         client = build_client(cfg, dry_run=dry_run)
         for task in tasks:
             # POST/PRE is computed per (task, configuration), not by filtering
@@ -203,7 +208,12 @@ def _score_one(cfg: ModelConfig, plan: RunPlan, task: TaskSpec, rep: int,
         row["notes"] = "dry_run or no artifact: intentionally not scored"
         return row
 
-    verification = verify_artifact(gen.artifact_path, use_browser=None)
+    # The task pack directory must be passed in, otherwise the task-specific L1
+    # assertions are never loaded and every score rests on L0 alone.
+    task_dir = ROOT / "tasks" / task.task_id
+    verification = verify_artifact(gen.artifact_path,
+                                   task_dir if task_dir.is_dir() else None,
+                                   use_browser=None)
     obs, ready = build_observation(gen, verification)
     l0s, l1s = verification["l0_summary"], verification["l1_summary"]
     row.update({

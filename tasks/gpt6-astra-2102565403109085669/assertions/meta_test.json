@@ -1,0 +1,36 @@
+{
+  "task_id": "gpt6-astra-2102565403109085669",
+  "status": "ok",
+  "bytes": 705308,
+  "l0_failed": [
+    {
+      "id": "L0-01",
+      "name": "Single file / no external resources",
+      "evidence": "external references: external <script src>"
+    }
+  ],
+  "l1_failed": [],
+  "l0_summary": {
+    "total": 8,
+    "passed": 5,
+    "failed": 1,
+    "skipped": 2,
+    "na": 0,
+    "effective_assertions": 6,
+    "pass_rate": 0.8333333333333334,
+    "all_effective_passed": false,
+    "coverage_complete": false
+  },
+  "l1_summary": {
+    "total": 9,
+    "passed": 7,
+    "failed": 0,
+    "skipped": 1,
+    "na": 1,
+    "effective_assertions": 7,
+    "pass_rate": 1.0,
+    "all_effective_passed": true,
+    "coverage_complete": false
+  },
+  "assertions_ok": false
+}

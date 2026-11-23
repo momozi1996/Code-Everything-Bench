@@ -1,0 +1,42 @@
+{
+  "task_id": "case-001",
+  "status": "ok",
+  "bytes": 156766,
+  "l0_failed": [
+    {
+      "id": "L0-01",
+      "name": "Single file / no external resources",
+      "evidence": "external references: external <script src>, external <link href>, known CDN domain"
+    }
+  ],
+  "l1_failed": [
+    {
+      "id": "L1-04",
+      "name": "drag/pointer interaction",
+      "evidence": "pattern 'draggable|mousedown|pointerdown|touchstart' absent"
+    }
+  ],
+  "l0_summary": {
+    "total": 8,
+    "passed": 5,
+    "failed": 1,
+    "skipped": 2,
+    "na": 0,
+    "effective_assertions": 6,
+    "pass_rate": 0.8333333333333334,
+    "all_effective_passed": false,
+    "coverage_complete": false
+  },
+  "l1_summary": {
+    "total": 9,
+    "passed": 6,
+    "failed": 1,
+    "skipped": 1,
+    "na": 1,
+    "effective_assertions": 7,
+    "pass_rate": 0.8571428571428571,
+    "all_effective_passed": false,
+    "coverage_complete": false
+  },
+  "assertions_ok": false
+}

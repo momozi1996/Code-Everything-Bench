@@ -58,7 +58,7 @@ git clone https://github.com/momozi1996/Code-Everything-Bench.git
 cd Code-Everything-Bench
 python3 -m unittest discover -s tests -v       # runs the L0 assertion suite + scoring tests
 python3 -m cebench.cli selftest                 # prints the contract and validates all task packs
-python3 -m cebench.cli verify tasks/ce-085-karesansui/artifact.html   # score one artifact (static mode)
+python3 -m cebench.cli verify tests/fixtures/minimal_pass.html   # score one artifact (static mode)
 ```
 
 The core package uses **only the Python standard library**, so a fresh clone can be validated immediately. Installing `requirements.txt` enables the full browser mode (`playwright`), YAML task specs (`PyYAML`), and the statistical analysis (`numpy` / `scipy`). Without Playwright, `cebench` runs static assertions and reports `browser_unavailable` explicitly — it never claims to have executed a check it did not execute.
@@ -111,7 +111,7 @@ leaderboard. Full field reference: [`config/README.md`](config/README.md).
 │   └── cli.py                `cebench verify | score | selftest | report`
 ├── tasks/
 │   ├── manifest.json         measured metadata for all 111 tasks
-│   └── ce-085-karesansui/    one complete example task pack
+│   └── case-085/             one complete hand-authored pack (10 auto + 2 L2)
 ├── scripts/                  corpus sync, manifest build, one-command reproduction
 ├── analysis/                 IRT (2PL), inter-rater agreement, bootstrap / effect sizes
 ├── config/                   API + run templates (filled-in copies are git-ignored)
@@ -147,9 +147,11 @@ Third-party reference implementations are **not vendored**. Each task pack recor
 | Harness-side state probe, D1–D6 mutation operators | ✅ implemented (task-specific configs pending) |
 | Trace schema, unverified-claim audit | ✅ implemented |
 | Leaderboard site, filters, drill-down | ✅ deployed at [momozi1996.github.io/Code-Everything-Bench](https://momozi1996.github.io/Code-Everything-Bench/), **PLACEHOLDER data** |
-| 111 task-specific L1 assertion packs | ⬜ pipeline in progress |
-| 111 mutation configs + reference self-check | ⬜ pipeline in progress |
-| Model runs (M1/M2/M3) and `[R#]` result slots | ⬜ first run scheduled 2027-Q1 |
+| 111 task packs (prompt + budget + reference source + assertions) | ✅ committed — prompts materialised from the pinned corpus |
+| 111 task-specific L1 assertion packs | ✅ generated, `auto_derived_needs_review` — 86/111 reference-clean, see `docs/assertion-meta-test.md` |
+| 111 mutation configs + reference self-check | 🟡 templates committed (`status: needs_review`); operators per task pending |
+| L2 judge (closed visual questions) | ✅ committed — `scripts/judge_run.py`, fixed `role: judge` configuration |
+| Model runs (M1/M2/M3) and `[R#]` result slots | 🟡 smoke run committed (`results/2026-11-23-smoke-glm53flash/`); full census pending |
 | arXiv preprint / journal submission | ⬜ |
 
 ## Citation

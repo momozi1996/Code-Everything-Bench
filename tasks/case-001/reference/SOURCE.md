@@ -1,0 +1,33 @@
+# Reference implementation — source, not a copy
+
+The reference artifact is **not vendored** in this repository. It is a
+third-party community artifact; copying it here would duplicate the source of
+truth and bypass per-record attribution.
+
+| Asset | URL |
+|---|---|
+| Runnable artifact | `https://s.baoyu.io/files/sakura-valley-opus-5-5.html` |
+| Source post | `https://x.com/dotey/status/2102565403109085669` |
+| Source corpus record | `momozi1996/Code-Everything` → `data/cases.jsonl` (`id=case-001`) |
+
+Attribution: **宝玉 @dotey**.
+
+## What the reference implementation is for
+
+It is **not ground truth for scoring**. It is an **oracle for testing the
+assertions**: a known-good artifact must pass every applicable L0 and L1 rule.
+If it fails, the assertion is wrong, not the artifact. This meta-test is a CI
+gate (`.github/workflows/meta-test.yml`).
+
+Using the reference implementation as a scoring target would bias the
+benchmark toward the model that produced it, which is why M2 injects *defects*
+into it instead of asking models to imitate it.
+
+## Licensing
+
+`CC-BY-NC-4.0`
+
+默认许可：署名-非商业使用（CC BY-NC 4.0）。本条内容为第三方原作者作品，若原作者另有明确声明，以原作者声明为准。如需下架请提 Issue，即刻移除。
+
+Original authors retain all rights. This repository records attribution and
+fetches on demand only. See `data/README.md`.

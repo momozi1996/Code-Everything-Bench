@@ -43,7 +43,7 @@ interface changes what the agent can observe.
 ```bash
 python3 scripts/run_evaluation.py --check         # schema + no literal keys + env vars present
 python3 scripts/run_evaluation.py --dry-run       # full pipeline, no network, no results written
-python3 scripts/run_evaluation.py --task ce-085-karesansui --limit 1   # one real task first
+python3 scripts/run_evaluation.py --task case-085 --limit 1   # one real task first
 python3 scripts/run_evaluation.py                 # full 111 x N x repetitions batch
 ```
 
