@@ -111,7 +111,8 @@ leaderboard. Full field reference: [`config/README.md`](config/README.md).
 │   └── cli.py                `cebench verify | score | selftest | report`
 ├── tasks/
 │   ├── manifest.json         measured metadata for all 111 tasks
-│   └── case-085/             one complete hand-authored pack (10 auto + 2 L2)
+│   ├── taxonomy.json         3-axis labels per task (track / primary / tech)
+│   └── case-*/               111 materialised packs: prompt.md, assertions, budget, reference
 ├── scripts/                  corpus sync, manifest build, one-command reproduction
 ├── analysis/                 IRT (2PL), inter-rater agreement, bootstrap / effect sizes
 ├── config/                   API + run templates (filled-in copies are git-ignored)
@@ -121,6 +122,9 @@ leaderboard. Full field reference: [`config/README.md`](config/README.md).
 ├── tests/                    runnable fixtures (pass + targeted failures)
 ├── leaderboard/              static site + CSV — all values PLACEHOLDER until first run
 ├── docs/
+│   ├── task-catalog.html     111-task table + taxonomy tab (offline, filterable)
+│   ├── task-catalog.md       same table as Markdown, with per-axis counts
+│   ├── task-catalog.csv      flat table for spreadsheets
 │   ├── benchmark-spec.md     protocol summary aligned with the paper §3–§5
 │   ├── figure-audit.md       element-by-element parity check against GameCraft-Bench
 │   ├── reproducibility.md    one-command reproduction contract

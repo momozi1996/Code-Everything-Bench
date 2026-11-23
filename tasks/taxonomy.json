@@ -1,0 +1,2926 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-11-23T19:36:46+08:00",
+  "task_count": 111,
+  "description": "CE-Bench 三轴分类标签体系。track 为多标签主赛道（与论文 §7 judge 维度对齐）；primary 为唯一主类；tech 为技术实现标签。派生标签用于分层统计，不改变评分口径。POST/PRE 污染切分仍由运行时按各配置 training_cutoff 计算，不静态写入。",
+  "axes": {
+    "track": {
+      "visualization": {
+        "label_zh": "数据可视化",
+        "rubric_hint": "Frontend",
+        "description": "图表、物理模拟、数据映射与信息呈现"
+      },
+      "frontend": {
+        "label_zh": "前端 / 网页",
+        "rubric_hint": "Frontend",
+        "description": "页面结构、UI 组件、布局与交互界面"
+      },
+      "svg-art": {
+        "label_zh": "SVG 生成艺术",
+        "rubric_hint": "Frontend",
+        "description": "矢量程序化艺术、图形构成与几何美学"
+      },
+      "3d": {
+        "label_zh": "3D / WebGL",
+        "rubric_hint": "3D",
+        "description": "三维场景、相机、光照、材质与实时渲染"
+      },
+      "audio": {
+        "label_zh": "音频",
+        "rubric_hint": "Animation",
+        "description": "声音合成、音频可视化与节奏驱动"
+      },
+      "animation-video": {
+        "label_zh": "动画 / 视频",
+        "rubric_hint": "Animation",
+        "description": "时间轴动效、过渡、镜头与逐帧输出"
+      },
+      "game": {
+        "label_zh": "游戏",
+        "rubric_hint": "Game",
+        "description": "可玩规则、输入处理、状态机与胜负判定"
+      },
+      "composite": {
+        "label_zh": "复合任务",
+        "rubric_hint": "Overall",
+        "description": "跨多类、需整体评定的复合交付物"
+      }
+    },
+    "primary": {
+      "生成艺术": {
+        "track_hint": "svg-art",
+        "description": "程序化生成艺术为主"
+      },
+      "可视化": {
+        "track_hint": "visualization",
+        "description": "数据/现象可视化为主"
+      },
+      "网页": {
+        "track_hint": "frontend",
+        "description": "完整网页与站点"
+      },
+      "3D": {
+        "track_hint": "3d",
+        "description": "三维场景"
+      },
+      "动画": {
+        "track_hint": "animation-video",
+        "description": "时间轴动效"
+      },
+      "工具": {
+        "track_hint": "frontend",
+        "description": "实用工具与应用"
+      },
+      "前端": {
+        "track_hint": "frontend",
+        "description": "前端组件与界面"
+      },
+      "游戏": {
+        "track_hint": "game",
+        "description": "可玩游戏"
+      }
+    },
+    "tech": {
+      "code2frontend": {
+        "track_hint": "frontend",
+        "description": "HTML/CSS/JS 前端实现"
+      },
+      "code2viz": {
+        "track_hint": "visualization",
+        "description": "可视化与数据映射"
+      },
+      "code2svg": {
+        "track_hint": "svg-art",
+        "description": "SVG 矢量图形"
+      },
+      "code2canvas": {
+        "track_hint": "visualization",
+        "description": "Canvas 2D 绘制"
+      },
+      "code23d": {
+        "track_hint": "3d",
+        "description": "Three.js / WebGL / 三维"
+      },
+      "code2audio": {
+        "track_hint": "audio",
+        "description": "Web Audio / 声音"
+      },
+      "code2video": {
+        "track_hint": "animation-video",
+        "description": "视频 / 镜头 / 帧输出"
+      },
+      "code2game": {
+        "track_hint": "game",
+        "description": "游戏机制与交互规则"
+      },
+      "code2css": {
+        "track_hint": "frontend",
+        "description": "CSS 样式与布局"
+      },
+      "code2world": {
+        "track_hint": "3d",
+        "description": "世界 / 地形 / 场景生成"
+      },
+      "code2html": {
+        "track_hint": "frontend",
+        "description": "HTML 结构"
+      },
+      "code2deck": {
+        "track_hint": "frontend",
+        "description": "演示文稿 / 幻灯片"
+      }
+    }
+  },
+  "derived": {
+    "lang": {
+      "zh": "中文",
+      "en": "英文",
+      "mixed": "中英混合"
+    },
+    "prompt_bucket": {
+      "S": "短 (<400)",
+      "M": "中 (400–1499)",
+      "L": "长 (1500–2999)",
+      "XL": "超长 (≥3000)"
+    },
+    "prompt_status": {
+      "full": "完整原文",
+      "transcribed": "转录",
+      "repository": "仓库摘录",
+      "context": "上下文推断"
+    },
+    "source_group": "Opus-100 合辑 / 社区单帖 / GPT-6 · Astra / Sol / Luna",
+    "meta_test": {
+      "pass": "reference 通过全部断言",
+      "review": "断言偏严或 reference 未通过，待人工复核"
+    },
+    "replay": "relatedCaseIds 非空，可做 Replay 对照",
+    "track_count": "该题命中的赛道数（复合度代理指标）"
+  },
+  "tasks": {
+    "case-001": {
+      "primary": "3D",
+      "primary_track": "3d",
+      "tracks": [
+        "3d",
+        "animation-video",
+        "frontend",
+        "game"
+      ],
+      "tech": [
+        "code2game",
+        "code23d",
+        "code2world",
+        "code2video",
+        "code2html",
+        "code2css",
+        "code2frontend"
+      ],
+      "categories": [
+        "3D",
+        "网页",
+        "生成艺术"
+      ],
+      "lang": "zh",
+      "prompt_bucket": "L",
+      "source_group": "社区单帖",
+      "track_count": 4,
+      "replay": true,
+      "meta_test": "review",
+      "assertion_count": 9
+    },
+    "gpt6-astra-2102565403109085669": {
+      "primary": "3D",
+      "primary_track": "3d",
+      "tracks": [
+        "3d",
+        "animation-video",
+        "frontend",
+        "game"
+      ],
+      "tech": [
+        "code2game",
+        "code23d",
+        "code2world",
+        "code2video",
+        "code2html",
+        "code2css",
+        "code2frontend"
+      ],
+      "categories": [
+        "3D",
+        "网页"
+      ],
+      "lang": "zh",
+      "prompt_bucket": "L",
+      "source_group": "GPT-6 · Astra",
+      "track_count": 4,
+      "replay": true,
+      "meta_test": "review",
+      "assertion_count": 9
+    },
+    "case-009": {
+      "primary": "游戏",
+      "primary_track": "game",
+      "tracks": [
+        "3d",
+        "game"
+      ],
+      "tech": [
+        "code2game",
+        "code23d"
+      ],
+      "categories": [
+        "游戏",
+        "3D"
+      ],
+      "lang": "zh",
+      "prompt_bucket": "S",
+      "source_group": "社区单帖",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "review",
+      "assertion_count": 9
+    },
+    "case-010": {
+      "primary": "游戏",
+      "primary_track": "game",
+      "tracks": [
+        "3d",
+        "game"
+      ],
+      "tech": [
+        "code2game",
+        "code23d"
+      ],
+      "categories": [
+        "游戏",
+        "3D"
+      ],
+      "lang": "zh",
+      "prompt_bucket": "S",
+      "source_group": "社区单帖",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "review",
+      "assertion_count": 9
+    },
+    "gpt6-sol-2102665046568673765": {
+      "primary": "3D",
+      "primary_track": "3d",
+      "tracks": [
+        "3d",
+        "animation-video",
+        "audio",
+        "frontend",
+        "game",
+        "visualization"
+      ],
+      "tech": [
+        "code2game",
+        "code23d",
+        "code2video",
+        "code2html",
+        "code2css",
+        "code2canvas",
+        "code2frontend",
+        "code2viz",
+        "code2audio"
+      ],
+      "categories": [
+        "3D",
+        "网页",
+        "可视化"
+      ],
+      "lang": "zh",
+      "prompt_bucket": "XL",
+      "source_group": "GPT-6 · Sol",
+      "track_count": 6,
+      "replay": true,
+      "meta_test": "review",
+      "assertion_count": 13
+    },
+    "case-011": {
+      "primary": "3D",
+      "primary_track": "3d",
+      "tracks": [
+        "3d"
+      ],
+      "tech": [
+        "code23d"
+      ],
+      "categories": [
+        "3D"
+      ],
+      "lang": "zh",
+      "prompt_bucket": "S",
+      "source_group": "社区单帖",
+      "track_count": 1,
+      "replay": false,
+      "meta_test": "pass",
+      "assertion_count": 9
+    },
+    "case-027": {
+      "primary": "网页",
+      "primary_track": "frontend",
+      "tracks": [
+        "3d",
+        "frontend",
+        "visualization"
+      ],
+      "tech": [
+        "code23d",
+        "code2canvas",
+        "code2frontend"
+      ],
+      "categories": [
+        "网页"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 3,
+      "replay": false,
+      "meta_test": "pass",
+      "assertion_count": 9
+    },
+    "case-028": {
+      "primary": "动画",
+      "primary_track": "animation-video",
+      "tracks": [
+        "animation-video",
+        "audio",
+        "frontend",
+        "game",
+        "visualization"
+      ],
+      "tech": [
+        "code2game",
+        "code2canvas",
+        "code2frontend",
+        "code2audio",
+        "code2video"
+      ],
+      "categories": [
+        "动画",
+        "前端"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 5,
+      "replay": false,
+      "meta_test": "review",
+      "assertion_count": 9
+    },
+    "case-029": {
+      "primary": "生成艺术",
+      "primary_track": "svg-art",
+      "tracks": [
+        "composite"
+      ],
+      "tech": [],
+      "categories": [
+        "生成艺术"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 1,
+      "replay": false,
+      "meta_test": "review",
+      "assertion_count": 9
+    },
+    "case-030": {
+      "primary": "可视化",
+      "primary_track": "visualization",
+      "tracks": [
+        "3d",
+        "audio",
+        "svg-art",
+        "visualization"
+      ],
+      "tech": [
+        "code23d",
+        "code2world",
+        "code2svg",
+        "code2viz",
+        "code2audio"
+      ],
+      "categories": [
+        "可视化",
+        "生成艺术",
+        "工具"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 4,
+      "replay": false,
+      "meta_test": "pass",
+      "assertion_count": 9
+    },
+    "case-031": {
+      "primary": "生成艺术",
+      "primary_track": "svg-art",
+      "tracks": [
+        "svg-art",
+        "visualization"
+      ],
+      "tech": [
+        "code2svg",
+        "code2canvas",
+        "code2viz"
+      ],
+      "categories": [
+        "生成艺术",
+        "可视化"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "pass",
+      "assertion_count": 9
+    },
+    "case-032": {
+      "primary": "网页",
+      "primary_track": "frontend",
+      "tracks": [
+        "audio",
+        "frontend",
+        "svg-art"
+      ],
+      "tech": [
+        "code2svg",
+        "code2css",
+        "code2frontend",
+        "code2audio"
+      ],
+      "categories": [
+        "网页",
+        "生成艺术"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 3,
+      "replay": false,
+      "meta_test": "pass",
+      "assertion_count": 9
+    },
+    "case-033": {
+      "primary": "工具",
+      "primary_track": "frontend",
+      "tracks": [
+        "audio",
+        "frontend",
+        "game",
+        "visualization"
+      ],
+      "tech": [
+        "code2game",
+        "code2canvas",
+        "code2frontend",
+        "code2viz",
+        "code2audio"
+      ],
+      "categories": [
+        "工具",
+        "游戏",
+        "可视化"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 4,
+      "replay": false,
+      "meta_test": "pass",
+      "assertion_count": 9
+    },
+    "b24-astra-2098105648106078541": {
+      "primary": "3D",
+      "primary_track": "3d",
+      "tracks": [
+        "3d",
+        "frontend",
+        "visualization"
+      ],
+      "tech": [
+        "code23d",
+        "code2html",
+        "code2viz"
+      ],
+      "categories": [
+        "3D",
+        "可视化"
+      ],
+      "lang": "en",
+      "prompt_bucket": "L",
+      "source_group": "GPT-6 · Astra",
+      "track_count": 3,
+      "replay": false,
+      "meta_test": "pass",
+      "assertion_count": 9
+    },
+    "case-034": {
+      "primary": "网页",
+      "primary_track": "frontend",
+      "tracks": [
+        "3d",
+        "frontend",
+        "svg-art"
+      ],
+      "tech": [
+        "code23d",
+        "code2svg",
+        "code2frontend"
+      ],
+      "categories": [
+        "网页"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 3,
+      "replay": false,
+      "meta_test": "pass",
+      "assertion_count": 9
+    },
+    "b24-astra-2098841316591346006": {
+      "primary": "3D",
+      "primary_track": "3d",
+      "tracks": [
+        "3d",
+        "frontend",
+        "visualization"
+      ],
+      "tech": [
+        "code23d",
+        "code2html",
+        "code2frontend",
+        "code2viz"
+      ],
+      "categories": [
+        "3D",
+        "可视化"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "GPT-6 · Astra",
+      "track_count": 3,
+      "replay": false,
+      "meta_test": "review",
+      "assertion_count": 9
+    },
+    "case-035": {
+      "primary": "生成艺术",
+      "primary_track": "svg-art",
+      "tracks": [
+        "3d",
+        "visualization"
+      ],
+      "tech": [
+        "code23d",
+        "code2viz"
+      ],
+      "categories": [
+        "生成艺术",
+        "3D"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "pass",
+      "assertion_count": 9
+    },
+    "case-036": {
+      "primary": "生成艺术",
+      "primary_track": "svg-art",
+      "tracks": [
+        "audio",
+        "game",
+        "svg-art",
+        "visualization"
+      ],
+      "tech": [
+        "code2game",
+        "code2svg",
+        "code2canvas",
+        "code2viz",
+        "code2audio"
+      ],
+      "categories": [
+        "生成艺术",
+        "可视化",
+        "工具"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 4,
+      "replay": false,
+      "meta_test": "pass",
+      "assertion_count": 9
+    },
+    "case-037": {
+      "primary": "生成艺术",
+      "primary_track": "svg-art",
+      "tracks": [
+        "svg-art"
+      ],
+      "tech": [
+        "code2svg"
+      ],
+      "categories": [
+        "生成艺术"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 1,
+      "replay": false,
+      "meta_test": "pass",
+      "assertion_count": 9
+    },
+    "case-038": {
+      "primary": "前端",
+      "primary_track": "frontend",
+      "tracks": [
+        "animation-video",
+        "frontend",
+        "svg-art",
+        "visualization"
+      ],
+      "tech": [
+        "code2svg",
+        "code2frontend",
+        "code2viz",
+        "code2video"
+      ],
+      "categories": [
+        "前端",
+        "动画"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 4,
+      "replay": false,
+      "meta_test": "pass",
+      "assertion_count": 9
+    },
+    "case-039": {
+      "primary": "可视化",
+      "primary_track": "visualization",
+      "tracks": [
+        "game",
+        "svg-art",
+        "visualization"
+      ],
+      "tech": [
+        "code2game",
+        "code2svg",
+        "code2canvas",
+        "code2viz"
+      ],
+      "categories": [
+        "可视化",
+        "游戏",
+        "生成艺术"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 3,
+      "replay": false,
+      "meta_test": "pass",
+      "assertion_count": 9
+    },
+    "case-040": {
+      "primary": "动画",
+      "primary_track": "animation-video",
+      "tracks": [
+        "3d",
+        "animation-video",
+        "frontend"
+      ],
+      "tech": [
+        "code23d",
+        "code2css",
+        "code2frontend",
+        "code2video"
+      ],
+      "categories": [
+        "动画"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 3,
+      "replay": false,
+      "meta_test": "pass",
+      "assertion_count": 9
+    },
+    "case-041": {
+      "primary": "网页",
+      "primary_track": "frontend",
+      "tracks": [
+        "3d",
+        "frontend",
+        "svg-art"
+      ],
+      "tech": [
+        "code23d",
+        "code2svg",
+        "code2frontend"
+      ],
+      "categories": [
+        "网页",
+        "3D",
+        "生成艺术"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 3,
+      "replay": false,
+      "meta_test": "pass",
+      "assertion_count": 9
+    },
+    "b24-sol-2102509273393627524": {
+      "primary": "3D",
+      "primary_track": "3d",
+      "tracks": [
+        "3d",
+        "visualization"
+      ],
+      "tech": [
+        "code23d",
+        "code2world",
+        "code2viz"
+      ],
+      "categories": [
+        "3D",
+        "可视化"
+      ],
+      "lang": "en",
+      "prompt_bucket": "S",
+      "source_group": "GPT-6 · Sol",
+      "track_count": 2,
+      "replay": true,
+      "meta_test": "review",
+      "assertion_count": 9
+    },
+    "case-042": {
+      "primary": "生成艺术",
+      "primary_track": "svg-art",
+      "tracks": [
+        "3d",
+        "audio",
+        "svg-art",
+        "visualization"
+      ],
+      "tech": [
+        "code23d",
+        "code2svg",
+        "code2viz",
+        "code2audio"
+      ],
+      "categories": [
+        "生成艺术",
+        "可视化"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 4,
+      "replay": false,
+      "meta_test": "pass",
+      "assertion_count": 9
+    },
+    "b24-luna-2102509273393627524": {
+      "primary": "3D",
+      "primary_track": "3d",
+      "tracks": [
+        "3d",
+        "visualization"
+      ],
+      "tech": [
+        "code23d",
+        "code2world",
+        "code2viz"
+      ],
+      "categories": [
+        "3D",
+        "可视化"
+      ],
+      "lang": "en",
+      "prompt_bucket": "S",
+      "source_group": "GPT-6 · Luna",
+      "track_count": 2,
+      "replay": true,
+      "meta_test": "review",
+      "assertion_count": 9
+    },
+    "case-043": {
+      "primary": "可视化",
+      "primary_track": "visualization",
+      "tracks": [
+        "3d",
+        "audio",
+        "visualization"
+      ],
+      "tech": [
+        "code23d",
+        "code2viz",
+        "code2audio"
+      ],
+      "categories": [
+        "可视化"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 3,
+      "replay": false,
+      "meta_test": "review",
+      "assertion_count": 9
+    },
+    "case-044": {
+      "primary": "生成艺术",
+      "primary_track": "svg-art",
+      "tracks": [
+        "frontend",
+        "svg-art"
+      ],
+      "tech": [
+        "code2svg",
+        "code2frontend"
+      ],
+      "categories": [
+        "生成艺术",
+        "前端"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "pass",
+      "assertion_count": 9
+    },
+    "case-045": {
+      "primary": "前端",
+      "primary_track": "frontend",
+      "tracks": [
+        "audio",
+        "frontend",
+        "game",
+        "visualization"
+      ],
+      "tech": [
+        "code2game",
+        "code2css",
+        "code2canvas",
+        "code2frontend",
+        "code2viz",
+        "code2audio"
+      ],
+      "categories": [
+        "前端",
+        "可视化"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 4,
+      "replay": false,
+      "meta_test": "pass",
+      "assertion_count": 9
+    },
+    "case-046": {
+      "primary": "可视化",
+      "primary_track": "visualization",
+      "tracks": [
+        "3d",
+        "svg-art",
+        "visualization"
+      ],
+      "tech": [
+        "code23d",
+        "code2svg",
+        "code2viz"
+      ],
+      "categories": [
+        "可视化",
+        "生成艺术"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 3,
+      "replay": false,
+      "meta_test": "pass",
+      "assertion_count": 9
+    },
+    "case-047": {
+      "primary": "生成艺术",
+      "primary_track": "svg-art",
+      "tracks": [
+        "frontend"
+      ],
+      "tech": [
+        "code2frontend"
+      ],
+      "categories": [
+        "生成艺术",
+        "前端"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 1,
+      "replay": false,
+      "meta_test": "pass",
+      "assertion_count": 9
+    },
+    "case-048": {
+      "primary": "网页",
+      "primary_track": "frontend",
+      "tracks": [
+        "frontend",
+        "svg-art",
+        "visualization"
+      ],
+      "tech": [
+        "code2svg",
+        "code2canvas",
+        "code2frontend"
+      ],
+      "categories": [
+        "网页",
+        "前端"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 3,
+      "replay": false,
+      "meta_test": "pass",
+      "assertion_count": 9
+    },
+    "case-049": {
+      "primary": "生成艺术",
+      "primary_track": "svg-art",
+      "tracks": [
+        "visualization"
+      ],
+      "tech": [
+        "code2canvas"
+      ],
+      "categories": [
+        "生成艺术",
+        "工具"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 1,
+      "replay": false,
+      "meta_test": "pass",
+      "assertion_count": 9
+    },
+    "case-050": {
+      "primary": "网页",
+      "primary_track": "frontend",
+      "tracks": [
+        "frontend",
+        "svg-art"
+      ],
+      "tech": [
+        "code2svg",
+        "code2frontend"
+      ],
+      "categories": [
+        "网页"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "pass",
+      "assertion_count": 9
+    },
+    "case-051": {
+      "primary": "游戏",
+      "primary_track": "game",
+      "tracks": [
+        "frontend",
+        "game",
+        "visualization"
+      ],
+      "tech": [
+        "code2game",
+        "code2canvas",
+        "code2frontend"
+      ],
+      "categories": [
+        "游戏",
+        "前端"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 3,
+      "replay": false,
+      "meta_test": "pass",
+      "assertion_count": 9
+    },
+    "case-052": {
+      "primary": "可视化",
+      "primary_track": "visualization",
+      "tracks": [
+        "audio",
+        "frontend",
+        "visualization"
+      ],
+      "tech": [
+        "code2canvas",
+        "code2frontend",
+        "code2viz",
+        "code2audio"
+      ],
+      "categories": [
+        "可视化",
+        "生成艺术"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 3,
+      "replay": false,
+      "meta_test": "pass",
+      "assertion_count": 9
+    },
+    "case-053": {
+      "primary": "3D",
+      "primary_track": "3d",
+      "tracks": [
+        "3d",
+        "animation-video",
+        "frontend",
+        "visualization"
+      ],
+      "tech": [
+        "code23d",
+        "code2css",
+        "code2canvas",
+        "code2frontend",
+        "code2viz",
+        "code2video"
+      ],
+      "categories": [
+        "3D",
+        "动画",
+        "可视化"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 4,
+      "replay": false,
+      "meta_test": "pass",
+      "assertion_count": 9
+    },
+    "case-054": {
+      "primary": "可视化",
+      "primary_track": "visualization",
+      "tracks": [
+        "visualization"
+      ],
+      "tech": [
+        "code2viz"
+      ],
+      "categories": [
+        "可视化"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 1,
+      "replay": false,
+      "meta_test": "review",
+      "assertion_count": 9
+    },
+    "case-055": {
+      "primary": "工具",
+      "primary_track": "frontend",
+      "tracks": [
+        "audio",
+        "svg-art"
+      ],
+      "tech": [
+        "code2svg",
+        "code2audio"
+      ],
+      "categories": [
+        "工具"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "pass",
+      "assertion_count": 9
+    },
+    "case-056": {
+      "primary": "可视化",
+      "primary_track": "visualization",
+      "tracks": [
+        "frontend",
+        "visualization"
+      ],
+      "tech": [
+        "code2canvas",
+        "code2frontend",
+        "code2viz"
+      ],
+      "categories": [
+        "可视化",
+        "前端"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "pass",
+      "assertion_count": 9
+    },
+    "case-057": {
+      "primary": "可视化",
+      "primary_track": "visualization",
+      "tracks": [
+        "svg-art",
+        "visualization"
+      ],
+      "tech": [
+        "code2svg",
+        "code2viz"
+      ],
+      "categories": [
+        "可视化"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "pass",
+      "assertion_count": 9
+    },
+    "case-058": {
+      "primary": "前端",
+      "primary_track": "frontend",
+      "tracks": [
+        "3d",
+        "composite",
+        "frontend",
+        "game",
+        "svg-art"
+      ],
+      "tech": [
+        "code2game",
+        "code23d",
+        "code2svg",
+        "code2frontend",
+        "code2deck"
+      ],
+      "categories": [
+        "前端"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 5,
+      "replay": false,
+      "meta_test": "pass",
+      "assertion_count": 9
+    },
+    "case-059": {
+      "primary": "游戏",
+      "primary_track": "game",
+      "tracks": [
+        "game",
+        "visualization"
+      ],
+      "tech": [
+        "code2game",
+        "code2canvas"
+      ],
+      "categories": [
+        "游戏"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "pass",
+      "assertion_count": 9
+    },
+    "case-060": {
+      "primary": "生成艺术",
+      "primary_track": "svg-art",
+      "tracks": [
+        "frontend",
+        "visualization"
+      ],
+      "tech": [
+        "code2canvas",
+        "code2frontend",
+        "code2viz"
+      ],
+      "categories": [
+        "生成艺术",
+        "可视化",
+        "工具"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "pass",
+      "assertion_count": 9
+    },
+    "case-061": {
+      "primary": "网页",
+      "primary_track": "frontend",
+      "tracks": [
+        "animation-video",
+        "frontend",
+        "svg-art"
+      ],
+      "tech": [
+        "code2svg",
+        "code2frontend",
+        "code2video"
+      ],
+      "categories": [
+        "网页",
+        "动画"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 3,
+      "replay": false,
+      "meta_test": "pass",
+      "assertion_count": 9
+    },
+    "case-062": {
+      "primary": "可视化",
+      "primary_track": "visualization",
+      "tracks": [
+        "animation-video",
+        "svg-art",
+        "visualization"
+      ],
+      "tech": [
+        "code2svg",
+        "code2viz",
+        "code2video"
+      ],
+      "categories": [
+        "可视化",
+        "动画",
+        "生成艺术"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 3,
+      "replay": false,
+      "meta_test": "pass",
+      "assertion_count": 9
+    },
+    "case-063": {
+      "primary": "可视化",
+      "primary_track": "visualization",
+      "tracks": [
+        "visualization"
+      ],
+      "tech": [
+        "code2canvas",
+        "code2viz"
+      ],
+      "categories": [
+        "可视化"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 1,
+      "replay": false,
+      "meta_test": "pass",
+      "assertion_count": 9
+    },
+    "case-064": {
+      "primary": "游戏",
+      "primary_track": "game",
+      "tracks": [
+        "audio",
+        "game",
+        "visualization"
+      ],
+      "tech": [
+        "code2game",
+        "code2canvas",
+        "code2viz",
+        "code2audio"
+      ],
+      "categories": [
+        "游戏",
+        "可视化"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 3,
+      "replay": false,
+      "meta_test": "pass",
+      "assertion_count": 9
+    },
+    "case-065": {
+      "primary": "3D",
+      "primary_track": "3d",
+      "tracks": [
+        "3d",
+        "frontend",
+        "visualization"
+      ],
+      "tech": [
+        "code23d",
+        "code2css",
+        "code2canvas"
+      ],
+      "categories": [
+        "3D",
+        "生成艺术"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 3,
+      "replay": false,
+      "meta_test": "pass",
+      "assertion_count": 9
+    },
+    "case-066": {
+      "primary": "网页",
+      "primary_track": "frontend",
+      "tracks": [
+        "audio",
+        "frontend",
+        "svg-art"
+      ],
+      "tech": [
+        "code2svg",
+        "code2frontend",
+        "code2audio"
+      ],
+      "categories": [
+        "网页",
+        "生成艺术"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 3,
+      "replay": false,
+      "meta_test": "review",
+      "assertion_count": 9
+    },
+    "case-067": {
+      "primary": "动画",
+      "primary_track": "animation-video",
+      "tracks": [
+        "animation-video",
+        "audio",
+        "frontend",
+        "visualization"
+      ],
+      "tech": [
+        "code2canvas",
+        "code2frontend",
+        "code2audio",
+        "code2video"
+      ],
+      "categories": [
+        "动画",
+        "前端"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 4,
+      "replay": false,
+      "meta_test": "pass",
+      "assertion_count": 9
+    },
+    "case-068": {
+      "primary": "生成艺术",
+      "primary_track": "svg-art",
+      "tracks": [
+        "frontend",
+        "visualization"
+      ],
+      "tech": [
+        "code2canvas",
+        "code2frontend"
+      ],
+      "categories": [
+        "生成艺术",
+        "前端"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "pass",
+      "assertion_count": 9
+    },
+    "case-069": {
+      "primary": "网页",
+      "primary_track": "frontend",
+      "tracks": [
+        "frontend",
+        "svg-art"
+      ],
+      "tech": [
+        "code2svg",
+        "code2css",
+        "code2frontend"
+      ],
+      "categories": [
+        "网页"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "review",
+      "assertion_count": 9
+    },
+    "case-070": {
+      "primary": "可视化",
+      "primary_track": "visualization",
+      "tracks": [
+        "svg-art",
+        "visualization"
+      ],
+      "tech": [
+        "code2svg",
+        "code2canvas",
+        "code2viz"
+      ],
+      "categories": [
+        "可视化",
+        "工具"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "pass",
+      "assertion_count": 9
+    },
+    "case-071": {
+      "primary": "生成艺术",
+      "primary_track": "svg-art",
+      "tracks": [
+        "frontend",
+        "svg-art",
+        "visualization"
+      ],
+      "tech": [
+        "code2svg",
+        "code2frontend",
+        "code2viz"
+      ],
+      "categories": [
+        "生成艺术",
+        "前端"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 3,
+      "replay": false,
+      "meta_test": "pass",
+      "assertion_count": 9
+    },
+    "case-072": {
+      "primary": "工具",
+      "primary_track": "frontend",
+      "tracks": [
+        "frontend",
+        "svg-art",
+        "visualization"
+      ],
+      "tech": [
+        "code2svg",
+        "code2frontend",
+        "code2viz"
+      ],
+      "categories": [
+        "工具",
+        "前端"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 3,
+      "replay": false,
+      "meta_test": "pass",
+      "assertion_count": 9
+    },
+    "case-073": {
+      "primary": "网页",
+      "primary_track": "frontend",
+      "tracks": [
+        "3d",
+        "frontend",
+        "visualization"
+      ],
+      "tech": [
+        "code2world",
+        "code2canvas",
+        "code2frontend"
+      ],
+      "categories": [
+        "网页",
+        "前端"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 3,
+      "replay": false,
+      "meta_test": "pass",
+      "assertion_count": 9
+    },
+    "case-074": {
+      "primary": "前端",
+      "primary_track": "frontend",
+      "tracks": [
+        "3d",
+        "frontend",
+        "svg-art"
+      ],
+      "tech": [
+        "code23d",
+        "code2svg",
+        "code2css",
+        "code2frontend"
+      ],
+      "categories": [
+        "前端",
+        "3D",
+        "网页"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 3,
+      "replay": false,
+      "meta_test": "pass",
+      "assertion_count": 9
+    },
+    "case-075": {
+      "primary": "生成艺术",
+      "primary_track": "svg-art",
+      "tracks": [
+        "visualization"
+      ],
+      "tech": [
+        "code2canvas",
+        "code2viz"
+      ],
+      "categories": [
+        "生成艺术",
+        "可视化",
+        "工具"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 1,
+      "replay": false,
+      "meta_test": "pass",
+      "assertion_count": 9
+    },
+    "case-076": {
+      "primary": "前端",
+      "primary_track": "frontend",
+      "tracks": [
+        "3d",
+        "animation-video",
+        "frontend",
+        "svg-art"
+      ],
+      "tech": [
+        "code23d",
+        "code2svg",
+        "code2css",
+        "code2frontend",
+        "code2video"
+      ],
+      "categories": [
+        "前端",
+        "动画"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 4,
+      "replay": false,
+      "meta_test": "review",
+      "assertion_count": 9
+    },
+    "case-077": {
+      "primary": "生成艺术",
+      "primary_track": "svg-art",
+      "tracks": [
+        "animation-video",
+        "audio",
+        "frontend",
+        "svg-art",
+        "visualization"
+      ],
+      "tech": [
+        "code2svg",
+        "code2css",
+        "code2canvas",
+        "code2audio",
+        "code2video"
+      ],
+      "categories": [
+        "生成艺术",
+        "动画"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 5,
+      "replay": false,
+      "meta_test": "pass",
+      "assertion_count": 9
+    },
+    "case-078": {
+      "primary": "可视化",
+      "primary_track": "visualization",
+      "tracks": [
+        "3d",
+        "visualization"
+      ],
+      "tech": [
+        "code23d",
+        "code2canvas",
+        "code2viz"
+      ],
+      "categories": [
+        "可视化",
+        "3D",
+        "生成艺术"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "pass",
+      "assertion_count": 9
+    },
+    "case-079": {
+      "primary": "生成艺术",
+      "primary_track": "svg-art",
+      "tracks": [
+        "3d",
+        "composite",
+        "frontend",
+        "svg-art"
+      ],
+      "tech": [
+        "code23d",
+        "code2svg",
+        "code2frontend",
+        "code2deck"
+      ],
+      "categories": [
+        "生成艺术",
+        "前端"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 4,
+      "replay": false,
+      "meta_test": "pass",
+      "assertion_count": 9
+    },
+    "case-080": {
+      "primary": "前端",
+      "primary_track": "frontend",
+      "tracks": [
+        "frontend",
+        "visualization"
+      ],
+      "tech": [
+        "code2canvas",
+        "code2frontend"
+      ],
+      "categories": [
+        "前端",
+        "生成艺术"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "review",
+      "assertion_count": 9
+    },
+    "case-081": {
+      "primary": "游戏",
+      "primary_track": "game",
+      "tracks": [
+        "3d",
+        "game",
+        "visualization"
+      ],
+      "tech": [
+        "code2game",
+        "code23d",
+        "code2canvas",
+        "code2viz"
+      ],
+      "categories": [
+        "游戏",
+        "3D",
+        "可视化"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 3,
+      "replay": false,
+      "meta_test": "pass",
+      "assertion_count": 9
+    },
+    "case-082": {
+      "primary": "动画",
+      "primary_track": "animation-video",
+      "tracks": [
+        "3d",
+        "animation-video",
+        "svg-art"
+      ],
+      "tech": [
+        "code23d",
+        "code2svg",
+        "code2video"
+      ],
+      "categories": [
+        "动画",
+        "3D",
+        "生成艺术"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 3,
+      "replay": false,
+      "meta_test": "review",
+      "assertion_count": 9
+    },
+    "case-083": {
+      "primary": "工具",
+      "primary_track": "frontend",
+      "tracks": [
+        "3d",
+        "audio",
+        "frontend",
+        "svg-art"
+      ],
+      "tech": [
+        "code23d",
+        "code2svg",
+        "code2css",
+        "code2audio"
+      ],
+      "categories": [
+        "工具",
+        "3D"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 4,
+      "replay": false,
+      "meta_test": "pass",
+      "assertion_count": 9
+    },
+    "case-084": {
+      "primary": "网页",
+      "primary_track": "frontend",
+      "tracks": [
+        "frontend",
+        "svg-art"
+      ],
+      "tech": [
+        "code2svg",
+        "code2frontend"
+      ],
+      "categories": [
+        "网页",
+        "生成艺术"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "pass",
+      "assertion_count": 9
+    },
+    "case-085": {
+      "primary": "生成艺术",
+      "primary_track": "svg-art",
+      "tracks": [
+        "audio",
+        "frontend",
+        "visualization"
+      ],
+      "tech": [
+        "code2canvas",
+        "code2frontend",
+        "code2audio"
+      ],
+      "categories": [
+        "生成艺术",
+        "前端"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 3,
+      "replay": false,
+      "meta_test": "pass",
+      "assertion_count": 12
+    },
+    "case-086": {
+      "primary": "前端",
+      "primary_track": "frontend",
+      "tracks": [
+        "frontend",
+        "visualization"
+      ],
+      "tech": [
+        "code2canvas",
+        "code2frontend",
+        "code2viz"
+      ],
+      "categories": [
+        "前端",
+        "可视化"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "pass",
+      "assertion_count": 9
+    },
+    "case-087": {
+      "primary": "动画",
+      "primary_track": "animation-video",
+      "tracks": [
+        "animation-video",
+        "audio",
+        "frontend",
+        "visualization"
+      ],
+      "tech": [
+        "code2canvas",
+        "code2frontend",
+        "code2audio",
+        "code2video"
+      ],
+      "categories": [
+        "动画",
+        "前端"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 4,
+      "replay": false,
+      "meta_test": "pass",
+      "assertion_count": 9
+    },
+    "case-088": {
+      "primary": "可视化",
+      "primary_track": "visualization",
+      "tracks": [
+        "svg-art",
+        "visualization"
+      ],
+      "tech": [
+        "code2svg",
+        "code2viz"
+      ],
+      "categories": [
+        "可视化",
+        "生成艺术"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "pass",
+      "assertion_count": 9
+    },
+    "case-089": {
+      "primary": "可视化",
+      "primary_track": "visualization",
+      "tracks": [
+        "animation-video",
+        "svg-art",
+        "visualization"
+      ],
+      "tech": [
+        "code2svg",
+        "code2viz",
+        "code2video"
+      ],
+      "categories": [
+        "可视化",
+        "动画",
+        "生成艺术"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 3,
+      "replay": false,
+      "meta_test": "pass",
+      "assertion_count": 9
+    },
+    "case-090": {
+      "primary": "生成艺术",
+      "primary_track": "svg-art",
+      "tracks": [
+        "frontend"
+      ],
+      "tech": [
+        "code2frontend"
+      ],
+      "categories": [
+        "生成艺术",
+        "前端"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 1,
+      "replay": false,
+      "meta_test": "pass",
+      "assertion_count": 9
+    },
+    "case-091": {
+      "primary": "生成艺术",
+      "primary_track": "svg-art",
+      "tracks": [
+        "svg-art"
+      ],
+      "tech": [
+        "code2svg"
+      ],
+      "categories": [
+        "生成艺术"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 1,
+      "replay": false,
+      "meta_test": "pass",
+      "assertion_count": 9
+    },
+    "case-092": {
+      "primary": "3D",
+      "primary_track": "3d",
+      "tracks": [
+        "3d",
+        "visualization"
+      ],
+      "tech": [
+        "code23d",
+        "code2world",
+        "code2canvas",
+        "code2viz"
+      ],
+      "categories": [
+        "3D",
+        "可视化"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "pass",
+      "assertion_count": 9
+    },
+    "case-093": {
+      "primary": "动画",
+      "primary_track": "animation-video",
+      "tracks": [
+        "animation-video",
+        "game",
+        "visualization"
+      ],
+      "tech": [
+        "code2game",
+        "code2canvas",
+        "code2viz",
+        "code2video"
+      ],
+      "categories": [
+        "动画",
+        "可视化"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 3,
+      "replay": false,
+      "meta_test": "pass",
+      "assertion_count": 9
+    },
+    "case-094": {
+      "primary": "网页",
+      "primary_track": "frontend",
+      "tracks": [
+        "frontend",
+        "svg-art"
+      ],
+      "tech": [
+        "code2svg",
+        "code2css",
+        "code2frontend"
+      ],
+      "categories": [
+        "网页"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "pass",
+      "assertion_count": 9
+    },
+    "case-095": {
+      "primary": "生成艺术",
+      "primary_track": "svg-art",
+      "tracks": [
+        "svg-art",
+        "visualization"
+      ],
+      "tech": [
+        "code2svg",
+        "code2canvas"
+      ],
+      "categories": [
+        "生成艺术"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "pass",
+      "assertion_count": 9
+    },
+    "case-096": {
+      "primary": "游戏",
+      "primary_track": "game",
+      "tracks": [
+        "audio",
+        "game",
+        "svg-art",
+        "visualization"
+      ],
+      "tech": [
+        "code2game",
+        "code2svg",
+        "code2viz",
+        "code2audio"
+      ],
+      "categories": [
+        "游戏",
+        "可视化",
+        "工具"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 4,
+      "replay": false,
+      "meta_test": "review",
+      "assertion_count": 9
+    },
+    "case-097": {
+      "primary": "工具",
+      "primary_track": "frontend",
+      "tracks": [
+        "frontend"
+      ],
+      "tech": [
+        "code2css"
+      ],
+      "categories": [
+        "工具"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 1,
+      "replay": false,
+      "meta_test": "review",
+      "assertion_count": 9
+    },
+    "case-098": {
+      "primary": "生成艺术",
+      "primary_track": "svg-art",
+      "tracks": [
+        "svg-art"
+      ],
+      "tech": [
+        "code2svg"
+      ],
+      "categories": [
+        "生成艺术"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 1,
+      "replay": false,
+      "meta_test": "review",
+      "assertion_count": 9
+    },
+    "case-099": {
+      "primary": "动画",
+      "primary_track": "animation-video",
+      "tracks": [
+        "animation-video",
+        "frontend",
+        "svg-art"
+      ],
+      "tech": [
+        "code2svg",
+        "code2frontend",
+        "code2video"
+      ],
+      "categories": [
+        "动画",
+        "前端"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 3,
+      "replay": false,
+      "meta_test": "pass",
+      "assertion_count": 9
+    },
+    "case-100": {
+      "primary": "动画",
+      "primary_track": "animation-video",
+      "tracks": [
+        "animation-video",
+        "audio",
+        "frontend",
+        "visualization"
+      ],
+      "tech": [
+        "code2canvas",
+        "code2frontend",
+        "code2audio",
+        "code2video"
+      ],
+      "categories": [
+        "动画",
+        "前端"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 4,
+      "replay": false,
+      "meta_test": "pass",
+      "assertion_count": 9
+    },
+    "case-101": {
+      "primary": "工具",
+      "primary_track": "frontend",
+      "tracks": [
+        "composite",
+        "svg-art"
+      ],
+      "tech": [
+        "code2svg",
+        "code2deck"
+      ],
+      "categories": [
+        "工具",
+        "生成艺术"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "pass",
+      "assertion_count": 9
+    },
+    "case-102": {
+      "primary": "前端",
+      "primary_track": "frontend",
+      "tracks": [
+        "audio",
+        "frontend",
+        "svg-art",
+        "visualization"
+      ],
+      "tech": [
+        "code2svg",
+        "code2frontend",
+        "code2viz",
+        "code2audio"
+      ],
+      "categories": [
+        "前端",
+        "可视化"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 4,
+      "replay": false,
+      "meta_test": "pass",
+      "assertion_count": 9
+    },
+    "case-103": {
+      "primary": "游戏",
+      "primary_track": "game",
+      "tracks": [
+        "audio",
+        "frontend",
+        "game",
+        "svg-art",
+        "visualization"
+      ],
+      "tech": [
+        "code2game",
+        "code2svg",
+        "code2canvas",
+        "code2frontend",
+        "code2audio"
+      ],
+      "categories": [
+        "游戏",
+        "前端"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 5,
+      "replay": false,
+      "meta_test": "pass",
+      "assertion_count": 9
+    },
+    "case-104": {
+      "primary": "生成艺术",
+      "primary_track": "svg-art",
+      "tracks": [
+        "visualization"
+      ],
+      "tech": [
+        "code2canvas",
+        "code2viz"
+      ],
+      "categories": [
+        "生成艺术",
+        "可视化"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 1,
+      "replay": false,
+      "meta_test": "pass",
+      "assertion_count": 9
+    },
+    "case-105": {
+      "primary": "动画",
+      "primary_track": "animation-video",
+      "tracks": [
+        "3d",
+        "animation-video",
+        "audio",
+        "visualization"
+      ],
+      "tech": [
+        "code2world",
+        "code2canvas",
+        "code2audio",
+        "code2video"
+      ],
+      "categories": [
+        "动画",
+        "工具",
+        "生成艺术"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 4,
+      "replay": false,
+      "meta_test": "review",
+      "assertion_count": 9
+    },
+    "case-106": {
+      "primary": "工具",
+      "primary_track": "frontend",
+      "tracks": [
+        "audio",
+        "game",
+        "visualization"
+      ],
+      "tech": [
+        "code2game",
+        "code2viz",
+        "code2audio"
+      ],
+      "categories": [
+        "工具",
+        "游戏",
+        "可视化"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 3,
+      "replay": false,
+      "meta_test": "pass",
+      "assertion_count": 9
+    },
+    "case-107": {
+      "primary": "网页",
+      "primary_track": "frontend",
+      "tracks": [
+        "frontend",
+        "visualization"
+      ],
+      "tech": [
+        "code2canvas",
+        "code2frontend"
+      ],
+      "categories": [
+        "网页",
+        "生成艺术"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "pass",
+      "assertion_count": 9
+    },
+    "case-108": {
+      "primary": "网页",
+      "primary_track": "frontend",
+      "tracks": [
+        "3d",
+        "frontend",
+        "svg-art"
+      ],
+      "tech": [
+        "code23d",
+        "code2svg",
+        "code2frontend"
+      ],
+      "categories": [
+        "网页",
+        "生成艺术"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 3,
+      "replay": false,
+      "meta_test": "pass",
+      "assertion_count": 9
+    },
+    "case-109": {
+      "primary": "3D",
+      "primary_track": "3d",
+      "tracks": [
+        "3d",
+        "visualization"
+      ],
+      "tech": [
+        "code23d",
+        "code2canvas",
+        "code2viz"
+      ],
+      "categories": [
+        "3D",
+        "可视化"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "review",
+      "assertion_count": 9
+    },
+    "case-110": {
+      "primary": "生成艺术",
+      "primary_track": "svg-art",
+      "tracks": [
+        "frontend",
+        "svg-art",
+        "visualization"
+      ],
+      "tech": [
+        "code2svg",
+        "code2canvas",
+        "code2frontend"
+      ],
+      "categories": [
+        "生成艺术"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 3,
+      "replay": false,
+      "meta_test": "pass",
+      "assertion_count": 9
+    },
+    "case-111": {
+      "primary": "网页",
+      "primary_track": "frontend",
+      "tracks": [
+        "frontend",
+        "svg-art",
+        "visualization"
+      ],
+      "tech": [
+        "code2svg",
+        "code2frontend",
+        "code2viz"
+      ],
+      "categories": [
+        "网页",
+        "可视化",
+        "生成艺术"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 3,
+      "replay": false,
+      "meta_test": "review",
+      "assertion_count": 9
+    },
+    "case-112": {
+      "primary": "可视化",
+      "primary_track": "visualization",
+      "tracks": [
+        "frontend",
+        "visualization"
+      ],
+      "tech": [
+        "code2frontend",
+        "code2viz"
+      ],
+      "categories": [
+        "可视化",
+        "网页",
+        "前端"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "pass",
+      "assertion_count": 9
+    },
+    "case-113": {
+      "primary": "网页",
+      "primary_track": "frontend",
+      "tracks": [
+        "3d",
+        "frontend",
+        "svg-art"
+      ],
+      "tech": [
+        "code23d",
+        "code2svg",
+        "code2css",
+        "code2frontend"
+      ],
+      "categories": [
+        "网页",
+        "3D"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 3,
+      "replay": false,
+      "meta_test": "pass",
+      "assertion_count": 9
+    },
+    "case-114": {
+      "primary": "工具",
+      "primary_track": "frontend",
+      "tracks": [
+        "3d",
+        "audio",
+        "svg-art",
+        "visualization"
+      ],
+      "tech": [
+        "code23d",
+        "code2svg",
+        "code2viz",
+        "code2audio"
+      ],
+      "categories": [
+        "工具",
+        "可视化",
+        "生成艺术"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 4,
+      "replay": false,
+      "meta_test": "review",
+      "assertion_count": 9
+    },
+    "case-115": {
+      "primary": "前端",
+      "primary_track": "frontend",
+      "tracks": [
+        "audio",
+        "frontend",
+        "visualization"
+      ],
+      "tech": [
+        "code2canvas",
+        "code2frontend",
+        "code2viz",
+        "code2audio"
+      ],
+      "categories": [
+        "前端",
+        "可视化"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 3,
+      "replay": false,
+      "meta_test": "pass",
+      "assertion_count": 9
+    },
+    "case-116": {
+      "primary": "工具",
+      "primary_track": "frontend",
+      "tracks": [
+        "frontend",
+        "visualization"
+      ],
+      "tech": [
+        "code2frontend",
+        "code2viz"
+      ],
+      "categories": [
+        "工具",
+        "前端",
+        "可视化"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "pass",
+      "assertion_count": 9
+    },
+    "case-117": {
+      "primary": "动画",
+      "primary_track": "animation-video",
+      "tracks": [
+        "animation-video",
+        "frontend"
+      ],
+      "tech": [
+        "code2frontend",
+        "code2video"
+      ],
+      "categories": [
+        "动画",
+        "前端"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "pass",
+      "assertion_count": 9
+    },
+    "case-118": {
+      "primary": "工具",
+      "primary_track": "frontend",
+      "tracks": [
+        "audio",
+        "frontend",
+        "svg-art",
+        "visualization"
+      ],
+      "tech": [
+        "code2svg",
+        "code2frontend",
+        "code2viz",
+        "code2audio"
+      ],
+      "categories": [
+        "工具",
+        "可视化"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 4,
+      "replay": false,
+      "meta_test": "pass",
+      "assertion_count": 9
+    },
+    "case-119": {
+      "primary": "可视化",
+      "primary_track": "visualization",
+      "tracks": [
+        "visualization"
+      ],
+      "tech": [
+        "code2viz"
+      ],
+      "categories": [
+        "可视化",
+        "生成艺术"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 1,
+      "replay": false,
+      "meta_test": "pass",
+      "assertion_count": 9
+    },
+    "case-120": {
+      "primary": "生成艺术",
+      "primary_track": "svg-art",
+      "tracks": [
+        "frontend"
+      ],
+      "tech": [
+        "code2frontend"
+      ],
+      "categories": [
+        "生成艺术"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 1,
+      "replay": false,
+      "meta_test": "pass",
+      "assertion_count": 9
+    },
+    "case-121": {
+      "primary": "可视化",
+      "primary_track": "visualization",
+      "tracks": [
+        "frontend",
+        "visualization"
+      ],
+      "tech": [
+        "code2canvas",
+        "code2frontend",
+        "code2viz"
+      ],
+      "categories": [
+        "可视化",
+        "前端"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "pass",
+      "assertion_count": 9
+    },
+    "case-122": {
+      "primary": "网页",
+      "primary_track": "frontend",
+      "tracks": [
+        "frontend",
+        "svg-art"
+      ],
+      "tech": [
+        "code2svg",
+        "code2frontend"
+      ],
+      "categories": [
+        "网页",
+        "工具"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "pass",
+      "assertion_count": 9
+    },
+    "case-123": {
+      "primary": "可视化",
+      "primary_track": "visualization",
+      "tracks": [
+        "svg-art",
+        "visualization"
+      ],
+      "tech": [
+        "code2svg",
+        "code2viz"
+      ],
+      "categories": [
+        "可视化",
+        "生成艺术"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "pass",
+      "assertion_count": 9
+    },
+    "case-124": {
+      "primary": "动画",
+      "primary_track": "animation-video",
+      "tracks": [
+        "3d",
+        "animation-video",
+        "frontend",
+        "svg-art"
+      ],
+      "tech": [
+        "code23d",
+        "code2svg",
+        "code2css",
+        "code2video"
+      ],
+      "categories": [
+        "动画",
+        "生成艺术"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 4,
+      "replay": false,
+      "meta_test": "pass",
+      "assertion_count": 9
+    },
+    "case-125": {
+      "primary": "动画",
+      "primary_track": "animation-video",
+      "tracks": [
+        "animation-video",
+        "frontend",
+        "visualization"
+      ],
+      "tech": [
+        "code2canvas",
+        "code2frontend",
+        "code2video"
+      ],
+      "categories": [
+        "动画",
+        "生成艺术"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 3,
+      "replay": false,
+      "meta_test": "pass",
+      "assertion_count": 9
+    },
+    "case-126": {
+      "primary": "可视化",
+      "primary_track": "visualization",
+      "tracks": [
+        "frontend",
+        "visualization"
+      ],
+      "tech": [
+        "code2frontend",
+        "code2viz"
+      ],
+      "categories": [
+        "可视化"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Opus-100 合辑",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "pass",
+      "assertion_count": 9
+    },
+    "x-2102665046568673765": {
+      "primary": "3D",
+      "primary_track": "3d",
+      "tracks": [
+        "3d",
+        "animation-video",
+        "audio",
+        "frontend",
+        "game",
+        "visualization"
+      ],
+      "tech": [
+        "code2game",
+        "code23d",
+        "code2video",
+        "code2html",
+        "code2css",
+        "code2canvas",
+        "code2frontend",
+        "code2viz",
+        "code2audio"
+      ],
+      "categories": [
+        "3D",
+        "网页",
+        "可视化"
+      ],
+      "lang": "zh",
+      "prompt_bucket": "XL",
+      "source_group": "社区单帖",
+      "track_count": 6,
+      "replay": true,
+      "meta_test": "review",
+      "assertion_count": 13
+    }
+  }
+}
