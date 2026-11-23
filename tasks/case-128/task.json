@@ -1,0 +1,46 @@
+{
+  "task_id": "case-128",
+  "source_case_id": "case-128",
+  "title": "30 秒纯代码场景动画",
+  "prompt_status": "full",
+  "evidence_level": "B",
+  "mode": "Replay",
+  "track": "CE-Frozen",
+  "code2_tags": [
+    "code2html",
+    "code2css",
+    "code2video"
+  ],
+  "domains": [
+    "animation-video",
+    "frontend"
+  ],
+  "four_dimensions": {
+    "interaction_span": "single-turn",
+    "execution_span": "long",
+    "trigger": "user-initiated",
+    "deliverable": "objective-artifact"
+  },
+  "four_dimensions_note": "inferred from prompt/tags by scripts/build_task_packs.py; not a scored field",
+  "prompt_chars": 213,
+  "prompt_chars_manifest": 213,
+  "published_at": "2026-09-23T01:22:29+00:00",
+  "reference_url": "",
+  "source_post_url": "https://x.com/edwinhayward/status/2102569255657259036",
+  "contamination_split": null,
+  "contamination_split_note": "computed at run time against each configuration's training_cutoff (cebench/evaluation.py); baseline cutoff for documentation: 2025-06-30",
+  "assertion_target": 9,
+  "full_measurement": true,
+  "license": "CC-BY-NC-4.0",
+  "attribution": {
+    "creator": "Edwin Hayward @edwinhayward",
+    "sourceUrl": "https://x.com/edwinhayward/status/2102569255657259036"
+  },
+  "notes": "Prompt text is fetched from the pinned corpus and is not vendored upstream; it is materialised here for offline runs.",
+  "set": "extended",
+  "source_origin": "corpus_rejected_by_html_gate",
+  "reference_kind": "post-only",
+  "has_reference_oracle": false,
+  "meta_test_applicable": false,
+  "admission_note": "Admitted on verbatim-prompt evidence only. No third-party runnable artifact is pinned, so the reference-oracle meta-test does not apply; L0/L1 assertions still evaluate each generated artifact normally."
+}

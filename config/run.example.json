@@ -14,12 +14,15 @@
     "max_output_tokens": 60000,
     "network": "deny"
   },
-  "measurements": ["M1", "M2"],
+  "measurements": [
+    "M1",
+    "M2"
+  ],
   "limit": null,
   "output": {
     "write_artifacts": true,
     "write_traces": true,
     "write_delivery_notes": true
   },
-  "notes": "Start with --check, then --dry-run, then a single task via --task before the full 111 x N x 3 batch."
+  "notes": "Start with --check, then --dry-run, then a single task via --task before the full 180-task batch. task_set: all (default) = 180, core = 111 (paper census), extended = 69."
 }

@@ -15,7 +15,7 @@ ROOT = Path(__file__).resolve().parents[1]
 VERSION = "0.1.0"
 CORPUS_COMMIT = "v556ab07"  # pinned snapshot of momozi1996/Code-Everything
 
-# --- L0: eight global assertions, shared by all 111 tasks -------------------
+# --- L0: eight global assertions, shared by every task in the bank ----------
 L0_IDS = (
     "L0-01",  # single file / no external resources
     "L0-02",  # doctype + viewport meta

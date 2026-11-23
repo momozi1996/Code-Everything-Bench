@@ -1,0 +1,34 @@
+<!-- verbatim prompt from data/corpus/extension.jsonl + cases.jsonl (id=b24-astra-2096841787520266392, set=extended) -->
+
+The `/terminal` page on desktop is really GPU intensive.
+
+We have already applied a lot of work-arounds and fixes that improves the performance but I'm sure we can do better.
+
+The current state of animations and reactivity is what we want to keep, we do not want to alter the current user experience and refresh rate and visual indicators this is great.
+
+But we want to improve the performance of it, specially on Windows Chrome typed browsers which is GPU+CPU intensive.
+
+The user actions shouldn't not be blocked by components refreshing and should feel instant, specially true for trading interfaces.
+
+Your goal is to review the code and find improvements that will make use less CPU and GPU without altering the current great user experience and visual feedback we have.
+
+Example of type of performance improvements we can find (non-exhaustive):
+
+- Early loop exits
+- Less creation of objects in large array / map, lower the memory usage
+- Better usage of CSS
+- Hacks and workarounds known impacting the performance
+- New design pattern that will better fit to our usage of data and updates
+
+Be smart, creative, think outside of the box, this is a really complex hacky app, not a traditional website.
+
+Analyze the results and produce a copy/paste-friendly report for each issue found. Do not use tables or code blocks.
+
+For each issue, include:
+
+- Label / scope
+- Description
+- Impacted files
+- Mitigation plan, detailed enough for low reasoning model agents can do the work
+
+List the reports one after another, using plain Markdown bullets or numbered sections. Keep each report concise, specific, and actionable.

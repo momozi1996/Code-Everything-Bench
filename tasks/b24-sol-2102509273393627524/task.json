@@ -36,5 +36,10 @@
     "creator": "Timothée Le Borgne @Tim_LB",
     "sourceUrl": "https://x.com/Tim_LB/status/2102509273393627524"
   },
-  "notes": "Prompt text is fetched from the pinned corpus and is not vendored upstream; it is materialised here for offline runs."
+  "notes": "Prompt text is fetched from the pinned corpus and is not vendored upstream; it is materialised here for offline runs.",
+  "set": "core",
+  "source_origin": "core_corpus",
+  "reference_kind": "runnable-html",
+  "has_reference_oracle": true,
+  "meta_test_applicable": true
 }

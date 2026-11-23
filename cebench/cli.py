@@ -54,12 +54,19 @@ def cmd_selftest() -> int:
                     "assertions/task.json", "mutations.json", "reference/SOURCE.md"):
             checks.append((f"{d.name}/{rel}", (d / rel).is_file(), ""))
 
-    manifest = ROOT / "tasks" / "manifest.json"
-    if manifest.is_file():
-        from .io import read_json
-        m = read_json(manifest)
-        checks.append(("manifest carries 111 tasks", m.get("task_count") == 111,
-                       str(m.get("task_count"))))
+    from .io import read_json
+    core_manifest = ROOT / "tasks" / "manifest.json"
+    ext_manifest = ROOT / "tasks" / "manifest_extended.json"
+    n_core = n_ext = 0
+    if core_manifest.is_file():
+        n_core = len(read_json(core_manifest).get("tasks") or [])
+        checks.append(("Core-111 manifest", n_core == 111, f"{n_core} tasks"))
+    if ext_manifest.is_file():
+        n_ext = len(read_json(ext_manifest).get("tasks") or [])
+        checks.append(("Extended manifest present", n_ext > 0, f"{n_ext} tasks"))
+    checks.append(("pack count matches both manifests",
+                   len(dirs) == n_core + n_ext,
+                   f"{len(dirs)} packs vs {n_core}+{n_ext}"))
 
     for name, ok, detail in checks:
         if not ok:

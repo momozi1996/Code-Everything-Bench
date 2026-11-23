@@ -1,0 +1,12 @@
+{
+  "wall_clock_minutes": 30,
+  "max_repair_rounds": 15,
+  "max_output_tokens": 60000,
+  "network": "deny",
+  "browser": "chromium-pinned",
+  "viewport_desktop": "1440x900",
+  "viewport_mobile": "360x780",
+  "repetitions": 3,
+  "seed_policy": "fixed-per-configuration",
+  "rationale": "A real user does not accept unlimited repair rounds. Without a budget, delivery degenerates into 'eventually solvable'."
+}

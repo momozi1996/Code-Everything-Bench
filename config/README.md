@@ -44,7 +44,9 @@ interface changes what the agent can observe.
 python3 scripts/run_evaluation.py --check         # schema + no literal keys + env vars present
 python3 scripts/run_evaluation.py --dry-run       # full pipeline, no network, no results written
 python3 scripts/run_evaluation.py --task case-085 --limit 1   # one real task first
-python3 scripts/run_evaluation.py                 # full 111 x N x repetitions batch
+python3 scripts/run_evaluation.py                 # full 180 x N x repetitions batch (all)
+python3 scripts/run_evaluation.py --task-set core  # paper census: 111 tasks
+python3 scripts/run_evaluation.py --task-set extended  # 69 label-balanced tasks
 ```
 
 `--check` never calls an API. `--dry-run` uses a stub client whose output is

@@ -1,0 +1,57 @@
+{
+  "task_id": "u28-opus-2104085484347818226",
+  "source_case_id": "u28-opus-2104085484347818226",
+  "title": "手游抽卡与奖励揭晓动效",
+  "prompt_status": "repository",
+  "evidence_level": "B",
+  "mode": "Replay",
+  "track": "CE-Frozen",
+  "code2_tags": [
+    "code2game",
+    "code23d",
+    "code2video",
+    "code2html",
+    "code2svg",
+    "code2css",
+    "code2canvas",
+    "code2frontend",
+    "code2audio"
+  ],
+  "domains": [
+    "3d",
+    "animation-video",
+    "audio",
+    "frontend",
+    "game",
+    "svg-art",
+    "visualization"
+  ],
+  "four_dimensions": {
+    "interaction_span": "multi-turn",
+    "execution_span": "long",
+    "trigger": "user-initiated",
+    "deliverable": "objective-artifact"
+  },
+  "four_dimensions_note": "inferred from prompt/tags by scripts/build_task_packs.py; not a scored field",
+  "prompt_chars": 2528,
+  "prompt_chars_manifest": 2528,
+  "published_at": "2026-09-27T05:47:26+00:00",
+  "reference_url": "",
+  "source_post_url": "https://x.com/op7418/status/2104085484347818226",
+  "contamination_split": null,
+  "contamination_split_note": "computed at run time against each configuration's training_cutoff (cebench/evaluation.py); baseline cutoff for documentation: 2025-06-30",
+  "assertion_target": 14,
+  "full_measurement": true,
+  "license": "CC-BY-NC-4.0",
+  "attribution": {
+    "creator": "歸藏(guizang.ai) @op7418",
+    "sourceUrl": "https://x.com/op7418/status/2104085484347818226"
+  },
+  "notes": "Prompt text is fetched from the pinned corpus and is not vendored upstream; it is materialised here for offline runs.",
+  "set": "extended",
+  "source_origin": "corpus_rejected_by_html_gate",
+  "reference_kind": "post-only",
+  "has_reference_oracle": false,
+  "meta_test_applicable": false,
+  "admission_note": "Admitted on verbatim-prompt evidence only. No third-party runnable artifact is pinned, so the reference-oracle meta-test does not apply; L0/L1 assertions still evaluate each generated artifact normally."
+}

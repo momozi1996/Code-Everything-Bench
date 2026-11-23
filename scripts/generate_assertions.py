@@ -168,9 +168,15 @@ def main() -> int:
     ap.add_argument("--task")
     ap.add_argument("--force", action="store_true",
                     help="overwrite hand-authored assertion packs too")
+    ap.add_argument("--extended-only", action="store_true",
+                    help="only derive assertions for tasks/manifest_extended.json")
     args = ap.parse_args()
-    ids = [args.task] if args.task else sorted(
-        d.name for d in TASKS.iterdir() if d.is_dir() and (d / "task.json").is_file())
+    if args.extended_only:
+        ext = json.loads((TASKS / "manifest_extended.json").read_text(encoding="utf-8"))
+        ids = [t["task_id"] for t in ext["tasks"]]
+    else:
+        ids = [args.task] if args.task else sorted(
+            d.name for d in TASKS.iterdir() if d.is_dir() and (d / "task.json").is_file())
     counts: list[int] = []
     short: list[str] = []
     for tid in ids:

@@ -45,6 +45,8 @@ class TaskSpec:
     published_at: str | None = None
     split: str = "POST"
     domains: list[str] = field(default_factory=list)
+    task_set: str = "core"                 # core | extended
+    reference_kind: str = "runnable-html"  # runnable-html | post-only
 
 
 @dataclass
@@ -108,6 +110,71 @@ def load_prompts(corpus_path: str | Path | None = None,
                     continue
             out.append(TaskSpec(task_id=tid, prompt=r["prompt"], published_at=published,
                                 split=split, domains=r.get("code2Tags") or []))
+    return out
+
+
+def load_prompts_from_packs(task_set: str = "all",
+                            task_ids: Iterable[str] | None = None,
+                            split: str = "all",
+                            tasks_root: str | Path | None = None) -> list[TaskSpec]:
+    """Load verbatim prompts from the materialised task packs.
+
+    This is the task source for full-bank runs. Unlike :func:`load_prompts`,
+    it does **not** gate on a runnable ``.html`` reference: Extended-set tasks
+    are admitted on verbatim-prompt evidence alone. They have
+    ``has_reference_oracle=false`` (no reference-as-oracle meta-test), but
+    L0/L1 assertions still run against every generated artifact, so the
+    generate -> assert -> score chain is complete for all 180 tasks.
+
+    ``task_set``: ``core`` (111, paper's full-measurement census),
+    ``extended`` (69), or ``all`` (180). POST/PRE contamination is still
+    computed per configuration at run time, never statically here.
+    """
+    root = Path(tasks_root) if tasks_root else ROOT / "tasks"
+
+    def manifest_ids(name: str) -> list[str]:
+        p = root / name
+        if not p.is_file():
+            return []
+        return [t["task_id"] for t in io.read_json(p).get("tasks", [])]
+
+    core = manifest_ids("manifest.json")
+    ext = manifest_ids("manifest_extended.json")
+    if task_set == "core":
+        ids = core
+    elif task_set == "extended":
+        ids = ext
+    elif task_set == "all":
+        ids = core + ext
+    else:
+        raise ValueError(f"unknown task_set {task_set!r}; use core | extended | all")
+
+    wanted = set(task_ids) if task_ids else None
+    out: list[TaskSpec] = []
+    for tid in ids:
+        if wanted and tid not in wanted:
+            continue
+        pack_dir = root / tid
+        prompt_file = pack_dir / "prompt.md"
+        meta_file = pack_dir / "task.json"
+        if not prompt_file.is_file() or not meta_file.is_file():
+            continue
+        # Strip the single provenance comment line; everything after it is the
+        # verbatim prompt as materialised by scripts/build_task_packs.py.
+        text = prompt_file.read_text(encoding="utf-8")
+        if text.startswith("<!--"):
+            text = text.split("-->", 1)[-1]
+        prompt = text.strip()
+        if not prompt:
+            continue
+        meta = io.read_json(meta_file)
+        published = str(meta.get("published_at") or "")[:10] or None
+        out.append(TaskSpec(
+            task_id=tid, prompt=prompt, published_at=published, split=split,
+            domains=meta.get("code2_tags") or [],
+            task_set=meta.get("set") or ("core" if tid in core else "extended"),
+            reference_kind=meta.get("reference_kind") or "post-only",
+        ))
     return out
 
 

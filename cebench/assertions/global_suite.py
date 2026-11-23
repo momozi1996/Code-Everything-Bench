@@ -1,4 +1,4 @@
-"""L0 — the eight global assertions shared by all 111 tasks.
+"""L0 — the eight global assertions shared by every task in the bank.
 
 These are the ten community baseline rules from the source corpus distilled
 into mechanically checkable form (paper §5.2). Six are static source checks;

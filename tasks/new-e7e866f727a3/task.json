@@ -1,0 +1,47 @@
+{
+  "task_id": "new-e7e866f727a3",
+  "source_case_id": "new-e7e866f727a3",
+  "title": "Devin 中生成 Minecraft 风格单 HTML 游戏",
+  "prompt_status": "thread",
+  "evidence_level": "B",
+  "mode": "Replay",
+  "track": "CE-Frozen",
+  "code2_tags": [
+    "code2game",
+    "code2html",
+    "code23d"
+  ],
+  "domains": [
+    "3d",
+    "frontend",
+    "game"
+  ],
+  "four_dimensions": {
+    "interaction_span": "single-turn",
+    "execution_span": "long",
+    "trigger": "user-initiated",
+    "deliverable": "objective-artifact"
+  },
+  "four_dimensions_note": "inferred from prompt/tags by scripts/build_task_packs.py; not a scored field",
+  "prompt_chars": 405,
+  "prompt_chars_manifest": 405,
+  "published_at": "2026-10-13T17:24:50+00:00",
+  "reference_url": "",
+  "source_post_url": "https://x.com/notjazii/status/2110059198230970782",
+  "contamination_split": null,
+  "contamination_split_note": "computed at run time against each configuration's training_cutoff (cebench/evaluation.py); baseline cutoff for documentation: 2025-06-30",
+  "assertion_target": 9,
+  "full_measurement": true,
+  "license": "CC-BY-NC-4.0",
+  "attribution": {
+    "creator": "J A Z I I @notjazii",
+    "sourceUrl": "https://x.com/notjazii/status/2110059198230970782"
+  },
+  "notes": "Prompt text is fetched from the pinned corpus and is not vendored upstream; it is materialised here for offline runs.",
+  "set": "extended",
+  "source_origin": "corpus_rejected_by_html_gate",
+  "reference_kind": "post-only",
+  "has_reference_oracle": false,
+  "meta_test_applicable": false,
+  "admission_note": "Admitted on verbatim-prompt evidence only. No third-party runnable artifact is pinned, so the reference-oracle meta-test does not apply; L0/L1 assertions still evaluate each generated artifact normally."
+}

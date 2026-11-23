@@ -67,11 +67,34 @@ evidence-completeness label. All 111 are built.
 **Source skew (disclosed).** 100/111 point to one Opus collection. Results are
 stratified by source; `modelLabel` is the original poster's model, not a score.
 
+### 4.1 Two-tier task bank (v0.2)
+
+The funnel above defines **Core-111**, the paper's full-measurement census:
+every admitted task has a pinned runnable `.html` reference, so a
+reference-as-oracle meta-test is meaningful and POST/PRE coverage is 111/111.
+All paper numbers (Table 9, §7 stratified reporting, figure captions) refer to
+this tier and are unchanged.
+
+A second tier, **Extended-69**, was added to reduce label skew
+(`tasks/manifest_extended.json`; see `docs/expansion-report.md`). It admits
+records that have a verbatim prompt but no pinned `.html` reference — 63 from
+the 194 records rejected by S2, plus 6 newly parsed from a Feishu prompt
+export. Selection minimised the squared coefficient of variation of the
+`primary` / `track` / `tech` label counts. The full bank is **180** packs.
+
+Extended tasks have `has_reference_oracle=false` and
+`meta_test_applicable=false`. They **do not** enter the meta-test pass-rate
+denominator, and the M2/M3 reference-mutation path is not available for them.
+L0/L1 assertions still run against every generated artifact, so M1
+generation → assert → score is complete for all 180 tasks. Runs must report the
+two tiers separately; the paper's headline census remains Core-111 unless
+explicitly restated as two-tier.
+
 ## 5. Assertion tiers
 
 | Tier | Count | Nature | Cost |
 |---|---:|---|---|
-| **L0** global | 8 | static source checks (6) + browser runtime (2) | written once, all 111 tasks |
+| **L0** global | 8 | static source checks (6) + browser runtime (2) | written once, all 180 tasks |
 | **L1** task-specific | 4–12 | Playwright interaction scripts + harness-side state probes | per task, from 8 domain templates |
 | **L2** visual | closed questions | multimodal judge on interaction recordings | only for passing runs / top configurations |
 

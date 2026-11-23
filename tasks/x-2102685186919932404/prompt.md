@@ -1,0 +1,9 @@
+<!-- verbatim prompt from data/corpus/extension.jsonl + cases.jsonl (id=x-2102685186919932404, set=extended) -->
+
+Using only a self-contained HTML file, vanilla JavaScript and Canvas 2D, I want you to recreate the original Prince of Persia game. The level doesn't have to be the same, but the aesthetics, the design, the character, the jumping animations and gameplay do need to be identical to the original game.
+
+I should be able to jump, use floor pads that you can stand on to open and activate gates. I should be able to pick up a sword and fight against NPCs, and make the level as realistic and accurate as possible.
+
+It should take me maybe a couple of minutes to complete a level just using WASD, spacebar to jump, X to pick up an object and whatever keys you think to use the sword.
+
+Focus on the level aesthetics, the background, the flickering of the lamps on the wall, the gates that open and close and really nail that original Prince of Persia aesthetic.

@@ -28,8 +28,13 @@ tmp/
 config/models.json
 config/run.json
 
-# Corpus snapshot fetched on demand by scripts/sync_corpus.py
-data/corpus/
+# Upstream corpus snapshot is fetched on demand by scripts/sync_corpus.py.
+# The two derived files below are NOT upstream snapshots: they hold the
+# newly parsed Feishu prompts and must be versioned so `expand_tasks.py`
+# can reproduce the Extended tier from a fresh clone.
+data/corpus/*
+!data/corpus/extension.jsonl
+!data/corpus/feishu_md_records.jsonl
 
 # NOTE: results/, leaderboard/data/ and tasks/manifest.json are intentionally
 # NOT ignored. Reproducibility requires that traces and placeholder data are

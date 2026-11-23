@@ -37,5 +37,10 @@
     "creator": "@DavidSilgado_",
     "sourceUrl": "https://x.com/DavidSilgado_/status/2102605163257381124"
   },
-  "notes": "Hand-authored example pack (migrated from ce-085-karesansui); 10 auto + 2 L2 visual assertions."
+  "notes": "Hand-authored example pack (migrated from ce-085-karesansui); 10 auto + 2 L2 visual assertions.",
+  "set": "core",
+  "source_origin": "core_corpus",
+  "reference_kind": "runnable-html",
+  "has_reference_oracle": true,
+  "meta_test_applicable": true
 }

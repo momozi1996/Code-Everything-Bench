@@ -2,7 +2,7 @@
 
 | File | Content | Status |
 |---|---|---|
-| `tasks.json` | 111 real task records + 8-domain counts | ✅ measured, generated |
+| `tasks.json` | Core-111 real task records + 8-domain counts (paper census; full bank = 180 packs) | ✅ measured, generated |
 | `results.csv` | one explicit `PLACEHOLDER_NO_RUN` row | ⬜ no results |
 
 ## Regeneration

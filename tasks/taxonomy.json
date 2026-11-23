@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-11-23T19:36:46+08:00",
-  "task_count": 111,
-  "description": "CE-Bench 三轴分类标签体系。track 为多标签主赛道（与论文 §7 judge 维度对齐）；primary 为唯一主类；tech 为技术实现标签。派生标签用于分层统计，不改变评分口径。POST/PRE 污染切分仍由运行时按各配置 training_cutoff 计算，不静态写入。",
+  "generated_at": "2026-11-23T22:05:44+08:00",
+  "task_count": 180,
+  "description": "CE-Bench 三轴分类标签体系。track 为多标签主赛道（与论文 §7 judge 维度对齐）；primary 为唯一主类；tech 为技术实现标签。题库分两层：Core-111（有可运行 .html 参考产物，完整测量）与 Extended（仅凭逐字 Prompt 证据纳入，无 reference oracle）。派生标签用于分层统计，不改变评分口径。POST/PRE 污染切分仍由运行时按各配置 training_cutoff 计算，不静态写入。",
   "axes": {
     "track": {
       "visualization": {
@@ -150,15 +150,28 @@
       "context": "上下文推断"
     },
     "source_group": "Opus-100 合辑 / 社区单帖 / GPT-6 · Astra / Sol / Luna",
+    "set": {
+      "core": "Core-111",
+      "extended": "Extended"
+    },
+    "reference_kind": {
+      "runnable-html": "有可运行 .html 第三方产物，可作 reference oracle",
+      "post-only": "仅逐字 Prompt + 原帖，无 runnable 产物，meta-test 不适用"
+    },
     "meta_test": {
       "pass": "reference 通过全部断言",
-      "review": "断言偏严或 reference 未通过，待人工复核"
+      "review": "断言偏严或 reference 未通过，待人工复核",
+      "n/a": "post-only 证据，无 reference oracle；不纳入自检通过率分母"
     },
     "replay": "relatedCaseIds 非空，可做 Replay 对照",
     "track_count": "该题命中的赛道数（复合度代理指标）"
   },
   "tasks": {
     "case-001": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "3D",
       "primary_track": "3d",
       "tracks": [
@@ -189,7 +202,220 @@
       "meta_test": "review",
       "assertion_count": 9
     },
+    "new-95380185d0ed": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "corpus_rejected_by_html_gate",
+      "primary": "游戏",
+      "primary_track": "game",
+      "tracks": [
+        "3d",
+        "game"
+      ],
+      "tech": [
+        "code2game",
+        "code23d"
+      ],
+      "categories": [
+        "游戏"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Claude Sonnet 5.5",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "work-002": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "corpus_rejected_by_html_gate",
+      "primary": "工具",
+      "primary_track": "frontend",
+      "tracks": [
+        "composite"
+      ],
+      "tech": [],
+      "categories": [
+        "效率工作"
+      ],
+      "lang": "zh",
+      "prompt_bucket": "S",
+      "source_group": "社区单帖",
+      "track_count": 1,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "b24-astra-2098196448823144740": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "corpus_rejected_by_html_gate",
+      "primary": "工具",
+      "primary_track": "frontend",
+      "tracks": [
+        "composite"
+      ],
+      "tech": [],
+      "categories": [
+        "效率工作"
+      ],
+      "lang": "en",
+      "prompt_bucket": "S",
+      "source_group": "GPT-6 · Astra",
+      "track_count": 1,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "work-003": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "corpus_rejected_by_html_gate",
+      "primary": "工具",
+      "primary_track": "frontend",
+      "tracks": [
+        "composite"
+      ],
+      "tech": [],
+      "categories": [
+        "效率工作"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "社区单帖",
+      "track_count": 1,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "work-004": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "corpus_rejected_by_html_gate",
+      "primary": "工具",
+      "primary_track": "frontend",
+      "tracks": [
+        "composite"
+      ],
+      "tech": [],
+      "categories": [
+        "效率工作"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "社区单帖",
+      "track_count": 1,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "case-005": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "corpus_rejected_by_html_gate",
+      "primary": "3D",
+      "primary_track": "3d",
+      "tracks": [
+        "3d",
+        "frontend"
+      ],
+      "tech": [
+        "code23d",
+        "code2html",
+        "code2css"
+      ],
+      "categories": [
+        "3D"
+      ],
+      "lang": "zh",
+      "prompt_bucket": "L",
+      "source_group": "社区单帖",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "work-005": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "corpus_rejected_by_html_gate",
+      "primary": "工具",
+      "primary_track": "frontend",
+      "tracks": [
+        "composite"
+      ],
+      "tech": [],
+      "categories": [
+        "效率工作"
+      ],
+      "lang": "en",
+      "prompt_bucket": "L",
+      "source_group": "社区单帖",
+      "track_count": 1,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "new-88ba92731335": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "corpus_rejected_by_html_gate",
+      "primary": "前端",
+      "primary_track": "frontend",
+      "tracks": [
+        "frontend"
+      ],
+      "tech": [
+        "code2frontend"
+      ],
+      "categories": [
+        "前端"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "社区单帖",
+      "track_count": 1,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "x-2102648645233373328": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "corpus_rejected_by_html_gate",
+      "primary": "工具",
+      "primary_track": "frontend",
+      "tracks": [
+        "composite"
+      ],
+      "tech": [],
+      "categories": [
+        "效率工作"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "社区单帖",
+      "track_count": 1,
+      "replay": true,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
     "gpt6-astra-2102565403109085669": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "3D",
       "primary_track": "3d",
       "tracks": [
@@ -219,7 +445,45 @@
       "meta_test": "review",
       "assertion_count": 9
     },
+    "case-008": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "corpus_rejected_by_html_gate",
+      "primary": "3D",
+      "primary_track": "3d",
+      "tracks": [
+        "3d",
+        "animation-video",
+        "frontend",
+        "visualization"
+      ],
+      "tech": [
+        "code23d",
+        "code2world",
+        "code2video",
+        "code2html",
+        "code2frontend",
+        "code2viz"
+      ],
+      "categories": [
+        "3D",
+        "可视化",
+        "生成艺术"
+      ],
+      "lang": "zh",
+      "prompt_bucket": "XL",
+      "source_group": "社区单帖",
+      "track_count": 4,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
     "case-009": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "游戏",
       "primary_track": "game",
       "tracks": [
@@ -243,6 +507,10 @@
       "assertion_count": 9
     },
     "case-010": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "游戏",
       "primary_track": "game",
       "tracks": [
@@ -266,6 +534,10 @@
       "assertion_count": 9
     },
     "gpt6-sol-2102665046568673765": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "3D",
       "primary_track": "3d",
       "tracks": [
@@ -301,6 +573,10 @@
       "assertion_count": 13
     },
     "case-011": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "3D",
       "primary_track": "3d",
       "tracks": [
@@ -320,7 +596,382 @@
       "meta_test": "pass",
       "assertion_count": 9
     },
+    "gpt6-astra-arcade-kitchen": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "corpus_rejected_by_html_gate",
+      "primary": "游戏",
+      "primary_track": "game",
+      "tracks": [
+        "composite",
+        "game",
+        "visualization"
+      ],
+      "tech": [
+        "code2game",
+        "code2canvas",
+        "code2deck"
+      ],
+      "categories": [
+        "游戏"
+      ],
+      "lang": "zh",
+      "prompt_bucket": "M",
+      "source_group": "GPT-6 · Astra",
+      "track_count": 3,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "case-013": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "corpus_rejected_by_html_gate",
+      "primary": "动画",
+      "primary_track": "animation-video",
+      "tracks": [
+        "animation-video",
+        "frontend",
+        "game",
+        "svg-art",
+        "visualization"
+      ],
+      "tech": [
+        "code2game",
+        "code2html",
+        "code2svg",
+        "code2css",
+        "code2canvas",
+        "code2frontend",
+        "code2video"
+      ],
+      "categories": [
+        "动画",
+        "生成艺术"
+      ],
+      "lang": "en",
+      "prompt_bucket": "XL",
+      "source_group": "社区单帖",
+      "track_count": 5,
+      "replay": true,
+      "meta_test": "n/a",
+      "assertion_count": 10
+    },
+    "case-014": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "corpus_rejected_by_html_gate",
+      "primary": "动画",
+      "primary_track": "animation-video",
+      "tracks": [
+        "animation-video",
+        "audio"
+      ],
+      "tech": [
+        "code2audio",
+        "code2video"
+      ],
+      "categories": [
+        "动画",
+        "生成艺术"
+      ],
+      "lang": "en",
+      "prompt_bucket": "S",
+      "source_group": "社区单帖",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "gpt6-astra-arcade-magnet": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "corpus_rejected_by_html_gate",
+      "primary": "游戏",
+      "primary_track": "game",
+      "tracks": [
+        "composite",
+        "game",
+        "visualization"
+      ],
+      "tech": [
+        "code2game",
+        "code2canvas",
+        "code2deck"
+      ],
+      "categories": [
+        "游戏"
+      ],
+      "lang": "zh",
+      "prompt_bucket": "M",
+      "source_group": "GPT-6 · Astra",
+      "track_count": 3,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "case-015": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "corpus_rejected_by_html_gate",
+      "primary": "动画",
+      "primary_track": "animation-video",
+      "tracks": [
+        "animation-video",
+        "frontend",
+        "game",
+        "visualization"
+      ],
+      "tech": [
+        "code2game",
+        "code2html",
+        "code2css",
+        "code2canvas",
+        "code2video"
+      ],
+      "categories": [
+        "动画",
+        "生成艺术"
+      ],
+      "lang": "en",
+      "prompt_bucket": "L",
+      "source_group": "社区单帖",
+      "track_count": 4,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "gpt6-astra-arcade-hockey": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "corpus_rejected_by_html_gate",
+      "primary": "游戏",
+      "primary_track": "game",
+      "tracks": [
+        "audio",
+        "game",
+        "visualization"
+      ],
+      "tech": [
+        "code2game",
+        "code2canvas",
+        "code2audio"
+      ],
+      "categories": [
+        "游戏"
+      ],
+      "lang": "zh",
+      "prompt_bucket": "S",
+      "source_group": "GPT-6 · Astra",
+      "track_count": 3,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "gpt6-astra-arcade-racer": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "corpus_rejected_by_html_gate",
+      "primary": "游戏",
+      "primary_track": "game",
+      "tracks": [
+        "audio",
+        "game",
+        "visualization"
+      ],
+      "tech": [
+        "code2game",
+        "code2canvas",
+        "code2audio"
+      ],
+      "categories": [
+        "游戏"
+      ],
+      "lang": "zh",
+      "prompt_bucket": "S",
+      "source_group": "GPT-6 · Astra",
+      "track_count": 3,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "case-017": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "corpus_rejected_by_html_gate",
+      "primary": "动画",
+      "primary_track": "animation-video",
+      "tracks": [
+        "animation-video",
+        "audio"
+      ],
+      "tech": [
+        "code2video",
+        "code2audio"
+      ],
+      "categories": [
+        "动画"
+      ],
+      "lang": "zh",
+      "prompt_bucket": "S",
+      "source_group": "社区单帖",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "gpt6-astra-2102725596124270665": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "corpus_rejected_by_html_gate",
+      "primary": "前端",
+      "primary_track": "frontend",
+      "tracks": [
+        "frontend",
+        "visualization"
+      ],
+      "tech": [
+        "code2frontend",
+        "code2viz"
+      ],
+      "categories": [
+        "前端",
+        "可视化"
+      ],
+      "lang": "en",
+      "prompt_bucket": "S",
+      "source_group": "GPT-6 · Astra",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "case-018": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "corpus_rejected_by_html_gate",
+      "primary": "游戏",
+      "primary_track": "game",
+      "tracks": [
+        "3d",
+        "frontend",
+        "game"
+      ],
+      "tech": [
+        "code2game",
+        "code23d",
+        "code2html"
+      ],
+      "categories": [
+        "游戏",
+        "3D"
+      ],
+      "lang": "en",
+      "prompt_bucket": "S",
+      "source_group": "社区单帖",
+      "track_count": 3,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "gpt6-astra-2098188287789646138": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "corpus_rejected_by_html_gate",
+      "primary": "网页",
+      "primary_track": "frontend",
+      "tracks": [
+        "audio",
+        "frontend"
+      ],
+      "tech": [
+        "code2frontend",
+        "code2audio"
+      ],
+      "categories": [
+        "网页"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "GPT-6 · Astra",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "b24-astra-2096841787520266392": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "corpus_rejected_by_html_gate",
+      "primary": "前端",
+      "primary_track": "frontend",
+      "tracks": [
+        "frontend"
+      ],
+      "tech": [
+        "code2css",
+        "code2frontend"
+      ],
+      "categories": [
+        "前端",
+        "工具"
+      ],
+      "lang": "en",
+      "prompt_bucket": "L",
+      "source_group": "GPT-6 · Astra",
+      "track_count": 1,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "case-023": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "corpus_rejected_by_html_gate",
+      "primary": "3D",
+      "primary_track": "3d",
+      "tracks": [
+        "3d",
+        "audio",
+        "frontend"
+      ],
+      "tech": [
+        "code23d",
+        "code2world",
+        "code2html",
+        "code2frontend",
+        "code2audio"
+      ],
+      "categories": [
+        "3D",
+        "生成艺术"
+      ],
+      "lang": "en",
+      "prompt_bucket": "XL",
+      "source_group": "社区单帖",
+      "track_count": 3,
+      "replay": true,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
     "case-027": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "网页",
       "primary_track": "frontend",
       "tracks": [
@@ -345,6 +996,10 @@
       "assertion_count": 9
     },
     "case-028": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "动画",
       "primary_track": "animation-video",
       "tracks": [
@@ -373,7 +1028,41 @@
       "meta_test": "review",
       "assertion_count": 9
     },
+    "b24-astra-2096806353574752474": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "corpus_rejected_by_html_gate",
+      "primary": "游戏",
+      "primary_track": "game",
+      "tracks": [
+        "3d",
+        "frontend",
+        "game"
+      ],
+      "tech": [
+        "code2game",
+        "code23d",
+        "code2html",
+        "code2css"
+      ],
+      "categories": [
+        "游戏",
+        "3D"
+      ],
+      "lang": "zh",
+      "prompt_bucket": "L",
+      "source_group": "GPT-6 · Astra",
+      "track_count": 3,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
     "case-029": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "生成艺术",
       "primary_track": "svg-art",
       "tracks": [
@@ -391,7 +1080,40 @@
       "meta_test": "review",
       "assertion_count": 9
     },
+    "b24-astra-2099894689319334301": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "corpus_rejected_by_html_gate",
+      "primary": "3D",
+      "primary_track": "3d",
+      "tracks": [
+        "3d",
+        "animation-video",
+        "audio"
+      ],
+      "tech": [
+        "code23d",
+        "code2video",
+        "code2audio"
+      ],
+      "categories": [
+        "3D",
+        "动画"
+      ],
+      "lang": "zh",
+      "prompt_bucket": "S",
+      "source_group": "GPT-6 · Astra",
+      "track_count": 3,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
     "case-030": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "可视化",
       "primary_track": "visualization",
       "tracks": [
@@ -420,7 +1142,38 @@
       "meta_test": "pass",
       "assertion_count": 9
     },
+    "b24-astra-2095599934766764338": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "corpus_rejected_by_html_gate",
+      "primary": "游戏",
+      "primary_track": "game",
+      "tracks": [
+        "3d",
+        "game"
+      ],
+      "tech": [
+        "code2game",
+        "code23d"
+      ],
+      "categories": [
+        "游戏",
+        "3D"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "GPT-6 · Astra",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
     "case-031": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "生成艺术",
       "primary_track": "svg-art",
       "tracks": [
@@ -444,7 +1197,36 @@
       "meta_test": "pass",
       "assertion_count": 9
     },
+    "b24-astra-2101869079670001966": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "corpus_rejected_by_html_gate",
+      "primary": "游戏",
+      "primary_track": "game",
+      "tracks": [
+        "game"
+      ],
+      "tech": [
+        "code2game"
+      ],
+      "categories": [
+        "游戏",
+        "生成艺术"
+      ],
+      "lang": "zh",
+      "prompt_bucket": "M",
+      "source_group": "GPT-6 · Astra",
+      "track_count": 1,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
     "case-032": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "网页",
       "primary_track": "frontend",
       "tracks": [
@@ -471,6 +1253,10 @@
       "assertion_count": 9
     },
     "case-033": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "工具",
       "primary_track": "frontend",
       "tracks": [
@@ -500,6 +1286,10 @@
       "assertion_count": 9
     },
     "b24-astra-2098105648106078541": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "3D",
       "primary_track": "3d",
       "tracks": [
@@ -525,6 +1315,10 @@
       "assertion_count": 9
     },
     "case-034": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "网页",
       "primary_track": "frontend",
       "tracks": [
@@ -548,7 +1342,41 @@
       "meta_test": "pass",
       "assertion_count": 9
     },
+    "new-6f22235d8b37": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "corpus_rejected_by_html_gate",
+      "primary": "3D",
+      "primary_track": "3d",
+      "tracks": [
+        "3d",
+        "animation-video",
+        "audio"
+      ],
+      "tech": [
+        "code23d",
+        "code2video",
+        "code2audio"
+      ],
+      "categories": [
+        "3D",
+        "动画",
+        "生成艺术"
+      ],
+      "lang": "en",
+      "prompt_bucket": "S",
+      "source_group": "Claude Haiku 5.5",
+      "track_count": 3,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
     "b24-astra-2098841316591346006": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "3D",
       "primary_track": "3d",
       "tracks": [
@@ -575,6 +1403,10 @@
       "assertion_count": 9
     },
     "case-035": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "生成艺术",
       "primary_track": "svg-art",
       "tracks": [
@@ -598,6 +1430,10 @@
       "assertion_count": 9
     },
     "case-036": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "生成艺术",
       "primary_track": "svg-art",
       "tracks": [
@@ -626,7 +1462,39 @@
       "meta_test": "pass",
       "assertion_count": 9
     },
+    "b24-astra-2097323734504017936": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "corpus_rejected_by_html_gate",
+      "primary": "3D",
+      "primary_track": "3d",
+      "tracks": [
+        "3d",
+        "animation-video"
+      ],
+      "tech": [
+        "code23d",
+        "code2world",
+        "code2video"
+      ],
+      "categories": [
+        "3D",
+        "动画"
+      ],
+      "lang": "zh",
+      "prompt_bucket": "M",
+      "source_group": "GPT-6 · Astra",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
     "case-037": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "生成艺术",
       "primary_track": "svg-art",
       "tracks": [
@@ -647,6 +1515,10 @@
       "assertion_count": 9
     },
     "case-038": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "前端",
       "primary_track": "frontend",
       "tracks": [
@@ -674,6 +1546,10 @@
       "assertion_count": 9
     },
     "case-039": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "可视化",
       "primary_track": "visualization",
       "tracks": [
@@ -701,6 +1577,10 @@
       "assertion_count": 9
     },
     "case-040": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "动画",
       "primary_track": "animation-video",
       "tracks": [
@@ -726,6 +1606,10 @@
       "assertion_count": 9
     },
     "case-041": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "网页",
       "primary_track": "frontend",
       "tracks": [
@@ -752,6 +1636,10 @@
       "assertion_count": 9
     },
     "b24-sol-2102509273393627524": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "3D",
       "primary_track": "3d",
       "tracks": [
@@ -776,6 +1664,10 @@
       "assertion_count": 9
     },
     "case-042": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "生成艺术",
       "primary_track": "svg-art",
       "tracks": [
@@ -802,7 +1694,37 @@
       "meta_test": "pass",
       "assertion_count": 9
     },
+    "new-ed54b98ee8a2": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "corpus_rejected_by_html_gate",
+      "primary": "前端",
+      "primary_track": "frontend",
+      "tracks": [
+        "audio",
+        "frontend"
+      ],
+      "tech": [
+        "code2frontend",
+        "code2audio"
+      ],
+      "categories": [
+        "前端"
+      ],
+      "lang": "en",
+      "prompt_bucket": "S",
+      "source_group": "Gemini 4 Argon",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
     "b24-luna-2102509273393627524": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "3D",
       "primary_track": "3d",
       "tracks": [
@@ -827,6 +1749,10 @@
       "assertion_count": 9
     },
     "case-043": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "可视化",
       "primary_track": "visualization",
       "tracks": [
@@ -851,6 +1777,10 @@
       "assertion_count": 9
     },
     "case-044": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "生成艺术",
       "primary_track": "svg-art",
       "tracks": [
@@ -874,6 +1804,10 @@
       "assertion_count": 9
     },
     "case-045": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "前端",
       "primary_track": "frontend",
       "tracks": [
@@ -903,6 +1837,10 @@
       "assertion_count": 9
     },
     "case-046": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "可视化",
       "primary_track": "visualization",
       "tracks": [
@@ -928,6 +1866,10 @@
       "assertion_count": 9
     },
     "case-047": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "生成艺术",
       "primary_track": "svg-art",
       "tracks": [
@@ -949,6 +1891,10 @@
       "assertion_count": 9
     },
     "case-048": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "网页",
       "primary_track": "frontend",
       "tracks": [
@@ -974,6 +1920,10 @@
       "assertion_count": 9
     },
     "case-049": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "生成艺术",
       "primary_track": "svg-art",
       "tracks": [
@@ -995,6 +1945,10 @@
       "assertion_count": 9
     },
     "case-050": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "网页",
       "primary_track": "frontend",
       "tracks": [
@@ -1016,7 +1970,35 @@
       "meta_test": "pass",
       "assertion_count": 9
     },
+    "new-9b179c84d02e": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "corpus_rejected_by_html_gate",
+      "primary": "可视化",
+      "primary_track": "visualization",
+      "tracks": [
+        "visualization"
+      ],
+      "tech": [
+        "code2viz"
+      ],
+      "categories": [
+        "可视化"
+      ],
+      "lang": "en",
+      "prompt_bucket": "S",
+      "source_group": "GPT-6 · Astra",
+      "track_count": 1,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
     "case-051": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "游戏",
       "primary_track": "game",
       "tracks": [
@@ -1042,6 +2024,10 @@
       "assertion_count": 9
     },
     "case-052": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "可视化",
       "primary_track": "visualization",
       "tracks": [
@@ -1068,6 +2054,10 @@
       "assertion_count": 9
     },
     "case-053": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "3D",
       "primary_track": "3d",
       "tracks": [
@@ -1098,6 +2088,10 @@
       "assertion_count": 9
     },
     "case-054": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "可视化",
       "primary_track": "visualization",
       "tracks": [
@@ -1118,6 +2112,10 @@
       "assertion_count": 9
     },
     "case-055": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "工具",
       "primary_track": "frontend",
       "tracks": [
@@ -1140,6 +2138,10 @@
       "assertion_count": 9
     },
     "case-056": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "可视化",
       "primary_track": "visualization",
       "tracks": [
@@ -1164,6 +2166,10 @@
       "assertion_count": 9
     },
     "case-057": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "可视化",
       "primary_track": "visualization",
       "tracks": [
@@ -1186,6 +2192,10 @@
       "assertion_count": 9
     },
     "case-058": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "前端",
       "primary_track": "frontend",
       "tracks": [
@@ -1214,6 +2224,10 @@
       "assertion_count": 9
     },
     "case-059": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "游戏",
       "primary_track": "game",
       "tracks": [
@@ -1236,6 +2250,10 @@
       "assertion_count": 9
     },
     "case-060": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "生成艺术",
       "primary_track": "svg-art",
       "tracks": [
@@ -1260,7 +2278,38 @@
       "meta_test": "pass",
       "assertion_count": 9
     },
+    "new-d7096a7f7deb": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "corpus_rejected_by_html_gate",
+      "primary": "动画",
+      "primary_track": "animation-video",
+      "tracks": [
+        "animation-video",
+        "audio"
+      ],
+      "tech": [
+        "code2video",
+        "code2audio"
+      ],
+      "categories": [
+        "动画",
+        "生成艺术"
+      ],
+      "lang": "zh",
+      "prompt_bucket": "S",
+      "source_group": "社区单帖",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
     "case-061": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "网页",
       "primary_track": "frontend",
       "tracks": [
@@ -1286,6 +2335,10 @@
       "assertion_count": 9
     },
     "case-062": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "可视化",
       "primary_track": "visualization",
       "tracks": [
@@ -1311,7 +2364,35 @@
       "meta_test": "pass",
       "assertion_count": 9
     },
+    "new-0a356e87270d": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "corpus_rejected_by_html_gate",
+      "primary": "生成艺术",
+      "primary_track": "svg-art",
+      "tracks": [
+        "frontend"
+      ],
+      "tech": [
+        "code2html"
+      ],
+      "categories": [
+        "生成艺术"
+      ],
+      "lang": "en",
+      "prompt_bucket": "S",
+      "source_group": "Gemini 4 Argon",
+      "track_count": 1,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
     "case-063": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "可视化",
       "primary_track": "visualization",
       "tracks": [
@@ -1333,6 +2414,10 @@
       "assertion_count": 9
     },
     "case-064": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "游戏",
       "primary_track": "game",
       "tracks": [
@@ -1358,7 +2443,39 @@
       "meta_test": "pass",
       "assertion_count": 9
     },
+    "new-e7e866f727a3": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "corpus_rejected_by_html_gate",
+      "primary": "游戏",
+      "primary_track": "game",
+      "tracks": [
+        "3d",
+        "frontend",
+        "game"
+      ],
+      "tech": [
+        "code2game",
+        "code2html",
+        "code23d"
+      ],
+      "categories": [
+        "游戏"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Gemini 4 Argon",
+      "track_count": 3,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
     "case-065": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "3D",
       "primary_track": "3d",
       "tracks": [
@@ -1384,6 +2501,10 @@
       "assertion_count": 9
     },
     "case-066": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "网页",
       "primary_track": "frontend",
       "tracks": [
@@ -1409,6 +2530,10 @@
       "assertion_count": 9
     },
     "case-067": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "动画",
       "primary_track": "animation-video",
       "tracks": [
@@ -1436,6 +2561,10 @@
       "assertion_count": 9
     },
     "case-068": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "生成艺术",
       "primary_track": "svg-art",
       "tracks": [
@@ -1459,6 +2588,10 @@
       "assertion_count": 9
     },
     "case-069": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "网页",
       "primary_track": "frontend",
       "tracks": [
@@ -1482,6 +2615,10 @@
       "assertion_count": 9
     },
     "case-070": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "可视化",
       "primary_track": "visualization",
       "tracks": [
@@ -1505,7 +2642,40 @@
       "meta_test": "pass",
       "assertion_count": 9
     },
+    "new-301333fe8e00": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "corpus_rejected_by_html_gate",
+      "primary": "3D",
+      "primary_track": "3d",
+      "tracks": [
+        "3d",
+        "animation-video",
+        "audio"
+      ],
+      "tech": [
+        "code23d",
+        "code2audio",
+        "code2video"
+      ],
+      "categories": [
+        "3D",
+        "动画"
+      ],
+      "lang": "en",
+      "prompt_bucket": "S",
+      "source_group": "社区单帖",
+      "track_count": 3,
+      "replay": true,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
     "case-071": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "生成艺术",
       "primary_track": "svg-art",
       "tracks": [
@@ -1531,6 +2701,10 @@
       "assertion_count": 9
     },
     "case-072": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "工具",
       "primary_track": "frontend",
       "tracks": [
@@ -1556,6 +2730,10 @@
       "assertion_count": 9
     },
     "case-073": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "网页",
       "primary_track": "frontend",
       "tracks": [
@@ -1581,6 +2759,10 @@
       "assertion_count": 9
     },
     "case-074": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "前端",
       "primary_track": "frontend",
       "tracks": [
@@ -1608,6 +2790,10 @@
       "assertion_count": 9
     },
     "case-075": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "生成艺术",
       "primary_track": "svg-art",
       "tracks": [
@@ -1631,6 +2817,10 @@
       "assertion_count": 9
     },
     "case-076": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "前端",
       "primary_track": "frontend",
       "tracks": [
@@ -1659,6 +2849,10 @@
       "assertion_count": 9
     },
     "case-077": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "生成艺术",
       "primary_track": "svg-art",
       "tracks": [
@@ -1688,6 +2882,10 @@
       "assertion_count": 9
     },
     "case-078": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "可视化",
       "primary_track": "visualization",
       "tracks": [
@@ -1713,6 +2911,10 @@
       "assertion_count": 9
     },
     "case-079": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "生成艺术",
       "primary_track": "svg-art",
       "tracks": [
@@ -1740,6 +2942,10 @@
       "assertion_count": 9
     },
     "case-080": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "前端",
       "primary_track": "frontend",
       "tracks": [
@@ -1763,6 +2969,10 @@
       "assertion_count": 9
     },
     "case-081": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "游戏",
       "primary_track": "game",
       "tracks": [
@@ -1790,6 +3000,10 @@
       "assertion_count": 9
     },
     "case-082": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "动画",
       "primary_track": "animation-video",
       "tracks": [
@@ -1816,6 +3030,10 @@
       "assertion_count": 9
     },
     "case-083": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "工具",
       "primary_track": "frontend",
       "tracks": [
@@ -1843,6 +3061,10 @@
       "assertion_count": 9
     },
     "case-084": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "网页",
       "primary_track": "frontend",
       "tracks": [
@@ -1866,6 +3088,10 @@
       "assertion_count": 9
     },
     "case-085": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "生成艺术",
       "primary_track": "svg-art",
       "tracks": [
@@ -1891,6 +3117,10 @@
       "assertion_count": 12
     },
     "case-086": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "前端",
       "primary_track": "frontend",
       "tracks": [
@@ -1915,6 +3145,10 @@
       "assertion_count": 9
     },
     "case-087": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "动画",
       "primary_track": "animation-video",
       "tracks": [
@@ -1942,6 +3176,10 @@
       "assertion_count": 9
     },
     "case-088": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "可视化",
       "primary_track": "visualization",
       "tracks": [
@@ -1965,6 +3203,10 @@
       "assertion_count": 9
     },
     "case-089": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "可视化",
       "primary_track": "visualization",
       "tracks": [
@@ -1991,6 +3233,10 @@
       "assertion_count": 9
     },
     "case-090": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "生成艺术",
       "primary_track": "svg-art",
       "tracks": [
@@ -2012,6 +3258,10 @@
       "assertion_count": 9
     },
     "case-091": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "生成艺术",
       "primary_track": "svg-art",
       "tracks": [
@@ -2032,6 +3282,10 @@
       "assertion_count": 9
     },
     "case-092": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "3D",
       "primary_track": "3d",
       "tracks": [
@@ -2057,6 +3311,10 @@
       "assertion_count": 9
     },
     "case-093": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "动画",
       "primary_track": "animation-video",
       "tracks": [
@@ -2083,6 +3341,10 @@
       "assertion_count": 9
     },
     "case-094": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "网页",
       "primary_track": "frontend",
       "tracks": [
@@ -2106,6 +3368,10 @@
       "assertion_count": 9
     },
     "case-095": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "生成艺术",
       "primary_track": "svg-art",
       "tracks": [
@@ -2128,6 +3394,10 @@
       "assertion_count": 9
     },
     "case-096": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "游戏",
       "primary_track": "game",
       "tracks": [
@@ -2156,6 +3426,10 @@
       "assertion_count": 9
     },
     "case-097": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "工具",
       "primary_track": "frontend",
       "tracks": [
@@ -2176,6 +3450,10 @@
       "assertion_count": 9
     },
     "case-098": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "生成艺术",
       "primary_track": "svg-art",
       "tracks": [
@@ -2196,6 +3474,10 @@
       "assertion_count": 9
     },
     "case-099": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "动画",
       "primary_track": "animation-video",
       "tracks": [
@@ -2221,6 +3503,10 @@
       "assertion_count": 9
     },
     "case-100": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "动画",
       "primary_track": "animation-video",
       "tracks": [
@@ -2248,6 +3534,10 @@
       "assertion_count": 9
     },
     "case-101": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "工具",
       "primary_track": "frontend",
       "tracks": [
@@ -2271,6 +3561,10 @@
       "assertion_count": 9
     },
     "case-102": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "前端",
       "primary_track": "frontend",
       "tracks": [
@@ -2298,6 +3592,10 @@
       "assertion_count": 9
     },
     "case-103": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "游戏",
       "primary_track": "game",
       "tracks": [
@@ -2327,6 +3625,10 @@
       "assertion_count": 9
     },
     "case-104": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "生成艺术",
       "primary_track": "svg-art",
       "tracks": [
@@ -2349,6 +3651,10 @@
       "assertion_count": 9
     },
     "case-105": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "动画",
       "primary_track": "animation-video",
       "tracks": [
@@ -2377,6 +3683,10 @@
       "assertion_count": 9
     },
     "case-106": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "工具",
       "primary_track": "frontend",
       "tracks": [
@@ -2403,6 +3713,10 @@
       "assertion_count": 9
     },
     "case-107": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "网页",
       "primary_track": "frontend",
       "tracks": [
@@ -2426,6 +3740,10 @@
       "assertion_count": 9
     },
     "case-108": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "网页",
       "primary_track": "frontend",
       "tracks": [
@@ -2451,6 +3769,10 @@
       "assertion_count": 9
     },
     "case-109": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "3D",
       "primary_track": "3d",
       "tracks": [
@@ -2475,6 +3797,10 @@
       "assertion_count": 9
     },
     "case-110": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "生成艺术",
       "primary_track": "svg-art",
       "tracks": [
@@ -2499,6 +3825,10 @@
       "assertion_count": 9
     },
     "case-111": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "网页",
       "primary_track": "frontend",
       "tracks": [
@@ -2525,6 +3855,10 @@
       "assertion_count": 9
     },
     "case-112": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "可视化",
       "primary_track": "visualization",
       "tracks": [
@@ -2549,6 +3883,10 @@
       "assertion_count": 9
     },
     "case-113": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "网页",
       "primary_track": "frontend",
       "tracks": [
@@ -2575,6 +3913,10 @@
       "assertion_count": 9
     },
     "case-114": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "工具",
       "primary_track": "frontend",
       "tracks": [
@@ -2603,6 +3945,10 @@
       "assertion_count": 9
     },
     "case-115": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "前端",
       "primary_track": "frontend",
       "tracks": [
@@ -2629,6 +3975,10 @@
       "assertion_count": 9
     },
     "case-116": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "工具",
       "primary_track": "frontend",
       "tracks": [
@@ -2653,6 +4003,10 @@
       "assertion_count": 9
     },
     "case-117": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "动画",
       "primary_track": "animation-video",
       "tracks": [
@@ -2676,6 +4030,10 @@
       "assertion_count": 9
     },
     "case-118": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "工具",
       "primary_track": "frontend",
       "tracks": [
@@ -2703,6 +4061,10 @@
       "assertion_count": 9
     },
     "case-119": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "可视化",
       "primary_track": "visualization",
       "tracks": [
@@ -2724,6 +4086,10 @@
       "assertion_count": 9
     },
     "case-120": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "生成艺术",
       "primary_track": "svg-art",
       "tracks": [
@@ -2744,6 +4110,10 @@
       "assertion_count": 9
     },
     "case-121": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "可视化",
       "primary_track": "visualization",
       "tracks": [
@@ -2768,6 +4138,10 @@
       "assertion_count": 9
     },
     "case-122": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "网页",
       "primary_track": "frontend",
       "tracks": [
@@ -2791,6 +4165,10 @@
       "assertion_count": 9
     },
     "case-123": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "可视化",
       "primary_track": "visualization",
       "tracks": [
@@ -2814,6 +4192,10 @@
       "assertion_count": 9
     },
     "case-124": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "动画",
       "primary_track": "animation-video",
       "tracks": [
@@ -2841,6 +4223,10 @@
       "assertion_count": 9
     },
     "case-125": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "动画",
       "primary_track": "animation-video",
       "tracks": [
@@ -2866,6 +4252,10 @@
       "assertion_count": 9
     },
     "case-126": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "可视化",
       "primary_track": "visualization",
       "tracks": [
@@ -2887,7 +4277,156 @@
       "meta_test": "pass",
       "assertion_count": 9
     },
+    "case-127": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "corpus_rejected_by_html_gate",
+      "primary": "动画",
+      "primary_track": "animation-video",
+      "tracks": [
+        "animation-video",
+        "audio"
+      ],
+      "tech": [
+        "code2audio",
+        "code2video"
+      ],
+      "categories": [
+        "动画"
+      ],
+      "lang": "en",
+      "prompt_bucket": "S",
+      "source_group": "社区单帖",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "new-660d2fdb371a": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "corpus_rejected_by_html_gate",
+      "primary": "可视化",
+      "primary_track": "visualization",
+      "tracks": [
+        "3d",
+        "composite",
+        "frontend",
+        "game",
+        "visualization"
+      ],
+      "tech": [
+        "code2game",
+        "code23d",
+        "code2html",
+        "code2frontend",
+        "code2viz",
+        "code2deck"
+      ],
+      "categories": [
+        "可视化"
+      ],
+      "lang": "en",
+      "prompt_bucket": "XL",
+      "source_group": "Claude Haiku 5.5",
+      "track_count": 5,
+      "replay": true,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "case-128": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "corpus_rejected_by_html_gate",
+      "primary": "动画",
+      "primary_track": "animation-video",
+      "tracks": [
+        "animation-video",
+        "frontend"
+      ],
+      "tech": [
+        "code2html",
+        "code2css",
+        "code2video"
+      ],
+      "categories": [
+        "动画"
+      ],
+      "lang": "en",
+      "prompt_bucket": "S",
+      "source_group": "社区单帖",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "new-085a7334aca5": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "corpus_rejected_by_html_gate",
+      "primary": "前端",
+      "primary_track": "frontend",
+      "tracks": [
+        "3d",
+        "composite",
+        "frontend",
+        "game",
+        "visualization"
+      ],
+      "tech": [
+        "code2game",
+        "code23d",
+        "code2html",
+        "code2frontend",
+        "code2viz",
+        "code2deck"
+      ],
+      "categories": [
+        "前端"
+      ],
+      "lang": "en",
+      "prompt_bucket": "XL",
+      "source_group": "社区单帖",
+      "track_count": 5,
+      "replay": true,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "new-6452db4ea6f9": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "corpus_rejected_by_html_gate",
+      "primary": "3D",
+      "primary_track": "3d",
+      "tracks": [
+        "3d",
+        "game"
+      ],
+      "tech": [
+        "code2game",
+        "code23d"
+      ],
+      "categories": [
+        "3D"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Claude Sonnet 5.5",
+      "track_count": 2,
+      "replay": true,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
     "x-2102665046568673765": {
+      "set": "core",
+      "set_label": "Core-111",
+      "reference_kind": "runnable-html",
+      "source_origin": "core_corpus",
       "primary": "3D",
       "primary_track": "3d",
       "tracks": [
@@ -2921,6 +4460,856 @@
       "replay": true,
       "meta_test": "review",
       "assertion_count": 13
+    },
+    "x-2102685186919932404": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "corpus_rejected_by_html_gate",
+      "primary": "游戏",
+      "primary_track": "game",
+      "tracks": [
+        "frontend",
+        "game",
+        "visualization"
+      ],
+      "tech": [
+        "code2game",
+        "code2html",
+        "code2canvas"
+      ],
+      "categories": [
+        "游戏"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "社区单帖",
+      "track_count": 3,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "x-2102652072252584046": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "corpus_rejected_by_html_gate",
+      "primary": "3D",
+      "primary_track": "3d",
+      "tracks": [
+        "3d",
+        "animation-video",
+        "visualization"
+      ],
+      "tech": [
+        "code23d",
+        "code2world",
+        "code2viz",
+        "code2video"
+      ],
+      "categories": [
+        "3D",
+        "动画",
+        "可视化"
+      ],
+      "lang": "zh",
+      "prompt_bucket": "S",
+      "source_group": "社区单帖",
+      "track_count": 3,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "x-2102657522507157906": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "corpus_rejected_by_html_gate",
+      "primary": "网页",
+      "primary_track": "frontend",
+      "tracks": [
+        "audio",
+        "frontend",
+        "svg-art",
+        "visualization"
+      ],
+      "tech": [
+        "code2svg",
+        "code2css",
+        "code2frontend",
+        "code2viz",
+        "code2audio"
+      ],
+      "categories": [
+        "网页",
+        "前端",
+        "可视化"
+      ],
+      "lang": "en",
+      "prompt_bucket": "XL",
+      "source_group": "社区单帖",
+      "track_count": 4,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "x-2102678371281018916": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "corpus_rejected_by_html_gate",
+      "primary": "网页",
+      "primary_track": "frontend",
+      "tracks": [
+        "frontend",
+        "svg-art"
+      ],
+      "tech": [
+        "code2html",
+        "code2svg",
+        "code2frontend"
+      ],
+      "categories": [
+        "网页",
+        "生成艺术"
+      ],
+      "lang": "en",
+      "prompt_bucket": "S",
+      "source_group": "社区单帖",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "x-2102689172955783211": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "corpus_rejected_by_html_gate",
+      "primary": "游戏",
+      "primary_track": "game",
+      "tracks": [
+        "3d",
+        "game"
+      ],
+      "tech": [
+        "code2game",
+        "code23d"
+      ],
+      "categories": [
+        "游戏",
+        "3D"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "社区单帖",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "x-2102686053379223919": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "corpus_rejected_by_html_gate",
+      "primary": "网页",
+      "primary_track": "frontend",
+      "tracks": [
+        "frontend",
+        "visualization"
+      ],
+      "tech": [
+        "code2html",
+        "code2frontend",
+        "code2viz"
+      ],
+      "categories": [
+        "网页",
+        "可视化"
+      ],
+      "lang": "en",
+      "prompt_bucket": "S",
+      "source_group": "社区单帖",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "demo-034": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "corpus_rejected_by_html_gate",
+      "primary": "3D",
+      "primary_track": "3d",
+      "tracks": [
+        "3d",
+        "visualization"
+      ],
+      "tech": [
+        "code23d",
+        "code2world",
+        "code2viz"
+      ],
+      "categories": [
+        "3D",
+        "可视化"
+      ],
+      "lang": "en",
+      "prompt_bucket": "S",
+      "source_group": "社区单帖",
+      "track_count": 2,
+      "replay": true,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "b24-opus-2102554209166000267": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "corpus_rejected_by_html_gate",
+      "primary": "动画",
+      "primary_track": "animation-video",
+      "tracks": [
+        "3d",
+        "animation-video",
+        "audio",
+        "frontend",
+        "game"
+      ],
+      "tech": [
+        "code2game",
+        "code23d",
+        "code2video",
+        "code2html",
+        "code2css",
+        "code2audio"
+      ],
+      "categories": [
+        "动画"
+      ],
+      "lang": "en",
+      "prompt_bucket": "L",
+      "source_group": "社区单帖",
+      "track_count": 5,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "u28-opus-2104085484347818226": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "corpus_rejected_by_html_gate",
+      "primary": "前端",
+      "primary_track": "frontend",
+      "tracks": [
+        "3d",
+        "animation-video",
+        "audio",
+        "frontend",
+        "game",
+        "svg-art",
+        "visualization"
+      ],
+      "tech": [
+        "code2game",
+        "code23d",
+        "code2video",
+        "code2html",
+        "code2svg",
+        "code2css",
+        "code2canvas",
+        "code2frontend",
+        "code2audio"
+      ],
+      "categories": [
+        "前端",
+        "3D",
+        "动画"
+      ],
+      "lang": "zh",
+      "prompt_bucket": "L",
+      "source_group": "社区单帖",
+      "track_count": 7,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 14
+    },
+    "u28-opus-2103243328041132100": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "corpus_rejected_by_html_gate",
+      "primary": "3D",
+      "primary_track": "3d",
+      "tracks": [
+        "3d",
+        "animation-video",
+        "game"
+      ],
+      "tech": [
+        "code2game",
+        "code23d",
+        "code2video"
+      ],
+      "categories": [
+        "3D",
+        "动画"
+      ],
+      "lang": "zh",
+      "prompt_bucket": "M",
+      "source_group": "社区单帖",
+      "track_count": 3,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "u28-opus-2103757767727255661": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "corpus_rejected_by_html_gate",
+      "primary": "动画",
+      "primary_track": "animation-video",
+      "tracks": [
+        "3d",
+        "animation-video",
+        "audio",
+        "game"
+      ],
+      "tech": [
+        "code2game",
+        "code23d",
+        "code2video",
+        "code2audio"
+      ],
+      "categories": [
+        "动画"
+      ],
+      "lang": "zh",
+      "prompt_bucket": "M",
+      "source_group": "社区单帖",
+      "track_count": 4,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "u28-opus-2104099543839343079": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "corpus_rejected_by_html_gate",
+      "primary": "动画",
+      "primary_track": "animation-video",
+      "tracks": [
+        "animation-video",
+        "audio",
+        "game",
+        "visualization"
+      ],
+      "tech": [
+        "code2game",
+        "code2video",
+        "code2viz",
+        "code2audio"
+      ],
+      "categories": [
+        "动画",
+        "可视化"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "社区单帖",
+      "track_count": 4,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "u28-opus-2103499977632997524": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "corpus_rejected_by_html_gate",
+      "primary": "动画",
+      "primary_track": "animation-video",
+      "tracks": [
+        "animation-video",
+        "frontend"
+      ],
+      "tech": [
+        "code2html",
+        "code2video"
+      ],
+      "categories": [
+        "动画"
+      ],
+      "lang": "en",
+      "prompt_bucket": "S",
+      "source_group": "社区单帖",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "u28-opus-2104401208958230764": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "corpus_rejected_by_html_gate",
+      "primary": "动画",
+      "primary_track": "animation-video",
+      "tracks": [
+        "animation-video",
+        "audio",
+        "frontend",
+        "game",
+        "svg-art"
+      ],
+      "tech": [
+        "code2game",
+        "code2html",
+        "code2svg",
+        "code2css",
+        "code2frontend",
+        "code2audio",
+        "code2video"
+      ],
+      "categories": [
+        "动画",
+        "前端"
+      ],
+      "lang": "en",
+      "prompt_bucket": "XL",
+      "source_group": "社区单帖",
+      "track_count": 5,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "u28-opus-2104400990049107994": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "corpus_rejected_by_html_gate",
+      "primary": "游戏",
+      "primary_track": "game",
+      "tracks": [
+        "3d",
+        "game"
+      ],
+      "tech": [
+        "code2game",
+        "code23d"
+      ],
+      "categories": [
+        "游戏",
+        "3D"
+      ],
+      "lang": "en",
+      "prompt_bucket": "S",
+      "source_group": "社区单帖",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "u28-opus-2104089865537331298": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "corpus_rejected_by_html_gate",
+      "primary": "动画",
+      "primary_track": "animation-video",
+      "tracks": [
+        "animation-video",
+        "audio"
+      ],
+      "tech": [
+        "code2audio",
+        "code2video"
+      ],
+      "categories": [
+        "动画"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "社区单帖",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "u29-opus-2103705625075331442": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "corpus_rejected_by_html_gate",
+      "primary": "动画",
+      "primary_track": "animation-video",
+      "tracks": [
+        "animation-video",
+        "audio"
+      ],
+      "tech": [
+        "code2video",
+        "code2audio"
+      ],
+      "categories": [
+        "动画"
+      ],
+      "lang": "zh",
+      "prompt_bucket": "S",
+      "source_group": "社区单帖",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "u29-opus-2103869518137483744": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "corpus_rejected_by_html_gate",
+      "primary": "动画",
+      "primary_track": "animation-video",
+      "tracks": [
+        "animation-video",
+        "audio"
+      ],
+      "tech": [
+        "code2video",
+        "code2audio"
+      ],
+      "categories": [
+        "动画"
+      ],
+      "lang": "zh",
+      "prompt_bucket": "S",
+      "source_group": "社区单帖",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "u29-opus-2104232360501997942": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "corpus_rejected_by_html_gate",
+      "primary": "前端",
+      "primary_track": "frontend",
+      "tracks": [
+        "composite",
+        "frontend"
+      ],
+      "tech": [
+        "code2html",
+        "code2css",
+        "code2frontend",
+        "code2deck"
+      ],
+      "categories": [
+        "前端",
+        "网页"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "社区单帖",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "u29-opus-gc-ui-5921e0916a9f": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "corpus_rejected_by_html_gate",
+      "primary": "动画",
+      "primary_track": "animation-video",
+      "tracks": [
+        "animation-video",
+        "audio",
+        "frontend",
+        "game",
+        "visualization"
+      ],
+      "tech": [
+        "code2game",
+        "code2video",
+        "code2html",
+        "code2css",
+        "code2canvas",
+        "code2frontend",
+        "code2viz",
+        "code2audio"
+      ],
+      "categories": [
+        "动画"
+      ],
+      "lang": "en",
+      "prompt_bucket": "L",
+      "source_group": "社区单帖",
+      "track_count": 5,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "u29-opus-gc-case-1247334c2204": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "corpus_rejected_by_html_gate",
+      "primary": "动画",
+      "primary_track": "animation-video",
+      "tracks": [
+        "animation-video",
+        "audio",
+        "frontend",
+        "game",
+        "svg-art",
+        "visualization"
+      ],
+      "tech": [
+        "code2game",
+        "code2html",
+        "code2svg",
+        "code2css",
+        "code2canvas",
+        "code2frontend",
+        "code2audio",
+        "code2video"
+      ],
+      "categories": [
+        "动画"
+      ],
+      "lang": "en",
+      "prompt_bucket": "XL",
+      "source_group": "社区单帖",
+      "track_count": 6,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "new-071381fcf933": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "corpus_rejected_by_html_gate",
+      "primary": "可视化",
+      "primary_track": "visualization",
+      "tracks": [
+        "3d",
+        "frontend",
+        "game",
+        "svg-art",
+        "visualization"
+      ],
+      "tech": [
+        "code2game",
+        "code23d",
+        "code2html",
+        "code2svg",
+        "code2css",
+        "code2canvas",
+        "code2frontend",
+        "code2viz"
+      ],
+      "categories": [
+        "可视化"
+      ],
+      "lang": "en",
+      "prompt_bucket": "XL",
+      "source_group": "社区单帖",
+      "track_count": 5,
+      "replay": true,
+      "meta_test": "n/a",
+      "assertion_count": 12
+    },
+    "new-c86b1871cdcc": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "corpus_rejected_by_html_gate",
+      "primary": "游戏",
+      "primary_track": "game",
+      "tracks": [
+        "3d",
+        "game"
+      ],
+      "tech": [
+        "code2game",
+        "code2world"
+      ],
+      "categories": [
+        "游戏"
+      ],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "社区单帖",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "md-1445-A-01": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "feishu_md_new",
+      "primary": "游戏",
+      "primary_track": "game",
+      "tracks": [
+        "3d",
+        "animation-video",
+        "game"
+      ],
+      "tech": [
+        "code2game",
+        "code23d",
+        "code2video"
+      ],
+      "categories": [],
+      "lang": "en",
+      "prompt_bucket": "S",
+      "source_group": "Claude Fable 5.2",
+      "track_count": 3,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "md-1445-A-02": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "feishu_md_new",
+      "primary": "3D",
+      "primary_track": "3d",
+      "tracks": [
+        "3d",
+        "animation-video",
+        "audio"
+      ],
+      "tech": [
+        "code23d",
+        "code2video",
+        "code2audio"
+      ],
+      "categories": [],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Claude Fable 5.2",
+      "track_count": 3,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "md-1445-A-03": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "feishu_md_new",
+      "primary": "游戏",
+      "primary_track": "game",
+      "tracks": [
+        "audio",
+        "game"
+      ],
+      "tech": [
+        "code2game",
+        "code2audio"
+      ],
+      "categories": [],
+      "lang": "en",
+      "prompt_bucket": "S",
+      "source_group": "Claude Fable 5.2",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "md-1445-A-04": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "feishu_md_new",
+      "primary": "游戏",
+      "primary_track": "game",
+      "tracks": [
+        "3d",
+        "animation-video",
+        "audio",
+        "game"
+      ],
+      "tech": [
+        "code2game",
+        "code23d",
+        "code2video",
+        "code2audio",
+        "code2world"
+      ],
+      "categories": [],
+      "lang": "en",
+      "prompt_bucket": "S",
+      "source_group": "Claude Fable 5.2（含 Felix Rieseberg 原帖）",
+      "track_count": 4,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "md-1465-A-13": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "feishu_md_new",
+      "primary": "游戏",
+      "primary_track": "game",
+      "tracks": [
+        "3d",
+        "animation-video",
+        "game"
+      ],
+      "tech": [
+        "code2game",
+        "code23d",
+        "code2video"
+      ],
+      "categories": [],
+      "lang": "en",
+      "prompt_bucket": "S",
+      "source_group": "Kimi K3.1 Pro",
+      "track_count": 3,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "md-1475-A-22": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "feishu_md_new",
+      "primary": "3D",
+      "primary_track": "3d",
+      "tracks": [
+        "3d",
+        "animation-video",
+        "audio"
+      ],
+      "tech": [
+        "code23d",
+        "code2video",
+        "code2audio"
+      ],
+      "categories": [],
+      "lang": "zh",
+      "prompt_bucket": "S",
+      "source_group": "GPT-6.1 Sol Max",
+      "track_count": 3,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
     }
   }
 }

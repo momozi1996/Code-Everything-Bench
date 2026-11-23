@@ -33,5 +33,10 @@
     "creator": "riba2534 @riba2534",
     "sourceUrl": "https://x.com/riba2534/status/2102584893909930258"
   },
-  "notes": "Prompt text is fetched from the pinned corpus and is not vendored upstream; it is materialised here for offline runs."
+  "notes": "Prompt text is fetched from the pinned corpus and is not vendored upstream; it is materialised here for offline runs.",
+  "set": "core",
+  "source_origin": "core_corpus",
+  "reference_kind": "runnable-html",
+  "has_reference_oracle": true,
+  "meta_test_applicable": true
 }

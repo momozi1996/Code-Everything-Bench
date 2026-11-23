@@ -38,5 +38,10 @@
     "creator": "@DavidSilgado_",
     "sourceUrl": "https://x.com/DavidSilgado_/status/2102605163257381124"
   },
-  "notes": "Prompt text is fetched from the pinned corpus and is not vendored upstream; it is materialised here for offline runs."
+  "notes": "Prompt text is fetched from the pinned corpus and is not vendored upstream; it is materialised here for offline runs.",
+  "set": "core",
+  "source_origin": "core_corpus",
+  "reference_kind": "runnable-html",
+  "has_reference_oracle": true,
+  "meta_test_applicable": true
 }

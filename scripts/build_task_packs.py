@@ -1,14 +1,18 @@
 #!/usr/bin/env python3
-"""Materialise the 111 task packs from the pinned corpus + manifest.
+"""Materialise the Core-111 task packs (or the Extended set) from pinned data.
 
-Single source of truth is `data/corpus/cases.jsonl` (fetched by
-`scripts/sync_corpus.py`) joined with `tasks/manifest.json`. This script only
-writes *derived* files; it never invents prompt text and never copies a
-third-party artifact into the repository.
+Default: `tasks/manifest.json` + `data/corpus/cases.jsonl`. With
+`--extended-only`: `tasks/manifest_extended.json` + `cases.jsonl` +
+`data/corpus/extension.jsonl`. The two modes never touch each other's packs,
+so the paper's reproducible Core-111 census is preserved.
 
-    python3 scripts/build_task_packs.py            # build/refresh all packs
-    python3 scripts/build_task_packs.py --dry-run  # report only
-    python3 scripts/build_task_packs.py --keep-assertions  # never touch assertions/
+This script only writes *derived* files; it never invents prompt text and never
+copies a third-party artifact into the repository.
+
+    python3 scripts/build_task_packs.py                   # Core-111 only
+    python3 scripts/build_task_packs.py --extended-only  # Extended set only
+    python3 scripts/build_task_packs.py --dry-run        # report only
+    python3 scripts/build_task_packs.py --keep-assertions
 
 Idempotence rules:
   * `prompt.md`, `task.json`, `budget.json`, `reference/SOURCE.md` are rewritten.
@@ -26,7 +30,9 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 MANIFEST = ROOT / "tasks" / "manifest.json"
+EXT_MANIFEST = ROOT / "tasks" / "manifest_extended.json"
 CORPUS = ROOT / "data" / "corpus" / "cases.jsonl"
+EXT_CORPUS = ROOT / "data" / "corpus" / "extension.jsonl"
 TASKS = ROOT / "tasks"
 
 # Conservative default. Contamination split is recomputed at run time against
@@ -61,15 +67,19 @@ MUTATIONS_TEMPLATE: dict[str, Any] = {
 }
 
 
-def load_jsonl(path: Path) -> dict[str, dict[str, Any]]:
+def load_jsonl(*paths: Path) -> dict[str, dict[str, Any]]:
+    """Merge corpus files; later files win only for ids not already present."""
     out: dict[str, dict[str, Any]] = {}
-    with path.open(encoding="utf-8") as fh:
-        for line in fh:
-            if not line.strip():
-                continue
-            r = json.loads(line)
-            if r.get("id"):
-                out[r["id"]] = r
+    for path in paths:
+        if not path.is_file():
+            continue
+        with path.open(encoding="utf-8") as fh:
+            for line in fh:
+                if not line.strip():
+                    continue
+                r = json.loads(line)
+                if r.get("id") and r["id"] not in out:
+                    out[r["id"]] = r
     return out
 
 
@@ -97,6 +107,29 @@ def so_md(rec: dict[str, Any], mrec: dict[str, Any]) -> str:
     license_ = rec.get("contentLicense") or "see licenseNote"
     license_note = (rec.get("licenseNote") or "").strip()
     demo = rec.get("demoUrl") or mrec.get("demo_url") or ""
+    is_runnable = demo.endswith(".html")
+    if is_runnable:
+        runnable_row = f"`{demo}`"
+        purpose = (
+            "It is **not ground truth for scoring**. It is an **oracle for testing the\n"
+            "assertions**: a known-good artifact must pass every applicable L0 and L1 rule.\n"
+            "If it fails, the assertion is wrong, not the artifact. This meta-test is a CI\n"
+            "gate (`.github/workflows/meta-test.yml`).\n\n"
+            "Using the reference implementation as a scoring target would bias the\n"
+            "benchmark toward the model that produced it, which is why M2 injects *defects*\n"
+            "into it instead of asking models to imitate it."
+        )
+    else:
+        extra = f" A demo link exists (`{demo}`) but is not a runnable `.html` artifact." if demo else ""
+        runnable_row = f"*(none pinned — post-only evidence)*{extra}"
+        purpose = (
+            "This task has **post-only evidence**: the source post and the verbatim prompt\n"
+            "are pinned, but no third-party runnable artifact is available. There is\n"
+            "therefore **no reference oracle** and the assertion meta-test does **not**\n"
+            "apply (`meta_test_applicable=false`). L0/L1 assertions are still evaluated\n"
+            "against each generated artifact, so generation, verification and scoring\n"
+            "remain complete; only the oracle-based CI check is unavailable."
+        )
     return f"""# Reference implementation — source, not a copy
 
 The reference artifact is **not vendored** in this repository. It is a
@@ -105,7 +138,7 @@ truth and bypass per-record attribution.
 
 | Asset | URL |
 |---|---|
-| Runnable artifact | `{demo}` |
+| Runnable artifact | {runnable_row} |
 | Source post | `{source_url}` |
 | Source corpus record | `momozi1996/Code-Everything` → `data/cases.jsonl` (`id={rec.get('id')}`) |
 
@@ -113,14 +146,7 @@ Attribution: **{creator}**.
 
 ## What the reference implementation is for
 
-It is **not ground truth for scoring**. It is an **oracle for testing the
-assertions**: a known-good artifact must pass every applicable L0 and L1 rule.
-If it fails, the assertion is wrong, not the artifact. This meta-test is a CI
-gate (`.github/workflows/meta-test.yml`).
-
-Using the reference implementation as a scoring target would bias the
-benchmark toward the model that produced it, which is why M2 injects *defects*
-into it instead of asking models to imitate it.
+{purpose}
 
 ## Licensing
 
@@ -133,9 +159,20 @@ fetches on demand only. See `data/README.md`.
 """
 
 
-def build(dry_run: bool, keep_assertions: bool, force_assertions: bool) -> int:
-    manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
-    cases = load_jsonl(CORPUS)
+def build(dry_run: bool, keep_assertions: bool, force_assertions: bool,
+          extended_only: bool = False) -> int:
+    if extended_only:
+        if not EXT_MANIFEST.is_file():
+            print(f"extended manifest missing: {EXT_MANIFEST}\n"
+                  "Run scripts/expand_tasks.py --apply first.", file=sys.stderr)
+            return 2
+        manifest = json.loads(EXT_MANIFEST.read_text(encoding="utf-8"))
+        cases = load_jsonl(CORPUS, EXT_CORPUS)
+        corpus_label = "data/corpus/extension.jsonl + cases.jsonl"
+    else:
+        manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
+        cases = load_jsonl(CORPUS)
+        corpus_label = "momozi1996/Code-Everything"
     created = refreshed = skipped = 0
     problems: list[str] = []
 
@@ -149,7 +186,10 @@ def build(dry_run: bool, keep_assertions: bool, force_assertions: bool) -> int:
         if not prompt.strip():
             problems.append(f"{tid}: empty prompt in corpus")
             continue
-        if not (rec.get("demoUrl") or "").endswith(".html"):
+        is_ext = mrec.get("set") == "extended"
+        # Core-111 keeps the strict .html gate. Extended tasks are admitted on
+        # verbatim-prompt evidence alone (post-only); see manifest_extended.json.
+        if not is_ext and not (rec.get("demoUrl") or "").endswith(".html"):
             problems.append(f"{tid}: demoUrl is not a runnable .html")
             continue
 
@@ -162,11 +202,17 @@ def build(dry_run: bool, keep_assertions: bool, force_assertions: bool) -> int:
                 refreshed += 1
             continue
 
-        tdir.mkdir(parents=True, exist_ok=True)
-        (tdir / "reference").mkdir(exist_ok=True)
+        # The sandbox shim raises EEXIST even with exist_ok=True on an existing
+        # directory, so guard every mkdir explicitly (idempotent re-runs).
+        if not tdir.is_dir():
+            tdir.mkdir(parents=True)
+        ref_dir = tdir / "reference"
+        if not ref_dir.is_dir():
+            ref_dir.mkdir(parents=True)
 
         (tdir / "prompt.md").write_text(
-            f"<!-- verbatim prompt from momozi1996/Code-Everything (id={tid}) -->\n\n"
+            f"<!-- verbatim prompt from {corpus_label} "
+            f"(id={tid}, set={'extended' if is_ext else 'core'}) -->\n\n"
             f"{prompt.strip()}\n", encoding="utf-8")
 
         dims = infer_four_dimensions(prompt, mrec.get("code2_tags") or [])
@@ -185,7 +231,7 @@ def build(dry_run: bool, keep_assertions: bool, force_assertions: bool) -> int:
             "prompt_chars": len(prompt.strip()),
             "prompt_chars_manifest": mrec.get("prompt_chars"),
             "published_at": mrec.get("published_at") or rec.get("publishedAt"),
-            "reference_url": rec.get("demoUrl"),
+            "reference_url": rec.get("demoUrl") if (rec.get("demoUrl") or "").endswith(".html") else "",
             "source_post_url": mrec.get("source_post_url") or rec.get("xUrl"),
             "contamination_split": None,
             "contamination_split_note": (
@@ -198,6 +244,25 @@ def build(dry_run: bool, keep_assertions: bool, force_assertions: bool) -> int:
             "notes": "Prompt text is fetched from the pinned corpus and is not vendored upstream; "
                      "it is materialised here for offline runs.",
         }
+        if is_ext:
+            task_json.update({
+                "set": "extended",
+                "source_origin": mrec.get("source_origin"),
+                "reference_kind": mrec.get("reference_kind"),
+                "has_reference_oracle": mrec.get("has_reference_oracle", False),
+                "meta_test_applicable": mrec.get("meta_test_applicable", False),
+                "admission_note": mrec.get("admission_note"),
+            })
+        else:
+            # Core-111: every task was admitted with a runnable .html reference,
+            # so a reference-as-oracle meta-test is meaningful by construction.
+            task_json.update({
+                "set": "core",
+                "source_origin": "core_corpus",
+                "reference_kind": "runnable-html",
+                "has_reference_oracle": True,
+                "meta_test_applicable": True,
+            })
         (tdir / "task.json").write_text(
             json.dumps(task_json, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
@@ -216,7 +281,8 @@ def build(dry_run: bool, keep_assertions: bool, force_assertions: bool) -> int:
         a_path = tdir / "assertions" / "task.json"
         if force_assertions or not a_path.exists():
             if force_assertions or not keep_assertions:
-                a_path.parent.mkdir(parents=True, exist_ok=True)
+                if not a_path.parent.is_dir():
+                    a_path.parent.mkdir(parents=True)
                 a_path.write_text(json.dumps({
                     "task_id": tid,
                     "tier": "L1",
@@ -248,11 +314,14 @@ def main() -> int:
                     help="never overwrite assertions/task.json")
     ap.add_argument("--force-assertions", action="store_true",
                     help="overwrite assertions/task.json even if present")
+    ap.add_argument("--extended-only", action="store_true",
+                    help="materialise only tasks/manifest_extended.json (never touch Core-111)")
     args = ap.parse_args()
     if not CORPUS.is_file():
         print(f"corpus missing: {CORPUS}\nRun scripts/sync_corpus.py first.", file=sys.stderr)
         return 2
-    return build(args.dry_run, args.keep_assertions, args.force_assertions)
+    return build(args.dry_run, args.keep_assertions, args.force_assertions,
+                 extended_only=args.extended_only)
 
 
 if __name__ == "__main__":

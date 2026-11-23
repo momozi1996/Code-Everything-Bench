@@ -6,8 +6,10 @@ Usage:
     python3 scripts/build_catalog.py
 
 Inputs (all local, pinned):
-    tasks/manifest.json              111 selected tasks (funnel 739 -> 305 -> 111)
+    tasks/manifest.json              Core-111 (funnel 739 -> 305 -> 111)
+    tasks/manifest_extended.json      Extended set (verbatim-prompt evidence only)
     data/corpus/cases.jsonl          pinned upstream corpus (739 records)
+    data/corpus/extension.jsonl      Extended prompt records
     tasks/<id>/task.json             materialised pack metadata
     tasks/<id>/assertions/task.json per-task L1 assertions
     tasks/<id>/assertions/meta_test.json  reference-as-oracle check
@@ -112,21 +114,43 @@ def source_group(rec: dict) -> str:
     return "社区单帖"
 
 
+SET_LABEL = {"core": "Core-111", "extended": "Extended"}
+
+
 def load() -> list[dict]:
+    """Load Core-111 plus the Extended set as one catalogue.
+
+    Core-111 (`tasks/manifest.json`) keeps its reproducible .html-gated census.
+    The Extended set (`tasks/manifest_extended.json`) is admitted on verbatim
+    prompt evidence only. Both are shown together, with a `set` dimension so
+    users can filter back to either tier at any time.
+    """
     manifest = json.loads((TASKS / "manifest.json").read_text(encoding="utf-8"))
     meta = {t["task_id"]: t for t in manifest["tasks"]}
-    corpus = {}
-    for line in (ROOT / "data" / "corpus" / "cases.jsonl").read_text(
-        encoding="utf-8"
-    ).splitlines():
-        if line.strip():
-            r = json.loads(line)
-            corpus[r["id"]] = r
+    ext_path = TASKS / "manifest_extended.json"
+    ext_meta: dict[str, dict] = {}
+    if ext_path.is_file():
+        em = json.loads(ext_path.read_text(encoding="utf-8"))
+        ext_meta = {t["task_id"]: t for t in em["tasks"]}
+    all_meta = {**meta, **ext_meta}
+    sets = {tid: "core" for tid in meta}
+    sets.update({tid: "extended" for tid in ext_meta})
+
+    corpus: dict[str, dict] = {}
+    for corpus_file in (ROOT / "data" / "corpus" / "cases.jsonl",
+                        ROOT / "data" / "corpus" / "extension.jsonl"):
+        if not corpus_file.is_file():
+            continue
+        for line in corpus_file.read_text(encoding="utf-8").splitlines():
+            if line.strip():
+                r = json.loads(line)
+                if r["id"] not in corpus:
+                    corpus[r["id"]] = r
 
     out = []
-    for tid in meta:
+    for tid in all_meta:
         rec = corpus[tid]
-        m = meta[tid]
+        m = all_meta[tid]
         pack_path = TASKS / tid / "task.json"
         pack = json.loads(pack_path.read_text(encoding="utf-8")) if pack_path.is_file() else {}
         apath = TASKS / tid / "assertions" / "task.json"
@@ -134,11 +158,17 @@ def load() -> list[dict]:
             if apath.is_file() else []
         mpath = TASKS / tid / "assertions" / "meta_test.json"
         mtest = json.loads(mpath.read_text(encoding="utf-8")) if mpath.is_file() else {}
+        if mtest.get("status") == "not_applicable_no_reference":
+            meta_state = "n/a"
+        else:
+            meta_state = "pass" if mtest.get("assertions_ok") else "review"
 
         prompt = rec.get("prompt") or ""
         tracks = list(m.get("domains") or [])
         tech = list(m.get("code2_tags") or [])
         primary = rec.get("primaryCategory") or "未分类"
+        if primary not in PRIMARY:          # corpus "效率工作" folds into 工具
+            primary = "工具"
         related = rec.get("relatedCaseIds") or []
 
         out.append({
@@ -146,6 +176,11 @@ def load() -> list[dict]:
             "n": rec.get("number"),        # upstream corpus number (not 1..111)
             "corpus_number": rec.get("number"),
             "id": tid,
+            "set": sets[tid],
+            "set_label": SET_LABEL[sets[tid]],
+            "reference_kind": m.get("reference_kind")
+                              or ("runnable-html" if sets[tid] == "core" else "post-only"),
+            "source_origin": m.get("source_origin") or "core_corpus",
             "title": m.get("title") or rec.get("title") or "",
             "original_title": rec.get("originalTitle") or "",
             "primary": primary,
@@ -162,7 +197,7 @@ def load() -> list[dict]:
             "model_label": rec.get("modelLabel") or "",
             "author": rec.get("author") or "",
             "published_at": rec.get("publishedAt") or "",
-            "date_display": rec.get("dateDisplay") or "",
+            "date_display": rec.get("dateDisplay") or (rec.get("publishedAt") or "")[:10],
             "source_group": source_group(rec),
             "collection_index": rec.get("collectionIndex"),
             "rank": (round(rec["rank"], 2) if isinstance(rec.get("rank"), (int, float)) else rec.get("rank")),
@@ -170,7 +205,7 @@ def load() -> list[dict]:
             "replay": bool(related),
             "assertion_count": len(assertions),
             "assertion_kinds": sorted({a.get("kind", "") for a in assertions}),
-            "meta_test": "pass" if mtest.get("assertions_ok") else "review",
+            "meta_test": meta_state,
             "l1_failed": [f["name"] for f in (mtest.get("l1_failed") or [])],
             "license": pack.get("license") or rec.get("contentLicense") or "",
             "demo_url": rec.get("demoUrl") or "",
@@ -198,6 +233,8 @@ def build_taxonomy(rows: list[dict]) -> dict:
         "description": (
             "CE-Bench 三轴分类标签体系。track 为多标签主赛道（与论文 §7 "
             "judge 维度对齐）；primary 为唯一主类；tech 为技术实现标签。"
+            "题库分两层：Core-111（有可运行 .html 参考产物，完整测量）与 "
+            "Extended（仅凭逐字 Prompt 证据纳入，无 reference oracle）。"
             "派生标签用于分层统计，不改变评分口径。POST/PRE 污染切分仍由"
             "运行时按各配置 training_cutoff 计算，不静态写入。"
         ),
@@ -220,12 +257,25 @@ def build_taxonomy(rows: list[dict]) -> dict:
             "prompt_bucket": BUCKET_LABEL,
             "prompt_status": STATUS_LABEL,
             "source_group": "Opus-100 合辑 / 社区单帖 / GPT-6 · Astra / Sol / Luna",
-            "meta_test": {"pass": "reference 通过全部断言", "review": "断言偏严或 reference 未通过，待人工复核"},
+            "set": SET_LABEL,
+            "reference_kind": {
+                "runnable-html": "有可运行 .html 第三方产物，可作 reference oracle",
+                "post-only": "仅逐字 Prompt + 原帖，无 runnable 产物，meta-test 不适用",
+            },
+            "meta_test": {
+                "pass": "reference 通过全部断言",
+                "review": "断言偏严或 reference 未通过，待人工复核",
+                "n/a": "post-only 证据，无 reference oracle；不纳入自检通过率分母",
+            },
             "replay": "relatedCaseIds 非空，可做 Replay 对照",
             "track_count": "该题命中的赛道数（复合度代理指标）",
         },
         "tasks": {
             r["id"]: {
+                "set": r["set"],
+                "set_label": r["set_label"],
+                "reference_kind": r["reference_kind"],
+                "source_origin": r["source_origin"],
                 "primary": r["primary"],
                 "primary_track": r["primary_track"],
                 "tracks": r["tracks"],
@@ -247,7 +297,8 @@ def build_taxonomy(rows: list[dict]) -> dict:
 # ------------------------------------------------------------------ outputs ---
 
 COLS = [
-    ("seq", "序号"), ("id", "任务 ID"), ("title", "题目"),
+    ("seq", "序号"), ("id", "任务 ID"), ("set", "集合"),
+    ("reference_kind", "参考类型"), ("title", "题目"),
     ("primary", "主类"), ("tracks", "赛道标签"), ("tech", "技术标签"),
     ("lang", "语言"), ("prompt_chars", "Prompt 字数"),
     ("prompt_bucket", "长度档"), ("prompt_status", "Prompt 状态"),
@@ -284,10 +335,15 @@ def write_csv(rows: list[dict]) -> None:
 
 def write_md(rows: list[dict], tax: dict) -> None:
     lines = [
-        "# CE-Bench 111 题总表与分类标签",
+        f"# CE-Bench {len(rows)} 题总表与分类标签",
         "",
-        f"> 生成时间：{tax['generated_at']} ｜ 任务数：**{len(rows)}** ｜ "
-        "数据源：`tasks/manifest.json` + pinned `data/corpus/cases.jsonl` + 111 个任务包",
+        f"> 生成时间：{tax['generated_at']} ｜ 任务数：**{len(rows)}**"
+        f"（Core-111 {sum(1 for r in rows if r['set']=='core')} + "
+        f"Extended {sum(1 for r in rows if r['set']=='extended')}）",
+        "> 数据源：`tasks/manifest.json` + `tasks/manifest_extended.json` + "
+        "pinned `data/corpus/cases.jsonl` / `extension.jsonl` + 任务包。",
+        "> Core-111 有可运行 `.html` 参考产物；Extended 仅有逐字 Prompt 与原帖，"
+        "无 reference oracle，参考自检标记为 `n/a`。",
         "",
         "## 一、分类标签体系（三轴）",
         "",
@@ -302,7 +358,7 @@ def write_md(rows: list[dict], tax: dict) -> None:
         lines.append(f"| `{k}` | {zh} | {n} | {n/len(rows)*100:.1f}% | {rub} | {desc} |")
     lines += [
         "",
-        "> 多标签，题数之和大于 111。`rubric_hint` 为建议映射，非强制评分口径。",
+        f"> 多标签，题数之和大于 {len(rows)}。`rubric_hint` 为建议映射，非强制评分口径。",
         "",
         "**轴 2 · 唯一主类 `primary`**（中文 8 类，来自上游语料）",
         "",
@@ -325,23 +381,25 @@ def write_md(rows: list[dict], tax: dict) -> None:
     lines += [
         "",
         "**派生标签**：语言（zh/en/mixed）、长度档（S/M/L/XL）、Prompt 状态、"
-        "证据级别（A/B）、来源组、Replay、L1 断言数、参考自检（pass/review）、"
-        "复合度（track_count）。POST/PRE 污染切分为运行时按 `training_cutoff` 计算，不静态写入。",
+        "证据级别（A/B）、来源组、集合（Core-111 / Extended）、参考类型、Replay、"
+        "L1 断言数、参考自检（pass/review/n-a）、复合度（track_count）。"
+        "POST/PRE 污染切分为运行时按 `training_cutoff` 计算，不静态写入。",
         "",
-        "## 二、111 题详细总表",
+        f"## 二、{len(rows)} 题详细总表",
         "",
-        "| 序号 | ID | 题目 | 主类 | 赛道 | 技术标签 | 语言 | 字数 | 档 | Prompt | 证据 | 来源组 | 模型 | 作者 | 日期 | Replay | 断言 | 自检 | 授权 | Demo | 原帖 |",
-        "|---:|---|---|---|---|---|---|---:|---|---|---|---|---|---|---|---|:---:|---:|---|---|---|---|",
+        "| 序号 | ID | 集合 | 题目 | 主类 | 赛道 | 技术标签 | 语言 | 字数 | 档 | Prompt | 证据 | 来源组 | 模型 | 作者 | 日期 | Replay | 断言 | 自检 | 授权 | Demo | 原帖 |",
+        "|---:|---|---|---|---|---|---|---|---:|---|---|---|---|---|---|---|---|:---:|---:|---|---|---|---|---|",
     ]
 
     def esc(s):
         return str(s).replace("|", "\\|").replace("\n", " ")
 
+    meta_label = {"pass": "PASS", "review": "REVIEW", "n/a": "N/A"}
     for r in rows:
         demo = f"[demo]({r['demo_url']})" if r["demo_url"] else ""
         post = f"[原帖]({r['source_post_url']})" if r["source_post_url"] else ""
         lines.append(
-            f"| {r['seq']} | `{r['id']}` | {esc(r['title'])} | {r['primary']} "
+            f"| {r['seq']} | `{r['id']}` | {r['set_label']} | {esc(r['title'])} | {r['primary']} "
             f"| {', '.join(f'`{x}`' for x in r['tracks'])} "
             f"| {', '.join(f'`{x}`' for x in r['tech'])} "
             f"| {LANG_LABEL[r['lang']]} | {r['prompt_chars']} | {r['prompt_bucket']} "
@@ -349,7 +407,7 @@ def write_md(rows: list[dict], tax: dict) -> None:
             f"| {r['evidence']} | {r['source_group']} | {esc(r['model_label'])} "
             f"| {esc(r['author'])} | {r['date_display']} "
             f"| {'Y' if r['replay'] else ''} | {r['assertion_count']} "
-            f"| {'PASS' if r['meta_test'] == 'pass' else 'REVIEW'} "
+            f"| {meta_label.get(r['meta_test'], 'REVIEW')} "
             f"| {r['license']} | {demo} | {post} |"
         )
     lines += [
@@ -361,7 +419,9 @@ def write_md(rows: list[dict], tax: dict) -> None:
         f"- Prompt 状态：{dict(Counter(STATUS_LABEL.get(r['prompt_status'], r['prompt_status']) for r in rows))}",
         f"- 证据级别：{dict(Counter(r['evidence'] for r in rows))}",
         f"- 来源组：{dict(Counter(r['source_group'] for r in rows))}",
-        f"- 参考自检：{dict(Counter(r['meta_test'] for r in rows))}",
+        f"- 集合：{dict(Counter(r['set_label'] for r in rows))}",
+        f"- 参考类型：{dict(Counter(r['reference_kind'] for r in rows))}",
+        f"- 参考自检：{dict(Counter(r['meta_test'] for r in rows))}（n/a 不计入通过率）",
         f"- 复合度（命中赛道数）：{dict(sorted(Counter(r['track_count'] for r in rows).items()))}",
         "",
         "> 机读版见 `tasks/taxonomy.json`；可筛选/可展开 Prompt 全文的交互版见 "
@@ -386,7 +446,7 @@ def write_html(rows: list[dict], tax: dict) -> None:
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>CE-Bench · 111 题总表与分类标签</title>
+<title>CE-Bench · __TOTAL__ 题总表与分类标签</title>
 <style>
 :root{
   --bg:#f7f8fa; --panel:#fff; --ink:#1c2026; --muted:#6b7280; --line:#e5e7eb;
@@ -450,10 +510,14 @@ td code.tid{display:inline-block;max-width:118px;overflow:hidden;text-overflow:e
 span.au{display:inline-block;max-width:112px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;vertical-align:bottom}
 tbody td{font-size:11.5px;padding:6px 8px;vertical-align:middle}
 table td:nth-child(1){width:42px;color:var(--muted)}
-table td:nth-child(3){min-width:132px;max-width:196px;white-space:normal;font-weight:600}
-table td:nth-child(5),table td:nth-child(6){white-space:nowrap}
-table td:nth-child(9),table td:nth-child(10),table td:nth-child(16){white-space:nowrap}
-table td:nth-child(9){min-width:86px}
+table td:nth-child(3){white-space:nowrap}
+table td:nth-child(4){min-width:132px;max-width:196px;white-space:normal;font-weight:600}
+table td:nth-child(6),table td:nth-child(7){white-space:nowrap}
+table td:nth-child(10),table td:nth-child(11),table td:nth-child(17){white-space:nowrap}
+table td:nth-child(10){min-width:86px}
+span.set{display:inline-block;border-radius:5px;padding:1px 7px;font-size:11px;font-weight:600;white-space:nowrap}
+span.set.core{background:var(--accent-soft);color:var(--accent)}
+span.set.extended{background:var(--ok-bg);color:var(--ok)}
 tbody td{padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
 tbody tr.main:hover{background:var(--accent-soft)}
 tbody tr.detail{display:none;background:var(--bg)}
@@ -486,9 +550,12 @@ tr.pick:hover td,tr.pick:hover th{background:var(--accent-soft)}
 </head>
 <body><div class="wrap">
 <header>
-  <h1>CE-Bench · 111 题总表与分类标签</h1>
-  <p>数据源：<code>tasks/manifest.json</code> ＋ pinned 语料 <code>data/corpus/cases.jsonl</code> ＋ 111 个任务包 ｜
+  <h1>CE-Bench · __TOTAL__ 题总表与分类标签</h1>
+  <p>数据源：<code>tasks/manifest.json</code>（Core-111）＋ <code>tasks/manifest_extended.json</code>（Extended）
+     ＋ pinned 语料 <code>data/corpus/cases.jsonl</code> / <code>extension.jsonl</code> ＋ __TOTAL__ 个任务包 ｜
      生成：<span id="stamp"></span> ｜ 三轴标签：赛道 / 主类 / 技术标签</p>
+  <p class="tiny">两层集合：<b>Core-111</b> 有可运行 <code>.html</code> 参考产物，可做 reference-oracle 自检；
+     <b>Extended</b> 仅凭逐字 Prompt 纳入，无 oracle，自检标记 <code>N/A</code>（不进入 PASS 率分母）。可下拉筛选。</p>
 </header>
 
 <div class="tabs">
@@ -504,10 +571,11 @@ tr.pick:hover td,tr.pick:hover th{background:var(--accent-soft)}
     <h2>筛选</h2>
     <div class="filters">
       <input type="search" id="q" placeholder="搜索 ID / 题目 / 原标题 / 作者 / Prompt 全文…"/>
+      <select id="fSet"><option value="">全部集合</option><option value="core">Core-111</option><option value="extended">Extended</option></select>
       <select id="fPrimary"><option value="">全部主类</option></select>
       <select id="fTech"><option value="">全部技术标签</option></select>
       <select id="fSource"><option value="">全部来源组</option></select>
-      <select id="fMeta"><option value="">全部自检状态</option><option value="pass">PASS</option><option value="review">REVIEW</option></select>
+      <select id="fMeta"><option value="">全部自检状态</option><option value="pass">PASS</option><option value="review">REVIEW</option><option value="n/a">N/A（无 oracle）</option></select>
       <select id="fLang"><option value="">全部语言</option></select>
       <select id="fBucket"><option value="">全部长度档</option></select>
     </div>
@@ -520,7 +588,7 @@ tr.pick:hover td,tr.pick:hover th{background:var(--accent-soft)}
   </div>
   <div class="tablebox"><table id="tbl">
     <thead><tr>
-      <th data-k="seq">序号</th><th data-k="id">任务 ID</th><th data-k="title">题目</th>
+      <th data-k="seq">序号</th><th data-k="id">任务 ID</th><th data-k="set">集合</th><th data-k="title">题目</th>
       <th data-k="primary">主类</th><th>赛道标签</th><th>技术标签</th>
       <th data-k="lang">语言</th><th data-k="prompt_chars">字数</th>
       <th data-k="prompt_status">Prompt</th><th data-k="evidence">证据</th>
@@ -547,14 +615,14 @@ tr.pick:hover td,tr.pick:hover th{background:var(--accent-soft)}
       <div><h3 style="font-size:13px">轴 2 · 唯一主类 primary</h3><div class="tablebox" style="max-height:none">
       <table class="matrix" id="axPrimary" data-kind="primary"><thead><tr><th>主类</th><th>题数</th><th>建议赛道</th><th>说明</th></tr></thead><tbody></tbody></table></div></div>
     </div>
-    <h3 style="font-size:13px;margin:18px 0 8px">轴 3 · 技术标签 tech（12 个）</h3>
+    <h3 style="font-size:13px;margin:18px 0 8px">轴 3 · 技术标签 tech</h3>
     <div class="tablebox" style="max-height:none"><table class="matrix" id="axTech" data-kind="tech">
       <thead><tr><th>标签</th><th>题数</th><th>占比</th><th>归属赛道</th><th>说明</th></tr></thead><tbody></tbody></table></div>
   </div>
   <div class="panel">
     <h2>交叉矩阵 · 主类 × 赛道</h2>
     <div class="tiny" style="margin-bottom:10px">单元格为该主类题目<b>命中该赛道的次数</b>；一题可命中多个赛道，故行合计 ≥ 该主类题数，
-      列合计即赛道题数（32 列合计 = 304 题次）。高亮（≥5）表示该主类的主要赛道归属。</div>
+      列合计即赛道题数。高亮（≥5）表示该主类的主要赛道归属。</div>
     <div class="matrix"><table class="matrix" id="cross"><thead></thead><tbody></tbody></table></div>
   </div>
   <div class="panel">
@@ -588,12 +656,12 @@ document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{
 
 /* ---------- cards ---------- */
 const stats=[
- ['任务总数', R.length, '漏斗 739 → 305 → 111'],
+ ['任务总数', R.length, 'Core '+R.filter(r=>r.set==='core').length+' + Extended '+R.filter(r=>r.set==='extended').length],
  ['主赛道', Object.keys(L.tracks).length, '多标签，题次合计 '+R.reduce((a,r)=>a+r.tracks.length,0)],
  ['技术标签', Object.keys(L.tech).length, 'code2Signals 抽取'],
  ['完整 Prompt', R.filter(r=>r.prompt_status==='full').length, pct(R.filter(r=>r.prompt_status==='full').length)+' 为 full'],
  ['Opus-100 合辑', R.filter(r=>r.source_group==='Opus-100 合辑').length, '需注意单源偏置'],
- ['参考自检 PASS', R.filter(r=>r.meta_test==='pass').length, pct(R.filter(r=>r.meta_test==='pass').length)],
+ ['参考自检 PASS', R.filter(r=>r.meta_test==='pass').length, (()=>{const d=R.filter(r=>r.meta_test!=='n/a').length;const k=R.filter(r=>r.meta_test==='pass').length;return d?(k/d*100).toFixed(1)+'% of '+d+' testable':'—'})()],
  ['L1 断言总数', R.reduce((a,r)=>a+r.assertion_count,0), '每题 8–12 条自动断言'],
  ['Replay 题', R.filter(r=>r.replay).length, '可做对照实验'],
 ];
@@ -628,6 +696,7 @@ function current(){
     if($('#fPrimary').value && r.primary!==$('#fPrimary').value) return false;
     if($('#fTech').value && !r.tech.includes($('#fTech').value)) return false;
     if($('#fSource').value && r.source_group!==$('#fSource').value) return false;
+    if($('#fSet').value && r.set!==$('#fSet').value) return false;
     if($('#fMeta').value && r.meta_test!==$('#fMeta').value) return false;
     if($('#fLang').value && r.lang!==$('#fLang').value) return false;
     if($('#fBucket').value && r.prompt_bucket!==$('#fBucket').value) return false;
@@ -652,22 +721,24 @@ function rowHtml(r,i){
     + (r.tracks.length>3?`<span class="mini" title="${esc(r.tracks.join(', '))}">+${r.tracks.length-2}</span>`:'');
   const shown=r.tech.slice(0,2).map(t=>`<span class="mini">${esc(t)}</span>`).join('')
     + (r.tech.length>4?`<span class="mini" title="${esc(r.tech.join(', '))}">+${r.tech.length-2}</span>`:'');
-  const meta=r.meta_test==='pass'?'<span class="ok">PASS</span>':'<span class="warn">REVIEW</span>';
+  const meta=r.meta_test==='pass'?'<span class="ok">PASS</span>':(r.meta_test==='n/a'?'<span class="tiny">N/A</span>':'<span class="warn">REVIEW</span>');
   const links=[r.demo_url?`<a href="${esc(r.demo_url)}" target="_blank" rel="noopener">demo</a>`:'',
                r.source_post_url?`<a href="${esc(r.source_post_url)}" target="_blank" rel="noopener">原帖</a>`:''].filter(Boolean).join(' · ');
   return `<tr class="main" data-i="${i}"><td>${r.seq}</td><td><code class="tid" title="${esc(r.id)}">${esc(r.id)}</code></td>
+   <td><span class="set ${r.set}">${esc(r.set_label)}</span></td>
    <td><b>${esc(r.title)}</b></td><td>${esc(r.primary)}</td><td>${tracks}</td><td>${shown}</td>
    <td>${L.lang[r.lang]}</td><td>${r.prompt_chars} <span class="tiny">${r.prompt_bucket}</span></td>
    <td>${L.status[r.prompt_status]||r.prompt_status}</td><td>${r.evidence}</td>
    <td>${esc(r.source_group)}</td><td><span class="au" title="${esc(r.author)}">${esc(r.author)}</span></td>
    <td>${esc(r.date_display)}</td><td>${r.replay?'Y':''}</td><td>${r.assertion_count}</td>
    <td>${meta}</td><td>${links}</td></tr>
-   <tr class="detail" data-d="${i}"><td colspan="17">
+   <tr class="detail" data-d="${i}"><td colspan="18">
      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
        <div><h3 style="margin:0 0 6px;font-size:13px">Prompt 全文 <span class="tiny">(${r.prompt_chars} 字符)</span></h3>
          <pre>${esc(r.prompt)}</pre></div>
        <div><h3 style="margin:0 0 6px;font-size:13px">元数据</h3>
          <dl class="dl">
+           <dt>集合 / 参考</dt><dd>${esc(r.set_label)} · ${esc(r.reference_kind)} · ${esc(r.source_origin)}</dd>
            <dt>语料编号</dt><dd>#${r.corpus_number}（rank ${r.rank==null?'—':r.rank}）</dd>
            <dt>原标题</dt><dd>${esc(r.original_title)}</dd>
            <dt>分类</dt><dd>${esc(r.primary)} · ${r.categories.map(esc).join(' / ')}</dd>
@@ -696,12 +767,12 @@ function render(){
     if(d)d.classList.toggle('open');
   };
 }
-['q','fPrimary','fTech','fSource','fMeta','fLang','fBucket'].forEach(id=>
+['q','fSet','fPrimary','fTech','fSource','fMeta','fLang','fBucket'].forEach(id=>
   $('#'+id).addEventListener('input',render));
 $('#reset').onclick=()=>{active.clear();document.querySelectorAll('.chip').forEach(c=>c.classList.remove('on'));
- ['q','fPrimary','fTech','fSource','fMeta','fLang','fBucket'].forEach(id=>$('#'+id).value='');render();};
+ ['q','fSet','fPrimary','fTech','fSource','fMeta','fLang','fBucket'].forEach(id=>$('#'+id).value='');render();};
 $('#csv').onclick=()=>{
-  const cols=[['seq','序号'],['id','任务 ID'],['title','题目'],['primary','主类'],['tracks','赛道'],
+  const cols=[['seq','序号'],['id','任务 ID'],['set','集合'],['reference_kind','参考类型'],['title','题目'],['primary','主类'],['tracks','赛道'],
    ['tech','技术标签'],['lang','语言'],['prompt_chars','字数'],['prompt_bucket','长度档'],
    ['prompt_status','Prompt 状态'],['evidence','证据'],['source_group','来源组'],
    ['model_label','来源模型'],['author','作者'],['date_display','日期'],['replay','Replay'],
@@ -745,10 +816,13 @@ $('#derived').innerHTML=[
  distBlock('证据级别 evidence',cnt('evidence')),
  distBlock('来源组 source_group',cnt('source_group'),null,'source_group'),
  distBlock('参考自检 meta_test',cnt('meta_test'),null,'meta_test'),
+ distBlock('集合 set',cnt('set'),k=>k==='core'?'Core-111':'Extended','set'),
+ distBlock('参考类型 reference_kind',cnt('reference_kind')),
  distBlock('复合度 track_count',cnt('track_count').sort((a,b)=>a[0]-b[0])),
  distBlock('来源模型 model_label',cnt('model_label'),null,'model_label'),
 ].join('');
 $('#dists').innerHTML=[
+ distBlock('集合 set',cnt('set'),k=>k==='core'?'Core-111':'Extended','set'),
  distBlock('主类 primary',cnt('primary'),null,'primary'),
  distBlock('来源组',cnt('source_group'),null,'source_group'),
  distBlock('技术标签（多标签）',Object.entries(cc).sort((a,b)=>b[1]-a[1]),null,'tech'),
@@ -762,9 +836,10 @@ $('#dists').innerHTML=[
 function gotoFilter(kind,val){
   document.querySelector('.tab[data-v="v1"]').click();
   active.clear(); document.querySelectorAll('#trackChips .chip').forEach(c=>c.classList.remove('on'));
-  ['fPrimary','fTech','fSource','fMeta','fLang','fBucket'].forEach(id=>$('#'+id).value='');
+  ['fSet','fPrimary','fTech','fSource','fMeta','fLang','fBucket'].forEach(id=>$('#'+id).value='');
   $('#q').value='';
   if(kind==='track'){active.add(val);const c=document.querySelector(`#trackChips .chip[data-t="${val}"]`);if(c)c.classList.add('on');}
+  else if(kind==='set') $('#fSet').value=val;
   else if(kind==='primary') $('#fPrimary').value=val;
   else if(kind==='tech') $('#fTech').value=val;
   else if(kind==='lang') $('#fLang').value=val;
@@ -788,7 +863,7 @@ $('#combo').innerHTML=[
 ].join('');
 </script></body></html>"""
     p = DOCS / "task-catalog.html"
-    p.write_text(tpl.replace("__PAYLOAD__", payload), encoding="utf-8")
+    p.write_text(tpl.replace("__TOTAL__", str(len(rows))).replace("__PAYLOAD__", payload), encoding="utf-8")
     print(f"  {p.relative_to(ROOT)}  ({p.stat().st_size/1024:.0f} KB, self-contained)")
 
 
@@ -796,7 +871,10 @@ def main() -> None:
     if not DOCS.is_dir():
         DOCS.mkdir()
     rows = load()
-    assert len(rows) == 111, f"expected 111 tasks, got {len(rows)}"
+    core_n = sum(1 for r in rows if r["set"] == "core")
+    ext_n = sum(1 for r in rows if r["set"] == "extended")
+    assert core_n == 111, f"expected 111 core tasks, got {core_n}"
+    assert len(rows) == core_n + ext_n
     tax = build_taxonomy(rows)
     (TASKS / "taxonomy.json").write_text(
         json.dumps(tax, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"

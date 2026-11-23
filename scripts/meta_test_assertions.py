@@ -46,8 +46,27 @@ def test_one(tid: str, keep_html: bool) -> dict[str, Any]:
     try:
         task = json.loads((tdir / "task.json").read_text(encoding="utf-8"))
         url = task.get("reference_url") or ""
-        if not url:
-            return {**out, "status": "no_reference_url"}
+        # An explicit evidence flag beats a URL guess: extended post-only tasks
+        # may carry a claude.ai / goodcase.ai demo link that is NOT a runnable
+        # artifact, and fetching it would hang or produce a false oracle.
+        if task.get("meta_test_applicable") is False or not url:
+            # Extended post-only tasks have no pinned runnable artifact, so the
+            # reference-oracle check is *not applicable* (not a failure). Record
+            # that explicitly instead of leaving meta_test.json absent, which
+            # downstream catalog code would otherwise render as "review".
+            res = {
+                **out,
+                "status": "not_applicable_no_reference",
+                "meta_test_applicable": False,
+                "note": ("post-only evidence: verbatim prompt and source post are pinned, "
+                         "but no runnable third-party artifact is available. L0/L1 "
+                         "assertions still evaluate each generated artifact normally."),
+            }
+            if not (tdir / "assertions").is_dir():
+                (tdir / "assertions").mkdir(parents=True)
+            (tdir / "assertions" / "meta_test.json").write_text(
+                json.dumps(res, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+            return res
         try:
             html = fetch(url)
         except Exception as exc:
@@ -81,10 +100,16 @@ def main() -> int:
     ap.add_argument("--task")
     ap.add_argument("--workers", type=int, default=8)
     ap.add_argument("--keep-html", action="store_true")
+    ap.add_argument("--extended-only", action="store_true",
+                    help="only process tasks/manifest_extended.json (no network fetches)")
     args = ap.parse_args()
 
-    ids = [args.task] if args.task else sorted(
-        d.name for d in TASKS.iterdir() if d.is_dir() and (d / "task.json").is_file())
+    if args.extended_only:
+        ext = json.loads((TASKS / "manifest_extended.json").read_text(encoding="utf-8"))
+        ids = [t["task_id"] for t in ext["tasks"]]
+    else:
+        ids = [args.task] if args.task else sorted(
+            d.name for d in TASKS.iterdir() if d.is_dir() and (d / "task.json").is_file())
 
     results: list[dict[str, Any]] = []
     with ThreadPoolExecutor(max_workers=args.workers) as ex:
@@ -101,14 +126,17 @@ def main() -> int:
     l0_bad = [r for r in results if r.get("l0_failed")]
     l1_bad = [r for r in results if r.get("l1_failed")]
     failed = [r for r in results if r.get("status") in ("fetch_failed", "error", "no_reference_url")]
+    na = [r for r in results if r.get("status") == "not_applicable_no_reference"]
 
     if not DOCS.exists():
         DOCS.mkdir(parents=True)
+    report_name = "assertion-meta-test-extended.md" if args.extended_only else "assertion-meta-test.md"
     lines = ["# Assertion meta-test — reference as oracle", "",
              f"tasks tested: {len(results)} · reference passes every assertion: {len(ok)}",
              f"tasks failing at least one L0 rule: {len(l0_bad)}",
              f"tasks failing at least one L1 assertion: {len(l1_bad)}",
-             f"tasks that could not be fetched/testing failed: {len(failed)}", "",
+             f"tasks that could not be fetched/testing failed: {len(failed)}",
+             f"tasks with no reference oracle (not applicable): {len(na)}", "",
              "> A reference that fails an assertion means the assertion is wrong, or the",
              "> shared L0 contract does not apply to that task. Fix before publishing scores.",
              ""]
@@ -129,9 +157,21 @@ def main() -> int:
         for r in failed[:200]:
             lines.append(f"| {r['task_id']} | {r.get('status')} {r.get('error','')} |")
         lines.append("")
-    (DOCS / "assertion-meta-test.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
-    print(f"\nreport -> {DOCS/'assertion-meta-test.md'}")
-    print(f"clean={len(ok)} l0_bad={len(l0_bad)} l1_bad={len(l1_bad)} unavailable={len(failed)}")
+    if na:
+        lines += ["## Not applicable (post-only evidence)", "",
+                  "These tasks pin a verbatim prompt and source post but no runnable",
+                  "third-party artifact, so the oracle-based meta-test cannot run.",
+                  "This is an evidence grade, not a failure: L0/L1 assertions still",
+                  "evaluate each generated artifact. Do not include them in a",
+                  "meta-test pass-rate denominator.", "",
+                  "| task |", "|---|"]
+        for r in na[:200]:
+            lines.append(f"| {r['task_id']} |")
+        lines.append("")
+    (DOCS / report_name).write_text("\n".join(lines) + "\n", encoding="utf-8")
+    print(f"\nreport -> {DOCS/report_name}")
+    print(f"clean={len(ok)} l0_bad={len(l0_bad)} l1_bad={len(l1_bad)} "
+          f"unavailable={len(failed)} not_applicable={len(na)}")
     return 0
 
 

@@ -7,11 +7,15 @@
     # 2. rehearse the whole pipeline offline (no network, no results written)
     python3 scripts/run_evaluation.py --dry-run
 
-    # 3. one real task (ids come from tasks/manifest.json)
+    # 3. one real task (prompt comes from the materialised task pack)
     python3 scripts/run_evaluation.py --task case-001 --limit 1
 
-    # 4. the full batch
+    # 4. the full 180-task batch (Core-111 + Extended-69)
     python3 scripts/run_evaluation.py
+
+    # 4b. a single tier (paper census / label-balanced extension)
+    python3 scripts/run_evaluation.py --task-set core
+    python3 scripts/run_evaluation.py --task-set extended
 
 Credentials come from environment variables named by `api_key_env` in
 config/models.json. Nothing here asks you to paste a key into a tracked file.
@@ -28,7 +32,7 @@ sys.path.insert(0, str(ROOT))
 
 from cebench.config import ROOT as PKG_ROOT  # noqa: E402
 from cebench.evaluation import (RunPlan, TaskSpec, load_prompts,  # noqa: E402
-                                run_evaluation)
+                                load_prompts_from_packs, run_evaluation)
 from cebench.providers import (ConfigError, MissingCredentialError,  # noqa: E402
                                load_model_configs, validate_configs)
 from cebench.runner import playwright_available  # noqa: E402
@@ -62,7 +66,11 @@ def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description="Run a CE-Bench evaluation")
     ap.add_argument("--models", default=str(ROOT / "config" / "models.json"))
     ap.add_argument("--run", default=str(ROOT / "config" / "run.json"))
-    ap.add_argument("--corpus", default=str(ROOT / "data" / "corpus" / "cases.jsonl"))
+    ap.add_argument("--corpus", default=None,
+                    help="legacy Core-111 loader from a raw corpus jsonl; "
+                         "default is the materialised 180-task pack bank")
+    ap.add_argument("--task-set", choices=["core", "extended", "all"], default=None,
+                    help="task bank tier (default: run.json task_set, else all)")
     ap.add_argument("--check", action="store_true", help="validate config only; no API call")
     ap.add_argument("--require-keys", action="store_true", help="exit non-zero if a key is missing")
     ap.add_argument("--dry-run", action="store_true", help="rehearse offline; never writes results")
@@ -145,21 +153,30 @@ def main(argv: list[str] | None = None) -> int:
         print("    PYTHONPATH=. python3 -m cebench.cli verify tests/fixtures/minimal_pass.html")
         return 0
 
+    bank = args.task_set or (
+        plan.task_set if plan.task_set in ("core", "extended", "all") else "all")
     try:
-        # Load the whole census; POST/PRE is computed per (task, configuration)
-        # inside run_evaluation, so no task is silently dropped at load time.
-        tasks = load_prompts(args.corpus, plan.task_ids or None,
-                             split="all", cutoff=None)
-    except FileNotFoundError as exc:
+        # POST/PRE is computed per (task, configuration) inside
+        # run_evaluation, so no task is silently dropped at load time.
+        if args.corpus:
+            print("  NOTE: --corpus uses the legacy Core-111 loader "
+                  "(Extended tasks are excluded).")
+            tasks = load_prompts(args.corpus, plan.task_ids or None,
+                                 split="all", cutoff=None)
+        else:
+            tasks = load_prompts_from_packs(bank, plan.task_ids or None,
+                                            split="all")
+    except (FileNotFoundError, ValueError) as exc:
         print(f"\n  {exc}")
         return 2
     if plan.task_ids:
         tasks = [t for t in tasks if t.task_id in plan.task_ids]
     if not tasks and plan.task_ids:
-        # The example task pack is not in the raw corpus under that slug;
-        # allow an explicit local prompt source in a later release.
-        print("  No matching corpus record for the requested task id.")
+        print("  No matching task pack for the requested task id.")
         return 2
+    print(f"  task bank            : {bank} "
+          f"(core {sum(1 for t in tasks if t.task_set == 'core')} + "
+          f"extended {sum(1 for t in tasks if t.task_set == 'extended')})")
     if plan.limit:
         tasks = tasks[:plan.limit]
     print(f"\n  tasks selected       : {len(tasks)}")

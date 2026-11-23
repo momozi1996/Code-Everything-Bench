@@ -1,0 +1,47 @@
+{
+  "task_id": "md-1445-A-01",
+  "source_case_id": "md-1445-A-01",
+  "title": "FPS 关卡 + 3D 打砖块，两条提示词直出",
+  "prompt_status": "full",
+  "evidence_level": "B",
+  "mode": "Replay",
+  "track": "CE-Frozen",
+  "code2_tags": [
+    "code2game",
+    "code23d",
+    "code2video"
+  ],
+  "domains": [
+    "3d",
+    "animation-video",
+    "game"
+  ],
+  "four_dimensions": {
+    "interaction_span": "single-turn",
+    "execution_span": "long",
+    "trigger": "user-initiated",
+    "deliverable": "objective-artifact"
+  },
+  "four_dimensions_note": "inferred from prompt/tags by scripts/build_task_packs.py; not a scored field",
+  "prompt_chars": 214,
+  "prompt_chars_manifest": 214,
+  "published_at": "2026-11-11T00:00:00+00:00",
+  "reference_url": "",
+  "source_post_url": "https://x.com/vista8/status/2120383046239285264",
+  "contamination_split": null,
+  "contamination_split_note": "computed at run time against each configuration's training_cutoff (cebench/evaluation.py); baseline cutoff for documentation: 2025-06-30",
+  "assertion_target": 9,
+  "full_measurement": true,
+  "license": "CC-BY-NC-4.0",
+  "attribution": {
+    "creator": "@vista8",
+    "sourceUrl": "https://x.com/vista8/status/2120383046239285264"
+  },
+  "notes": "Prompt text is fetched from the pinned corpus and is not vendored upstream; it is materialised here for offline runs.",
+  "set": "extended",
+  "source_origin": "feishu_md_new",
+  "reference_kind": "post-only",
+  "has_reference_oracle": false,
+  "meta_test_applicable": false,
+  "admission_note": "Admitted on verbatim-prompt evidence only. No third-party runnable artifact is pinned, so the reference-oracle meta-test does not apply; L0/L1 assertions still evaluate each generated artifact normally."
+}
