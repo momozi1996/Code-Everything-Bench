@@ -1,0 +1,46 @@
+{
+  "_comment": "Local run configuration (git-ignored). Keys are referenced by env-var NAME only; a literal key here is rejected by validation.",
+  "defaults": {
+    "protocol": "openai-compatible",
+    "timeout_seconds": 1800,
+    "max_retries": 2,
+    "temperature": 0.7,
+    "max_tokens": 32000,
+    "top_p": 1.0
+  },
+  "models": [
+    {
+      "id": "cfg-glm53flash",
+      "role": "target",
+      "protocol": "openai-compatible",
+      "base_url": "https://api.tokenplus.cn/v1",
+      "api_key_env": "TOKENPLUS_API_KEY",
+      "model": "z-ai/glm-5.3-flash",
+      "harness": "single-shot-l2",
+      "training_cutoff": "2025-12-31",
+      "params": {
+        "temperature": 0.7,
+        "max_tokens": 16000,
+        "top_p": 1.0,
+        "reasoning_effort": "minimal"
+      },
+      "timeout_seconds": 240
+    },
+    {
+      "id": "judge-deepseek-v41-flash",
+      "role": "judge",
+      "protocol": "openai-compatible",
+      "base_url": "https://api.tokenplus.cn/v1",
+      "api_key_env": "TOKENPLUS_API_KEY",
+      "model": "deepseek/deepseek-v4.1-flash-1017",
+      "harness": "judge-closed-questions",
+      "training_cutoff": "2025-12-31",
+      "params": {
+        "temperature": 0.0,
+        "max_tokens": 8192,
+        "top_p": 1.0,
+        "reasoning_effort": "low"
+      }
+    }
+  ]
+}

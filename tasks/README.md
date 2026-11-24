@@ -1,10 +1,23 @@
 # Task bank
 
-`manifest.json` contains **measured metadata for all 111 tasks**, regenerated
-from the pinned corpus by `scripts/build_manifest.py`. It stores no prompt text
-and no third-party artifact source — only fields, links and provenance.
+Two manifests, two tiers, **180 materialised task packs** total:
 
-## Census, not a sample
+| Manifest | Tasks | What it is |
+|---|---:|---|
+| `manifest.json` | 111 | **Core-111** — the paper's full-measurement census; every task has a pinned runnable `.html` reference |
+| `manifest_extended.json` | 69 | **Extended-69** — label-balanced tier admitted on verbatim-prompt evidence alone (`has_reference_oracle=false`, meta-test `N/A`) |
+
+`manifest.json` is regenerated from the pinned corpus by
+`scripts/build_manifest.py`; `manifest_extended.json` by
+`scripts/expand_tasks.py` (fed by `scripts/import_feishu_md.py`). Manifests
+store no prompt text and no third-party artifact source — only fields, links
+and provenance. Three-axis labels for all 180 live in `taxonomy.json`; the
+browsable catalogue is `docs/task-catalog.{html,md,csv}`.
+
+Rationale, selection method and before/after label distributions:
+[`docs/expansion-report.md`](../docs/expansion-report.md).
+
+## Core-111 census, not a sample
 
 ```
 739  main-library records
@@ -15,9 +28,24 @@ and no third-party artifact source — only fields, links and provenance.
 
 The library has 120 `.html` demos in total; nine of them belong to records
 without prompt text and were already removed at the first gate. **120 is not a
-funnel stage.**
+funnel stage.** The 194 records rejected at S2 are the candidate pool for
+Extended-69 (63 admitted) — see below.
 
-## Evidence grades
+All paper numbers (funnel, Table 9, §7 stratified reporting, figure captions)
+refer to **Core-111 only** and are unchanged by the extension.
+
+## Extended-69 (label balancing)
+
+Records with a verbatim prompt but no pinned `.html` reference — 63 from the
+S2-rejected corpus plus 6 newly parsed from a Feishu prompt export. Selection
+minimised the squared coefficient of variation of the `primary` / `track` /
+`tech` label counts. Extended tasks carry `has_reference_oracle=false` and
+`meta_test_applicable=false`: they **do not** enter the meta-test pass-rate
+denominator and have no M2/M3 reference-mutation path. L0/L1 assertions still
+run against every generated artifact, so M1 generate → assert → score is
+complete for all 180. Runs must report the two tiers separately.
+
+## Evidence grades (Core-111)
 
 | `promptStatus` | Count | Track |
 |---|---:|---|
@@ -26,29 +54,45 @@ funnel stage.**
 | `repository` | 4 | Replay, annotated |
 | `context` | 2 | Replay, annotated |
 
-`promptStatus` is an **evidence grade**, not an admission gate. All 111 tasks
-are built; only the strict-D1 subset supports the verbatim-prompt claim.
+`promptStatus` is an **evidence grade**, not an admission gate. All 111 Core
+tasks are built; only the strict-D1 subset supports the verbatim-prompt claim.
 
 ## Task pack format
 
-Each full task package (one is shipped as an example) contains:
+All **180** packages are materialised (`scripts/build_task_packs.py`, with
+`--extended-only` for the 69):
 
 ```
 <task-id>/
-├── task.json                  id, provenance, domains, evidence level
-├── prompt.md                  provenance + requirement structure (text fetched, not vendored)
+├── task.json                  id, provenance, domains, evidence level,
+│                              set / reference_kind / has_reference_oracle
+├── prompt.md                  verbatim prompt, materialised from the pinned
+│                              corpus or the Feishu export (text, not vendored artifacts)
 ├── budget.json                30min / 15 rounds / token cap / network deny
 ├── assertions/task.json       L1 assertions compiled from the interaction model
+├── assertions/meta_test.json  reference-as-oracle result, or `not_applicable`
 ├── mutations.json             D1–D6 injection configs + difficulty ladder
-└── reference/SOURCE.md        URL of the runnable reference (not copied)
+└── reference/SOURCE.md        URL of the runnable reference, or post-only evidence
 ```
 
 The shared **L0** suite lives in `cebench/assertions/global_suite.py` and is not
 duplicated into task packages.
 
+## Running the two tiers
+
+The runner loads prompts from the packs themselves
+(`cebench/evaluation.py::load_prompts_from_packs`), so all 180 are reachable:
+
+```
+python3 scripts/run_evaluation.py                  # all (default) = 180
+python3 scripts/run_evaluation.py --task-set core      # paper census = 111
+python3 scripts/run_evaluation.py --task-set extended  # 69
+python3 scripts/run_evaluation.py --task <task-id>     # one task, either tier
+```
+
 ## Source skew (disclosed, not hidden)
 
-100 of 111 tasks point to one collection
+100 of the 111 Core tasks point to one collection
 (`miaai-lab.github.io/Claude-Opus-5.5-100-HTML-Files`). Results must be
 stratified by source collection; `modelLabel` records the model the original
 poster used and is **not** a cross-model score. See paper §9.3.

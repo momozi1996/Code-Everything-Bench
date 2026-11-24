@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Moonlit Meadow — a quiet garden</title>
+<style>
+  html,body{margin:0;padding:0;height:100%;overflow:hidden;background:#1a2233;}
+  #c{display:block;width:100vw;height:100vh;touch-action:none;cursor:crosshair;}
+  #ui{
+    position:fixed;top:14px;left:14px;right:14px;display:flex;justify-content:space-between;
+    align-items:flex-start;pointer-events:none;font-family:Georgia,'Times New Roman',serif;
+    color:#f3ead8;text-shadow:0 1px 6px rgba(20,30,50,.6);
+  }
+  #title{font-size:clamp(18px,3vw,26px);letter-spacing:.06em;font-style:italic;opacity:.9}
+  #sub{font-size:clamp(11px,1.6vw,14px);opacity:.65;margin-top:4px;font-style:italic}
+  #stats{font-size:clamp(13px,2vw,17px);text-align:right;line-height:1.6}
+  #hint{
+    position:fixed;bottom:18px;left:0;right:0;text-align:center;pointer-events:none;
+    font-family:Georgia,serif;font-style:italic;color:#f3ead8;opacity:.55;
+    font-size:clamp(12px,1.8vw,15px);text-shadow:0 1px 6px rgba(20,30,50,.6);
+    transition:opacity 1.5s;
+  }
+  #mute{
+    position:fixed;bottom:14px;right:14px;pointer-events:auto;
+    background:rgba(243,234,216,.12);border:1px solid rgba(243,234,216,.3);
+    color:#f3ead8;font-family:Georgia,serif;font-style:italic;font-size:13px;
+    padding:6px 14px;border-radius:20px;cursor:pointer;backdrop-filter:blur(4px);
+  }
+  #mute:hover{background:rgba(243,234,216,.22)}
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div id="ui">
+  <div>
+    <div id="title">Moonlit Meadow</div>
+    <div id="sub">a quiet garden, grown at your own pace</div>
+  </div>
+  <div id="stats"><span id="dew">💧 0</span> dew &nbsp;·&nbsp; <span id="bloom">✿ 0</span> blooms</div>
+</div>
+<div id="hint">tap anywhere to plant a seed · catch falling dewdrops</div>
+<button id="mute">sound: on</button>
+<script>
+"use strict";
+const cv = document.getElementById('c'), ctx = cv.getContext('2d');
+let W=0,H=0,DPR=1;
+function resize(){
+  DPR = Math.min(window.devicePixelRatio||1, 2);
+  W = window.innerWidth; H = window.innerHeight;
+  cv.width = W*DPR; cv.height = H*DPR;
+  ctx.setTransform(DPR,0,0,DPR,0,0);
+  buildSky();
+}
+window.addEventListener('resize', resize);
+
+/* ---------- palette & sky (pre-rendered for painterly texture) ---------- */
+let sky=null;
+function buildSky(){
+  sky = document.createElement('canvas');
+  sky.width = W; sky.height = H;
+  const s = sky.getContext('2d');
+  const g = s.createLinearGradient(0,0,0,H);
+  g.addColorStop(0,'#232c47'); g.addColorStop(.45,'#2e3a58');
+  g.addColorStop(.72,'#3d4a66'); g.addColorStop(1,'#4a5a6e');
+  s.fillStyle = g; s.fillRect(0,0,W,H);
+  // soft painted blotches
+  for(let i=0;i<90;i++){
+    const x=Math.random()*W, y=Math.random()*H, r=40+Math.random()*160;
+    const rg=s.createRadialGradient(x,y,0,x,y,r);
+    const hue = 215+Math.random()*40;
+    rg.addColorStop(0,`hsla(${hue},30%,${45+Math.random()*20}%,${0.05+Math.random()*0.06})`);
+    rg.addColorStop(1,'hsla(220,30%,50%,0)');
+    s.fillStyle=rg; s.beginPath(); s.arc(x,y,r,0,7); s.fill();
+  }
+  // stars
+  for(let i=0;i<130;i++){
+    const x=Math.random()*W, y=Math.random()*H*0.6, r=Math.random()*1.4+0.3;
+    s.fillStyle=`rgba(245,240,220,${0.15+Math.random()*0.5})`;
+    s.beginPath(); s.arc(x,y,r,0,7); s.fill();
+  }
+  // moon with halo
+  const mx=W*0.78, my=H*0.18, mr=Math.min(W,H)*0.055;
+  const halo=s.createRadialGradient(mx,my,mr*0.5,mx,my,mr*6);
+  halo.addColorStop(0,'rgba(250,244,220,0.28)');
+  halo.addColorStop(1,'rgba(250,244,220,0)');
+  s.fillStyle=halo; s.beginPath(); s.arc(mx,my,mr*6,0,7); s.fill();
+  const mg=s.createRadialGradient(mx-mr*0.3,my-mr*0.3,mr*0.1,mx,my,mr);
+  mg.addColorStop(0,'#fdf8e8'); mg.addColorStop(1,'#e8dfc0');
+  s.fillStyle=mg; s.beginPath(); s.arc(mx,my,mr,0,7); s.fill();
+  // distant hills
+  hill(s, H*0.72, '#2c3a50', 0.6);
+  hill(s, H*0.80, '#26344a', 0.9);
+}
+function hill(s, base, col, amp){
+  s.fillStyle=col; s.beginPath(); s.moveTo(0,H);
+  let y=base;
+  for(let x=0;x<=W;x+=8){
+    y = base + Math.sin(x*0.004+base)*30*amp + Math.sin(x*0.011+base*2)*14*amp;
+    s.lineTo(x,y);
+  }
+  s.lineTo(W,H); s.closePath(); s.fill();
+}
+
+/* ---------- state ---------- */
+const flowers=[], dews=[], fireflies=[], grassBlades=[], petals=[];
+let dewCount=0, bloomCount=0, planted=0;
+const FLOWER_COST = 0;            // plain seeds are free
+const GOLD_COST = 3;              // golden lotus costs dew
+
+for(let i=0;i<70;i++) grassBlades.push({
+  x:Math.random()*W, h:8+Math.random()*22, sw:Math.random()*2-1,
+  ph:Math.random()*7, hue:95+Math.random()*40, a:0.25+Math.random()*0.3
+});
+for(let i=0;i<14;i++) fireflies.push({
+  x:Math.random()*W, y:H*0.5+Math.random()*H*0.4,
+  vx:(Math.random()*2-1)*0.3, vy:(Math.random()*2-1)*0.2,
+  ph:Math.random()*7, r:1.5+Math.random()*1.5
+});
+
+/* ---------- sound (tiny, gentle) ---------- */
+let AC=null, muted=false;
+function chime(freq, vol, dur){
+  if(muted) return;
+  try{
+    if(!AC) AC = new (window.AudioContext||window.webkitAudioContext)();
+    if(AC.state==='suspended') AC.resume();
+    const t=AC.currentTime;
+    const o=AC.createOscillator(), g=AC.createGain();
+    o.type='sine'; o.frequency.value=freq;
+    g.gain.setValueAtTime(0,t);
+    g.gain.linearRampToValueAtTime(vol,t+0.02);
+    g.gain.exponentialRampToValueAtTime(0.0001,t+dur);
+    o.connect(g).connect(AC.destination);
+    o.start(t); o.stop(t+dur);
+  }catch(e){}
+}
+const PENTA=[261.6,293.7,329.6,392,440,523.3,587.3];
+document.getElementById('mute').addEventListener('click',e=>{
+  muted=!muted; e.target.textContent = muted?'sound: off':'sound: on';
+});
+
+/* ---------- planting ---------- */
+function plant(x,y,golden){
+  if(golden && dewCount<GOLD_COST) return;
+  if(golden) dewCount-=GOLD_COST;
+  const f = {
+    x,y, golden:!!golden, born:performance.now(),
+    size:0, maxS: golden? 34+Math.random()*10 : 20+Math.random()*14,
+    petals: golden? 8 : 5+Math.floor(Math.random()*3),
+    hue: golden? 45 : 300+Math.random()*70,
+    sway: Math.random()*7, bloomDur: 2600+Math.random()*1800,
+    seedPulse:0
+  };
+  flowers.push(f);
+  planted++;
+  if(planted===1) document.getElementById('hint').style.opacity=0;
+  chime(PENTA[Math.floor(Math.random()*PENTA.length)]*(golden?2:1), 0.06, 1.4);
+  if(golden) chime(784,0.05,2);
+  updateStats();
+}
+function updateStats(){
+  document.getElementById('dew').textContent='💧 '+dewCount;
+  document.getElementById('bloom').textContent='✿ '+bloomCount;
+}
+function spawnDew(){
+  dews.push({x:30+Math.random()*(W-60), y:-20, vy:0.35+Math.random()*0.3,
+             r:11+Math.random()*5, ph:Math.random()*7, caught:false});
+}
+setInterval(()=>{ if(dews.length<4 && Math.random()<0.55) spawnDew(); }, 3200);
+spawnDew();
+
+let lastTap=0;
+function onTap(e){
+  e.preventDefault();
+  const now=performance.now();
+  if(now-lastTap<180) return;   // ignore double-fire
+  lastTap=now;
+  const x=(e.touches?e.touches[0].clientX:e.clientX);
+  const y=(e.touches?e.touches[0].clientY:e.clientY);
+  // catch dew first
+  for(const d of dews){
+    if(!d.caught && Math.hypot(d.x-x,d.y-y)<d.r+26){
+      d.caught=true; dewCount++; updateStats();
+      chime(659,0.07,0.8); chime(880,0.05,1.2);
+      for(let i=0;i<8;i++) petals.push({x:d.x,y:d.y,vx:(Math.random()*2-1)*1.5,
+        vy:-Math.random()*1.5-0.5,life:1,hue:190});
+      return;
+    }
+  }
+  const groundY = groundAt(x);
+  if(y > H*0.35 && y < groundY+40){
+    const golden = dewCount>=GOLD_COST && Math.random()<0.5;
+    plant(x, Math.min(y,groundY), golden);
+  }
+}
+cv.addEventListener('pointerdown', onTap);
+function groundAt(x){
+  return H*0.80 + Math.sin(x*0.004+H*0.80)*30*0.9 + Math.sin(x*0.011+H*1.6)*14*0.9;
+}
+
+/* ---------- drawing helpers ---------- */
+function drawFlower(f, t){
+  const age=t-f.born;
+  const gr=Math.min(1, age/f.bloomDur);
+  const ease=1-Math.pow(1-gr,3);
+  const s=f.maxS*ease;
+  if(s<0.5) return;
+  const sway=Math.sin(t*0.0012+f.sway)*3*ease;
+  const x=f.x+sway, y=f.y;
+  ctx.save();
+  // stem
+  ctx.strokeStyle = f.golden?'rgba(120,140,80,0.9)':'rgba(90,130,95,0.85)';
+  ctx.lineWidth=2.2; ctx.lineCap='round';
+  ctx.beginPath();
+  ctx.moveTo(f.x, f.y+6);
+  ctx.quadraticCurveTo(f.x+sway*0.5, f.y-s*0.7, x, y-s*0.9);
+  ctx.stroke();
+  // leaves
+  ctx.fillStyle='rgba(95,135,100,0.55)';
+  ctx.beginPath(); ctx.ellipse(f.x-6*ease, f.y-s*0.35, 8*ease,3*ease,-0.6,0,7); ctx.fill();
+  ctx.beginPath(); ctx.ellipse(f.x+6*ease, f.y-s*0.5, 7*ease,3*ease,0.6,0,7); ctx.fill();
+  // petals
+  const cy=y-s*0.9;
+  const glow = f.golden?0.35:0.18;
+  const rg=ctx.createRadialGradient(x,cy,0,x,cy,s*1.8);
+  rg.addColorStop(0,`hsla(${f.hue},70%,75%,${glow*ease})`);
+  rg.addColorStop(1,`hsla(${f.hue},70%,70%,0)`);
+  ctx.fillStyle=rg; ctx.beginPath(); ctx.arc(x,cy,s*1.8,0,7); ctx.fill();
+  const n=f.petals, open=ease;
+  for(let i=0;i<n;i++){
+    const a=(i/n)*Math.PI*2 + t*0.00008 + f.sway;
+    const px=x+Math.cos(a)*s*0.55*open, py=cy+Math.sin(a)*s*0.55*open;
+    ctx.save(); ctx.translate(px,py); ctx.rotate(a);
+    ctx.fillStyle = f.golden
+      ? `hsla(45,85%,${62+8*Math.sin(t*0.002+i)}%,${0.9*open})`
+      : `hsla(${f.hue},65%,${70+6*Math.sin(t*0.0015+i)}%,${0.85*open})`;
+    ctx.beginPath(); ctx.ellipse(0,0,s*0.42*open,s*0.2*open,0,0,7); ctx.fill();
+    ctx.restore();
+  }
+  // heart
+  ctx.fillStyle = f.golden?'#fff3c8':'#fdf3d8';
+  ctx.beginPath(); ctx.arc(x,cy,s*0.2*open+1.5,0,7); ctx.fill();
+  ctx.restore();
+}
+
+/* ---------- main loop ---------- */
+let last=performance.now();
+function frame(t){
+  const dt=Math.min(50,t-last); last=t;
+  ctx.clearRect(0,0,W,H);
+  ctx.drawImage(sky,0,0,W,H);
+
+  // ground wash
+  const gg=ctx.createLinearGradient(0,H*0.7,0,H);
+  gg.addColorStop(0,'rgba(52,70,62,0.0)');
+  gg.addColorStop(0.4,'rgba(48,68,58,0.75)');
+  gg.addColorStop(1,'rgba(38,56,50,0.95)');
+  ctx.fillStyle=gg; ctx.fillRect(0,H*0.7,W,H*0.3);
+
+  // grass
+  for(const g of grassBlades){
+    const gy=groundAt(g.x);
+    const bend=Math.sin(t*0.001+g.ph)*3+g.sw;
+    ctx.strokeStyle=`hsla(${g.hue},35%,45%,${g.a})`;
+    ctx.lineWidth=1.6; ctx.beginPath();
+    ctx.moveTo(g.x,gy+4);
+    ctx.quadraticCurveTo(g.x+bend,gy-g.h*0.6,g.x+bend*2,gy-g.h);
+    ctx.stroke();
+  }
+
+  // flowers (back to front)
+  flowers.sort((a,b)=>a.y-b.y);
+  for(const f of flowers) drawFlower(f,t);
+
+  // dewdrops
+  for(let i=dews.length-1;i>=0;i--){
+    const d=dews[i];
+    if(d.caught){ dews.splice(i,1); continue; }
+    d.y+=d.vy*dt*0.06; d.ph+=dt*0.003;
+    if(d.y>H+30){ dews.splice(i,1); continue; }
+    const px=d.x+Math.sin(d.ph)*6;
+    const rg=ctx.createRadialGradient(px,d.y,0,px,d.y,d.r*2.4);
+    rg.addColorStop(0,'rgba(180,225,255,0.5)');
+    rg.addColorStop(1,'rgba(180,225,255,0)');
+    ctx.fillStyle=rg; ctx.beginPath(); ctx.arc(px,d.y,d.r*2.4,0,7); ctx.fill();
+    const dg=ctx.createRadialGradient(px-3,d.y-3,1,px,d.y,d.r);
+    dg.addColorStop(0,'#eaf7ff'); dg.addColorStop(1,'#8fc6e8');
+    ctx.fillStyle=dg; ctx.beginPath(); ctx.arc(px,d.y,d.r,0,7); ctx.fill();
+    ctx.fillStyle='rgba(255,255,255,0.85)';
+    ctx.beginPath(); ctx.arc(px-d.r*0.3,d.y-d.r*0.35,d.r*0.25,0,7); ctx.fill();
+  }
+
+  // fireflies
+  for(const fl of fireflies){
+    fl.x+=fl.vx*dt*0.06; fl.y+=fl.vy*dt*0.06;
+    if(fl.x<0||fl.x>W) fl.vx*=-1;
+    if(fl.y<H*0.4||fl.y>H*0.97) fl.vy*=-1;
+    fl.ph+=dt*0.004;
+    const a=0.25+0.55*Math.max(0,Math.sin(fl.ph));
+    const rg=ctx.createRadialGradient(fl.x,fl.y,0,fl.x,fl.y,fl.r*6);
+    rg.addColorStop(0,`rgba(255,240,160,${a*0.9})`);
+    rg.addColorStop(1,'rgba(255,240,160,0)');
+    ctx.fillStyle=rg; ctx.beginPath(); ctx.arc(fl.x,fl.y,fl.r*6,0,7); ctx.fill();
+    ctx.fillStyle=`rgba(255,248,200,${a})`;
+    ctx.beginPath(); ctx.arc(fl.x,fl.y,fl.r,0,7); ctx.fill();
+  }
+
+  // drifting petals / sparkles
+  for(let i=petals.length-1;i>=0;i--){
+    const p=petals[i];
+    p.x+=p.vx*dt*0.06; p.y+=p.vy*dt*0.06; p.vy+=0.01*dt*0.06; p.life-=dt*0.0012;
+    if(p.life<=0){ petals.splice(i,1); continue; }
+    ctx.fillStyle=`hsla(${p.hue},70%,80%,${p.life*0.7})`;
+    ctx.beginPath(); ctx.arc(p.x,p.y,2.2,0,7); ctx.fill();
+  }
+
+  // vignette
+  const vg=ctx.createRadialGradient(W/2,H/2,Math.min(W,H)*0.35,W/2,H/2,Math.max(W,H)*0.75);
+  vg.addColorStop(0,'rgba(0,0,0,0)'); vg.addColorStop(1,'rgba(15,20,35,0.45)');
+  ctx.fillStyle=vg; ctx.fillRect(0,0,W,H);
+
+  // gentle bloom counting
+  bloomCount = flowers.length;
+  requestAnimationFrame(frame);
+}
+resize();
+updateStats();
+setTimeout(()=>{ if(planted===0) document.getElementById('hint').style.opacity=0.25; }, 12000);
+requestAnimationFrame(frame);
+</script>
+</body>
+</html>

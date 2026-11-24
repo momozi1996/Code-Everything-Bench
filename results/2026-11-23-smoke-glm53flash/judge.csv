@@ -1,0 +1,3 @@
+run_id,artifact,task_id,assertion_id,assertion_name,judge_model,verdict,reason,judge_tokens
+2026-11-23-smoke-glm53flash,cfg-glm53flash__case-085__r1.html,case-085,L1-11,visual composition review,deepseek/deepseek-v4.1-flash-1017,FAIL,insufficient evidence — source truncated; no interaction recording shown,2405
+2026-11-23-smoke-glm53flash,cfg-glm53flash__case-085__r1.html,case-085,L1-12,tool labels legible at 360px,deepseek/deepseek-v4.1-flash-1017,FAIL,No visible text labels; buttons are icon-only with title/aria attributes only.,213

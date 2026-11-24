@@ -1,0 +1,23 @@
+{
+  "run_id": "2026-11-24-e2e-180-smoke",
+  "track": "CE-Frozen",
+  "mode": "Replay",
+  "split": "all",
+  "task_set": "all",
+  "task_ids": [
+    "case-001",
+    "md-1445-A-03"
+  ],
+  "repetitions": 1,
+  "seed": 2027,
+  "budget": {
+    "wall_clock_minutes": 45,
+    "max_repair_rounds": 15,
+    "max_output_tokens": 96000,
+    "network": "deny"
+  },
+  "measurements": [
+    "M1"
+  ],
+  "limit": 2
+}

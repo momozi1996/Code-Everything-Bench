@@ -1,0 +1,3 @@
+run_id,artifact,task_id,assertion_id,assertion_name,judge_model,verdict,reason,judge_tokens
+2026-11-24-e2e-180-smoke,cfg-glm53flash__case-001__r1.html,case-001,L1-09,visual fidelity review,deepseek/deepseek-v4.1-flash-1017,FAIL,insufficient evidence: no rendered screenshots provided; source is truncated,117
+2026-11-24-e2e-180-smoke,cfg-glm53flash__md-1445-A-03__r1.html,md-1445-A-03,L1-09,visual fidelity review,deepseek/deepseek-v4.1-flash-1017,FAIL,insufficient evidence,447

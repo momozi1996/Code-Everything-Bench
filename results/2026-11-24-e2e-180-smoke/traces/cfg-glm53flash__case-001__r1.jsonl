@@ -1,0 +1,4 @@
+{"step": 0, "action": "file_read", "target": "case-001", "observation": "prompt of 2237 chars loaded"}
+{"step": 1, "action": "browser_open", "target": "request", "observation": "configuration=cfg-glm53flash repetition=1 seed=8222"}
+{"step": 2, "action": "console_read", "target": "response", "observation": "{\"content_length\": 33387, \"usage\": {\"prompt_tokens\": 1700, \"completion_tokens\": 16000, \"total_tokens\": 17700, \"completion_tokens_details\": {\"reasoning_tokens\": 3953}}, \"model\": \"z-ai/glm-5.3-flash\", \"response_id\": \"01a20ba3-9e1c-7645-a63f-6f617c888506\", \"dry_run\": false}"}
+{"step": 3, "action": "assertion_run", "target": "deliverable", "observation": "artifact written: cfg-glm53flash__case-001__r1.html"}
