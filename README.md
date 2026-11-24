@@ -13,6 +13,8 @@
 
 **Live leaderboard (placeholder):** <https://momozi1996.github.io/Code-Everything-Bench/> — deployed from `leaderboard/` by `.github/workflows/pages.yml`. It only ever reads `leaderboard/data/results.csv` and `tasks.json`; no score is hard-coded in the page.
 
+**Live task catalogue (180 tasks):** <https://momozi1996.github.io/Code-Everything-Bench/catalog/> — the self-contained interactive table, taxonomy tab and stratification stats, browsable online. In the same `/catalog/` folder: [`task-catalog.csv`](https://momozi1996.github.io/Code-Everything-Bench/catalog/task-catalog.csv) (180 × 24, downloadable), [`task-catalog.md`](https://momozi1996.github.io/Code-Everything-Bench/catalog/task-catalog.md) and [`taxonomy.json`](https://momozi1996.github.io/Code-Everything-Bench/catalog/taxonomy.json). Source files stay in `docs/` and `tasks/`; the workflow assembles them into `site/catalog/` on each push, so there is only one copy to maintain.
+
 ---
 
 ## What this is

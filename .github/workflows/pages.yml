@@ -1,6 +1,9 @@
-name: Deploy leaderboard
+name: Deploy site (leaderboard + task catalog)
 
-# Publishes the static leaderboard from leaderboard/ to GitHub Pages.
+# Publishes the static leaderboard at the site root and the 180-task
+# catalogue under /catalog/. Source files live in their own folders in the
+# repo (leaderboard/, docs/, tasks/) and are assembled into a staging
+# directory here, so there is exactly one copy of each file to maintain.
 # Enable once in Settings -> Pages -> Source: "GitHub Actions".
 # All served result cells are PLACEHOLDER until scripts/reproduce_main_table.py
 # generates real rows from committed traces.
@@ -10,6 +13,9 @@ on:
     branches: [main]
     paths:
       - 'leaderboard/**'
+      - 'docs/task-catalog.*'
+      - 'tasks/taxonomy.json'
+      - 'scripts/build_catalog.py'
       - '.github/workflows/pages.yml'
   workflow_dispatch:
 
@@ -31,8 +37,24 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/configure-pages@v5
+      - name: Assemble site
+        run: |
+          set -euo pipefail
+          mkdir -p site/catalog
+          # Site root stays the leaderboard (unchanged URLs).
+          cp -R leaderboard/. site/
+          # /catalog/ — self-contained interactive table + downloadable data.
+          cp docs/task-catalog.html  site/catalog/index.html
+          cp docs/task-catalog.html  site/catalog/task-catalog.html
+          cp docs/task-catalog.csv   site/catalog/task-catalog.csv
+          cp docs/task-catalog.md    site/catalog/task-catalog.md
+          cp tasks/taxonomy.json     site/catalog/taxonomy.json
+          # Bypass Jekyll so .json/.csv and the underscore-free files serve as-is.
+          touch site/.nojekyll
+          echo "Assembled site:"
+          find site -maxdepth 2 -type f | sort
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: leaderboard
+          path: site
       - id: deployment
         uses: actions/deploy-pages@v4
