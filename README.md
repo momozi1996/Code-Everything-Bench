@@ -105,6 +105,10 @@ python3 scripts/run_evaluation.py --task-set core       # paper census: 111 task
 python3 scripts/run_evaluation.py --task-set extended   # label-balanced 69 tasks
 ```
 
+All targets share one output cap (**512,000 tokens**, 3600 s per request) so
+no task is truncated by the harness; see `config/README.md`. The judge is
+fixed and never varies by regime.
+
 Supported protocols: **`openai-compatible`** (OpenAI, vLLM/SGLang, Ollama shim,
 most gateways) and **`anthropic`**. Each entry names an environment variable via
 `api_key_env`; a literal key anywhere in the config is rejected by validation.
@@ -116,6 +120,28 @@ Outputs land in `results/<run-id>/` (artifacts, traces, delivery notes,
 `outcomes.csv`, and a **sanitised** `config.json` with no key values). Then
 `python3 scripts/reproduce_main_table.py --run <run-id>` regenerates the
 leaderboard. Full field reference: [`config/README.md`](config/README.md).
+
+### Results board (per-task evidence)
+
+```bash
+python3 scripts/rescore_artifacts.py               # -> results/*/rescored.csv + docs/rescore-report.md
+python3 scripts/build_results_dashboard.py          # -> docs/results-dashboard.html
+```
+
+One self-contained HTML page (no CDN, no server) that lists every task with its
+outcome, model, harness pin, score breakdown, L0/L1 counts, judge verdicts,
+delivery self-report, trace and — for tasks that ran — a **live preview of the
+generated artifact** inlined in a sandboxed iframe. Tasks without a run are
+listed as `未跑` so coverage is explicit rather than implied. The page is also
+published under `/results/` by the Pages workflow.
+
+`rescore_artifacts.py` re-runs assertions against **already committed
+artifacts** with the current scoring code. It never calls a model API and
+**never modifies `outcomes.csv`** — it writes a labelled `rescored.csv`
+companion and an old-vs-new report. The board picks those up automatically and
+marks the rows `↻ v0.6 重评分`. Scoring semantics and the assertion review are
+documented in [`docs/assertion-review.md`](docs/assertion-review.md) and
+[`docs/benchmark-spec.md`](docs/benchmark-spec.md) §6.
 
 ## Repository layout
 

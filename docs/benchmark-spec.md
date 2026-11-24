@@ -122,11 +122,30 @@ Kendall τb = −0.02).
 Score = 1[Gate] × min(0.35·F + 0.30·R + 0.20·V + 0.15·E, Cap)
 ```
 
+**Generation contract (v0.7).** Every target runs with a single output cap of
+**512,000 tokens** (`TARGET_MAX_TOKENS`), a 3600 s per-request timeout and a
+120-minute wall-clock budget; the judge stays at 8192 tokens. The cap is a
+ceiling, not a target, and is identical across models and across both harness
+regimes so it cannot explain a leaderboard difference. Cost is deliberately
+not optimised for the full 180-task batch. `finish_reason=length` and
+`completion_tokens >= cap` are recorded as `truncated`.
+
 - **Gate** (multiplicative veto, five rules): does not load · core interaction
   unusable · unverified claims · forbidden shortcut (e.g. static image posing
   as 3D) · no deliverable file. Any hit → `Pass@Budget = 0`.
+  - *does not load* (v0.6) requires a **complete** document: a missing closing
+    `</html>`/`</body>` or a browser that could not open the file. A token-
+    truncated artifact is attributed here (`truncated` flag), not to the
+    interaction rule.
+  - *core interaction unusable* (v0.6) is driven **only** by runtime
+    interaction probes (`interaction_delta`, `selector_exists`): zero PASS
+    among them is a veto. Static `source_contains` / `source_absent` failures
+    are requirement signals; they reduce F/R/E through the rubric but must not
+    zero the run. See `docs/assertion-review.md`.
 - **Cap** applies only to *passing* runs; it compresses quality among delivered
-  artifacts and never contaminates the binary main metric.
+  artifacts and never contaminates the binary main metric. A *partly* failing
+  runtime probe set (some PASS, some FAIL) sets `core_interaction_degraded`
+  and caps quality at 0.5; an all-failing set is a Gate veto instead.
 - **Deterministic mass** = F + R + E = **0.80** by construction, enforced by
   `cebench.scoring.assert_verifiability_budget()` in CI. This turns the
   "verifiability budget" from a policy into a property of the formula.

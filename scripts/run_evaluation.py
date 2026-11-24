@@ -50,6 +50,8 @@ def print_config_report(configs, report, *, strict: bool) -> int:
         print(f"    - {c.id:28s} {c.protocol:18s} {c.model:24s} "
               f"key({c.api_key_env})={key}")
     print(f"  browser (pinned)     : {'available' if playwright_available() else 'NOT installed — runtime assertions will SKIP'}")
+    for w in report.get("warnings") or []:
+        print(f"  [warn] {w['id']}: params.max_tokens={w['value']} — {w['hint']}")
     if report["missing_keys"]:
         print("\n  Environment variables not set:")
         for m in report["missing_keys"]:

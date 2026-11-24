@@ -40,9 +40,9 @@ TASKS = ROOT / "tasks"
 BASELINE_CUTOFF = "2025-06-30"
 
 BUDGET_TEMPLATE: dict[str, Any] = {
-    "wall_clock_minutes": 30,
+    "wall_clock_minutes": 120,
     "max_repair_rounds": 15,
-    "max_output_tokens": 60000,
+    "max_output_tokens": 512000,
     "network": "deny",
     "browser": "chromium-pinned",
     "viewport_desktop": "1440x900",

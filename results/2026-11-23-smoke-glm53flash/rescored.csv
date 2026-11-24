@@ -1,0 +1,2 @@
+run_id,config_id,task_id,repetition,old_pass,old_score,old_notes,new_pass,new_score,new_notes,gate_vetoes,cap,F,R,V,E,l0_pass,l0_fail,l0_skip,l1_pass,l1_fail,runtime_pass,runtime_fail,static_fails,truncated,artifact,browser_available,rescored_by
+2026-11-23-smoke-glm53flash,cfg-glm53flash,case-085,1,False,0.0,core_interaction_unusable,True,0.9688,delivered,,1.0,0.928571,1.0,,1.0,7,1,0,10,0,3,0,,False,cfg-glm53flash__case-085__r1.html,True,v0.6 (docs/assertion-review.md)

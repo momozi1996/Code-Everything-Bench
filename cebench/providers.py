@@ -28,6 +28,8 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
 
+from .config import (TARGET_MAX_TOKENS, TARGET_MAX_TOKENS_RECOMMENDED_MIN)
+
 PROTOCOLS = ("openai-compatible", "anthropic")
 
 # Reject anything that looks like a pasted credential anywhere in the config.
@@ -61,6 +63,8 @@ class ModelConfig:
     model: str
     harness: str
     training_cutoff: str
+    harness_impl: str = ""      # concrete implementation, e.g. "mini-swe-agent"; defaults to harness
+    harness_version: str = ""   # exact pinned release; a floating tag is not reproducible
     params: dict[str, Any] = field(default_factory=dict)
     extra_headers: dict[str, str] = field(default_factory=dict)
     timeout_seconds: int = 120
@@ -87,9 +91,11 @@ class ModelConfig:
             id=d["id"], protocol=d["protocol"], base_url=d["base_url"].rstrip("/"),
             api_key_env=d["api_key_env"], model=d["model"], harness=d["harness"],
             training_cutoff=d["training_cutoff"], params=params,
+            harness_impl=str(d.get("harness_impl") or d["harness"]),
+            harness_version=str(d.get("harness_version") or ""),
             extra_headers=d.get("extra_headers") or {},
-            timeout_seconds=int(defaults.get("timeout_seconds", 120)),
-            max_retries=int(defaults.get("max_retries", 3)),
+            timeout_seconds=int(d.get("timeout_seconds", defaults.get("timeout_seconds", 120))),
+            max_retries=int(d.get("max_retries", defaults.get("max_retries", 3))),
             role=str(d.get("role") or defaults.get("role") or "target"),
         )
 
@@ -98,6 +104,8 @@ class ModelConfig:
         return {"id": self.id, "protocol": self.protocol, "base_url": self.base_url,
                 "api_key_env": self.api_key_env, "model": self.model,
                 "harness": self.harness, "training_cutoff": self.training_cutoff,
+                "harness_impl": self.harness_impl or self.harness,
+                "harness_version": self.harness_version,
                 "params": self.params, "timeout_seconds": self.timeout_seconds,
                 "role": self.role}
 
@@ -137,14 +145,24 @@ def resolve_api_key(cfg: ModelConfig) -> str:
 
 def validate_configs(configs: list[ModelConfig], *, require_keys: bool = True) -> dict[str, Any]:
     """Check configuration without calling any API."""
-    report: dict[str, Any] = {"checked": len(configs), "missing_keys": [], "ready": True,
-                              "configs": [c.sanitized() for c in configs]}
+    report: dict[str, Any] = {"checked": len(configs), "missing_keys": [], "warnings": [],
+                              "ready": True, "configs": [c.sanitized() for c in configs]}
     for c in configs:
         try:
             resolve_api_key(c)
         except MissingCredentialError as exc:
             report["missing_keys"].append({"id": c.id, "env_var": c.api_key_env,
                                            "hint": str(exc)})
+        # A target capped below the recommended floor will truncate a 12–35 KB
+        # single-file artifact mid-script. Warn, but do not block: local models
+        # may genuinely have smaller context windows.
+        if c.role == "target":
+            cap = int(c.params.get("max_tokens", TARGET_MAX_TOKENS) or 0)
+            if cap < TARGET_MAX_TOKENS_RECOMMENDED_MIN:
+                report["warnings"].append(
+                    {"id": c.id, "field": "params.max_tokens", "value": cap,
+                     "hint": f"below the {TARGET_MAX_TOKENS_RECOMMENDED_MIN} token floor; "
+                             f"truncated artifacts are likely. Use {TARGET_MAX_TOKENS}."})
     if require_keys and report["missing_keys"]:
         report["ready"] = False
     return report
@@ -157,11 +175,12 @@ class LLMResponse:
     model: str = ""
     response_id: str = ""
     dry_run: bool = False
+    finish_reason: str = ""   # "length" means the output was cut off by the cap
 
     def to_dict(self) -> dict[str, Any]:
         return {"content_length": len(self.content), "usage": self.usage,
                 "model": self.model, "response_id": self.response_id,
-                "dry_run": self.dry_run}
+                "dry_run": self.dry_run, "finish_reason": self.finish_reason}
 
 
 class BaseClient:
@@ -205,7 +224,7 @@ class OpenAICompatibleClient(BaseClient):
         params = {**self.cfg.params, **overrides}
         body = {"model": self.cfg.model, "messages": messages,
                 "temperature": params.get("temperature", 0.7),
-                "max_tokens": params.get("max_tokens", 16000),
+                "max_tokens": params.get("max_tokens", TARGET_MAX_TOKENS),
                 "top_p": params.get("top_p", 1.0)}
         if params.get("seed") is not None:
             body["seed"] = params["seed"]
@@ -220,12 +239,14 @@ class OpenAICompatibleClient(BaseClient):
         headers = {"Authorization": f"Bearer {self._api_key}", **self.cfg.extra_headers}
         data = self._post(f"{self.cfg.base_url}/chat/completions", headers, body)
         try:
-            content = data["choices"][0]["message"]["content"] or ""
+            choice = data["choices"][0]
+            content = choice["message"]["content"] or ""
         except (KeyError, IndexError, TypeError) as exc:
             raise ProviderError(f"{self.cfg.id}: unexpected response shape") from exc
         return LLMResponse(content=content, usage=data.get("usage", {}),
                            model=data.get("model", self.cfg.model),
-                           response_id=data.get("id", ""))
+                           response_id=data.get("id", ""),
+                           finish_reason=str(choice.get("finish_reason") or ""))
 
 
 class AnthropicClient(BaseClient):
@@ -237,7 +258,7 @@ class AnthropicClient(BaseClient):
         conv = [{"role": m["role"], "content": m["content"]}
                 for m in messages if m["role"] != "system"]
         body: dict[str, Any] = {"model": self.cfg.model, "messages": conv,
-                                "max_tokens": params.get("max_tokens", 16000),
+                                "max_tokens": params.get("max_tokens", TARGET_MAX_TOKENS),
                                 "temperature": params.get("temperature", 0.7)}
         if system:
             body["system"] = system
@@ -250,7 +271,8 @@ class AnthropicClient(BaseClient):
             raise ProviderError(f"{self.cfg.id}: unexpected response shape") from exc
         return LLMResponse(content=content, usage=data.get("usage", {}),
                            model=data.get("model", self.cfg.model),
-                           response_id=data.get("id", ""))
+                           response_id=data.get("id", ""),
+                           finish_reason=str(data.get("stop_reason") or ""))
 
 
 class DryRunClient(BaseClient):

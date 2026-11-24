@@ -7,6 +7,15 @@ compensated by high visual quality.
 Historical note: the earlier draft put "core interaction unusable" only under a
 quality Cap, which was self-contradictory — Pass@Budget would have stayed 1.
 It is a Gate rule now (design-decisions #19).
+
+v0.6 correction: #19 was implemented too broadly. The observation fed into
+rule [1] was "every automatic L1 assertion passed", which turned each static
+source regex into a zero-score switch: a strict pattern missing an equivalent
+implementation erased an otherwise working artifact. Rule [1] is now driven
+only by runtime interaction probes; a partly failing probe set becomes a Cap
+while an all-failing set remains a veto. Rule [0] additionally requires a
+complete document, so token truncation is attributed to the deliverable.
+See docs/assertion-review.md.
 """
 
 from __future__ import annotations

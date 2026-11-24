@@ -1,0 +1,67 @@
+{
+  "_comment": "Dual-regime harness template (docs/harness-matrix.md v0.5). Regime 1: every model under single-shot-l2 (bare). Regime 2: every model under one pinned mini-swe-agent release. Never merge the two regimes into one ranking. Keys are referenced by env-var NAME only; a literal key here is rejected by validation. Target max_tokens pinned to 512000 (aligned with budget.max_output_tokens); judge stays at 8192.",
+  "defaults": {
+    "protocol": "openai-compatible",
+    "timeout_seconds": 3600,
+    "max_retries": 2,
+    "temperature": 0.7,
+    "max_tokens": 512000,
+    "top_p": 1.0
+  },
+  "models": [
+    {
+      "id": "cfg-h0-bare",
+      "role": "target",
+      "protocol": "openai-compatible",
+      "base_url": "https://REPLACE_ME/v1",
+      "api_key_env": "TOKENPLUS_API_KEY",
+      "model": "z-ai/glm-5.3-flash",
+      "harness": "single-shot-l2",
+      "harness_impl": "single-shot-l2",
+      "harness_version": "PIN_ME",
+      "training_cutoff": "2025-12-31",
+      "params": {
+        "temperature": 0.7,
+        "max_tokens": 512000,
+        "top_p": 1.0,
+        "reasoning_effort": "minimal"
+      },
+      "timeout_seconds": 3600
+    },
+    {
+      "id": "cfg-h1-mini-swe-agent",
+      "role": "target",
+      "protocol": "openai-compatible",
+      "base_url": "https://REPLACE_ME/v1",
+      "api_key_env": "TOKENPLUS_API_KEY",
+      "model": "z-ai/glm-5.3-flash",
+      "harness": "agent-harness-l2",
+      "harness_impl": "mini-swe-agent",
+      "harness_version": "PIN_ME",
+      "training_cutoff": "2025-12-31",
+      "params": {
+        "temperature": 0.7,
+        "max_tokens": 512000,
+        "top_p": 1.0,
+        "reasoning_effort": "minimal"
+      },
+      "timeout_seconds": 3600
+    },
+    {
+      "id": "judge-deepseek-v41-flash",
+      "role": "judge",
+      "protocol": "openai-compatible",
+      "base_url": "https://REPLACE_ME/v1",
+      "api_key_env": "TOKENPLUS_API_KEY",
+      "model": "deepseek/deepseek-v4.1-flash-1017",
+      "harness": "judge-closed-questions",
+      "training_cutoff": "2025-12-31",
+      "params": {
+        "temperature": 0.0,
+        "max_tokens": 8192,
+        "top_p": 1.0,
+        "reasoning_effort": "low"
+      }
+    }
+  ]
+}

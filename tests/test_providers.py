@@ -100,6 +100,51 @@ class TestConfigSafety(unittest.TestCase):
         self.assertFalse(report["ready"])
 
 
+class TestHarnessPinning(unittest.TestCase):
+    """The dual-regime policy needs every run to record its exact harness."""
+
+    HARNESS_EXAMPLE = ROOT / "config" / "models.harness.example.json"
+
+    def test_harness_impl_defaults_to_harness(self):
+        cfg = write_tmp({"models": [minimal()]})
+        c = load_model_configs(cfg)[0]
+        self.assertEqual(c.harness_impl, c.harness)
+        self.assertEqual(c.harness_version, "")
+        cfg.unlink()
+
+    def test_harness_impl_and_version_are_parsed_and_sanitised(self):
+        cfgs = load_model_configs(self.HARNESS_EXAMPLE)
+        by_id = {c.id: c for c in cfgs}
+        agent = by_id["cfg-h1-mini-swe-agent"]
+        self.assertEqual(agent.harness, "agent-harness-l2")
+        self.assertEqual(agent.harness_impl, "mini-swe-agent")
+        self.assertEqual(agent.harness_version, "PIN_ME")
+        s = agent.sanitized()
+        self.assertEqual(s["harness_impl"], "mini-swe-agent")
+        self.assertEqual(s["harness_version"], "PIN_ME")
+        # the bare row pins itself
+        self.assertEqual(by_id["cfg-h0-bare"].harness_impl, "single-shot-l2")
+
+    def test_entry_level_timeout_overrides_defaults(self):
+        cfgs = load_model_configs(self.HARNESS_EXAMPLE)
+        by_id = {c.id: c for c in cfgs}
+        # A 512k output cap needs a generous wall-clock allowance: targets are
+        # pinned to 3600 s; the judge has no entry-level value and therefore
+        # inherits the same defaults-level 3600 s.
+        self.assertEqual(by_id["cfg-h0-bare"].timeout_seconds, 3600)
+        # judge row has no entry-level value -> falls back to defaults (3600)
+        self.assertEqual(by_id["judge-deepseek-v41-flash"].timeout_seconds, 3600)
+        # a config with distinct defaults still respects entry-level override
+        cfg = write_tmp({"defaults": {"timeout_seconds": 1800},
+                         "models": [minimal(timeout_seconds=240)]})
+        self.assertEqual(load_model_configs(cfg)[0].timeout_seconds, 240)
+        cfg.unlink()
+        cfg = write_tmp({"defaults": {"timeout_seconds": 1800},
+                         "models": [minimal()]})
+        self.assertEqual(load_model_configs(cfg)[0].timeout_seconds, 1800)
+        cfg.unlink()
+
+
 class TestDryRunAndBoundary(unittest.TestCase):
     def test_dry_run_client_never_produces_scoreable_output(self):
         c = load_model_configs(EXAMPLE)[0]
@@ -199,6 +244,71 @@ class TestDryRunOrchestration(unittest.TestCase):
                 rows = run_evaluation(self.configs[:1], self.plan, [pre_task],
                                       dry_run=False, out_root=tmp, verbose=False)
         self.assertEqual(rows, [], "a PRE task must not leak into a POST run")
+
+
+class TestOutputCap(unittest.TestCase):
+    """A truncated artifact is a scoring artifact, not a model failure."""
+
+    def test_all_shipped_configs_use_one_target_cap(self):
+        from cebench.config import TARGET_MAX_TOKENS
+        for p in sorted((ROOT / "config").glob("*.json")):
+            data = json.loads(p.read_text(encoding="utf-8"))
+            if "models" in data:
+                self.assertEqual(data.get("defaults", {}).get("max_tokens"),
+                                 TARGET_MAX_TOKENS, p.name)
+                for m in data["models"]:
+                    expect = 8192 if m.get("role") == "judge" else TARGET_MAX_TOKENS
+                    self.assertEqual(m.get("params", {}).get("max_tokens"), expect,
+                                     f"{p.name}/{m['id']}")
+            if "budget" in data:
+                self.assertEqual(data["budget"]["max_output_tokens"],
+                                 TARGET_MAX_TOKENS, p.name)
+
+    def test_low_cap_emits_a_warning_not_a_hard_failure(self):
+        cfg = write_tmp({"models": [minimal(params={"max_tokens": 16000})]})
+        with patch.dict(os.environ, {"TEST_API_KEY": "x"}):
+            report = validate_configs(load_model_configs(cfg), require_keys=False)
+        self.assertTrue(report["ready"])
+        self.assertEqual(len(report["warnings"]), 1)
+        self.assertIn("truncated", report["warnings"][0]["hint"])
+        cfg.unlink()
+
+    def test_provider_falls_back_to_contract_cap_and_keeps_finish_reason(self):
+        from cebench.config import TARGET_MAX_TOKENS
+        from cebench.providers import OpenAICompatibleClient
+        p = write_tmp({"models": [minimal()]})
+        cfg = load_model_configs(p)[0]
+        p.unlink()
+        client = OpenAICompatibleClient(cfg, "dummy")
+        captured = {}
+
+        def fake_post(url, headers, body):
+            captured.update(body)
+            return {"choices": [{"message": {"content": "ok"},
+                                "finish_reason": "length"}],
+                    "usage": {"completion_tokens": 512000}, "model": "x", "id": "y"}
+
+        client._post = fake_post
+        resp = client.chat([{"role": "user", "content": "hi"}])
+        self.assertEqual(captured["max_tokens"], TARGET_MAX_TOKENS)
+        self.assertEqual(resp.finish_reason, "length")
+
+    def test_generation_marks_a_length_stop_as_truncated(self):
+        from types import SimpleNamespace
+        from cebench.providers import LLMResponse
+        from cebench.generate import generate_one
+
+        class Stub:
+            cfg = SimpleNamespace(params={"max_tokens": 512000})
+
+            def chat(self, messages, **kw):
+                return LLMResponse(content="<!doctype html><html></html>",
+                                   usage={"completion_tokens": 512000},
+                                   finish_reason="length")
+
+        g = generate_one(Stub(), "t", "p", "c", 1, {}, out_dir=None)
+        self.assertTrue(g.truncated)
+        self.assertTrue(g.to_dict()["truncated"])
 
 
 if __name__ == "__main__":

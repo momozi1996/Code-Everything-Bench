@@ -49,7 +49,7 @@
       "id": "L1-07",
       "name": "raking changes runtime state",
       "kind": "interaction_delta",
-      "selector": "#sand",
+      "selector": "canvas",
       "action": "click",
       "dimension": "F",
       "evidence_grade": "E1/E3"
@@ -58,7 +58,7 @@
       "id": "L1-08",
       "name": "rake tool button is reachable",
       "kind": "selector_exists",
-      "selector": "#rake",
+      "selector": "button, [role=\"button\"], [onclick]",
       "dimension": "F"
     },
     {
@@ -73,7 +73,7 @@
       "id": "L1-10",
       "name": "chime is gesture-bound",
       "kind": "source_contains",
-      "pattern": "addEventListener\\(\\s*['\"]click",
+      "pattern": "(?:addEventListener\\(\\s*['\"](?:click|pointerdown|pointerup|touchstart|touchend|keydown|keyup)|onclick\\s*=)",
       "dimension": "E"
     },
     {

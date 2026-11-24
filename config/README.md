@@ -30,13 +30,30 @@ set -a; source .env; set +a
 | `api_key_env` | **Name** of the environment variable holding the key (never the key itself) | ✅ |
 | `model` | Exact model/version string. Record it verbatim — a floating alias is not reproducible | ✅ |
 | `harness` | `single-shot-l2` / `agent-harness-l2` / your own identifier | ✅ |
+| `harness_impl` | Concrete implementation behind `harness`, e.g. `mini-swe-agent` for `agent-harness-l2`. Defaults to the `harness` value | optional |
+| `harness_version` | Exact pinned release of the implementation — a floating tag / `latest` is not reproducible | optional but strongly recommended |
 | `training_cutoff` | ISO date; used for POST/PRE contamination splits | ✅ |
 | `params` | `temperature`, `max_tokens`, `top_p`, `seed` overrides | optional |
+| `params.max_tokens` | **512000 for every target** (judge: 8192). Must match `budget.max_output_tokens` in the run plan and `TARGET_MAX_TOKENS` in `cebench/config.py`. A target below 512000 triggers a validation warning: a truncated single-file artifact is scored as `artifact_does_not_load`. `finish_reason=length` is recorded in `outcomes.csv` as `truncated`. | ✅ for targets |
 | `extra_headers` | Additional request headers for custom gateways | optional |
+| `timeout_seconds` / `max_retries` | Per-entry overrides of the `defaults` values | optional |
+
+**v0.7 (2026-11-24):** the target cap was raised 96k → **512k** and the per-request
+timeout to **3600 s**; cost is explicitly not a constraint for the full batch, the
+priority is that all 180 tasks can deliver a complete artifact. The cap is a ceiling,
+not a target — models normally stop far earlier. If a provider rejects a 512k
+`max_tokens` (some expose a smaller hard limit), override `params.max_tokens` for
+that one model and record the deviation in the run plan. Published `results/<run-id>/config.json`
+snapshots from earlier runs keep their historical 96k value and are never rewritten.
 
 Add or remove entries freely. A configuration is **harness × model**, not a bare
 model — the same model under two harnesses is two rows, because the L2
-interface changes what the agent can observe.
+interface changes what the agent can observe. The harness policy (see
+`docs/harness-matrix.md`) runs **two parallel regimes**: Regime 1, every model
+under `single-shot-l2`; Regime 2, every model under one pinned
+`agent-harness-l2` implementation (`mini-swe-agent`). Inside a regime the
+harness value is constant so leaderboard differences are attributable to the
+model; the two regimes produce two separate leaderboards that are never merged.
 
 ## 4. Validate before spending money
 

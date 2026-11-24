@@ -25,6 +25,7 @@ from .base import FAIL, NA, PASS, SKIP, AssertionResult, make_result, summarize
 MIN_FULL_MEASUREMENT = 8
 
 BROWSER_KINDS = {"selector_exists", "interaction_delta"}
+STATIC_KINDS = {"source_contains", "source_absent"}
 VISUAL_KINDS = {"visual_review"}
 
 
@@ -59,53 +60,79 @@ def run_task_assertions(assertions: list[dict[str, Any]], source: str,
         name = spec.get("name", aid)
         kind = spec.get("kind", "")
         dim = spec.get("dimension", "F")
-        if kind in ("source_contains", "source_absent"):
+        meta = {"kind": kind}
+        if kind in STATIC_KINDS:
             pattern = spec.get("pattern", "")
             found = bool(re.search(pattern, source, re.I | re.S)) if pattern else False
             ok = found if kind == "source_contains" else not found
             out.append(make_result(aid, name, PASS if ok else FAIL,
                                    f"pattern {pattern!r} {'found' if found else 'absent'}",
-                                   tier="L1", dimension=dim))
+                                   tier="L1", dimension=dim, meta=meta))
         elif kind in BROWSER_KINDS:
             if page is None:
                 out.append(make_result(aid, name, SKIP, "browser_unavailable: "
-                                       "pinned Chromium page required", tier="L1", dimension=dim))
+                                       "pinned Chromium page required", tier="L1",
+                                       dimension=dim, meta=meta))
             else:
-                ok = _browser_check(spec, page)
+                ok, detail = _browser_check(spec, page)
                 out.append(make_result(aid, name, PASS if ok else FAIL,
-                                       "browser interaction probe", tier="L1", dimension=dim))
+                                       detail, tier="L1", dimension=dim, meta=meta))
         elif kind in VISUAL_KINDS:
             out.append(make_result(aid, name, NA,
                                    "routed to L2 multimodal judge; not auto-scored",
-                                   tier="L2", dimension=dim))
+                                   tier="L2", dimension=dim, meta=meta))
         else:
             out.append(make_result(aid, name, SKIP, f"unknown assertion kind {kind!r}",
-                                   tier="L1", dimension=dim))
+                                   tier="L1", dimension=dim, meta=meta))
     return out
 
 
-def _browser_check(spec: dict[str, Any], page: Any) -> bool:
+# A selector inherited from a third-party reference implementation (e.g.
+# "#rake") is not observable by the model under test — the information-boundary
+# rule forbids showing the reference. When such a selector misses, fall back to
+# a semantic, implementation-agnostic candidate and record the substitution in
+# the evidence. An interaction_delta still requires a real state change, so the
+# fallback cannot fabricate a PASS. See docs/assertion-review.md.
+GENERIC_SELECTORS = {
+    "selector_exists": 'button, [role="button"], [onclick], canvas, svg, body',
+    "interaction_delta": "canvas, svg, body",
+}
+
+
+def _resolve_element(spec: dict[str, Any], page: Any) -> tuple[Any, str, bool]:
+    sel = spec.get("selector", "") or ""
+    el = page.query_selector(sel) if sel else None
+    if el is not None:
+        return el, sel, False
+    generic = GENERIC_SELECTORS.get(spec.get("kind", ""), "body")
+    return page.query_selector(generic), sel or "<none>", True
+
+
+def _browser_check(spec: dict[str, Any], page: Any) -> tuple[bool, str]:
+    """Return (passed, human-readable evidence), never a bare bool."""
     try:
+        el, sel, fell_back = _resolve_element(spec, page)
+        if el is None:
+            return False, f"browser probe: no interactive element (selector {sel!r})"
+        note = (f"browser probe on {sel!r}"
+                + (" [generic selector fallback]" if fell_back else ""))
         if spec.get("kind") == "selector_exists":
-            return page.query_selector(spec.get("selector", "body")) is not None
+            return True, note
         if spec.get("kind") == "interaction_delta":
             from .state_probe import infer_evidence_grade, probe
             before = probe(page)
-            sel = spec.get("selector", "")
             action = spec.get("action", "click")
-            el = page.query_selector(sel)
-            if el is None:
-                return False
             if action == "click":
                 el.click()
             elif action.startswith("key:"):
                 page.keyboard.press(action.split(":", 1)[1])
             page.wait_for_timeout(int(spec.get("settle_ms", 200)))
             after = probe(page)
-            return infer_evidence_grade(before, after) != "E0"
-    except Exception:
-        return False
-    return False
+            grade = infer_evidence_grade(before, after)
+            return grade != "E0", f"{note}; state evidence grade {grade}"
+    except Exception as exc:
+        return False, f"browser probe raised {type(exc).__name__}: {exc}"[:220]
+    return False, "browser probe: unsupported kind"
 
 
 def task_assertion_summary(path: str, source: str, page: Any = None) -> dict[str, Any]:

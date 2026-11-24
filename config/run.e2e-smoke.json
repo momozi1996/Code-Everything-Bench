@@ -11,9 +11,9 @@
   "repetitions": 1,
   "seed": 2027,
   "budget": {
-    "wall_clock_minutes": 45,
+    "wall_clock_minutes": 120,
     "max_repair_rounds": 15,
-    "max_output_tokens": 96000,
+    "max_output_tokens": 512000,
     "network": "deny"
   },
   "measurements": [

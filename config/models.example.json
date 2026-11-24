@@ -1,11 +1,11 @@
 {
-  "_comment": "Copy to config/models.json (git-ignored) and fill in. NEVER put a literal API key in this file — use api_key_env, which names an environment variable. Config validation rejects literal keys.",
+  "_comment": "Copy to config/models.json (git-ignored) and fill in. NEVER put a literal API key in this file — use api_key_env, which names an environment variable. Config validation rejects literal keys. Target max_tokens pinned to 512000 (aligned with budget.max_output_tokens); judge stays at 8192.",
   "defaults": {
     "protocol": "openai-compatible",
-    "timeout_seconds": 120,
+    "timeout_seconds": 3600,
     "max_retries": 3,
     "temperature": 0.7,
-    "max_tokens": 16000,
+    "max_tokens": 512000,
     "top_p": 1.0
   },
   "models": [
@@ -17,7 +17,10 @@
       "model": "gpt-5.1",
       "harness": "single-shot-l2",
       "training_cutoff": "2025-09-30",
-      "params": { "temperature": 0.7, "max_tokens": 16000 }
+      "params": {
+        "temperature": 0.7,
+        "max_tokens": 512000
+      }
     },
     {
       "id": "cfg-02-anthropic",
@@ -27,7 +30,10 @@
       "model": "claude-opus-4-5",
       "harness": "single-shot-l2",
       "training_cutoff": "2025-08-31",
-      "params": { "temperature": 0.7, "max_tokens": 16000 }
+      "params": {
+        "temperature": 0.7,
+        "max_tokens": 512000
+      }
     },
     {
       "id": "cfg-03-open-weight",
@@ -37,7 +43,10 @@
       "model": "your-open-weight-model",
       "harness": "agent-harness-l2",
       "training_cutoff": "2026-01-31",
-      "params": { "temperature": 0.7, "max_tokens": 16000 }
+      "params": {
+        "temperature": 0.7,
+        "max_tokens": 512000
+      }
     },
     {
       "id": "cfg-04-custom-gateway",
@@ -47,8 +56,13 @@
       "model": "your-model-id",
       "harness": "single-shot-l2",
       "training_cutoff": "2026-06-30",
-      "extra_headers": { "X-Project": "cebench" },
-      "params": { "temperature": 0.7, "max_tokens": 16000 }
+      "extra_headers": {
+        "X-Project": "cebench"
+      },
+      "params": {
+        "temperature": 0.7,
+        "max_tokens": 512000
+      }
     }
   ]
 }

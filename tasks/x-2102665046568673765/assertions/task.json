@@ -28,7 +28,7 @@
       "dimension": "F",
       "derived_from": "prompt-keyword",
       "auto_derived": true,
-      "pattern": "getContext\\(\\s*['\\\"]webgl"
+      "pattern": "(?:getContext\\(\\s*['\"]webgl2?|WebGLRenderer|WebGL2RenderingContext|THREE\\.WebGL)"
     },
     {
       "id": "L1-04",

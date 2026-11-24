@@ -29,12 +29,13 @@ from .scoring import score_run
 from .trace import Trace, audit_claims
 
 OUTCOME_FIELDS = [
-    "config_id", "harness", "model", "task_id", "repetition", "split",
+    "config_id", "harness", "harness_impl", "harness_version", "model",
+    "task_id", "repetition", "split",
     "track", "pass_at_budget", "final_score", "F", "R", "V", "E",
     "quality_given_pass", "unverified_claims", "claimed_checks",
     "trace_verified_checks", "self_assessed_completion", "l0_pass", "l0_fail",
-    "l0_skip", "l1_pass", "l1_fail", "tokens_out", "evaluation_ready",
-    "dry_run", "error", "notes",
+    "l0_skip", "l1_pass", "l1_fail", "tokens_out", "truncated",
+    "evaluation_ready", "dry_run", "error", "notes",
 ]
 
 
@@ -179,12 +180,47 @@ def load_prompts_from_packs(task_set: str = "all",
 
 
 def build_observation(gen, verification: dict[str, Any]) -> tuple[dict[str, Any], bool]:
-    """Translate generation + assertion evidence into Gate/Rubric inputs."""
+    """Translate generation + assertion evidence into Gate/Rubric inputs.
+
+    v0.6 semantics (see docs/assertion-review.md and docs/benchmark-spec.md §6):
+
+    * Gate[0] ``artifact_does_not_load`` covers an incomplete deliverable: a
+      token-truncated HTML has no closing tag, so its script never finishes.
+      It is attributed here rather than to "core interaction unusable".
+    * Gate[1] ``core_interaction_unusable`` is driven **only** by runtime
+      interaction probes (``interaction_delta`` / ``selector_exists``). Static
+      ``source_contains`` / ``source_absent`` failures are requirement signals:
+      they reduce F/R/E through the rubric, but must not zero the whole run.
+    * A *partly* failing runtime probe set is usable but degraded: it passes the
+      Gate and is compressed by ``CAP_CORE_INTERACTION_FAIL`` instead.
+    """
+    import re
+
+    from .assertions.task_spec import BROWSER_KINDS, STATIC_KINDS
+
     l0 = verification.get("l0", [])
     l1 = verification.get("l1", [])
-    l1_auto = [r for r in l1 if r.get("status") in ("PASS", "FAIL")
-               and r.get("id", "").startswith("L1")]
-    interaction_ok = bool(l1_auto) and all(r["status"] == "PASS" for r in l1_auto)
+    runtime = [r for r in l1
+               if r.get("meta", {}).get("kind") in BROWSER_KINDS
+               and r.get("status") in ("PASS", "FAIL")]
+    static = [r for r in l1
+              if r.get("meta", {}).get("kind") in STATIC_KINDS
+              and r.get("status") in ("PASS", "FAIL")]
+
+    runtime_pass = sum(1 for r in runtime if r["status"] == "PASS")
+    runtime_fail = sum(1 for r in runtime if r["status"] == "FAIL")
+    static_fails = [r["id"] for r in static if r["status"] == "FAIL"]
+
+    source = gen.artifact_html or ""
+    document_complete = bool(re.search(r"</(?:html|body)\s*>", source, re.I))
+    browser_ok = (bool(verification.get("browser_available"))
+                  and not verification.get("browser_error"))
+    loads = bool(source) and document_complete and browser_ok
+
+    # No PASS among runtime probes = the page genuinely does not respond. A
+    # mix of PASS and FAIL = degraded, capped below, but still a real delivery.
+    interaction_ok = runtime_pass > 0
+    degraded = runtime_pass > 0 and runtime_fail > 0
 
     note_text = ". ".join(gen.delivery_note.claimed_checks)
     trace = Trace.from_records(gen.config_id, gen.task_id, gen.trace_events)
@@ -192,14 +228,24 @@ def build_observation(gen, verification: dict[str, Any]) -> tuple[dict[str, Any]
     ready = bool(verification.get("evaluation_ready"))
 
     obs = {
-        "loads": bool(gen.artifact_html),
+        "loads": loads,
         "core_interaction_ok": interaction_ok,
         "unverified_claims": audit["unverified_claims"],
         "unverified_claims_audit": audit,
-        "forbidden_shortcut": any(r.get("status") == "FAIL" and
-                                  "shortcut" in r.get("name", "").lower() for r in l0 + l1),
-        "has_deliverable": bool(gen.artifact_html),
-        "core_interaction_degraded": False,
+        # A source_absent failure means "a static image / banned shortcut was
+        # used in place of the real artifact". That is the shortcut evidence;
+        # the old name-only check could never fire.
+        "forbidden_shortcut": any(
+            r.get("status") == "FAIL" and
+            ("shortcut" in r.get("name", "").lower()
+             or r.get("meta", {}).get("kind") == "source_absent")
+            for r in l0 + l1),
+        "has_deliverable": bool(source),
+        "core_interaction_degraded": degraded,
+        "artifact_truncated": bool(getattr(gen, "truncated", False)) or not document_complete,
+        "static_assertion_failures": static_fails,
+        "runtime_interaction_evidence": {"pass": runtime_pass, "fail": runtime_fail,
+                                         "total": len(runtime)},
         "cost": {"tokens_out": gen.usage.get("completion_tokens", 0)},
     }
     return obs, ready
@@ -265,10 +311,14 @@ def run_evaluation(configs: list[ModelConfig], plan: RunPlan, tasks: list[TaskSp
 def _score_one(cfg: ModelConfig, plan: RunPlan, task: TaskSpec, rep: int,
                gen, dry_run: bool, *, split: str = "POST") -> dict[str, Any]:
     row: dict[str, Any] = {k: "" for k in OUTCOME_FIELDS}
-    row.update({"config_id": cfg.id, "harness": cfg.harness, "model": cfg.model,
+    row.update({"config_id": cfg.id, "harness": cfg.harness,
+                "harness_impl": cfg.harness_impl or cfg.harness,
+                "harness_version": cfg.harness_version,
+                "model": cfg.model,
                 "task_id": task.task_id, "repetition": rep, "split": split,
                 "track": plan.track, "dry_run": dry_run,
                 "tokens_out": gen.usage.get("completion_tokens", 0),
+                "truncated": bool(getattr(gen, "truncated", False)),
                 "self_assessed_completion": gen.delivery_note.self_assessed_completion or "",
                 "error": gen.error, "evaluation_ready": False})
     if not gen.scoreable:
@@ -299,13 +349,29 @@ def _score_one(cfg: ModelConfig, plan: RunPlan, task: TaskSpec, rep: int,
                                status=r["status"], dimension=r.get("dimension", "F"))
                for r in verification["l0"] + verification["l1"]]
     s = score_run(task.task_id, cfg.id, obs, results)
+
+    def dim(value):
+        # `0.0 or ""` used to erase a genuine zero dimension (e.g. E=0 when the
+        # only E assertion failed). Keep None as blank, keep 0.0 as 0.0.
+        return "" if value is None else round(float(value), 6)
+
+    notes = ";".join(s.gate.vetoes) if s.gate.vetoes else "delivered"
+    if obs.get("artifact_truncated"):
+        notes += " | output_truncated_at_token_cap"
+    if obs.get("core_interaction_degraded"):
+        notes += " | runtime_interaction_degraded(cap=0.5)"
+    if obs.get("static_assertion_failures"):
+        notes += " | static_assertions_failed:" + ",".join(obs["static_assertion_failures"])
+
     row.update({
         "evaluation_ready": True,
         "pass_at_budget": s.pass_at_budget, "final_score": round(s.final_score, 4),
         "quality_given_pass": round(s.quality_score.final, 4) if s.pass_at_budget else "",
-        "F": s.quality_score.dimensions["F"] or "", "R": s.quality_score.dimensions["R"] or "",
-        "V": s.quality_score.dimensions["V"] or "", "E": s.quality_score.dimensions["E"] or "",
-        "notes": ";".join(s.gate.vetoes) if s.gate.vetoes else "delivered",
+        "F": dim(s.quality_score.dimensions["F"]),
+        "R": dim(s.quality_score.dimensions["R"]),
+        "V": dim(s.quality_score.dimensions["V"]),
+        "E": dim(s.quality_score.dimensions["E"]),
+        "notes": notes,
     })
     return row
 

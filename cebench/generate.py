@@ -117,6 +117,7 @@ class GenerationResult:
     error: str = ""
     trace_events: list[dict[str, Any]] = field(default_factory=list)
     artifact_path: str | None = None
+    truncated: bool = False   # finish_reason=length or completion_tokens hit the cap
 
     @property
     def scoreable(self) -> bool:
@@ -127,6 +128,7 @@ class GenerationResult:
                 "repetition": self.repetition, "scoreable": self.scoreable,
                 "dry_run": self.dry_run, "error": self.error,
                 "usage": self.usage, "artifact_path": self.artifact_path,
+                "truncated": self.truncated,
                 "self_assessed_completion": self.delivery_note.self_assessed_completion,
                 "weak_points": self.delivery_note.weak_points,
                 "claimed_checks": self.delivery_note.claimed_checks}
@@ -157,10 +159,15 @@ def generate_one(client: BaseClient, task_id: str, prompt: str, config_id: str,
                    "observation": json.dumps(response.to_dict(), ensure_ascii=False)})
     html = extract_html(response.content)
     note = extract_delivery_note(response.content)
+    from .config import TARGET_MAX_TOKENS
+    cap = int(client.cfg.params.get("max_tokens", TARGET_MAX_TOKENS) or TARGET_MAX_TOKENS)
+    used = int(response.usage.get("completion_tokens", 0) or 0)
+    truncated = (response.finish_reason in ("length", "max_tokens")
+                 or (cap > 0 and used >= cap))
     result = GenerationResult(
         task_id=task_id, config_id=config_id, repetition=repetition,
         artifact_html=html, delivery_note=note, usage=response.usage,
-        dry_run=response.dry_run, trace_events=events,
+        dry_run=response.dry_run, trace_events=events, truncated=truncated,
         # The offline stub deliberately emits no HTML. Recording that as a
         # provider error would make a healthy rehearsal look like a failure.
         error="" if (html or response.dry_run) else

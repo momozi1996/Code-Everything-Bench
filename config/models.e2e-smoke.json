@@ -1,11 +1,11 @@
 {
-  "_comment": "Local run configuration (git-ignored). Keys are referenced by env-var NAME only; a literal key here is rejected by validation.",
+  "_comment": "Local run configuration (git-ignored). Keys are referenced by env-var NAME only; a literal key here is rejected by validation. Target max_tokens pinned to 512000 (aligned with budget.max_output_tokens); judge stays at 8192.",
   "defaults": {
     "protocol": "openai-compatible",
-    "timeout_seconds": 1800,
+    "timeout_seconds": 3600,
     "max_retries": 2,
     "temperature": 0.7,
-    "max_tokens": 32000,
+    "max_tokens": 512000,
     "top_p": 1.0
   },
   "models": [
@@ -20,11 +20,11 @@
       "training_cutoff": "2025-12-31",
       "params": {
         "temperature": 0.7,
-        "max_tokens": 16000,
+        "max_tokens": 512000,
         "top_p": 1.0,
         "reasoning_effort": "minimal"
       },
-      "timeout_seconds": 240
+      "timeout_seconds": 3600
     },
     {
       "id": "judge-deepseek-v41-flash",

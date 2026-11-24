@@ -83,6 +83,13 @@ def quality(results: Iterable[AssertionResult], *, cap: float = CAP_DEFAULT) -> 
 
 
 def cap_for(observation: dict[str, Any]) -> float:
+    """Cap quality — never the binary main metric — when interaction is degraded.
+
+    Revived in v0.6: ``core_interaction_degraded`` is set when some runtime
+    probes PASS and others FAIL. The artifact is usable (Gate passes) but its
+    quality is compressed. An all-failing probe set is a Gate veto instead and
+    never reaches this Cap. See docs/assertion-review.md.
+    """
     return (CAP_CORE_INTERACTION_FAIL
             if observation.get("core_interaction_degraded", False) else CAP_DEFAULT)
 

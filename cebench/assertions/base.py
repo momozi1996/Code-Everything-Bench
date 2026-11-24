@@ -34,10 +34,14 @@ class AssertionResult:
     meta: dict[str, Any] = field(default_factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
+        # `meta` carries the assertion kind so the scorer can tell a runtime
+        # interaction probe from a static source regex. Gate semantics depend
+        # on this distinction; see docs/assertion-review.md.
         return {
             "id": self.id, "name": self.name, "tier": self.tier,
             "status": self.status, "evidence": self.evidence,
             "dimension": self.dimension, "weight": self.weight,
+            "meta": self.meta,
         }
 
     @property
@@ -56,9 +60,11 @@ class Assertion:
 
 
 def make_result(assertion_id: str, name: str, status: str, evidence: str,
-                *, tier: str = TIER_L0, dimension: str = "F") -> AssertionResult:
+                *, tier: str = TIER_L0, dimension: str = "F",
+                meta: dict[str, Any] | None = None) -> AssertionResult:
     return AssertionResult(id=assertion_id, name=name, tier=tier,
-                           status=status, evidence=evidence, dimension=dimension)
+                           status=status, evidence=evidence, dimension=dimension,
+                           meta=meta or {})
 
 
 def summarize(results: Iterable[AssertionResult]) -> dict[str, Any]:

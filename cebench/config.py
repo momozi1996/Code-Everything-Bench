@@ -29,11 +29,25 @@ L0_IDS = (
 BROWSER_ONLY = {"L0-03", "L0-04"}
 
 # --- Gate: multiplicative veto, five rules --------------------------------
+# Semantics (v0.6, see docs/benchmark-spec.md §6 and docs/assertion-review.md):
+#   [0] artifact_does_not_load     — the deliverable is not a complete, loadable
+#       HTML document (missing </html>/</body> closing tag, or the pinned
+#       browser could not open it). A token-truncated artifact lands here, not
+#       under [1]: its root cause is an incomplete deliverable.
+#   [1] core_interaction_unusable  — the *runtime* interaction probes
+#       (interaction_delta / selector_exists L1 assertions) produced no PASS at
+#       all. Static source_contains/source_absent failures are NOT Gate
+#       evidence: they are requirement signals and belong in F/R/E. Binding
+#       them to a veto made every strict regex a zero-score switch (design-
+#       decisions #19 corrected).
+#   [2] unverified_claims          — claimed checks with no trace evidence
+#   [3] forbidden_shortcut         — e.g. static image posing as real 3D
+#   [4] no_deliverable_file        — nothing was delivered
 GATE_RULES = (
     "artifact_does_not_load",
     "core_interaction_unusable",
-    "unverified_claims",          # claimed checks with no trace evidence
-    "forbidden_shortcut",         # e.g. static image posing as real 3D
+    "unverified_claims",
+    "forbidden_shortcut",
     "no_deliverable_file",
 )
 
@@ -42,12 +56,30 @@ WEIGHTS = {"F": 0.35, "R": 0.30, "V": 0.20, "E": 0.15}
 DETERMINISTIC_DIMENSIONS = ("F", "R", "E")
 DETERMINISTIC_WEIGHT_MIN = 0.75
 CAP_DEFAULT = 1.0
+# Revived in v0.6: a run whose runtime probes are *partly* failing is usable but
+# degraded — it passes the Gate yet its quality is capped. An all-failing probe
+# set is a Gate veto, not a Cap. This is the distinction design-decisions #19
+# lost when it moved the rule from Cap to Gate.
 CAP_CORE_INTERACTION_FAIL = 0.5
 
+# Single output cap for every target configuration and every run plan. A target
+# max_tokens below this is a truncation risk: CE-Bench artifacts are 12–35 KB of
+# inline HTML/CSS/JS and reasoning models additionally spend hidden tokens on
+# reasoning. Providers fall back to this value when a model entry omits params.
+#
+# v0.7: raised 96k -> 512k. Cost is deliberately not a constraint for the
+# full 180-task batch; the priority is that every task can deliver a complete
+# single-file artifact. This is a *cap*, not a target — the model may stop
+# much earlier. It must stay equal to `budget.max_output_tokens` in every run
+# plan and to `params.max_tokens` on every target (tests/test_providers.py
+# enforces this across all shipped configs).
+TARGET_MAX_TOKENS = 512000
+TARGET_MAX_TOKENS_RECOMMENDED_MIN = 512000
+
 DEFAULT_BUDGET = {
-    "wall_clock_minutes": 30,
+    "wall_clock_minutes": 120,
     "max_repair_rounds": 15,
-    "max_output_tokens": 60000,
+    "max_output_tokens": TARGET_MAX_TOKENS,
     "network": "deny",
 }
 
