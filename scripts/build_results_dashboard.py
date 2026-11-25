@@ -770,7 +770,8 @@ TEMPLATE = r"""<!DOCTYPE html>
 
   $('#fRun').innerHTML = `<option value="all">全部批次 (${RUNS.length})</option>` + RUNS.map(r=>`<option value="${esc(r.run_id)}">${esc(r.run_id)}</option>`).join('');
   const sets = [...new Set(Object.values(TASKS).map(t=>t.set).filter(Boolean))];
-  $('#fSet').innerHTML = `<option value="all">全部层级</option>` + sets.map(s=>`<option value="${esc(s)}">${s==='core'?'Core-111':'Extended-69'}</option>`).join('');
+  const setCounts = {}; Object.values(TASKS).forEach(t=>{ if(t.set) setCounts[t.set]=(setCounts[t.set]||0)+1; });
+  $('#fSet').innerHTML = `<option value="all">全部层级</option>` + sets.map(s=>`<option value="${esc(s)}">${s==='core'?'Core':'Extended'}-${setCounts[s]||0}</option>`).join('');
   const prims = [...new Set(Object.values(TASKS).map(t=>t.primary).filter(Boolean))].sort();
   $('#fPrimary').innerHTML = `<option value="all">全部主类</option>` + prims.map(p=>`<option value="${esc(p)}">${esc(p)}</option>`).join('');
 

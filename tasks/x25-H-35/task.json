@@ -1,0 +1,45 @@
+{
+  "task_id": "x25-H-35",
+  "source_case_id": "x25-H-35",
+  "title": "一艘可完全探索的星舰",
+  "prompt_status": "short_verbatim",
+  "evidence_level": "B",
+  "mode": "Replay",
+  "track": "CE-Frozen",
+  "code2_tags": [
+    "code2game",
+    "code23d"
+  ],
+  "domains": [
+    "3d",
+    "game"
+  ],
+  "four_dimensions": {
+    "interaction_span": "multi-turn",
+    "execution_span": "long",
+    "trigger": "user-initiated",
+    "deliverable": "objective-artifact"
+  },
+  "four_dimensions_note": "inferred from prompt/tags by scripts/build_task_packs.py; not a scored field",
+  "prompt_chars": 76,
+  "prompt_chars_manifest": 76,
+  "published_at": "2026-11-25T00:00:00+00:00",
+  "reference_url": "",
+  "source_post_url": "",
+  "contamination_split": null,
+  "contamination_split_note": "computed at run time against each configuration's training_cutoff (cebench/evaluation.py); baseline cutoff for documentation: 2025-06-30",
+  "assertion_target": 9,
+  "full_measurement": true,
+  "license": "CC-BY-NC-4.0",
+  "attribution": {
+    "creator": "owner collection",
+    "sourceUrl": ""
+  },
+  "notes": "Prompt text is fetched from the pinned corpus and is not vendored upstream; it is materialised here for offline runs.",
+  "set": "extended",
+  "source_origin": "x_batch_2026-11-25",
+  "reference_kind": "post-only",
+  "has_reference_oracle": false,
+  "meta_test_applicable": false,
+  "admission_note": "Admitted on verbatim-prompt evidence only, under the owner-approved scale B (short but complete instructions included). No third-party runnable artifact is pinned, so the reference-oracle meta-test does not apply; L0/L1 assertions still evaluate each generated artifact."
+}

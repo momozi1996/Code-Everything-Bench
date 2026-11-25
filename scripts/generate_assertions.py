@@ -12,6 +12,11 @@ wrong artifact (see the meta-test in reference/SOURCE.md).
     python3 scripts/generate_assertions.py --check          # report only
     python3 scripts/generate_assertions.py                  # write all
     python3 scripts/generate_assertions.py --task case-001  # one task
+    python3 scripts/generate_assertions.py --batch 2026-11-25  # one admitted batch only
+
+`--batch` is the safe way to derive assertions for a newly imported Extended
+batch: `--extended-only` would re-derive (and overwrite) the older Extended
+packs too, since those carry status `auto_derived_needs_review`.
 """
 
 from __future__ import annotations
@@ -170,10 +175,17 @@ def main() -> int:
                     help="overwrite hand-authored assertion packs too")
     ap.add_argument("--extended-only", action="store_true",
                     help="only derive assertions for tasks/manifest_extended.json")
+    ap.add_argument("--batch",
+                    help="only derive assertions for Extended tasks whose "
+                         "manifest `batch` equals this value (e.g. 2026-11-25)")
     args = ap.parse_args()
-    if args.extended_only:
+    if args.batch or args.extended_only:
         ext = json.loads((TASKS / "manifest_extended.json").read_text(encoding="utf-8"))
-        ids = [t["task_id"] for t in ext["tasks"]]
+        ids = [t["task_id"] for t in ext["tasks"]
+               if not args.batch or t.get("batch") == args.batch]
+        if args.batch and not ids:
+            print(f"no Extended tasks with batch={args.batch!r}", file=sys.stderr)
+            return 2
     else:
         ids = [args.task] if args.task else sorted(
             d.name for d in TASKS.iterdir() if d.is_dir() and (d / "task.json").is_file())

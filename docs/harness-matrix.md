@@ -133,6 +133,13 @@ has_reference_oracle: True 111, False 69
 meta_test_applicable: True 111, False 69
 ```
 
+> **Snapshot note (2026-11-25, v0.8).** The counts above are the historical
+> 180-task bank as measured on 2026-11-24 and are kept verbatim. The current
+> bank is **258** packs (Core-111 unchanged, Extended-147 after the 2026-11-25
+> X / Vibe3D batch, `docs/x-batch-import-report.md`). The subset rule below is
+> unchanged: both regimes still run on Core-111 only; Extended-147 stays out of
+> the meta-test denominator and out of either regime's agent comparison.
+
 **Both regimes run on Core-111** (`has_reference_oracle == true AND
 reference_kind == "runnable-html"`). Extended-69 may run bare-only for the
 two-tier stratified report, but never enters the meta-test denominator or

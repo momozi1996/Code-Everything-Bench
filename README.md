@@ -5,21 +5,21 @@
 > 中文主张句：**面向用户的最后一次真实考验**
 
 [![Status: Pre-registration](https://img.shields.io/badge/status-pre--registration-blue)]()
-[![Tasks: 180](https://img.shields.io/badge/tasks-180-green)]()
-[![Core 111 + Extended 69](https://img.shields.io/badge/core-111_%2B_69ext-blue)]()
+[![Tasks: 258](https://img.shields.io/badge/tasks-258-green)]()
+[![Core 111 + Extended 147](https://img.shields.io/badge/core-111_%2B_147ext-blue)]()
 [![License: MIT](https://img.shields.io/badge/license-MIT-lightgrey)]()
 
 > **⚠️ NO RESULTS YET.** This repository is the companion artifact of a pre-registered study. Every number on the leaderboard is an explicit `PLACEHOLDER`. No model scores are published until the evaluation run defined in [`docs/benchmark-spec.md`](docs/benchmark-spec.md) has been executed and its traces are committed under `results/`. Filling in a score by hand is a violation of the benchmark contract.
 
 **Live leaderboard (placeholder):** <https://momozi1996.github.io/Code-Everything-Bench/> — deployed from `leaderboard/` by `.github/workflows/pages.yml`. It only ever reads `leaderboard/data/results.csv` and `tasks.json`; no score is hard-coded in the page.
 
-**Live task catalogue (180 tasks):** <https://momozi1996.github.io/Code-Everything-Bench/catalog/> — the self-contained interactive table, taxonomy tab and stratification stats, browsable online. In the same `/catalog/` folder: [`task-catalog.csv`](https://momozi1996.github.io/Code-Everything-Bench/catalog/task-catalog.csv) (180 × 24, downloadable), [`task-catalog.md`](https://momozi1996.github.io/Code-Everything-Bench/catalog/task-catalog.md) and [`taxonomy.json`](https://momozi1996.github.io/Code-Everything-Bench/catalog/taxonomy.json). Source files stay in `docs/` and `tasks/`; the workflow assembles them into `site/catalog/` on each push, so there is only one copy to maintain.
+**Live task catalogue (258 tasks):** <https://momozi1996.github.io/Code-Everything-Bench/catalog/> — the self-contained interactive table, taxonomy tab and stratification stats, browsable online. In the same `/catalog/` folder: [`task-catalog.csv`](https://momozi1996.github.io/Code-Everything-Bench/catalog/task-catalog.csv) (258 × 24, downloadable), [`task-catalog.md`](https://momozi1996.github.io/Code-Everything-Bench/catalog/task-catalog.md) and [`taxonomy.json`](https://momozi1996.github.io/Code-Everything-Bench/catalog/taxonomy.json). Source files stay in `docs/` and `tasks/`; the workflow assembles them into `site/catalog/` on each push, so there is only one copy to maintain.
 
 ---
 
 ## What this is
 
-CE-Bench converts **naturally occurring community stress tests** into reproducible evidence. Its tasks are not written by researchers: they are verbatim prompts that real users posted on X when testing newly released models, each paired with a traceable original post. The **Core-111** census additionally pairs every task with a runnable single-file HTML reference implementation; the **Extended-69** tier is admitted on verbatim-prompt evidence alone.
+CE-Bench converts **naturally occurring community stress tests** into reproducible evidence. Its tasks are not written by researchers: they are verbatim prompts that real users posted on X when testing newly released models, each paired with a traceable original post. The **Core-111** census additionally pairs every task with a runnable single-file HTML reference implementation; the **Extended-147** tier is admitted on verbatim-prompt evidence alone.
 
 It measures three separable constructs on the **same task bank**:
 
@@ -41,7 +41,7 @@ The pre-registered, falsifiable claim is the **verification gap**: generation ha
 
 | | |
 |---|---|
-| **180** | tasks in the full bank (Core-111 + Extended-69) |
+| **258** | tasks in the full bank (Core-111 + Extended-147) |
 | **111** | fully measurable Core tasks (a census, not a sample) |
 | **8** | shared global assertions (L0), written once, applied to every task |
 | **3** | measurement modes (M1 / M2 / M3) on the same task bank |
@@ -55,16 +55,19 @@ Construction ceiling, measured from the source corpus by `scripts/build_manifest
 
 The library contains 120 `.html` demos in total, but nine of those records have no prompt text and were already removed at S1 — **120 is not a funnel stage**. No task is synthesized, no task is sampled, and no task is removed for traceability. See [`docs/benchmark-spec.md`](docs/benchmark-spec.md#4-construction-funnel).
 
-**Two-tier task bank (v0.2).** The 111-task funnel above is the paper's
-*full-measurement census* and stays reproducible. A second, label-balanced
-tier adds **69** tasks admitted on verbatim-prompt evidence alone
-(`tasks/manifest_extended.json`), drawn from the 194 corpus records rejected
-by S2 plus newly parsed prompts from a Feishu export. Total: **180** packs.
-Extended tasks carry `has_reference_oracle=false`, so no reference-as-oracle
-meta-test is reported for them — L0/L1 assertions still run against every
-generated artifact, and the full generate → assert → score chain applies.
-Use `--task-set core` to reproduce the paper census, `--task-set all`
-(default) for the full bank. Rationale and before/after label distributions:
+**Two-tier task bank (v0.8).** The 111-task funnel above is the paper's
+*full-measurement census* and stays reproducible. A second tier adds **147**
+tasks admitted on verbatim-prompt evidence alone
+(`tasks/manifest_extended.json`): 69 label-balanced tasks from the 2026-11-23
+Feishu expansion, plus 78 tasks from the 2026-11-25 X / Vibe3D batch
+(`docs/x-batch-import-report.md`). Total: **258** packs. All Extended tasks
+carry `has_reference_oracle=false`, so no reference-as-oracle meta-test is
+reported for them — L0/L1 assertions still run against every generated
+artifact, and the full generate → assert → score chain applies. The 2026-11-25
+batch also introduces an owner-approved `short_verbatim` tier for complete
+verbatim prompts shorter than 80 characters. Use `--task-set core` to
+reproduce the paper census, `--task-set all` (default) for the full bank.
+Rationale and before/after label distributions:
 [`docs/expansion-report.md`](docs/expansion-report.md).
 
 ## Quickstart (zero dependencies)
@@ -100,9 +103,9 @@ python3 scripts/sync_corpus.py --ref <commit-hash>     # optional: refresh pinne
 python3 scripts/run_evaluation.py --check               # validate config; no API call
 python3 scripts/run_evaluation.py --dry-run             # rehearse offline; writes nothing
 python3 scripts/run_evaluation.py --task case-001 --limit 1   # one real generation
-python3 scripts/run_evaluation.py                       # full 180 x N x 3 batch (all)
+python3 scripts/run_evaluation.py                       # full 258 x N x 3 batch (all)
 python3 scripts/run_evaluation.py --task-set core       # paper census: 111 tasks
-python3 scripts/run_evaluation.py --task-set extended   # label-balanced 69 tasks
+python3 scripts/run_evaluation.py --task-set extended   # 147 extended tasks
 ```
 
 All targets share one output cap (**512,000 tokens**, 3600 s per request) so
@@ -155,9 +158,9 @@ documented in [`docs/assertion-review.md`](docs/assertion-review.md) and
 │   └── cli.py                `cebench verify | score | selftest | report`
 ├── tasks/
 │   ├── manifest.json         measured metadata for Core-111
-│   ├── manifest_extended.json 69 label-balanced tasks (verbatim prompt only)
-│   ├── taxonomy.json         3-axis labels for all 180 tasks
-│   └── <task-id>/            180 materialised packs: prompt.md, assertions, budget, reference
+│   ├── manifest_extended.json 147 extended tasks (verbatim prompt only)
+│   ├── taxonomy.json         3-axis labels for all 258 tasks
+│   └── <task-id>/            258 materialised packs: prompt.md, assertions, budget, reference
 ├── scripts/                  corpus sync, manifest build, one-command reproduction
 ├── analysis/                 IRT (2PL), inter-rater agreement, bootstrap / effect sizes
 ├── config/                   API + run templates (filled-in copies are git-ignored)
@@ -167,7 +170,7 @@ documented in [`docs/assertion-review.md`](docs/assertion-review.md) and
 ├── tests/                    runnable fixtures (pass + targeted failures)
 ├── leaderboard/              static site + CSV — all values PLACEHOLDER until first run
 ├── docs/
-│   ├── task-catalog.html     180-task table + taxonomy tab (offline, filterable, set filter)
+│   ├── task-catalog.html     258-task table + taxonomy tab (offline, filterable, set filter)
 │   ├── task-catalog.md       same table as Markdown, with per-axis counts
 │   ├── task-catalog.csv      flat table for spreadsheets
 │   ├── benchmark-spec.md     protocol summary aligned with the paper §3–§5
@@ -188,7 +191,7 @@ Third-party reference implementations are **not vendored**. Each task pack recor
 
 | Component | State |
 |---|---|
-| Task bank metadata (111 Core + 69 Extended = 180 tasks, real fields) | ✅ committed |
+| Task bank metadata (111 Core + 147 Extended = 258 tasks, real fields) | ✅ committed |
 | L0 global assertion suite (8 rules) + runnable fixtures | ✅ committed, tested |
 | Gate / Cap / rubric / aggregation formula | ✅ committed, tested |
 | **Model API input layer (config templates + env-var keys + provider clients)** | ✅ committed, tested — **you fill in key / base_url / model** |
@@ -196,11 +199,11 @@ Third-party reference implementations are **not vendored**. Each task pack recor
 | Harness-side state probe, D1–D6 mutation operators | ✅ implemented (task-specific configs pending) |
 | Trace schema, unverified-claim audit | ✅ implemented |
 | Leaderboard site, filters, drill-down | ✅ deployed at [momozi1996.github.io/Code-Everything-Bench](https://momozi1996.github.io/Code-Everything-Bench/), **PLACEHOLDER data** |
-| 180 task packs (prompt + budget + reference source + assertions) | ✅ committed — prompts materialised from the pinned corpus |
-| 180 task-specific L1 assertion packs | ✅ generated — Core-111: 86/111 reference-clean (`docs/assertion-meta-test.md`); Extended-69: no oracle, meta-test N/A |
-| 180 mutation configs + reference self-check | 🟡 templates committed (`status: needs_review`); operators per task pending |
+| 258 task packs (prompt + budget + reference source + assertions) | ✅ committed — prompts materialised from the pinned corpus |
+| 258 task-specific L1 assertion packs | ✅ generated — Core-111: 86/111 reference-clean (`docs/assertion-meta-test.md`); Extended-147: no oracle, meta-test N/A |
+| 258 mutation configs + reference self-check | 🟡 templates committed (`status: needs_review`); operators per task pending |
 | L2 judge (closed visual questions) | ✅ committed — `scripts/judge_run.py`, fixed `role: judge` configuration |
-| Model runs (M1/M2/M3) and `[R#]` result slots | 🟡 smoke run committed (`results/2026-11-23-smoke-glm53flash/`); full 180-task batch pending |
+| Model runs (M1/M2/M3) and `[R#]` result slots | 🟡 smoke run committed (`results/2026-11-23-smoke-glm53flash/`); full 258-task batch pending |
 | arXiv preprint / journal submission | ⬜ |
 
 ## Citation

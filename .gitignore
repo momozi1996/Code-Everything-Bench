@@ -35,6 +35,10 @@ config/run.json
 data/corpus/*
 !data/corpus/extension.jsonl
 !data/corpus/feishu_md_records.jsonl
+# 2026-11-25 X / Vibe3D prompt batch: versioned so a fresh clone can
+# reproduce the +78 Extended tasks (import_x_batch.py / build_catalog.py).
+!data/corpus/x_batch_2026-11-25.jsonl
+!data/corpus/x_batch_2026-11-25_triage.jsonl
 
 # NOTE: results/, leaderboard/data/ and tasks/manifest.json are intentionally
 # NOT ignored. Reproducibility requires that traces and placeholder data are

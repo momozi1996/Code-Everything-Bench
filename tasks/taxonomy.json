@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-11-23T22:05:44+08:00",
-  "task_count": 180,
+  "generated_at": "2026-11-25T17:44:25+08:00",
+  "task_count": 258,
   "description": "CE-Bench 三轴分类标签体系。track 为多标签主赛道（与论文 §7 judge 维度对齐）；primary 为唯一主类；tech 为技术实现标签。题库分两层：Core-111（有可运行 .html 参考产物，完整测量）与 Extended（仅凭逐字 Prompt 证据纳入，无 reference oracle）。派生标签用于分层统计，不改变评分口径。POST/PRE 污染切分仍由运行时按各配置 training_cutoff 计算，不静态写入。",
   "axes": {
     "track": {
@@ -5307,6 +5307,2006 @@
       "prompt_bucket": "S",
       "source_group": "GPT-6.1 Sol Max",
       "track_count": 3,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "x25-A-05": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "x_batch_2026-11-25",
+      "primary": "生成艺术",
+      "primary_track": "svg-art",
+      "tracks": [
+        "animation-video",
+        "svg-art"
+      ],
+      "tech": [
+        "code2svg",
+        "code2video"
+      ],
+      "categories": [],
+      "lang": "zh",
+      "prompt_bucket": "S",
+      "source_group": "GPT-6.2 Sol",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "x25-A-06": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "x_batch_2026-11-25",
+      "primary": "生成艺术",
+      "primary_track": "svg-art",
+      "tracks": [
+        "animation-video",
+        "game",
+        "svg-art"
+      ],
+      "tech": [
+        "code2game",
+        "code2svg",
+        "code2video"
+      ],
+      "categories": [],
+      "lang": "zh",
+      "prompt_bucket": "S",
+      "source_group": "GPT-6.2 Sol",
+      "track_count": 3,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "x25-A-07": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "x_batch_2026-11-25",
+      "primary": "3D",
+      "primary_track": "3d",
+      "tracks": [
+        "3d",
+        "frontend"
+      ],
+      "tech": [
+        "code23d",
+        "code2html",
+        "code2frontend"
+      ],
+      "categories": [],
+      "lang": "zh",
+      "prompt_bucket": "S",
+      "source_group": "GPT-6.2 Sol",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "x25-A-08": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "x_batch_2026-11-25",
+      "primary": "动画",
+      "primary_track": "animation-video",
+      "tracks": [
+        "3d",
+        "animation-video",
+        "frontend"
+      ],
+      "tech": [
+        "code23d",
+        "code2video",
+        "code2html",
+        "code2frontend"
+      ],
+      "categories": [],
+      "lang": "zh",
+      "prompt_bucket": "S",
+      "source_group": "GPT-6.2 Sol",
+      "track_count": 3,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "x25-A-09": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "x_batch_2026-11-25",
+      "primary": "3D",
+      "primary_track": "3d",
+      "tracks": [
+        "3d",
+        "frontend"
+      ],
+      "tech": [
+        "code23d",
+        "code2html"
+      ],
+      "categories": [],
+      "lang": "mixed",
+      "prompt_bucket": "S",
+      "source_group": "GPT-6.2 Sol",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "x25-A-10": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "x_batch_2026-11-25",
+      "primary": "游戏",
+      "primary_track": "game",
+      "tracks": [
+        "3d",
+        "game"
+      ],
+      "tech": [
+        "code2game",
+        "code23d"
+      ],
+      "categories": [],
+      "lang": "en",
+      "prompt_bucket": "S",
+      "source_group": "GPT-6.2 Sol",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "x25-A-11": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "x_batch_2026-11-25",
+      "primary": "3D",
+      "primary_track": "3d",
+      "tracks": [
+        "3d"
+      ],
+      "tech": [
+        "code23d",
+        "code2world"
+      ],
+      "categories": [],
+      "lang": "en",
+      "prompt_bucket": "S",
+      "source_group": "Kimi K3.1 Pro",
+      "track_count": 1,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "x25-A-14": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "x_batch_2026-11-25",
+      "primary": "生成艺术",
+      "primary_track": "svg-art",
+      "tracks": [
+        "frontend"
+      ],
+      "tech": [
+        "code2frontend",
+        "code2html"
+      ],
+      "categories": [],
+      "lang": "en",
+      "prompt_bucket": "S",
+      "source_group": "Kimi K3.1 Pro",
+      "track_count": 1,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "x25-A-15": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "x_batch_2026-11-25",
+      "primary": "游戏",
+      "primary_track": "game",
+      "tracks": [
+        "3d",
+        "game"
+      ],
+      "tech": [
+        "code2game",
+        "code23d"
+      ],
+      "categories": [],
+      "lang": "en",
+      "prompt_bucket": "S",
+      "source_group": "Kimi K3.1 Pro",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "x25-A-16": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "x_batch_2026-11-25",
+      "primary": "动画",
+      "primary_track": "animation-video",
+      "tracks": [
+        "3d",
+        "frontend"
+      ],
+      "tech": [
+        "code23d",
+        "code2html"
+      ],
+      "categories": [],
+      "lang": "en",
+      "prompt_bucket": "S",
+      "source_group": "GPT-6.1 Sol",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "x25-A-17": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "x_batch_2026-11-25",
+      "primary": "3D",
+      "primary_track": "3d",
+      "tracks": [
+        "3d",
+        "frontend"
+      ],
+      "tech": [
+        "code23d",
+        "code2html"
+      ],
+      "categories": [],
+      "lang": "en",
+      "prompt_bucket": "S",
+      "source_group": "GPT-6.1 Sol",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "x25-A-18": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "x_batch_2026-11-25",
+      "primary": "3D",
+      "primary_track": "3d",
+      "tracks": [
+        "3d",
+        "frontend"
+      ],
+      "tech": [
+        "code23d",
+        "code2html"
+      ],
+      "categories": [],
+      "lang": "en",
+      "prompt_bucket": "S",
+      "source_group": "GPT-6.1 Sol",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "x25-A-21": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "x_batch_2026-11-25",
+      "primary": "3D",
+      "primary_track": "3d",
+      "tracks": [
+        "3d",
+        "audio",
+        "frontend"
+      ],
+      "tech": [
+        "code23d",
+        "code2audio",
+        "code2html",
+        "code2frontend"
+      ],
+      "categories": [],
+      "lang": "zh",
+      "prompt_bucket": "S",
+      "source_group": "GPT-6.1 Sol",
+      "track_count": 3,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "x25-A-23": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "x_batch_2026-11-25",
+      "primary": "3D",
+      "primary_track": "3d",
+      "tracks": [
+        "3d",
+        "frontend"
+      ],
+      "tech": [
+        "code23d",
+        "code2html"
+      ],
+      "categories": [],
+      "lang": "zh",
+      "prompt_bucket": "S",
+      "source_group": "GPT-6.1 Sol",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "x25-A-34": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "x_batch_2026-11-25",
+      "primary": "3D",
+      "primary_track": "3d",
+      "tracks": [
+        "3d",
+        "animation-video",
+        "frontend"
+      ],
+      "tech": [
+        "code23d",
+        "code2video",
+        "code2html",
+        "code2frontend"
+      ],
+      "categories": [],
+      "lang": "zh",
+      "prompt_bucket": "M",
+      "source_group": "GPT-6.2 Astra",
+      "track_count": 3,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "x25-A-35": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "x_batch_2026-11-25",
+      "primary": "动画",
+      "primary_track": "animation-video",
+      "tracks": [
+        "3d",
+        "animation-video"
+      ],
+      "tech": [
+        "code23d",
+        "code2video"
+      ],
+      "categories": [],
+      "lang": "zh",
+      "prompt_bucket": "S",
+      "source_group": "GPT-6.2 Astra",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "x25-H-01": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "x_batch_2026-11-25",
+      "primary": "3D",
+      "primary_track": "3d",
+      "tracks": [
+        "3d",
+        "frontend"
+      ],
+      "tech": [
+        "code23d",
+        "code2html",
+        "code2frontend"
+      ],
+      "categories": [],
+      "lang": "zh",
+      "prompt_bucket": "S",
+      "source_group": "Vibe3D 纯文输入",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "x25-H-02": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "x_batch_2026-11-25",
+      "primary": "3D",
+      "primary_track": "3d",
+      "tracks": [
+        "3d",
+        "frontend",
+        "visualization"
+      ],
+      "tech": [
+        "code23d",
+        "code2viz",
+        "code2html",
+        "code2frontend"
+      ],
+      "categories": [],
+      "lang": "zh",
+      "prompt_bucket": "S",
+      "source_group": "Vibe3D 纯文输入",
+      "track_count": 3,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "x25-H-03": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "x_batch_2026-11-25",
+      "primary": "3D",
+      "primary_track": "3d",
+      "tracks": [
+        "3d",
+        "frontend"
+      ],
+      "tech": [
+        "code23d",
+        "code2html",
+        "code2frontend"
+      ],
+      "categories": [],
+      "lang": "zh",
+      "prompt_bucket": "S",
+      "source_group": "Vibe3D 纯文输入",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "x25-H-04": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "x_batch_2026-11-25",
+      "primary": "3D",
+      "primary_track": "3d",
+      "tracks": [
+        "3d",
+        "animation-video",
+        "frontend"
+      ],
+      "tech": [
+        "code23d",
+        "code2video",
+        "code2html",
+        "code2frontend"
+      ],
+      "categories": [],
+      "lang": "zh",
+      "prompt_bucket": "S",
+      "source_group": "Vibe3D 纯文输入",
+      "track_count": 3,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "x25-H-05": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "x_batch_2026-11-25",
+      "primary": "3D",
+      "primary_track": "3d",
+      "tracks": [
+        "3d",
+        "frontend",
+        "game"
+      ],
+      "tech": [
+        "code2game",
+        "code23d",
+        "code2world",
+        "code2html",
+        "code2frontend"
+      ],
+      "categories": [],
+      "lang": "zh",
+      "prompt_bucket": "M",
+      "source_group": "Vibe3D 纯文输入",
+      "track_count": 3,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "x25-H-06": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "x_batch_2026-11-25",
+      "primary": "3D",
+      "primary_track": "3d",
+      "tracks": [
+        "3d",
+        "animation-video",
+        "frontend"
+      ],
+      "tech": [
+        "code23d",
+        "code2video",
+        "code2html",
+        "code2frontend"
+      ],
+      "categories": [],
+      "lang": "zh",
+      "prompt_bucket": "S",
+      "source_group": "Vibe3D 纯文输入",
+      "track_count": 3,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "x25-H-09": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "x_batch_2026-11-25",
+      "primary": "3D",
+      "primary_track": "3d",
+      "tracks": [
+        "3d",
+        "frontend"
+      ],
+      "tech": [
+        "code23d",
+        "code2html",
+        "code2frontend"
+      ],
+      "categories": [],
+      "lang": "zh",
+      "prompt_bucket": "M",
+      "source_group": "Vibe3D 纯文输入",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "x25-H-10": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "x_batch_2026-11-25",
+      "primary": "网页",
+      "primary_track": "frontend",
+      "tracks": [
+        "animation-video",
+        "frontend"
+      ],
+      "tech": [
+        "code2video",
+        "code2html",
+        "code2frontend",
+        "code2css"
+      ],
+      "categories": [],
+      "lang": "zh",
+      "prompt_bucket": "S",
+      "source_group": "Vibe3D 纯文输入",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "x25-H-11": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "x_batch_2026-11-25",
+      "primary": "3D",
+      "primary_track": "3d",
+      "tracks": [
+        "3d",
+        "animation-video",
+        "frontend"
+      ],
+      "tech": [
+        "code23d",
+        "code2video",
+        "code2world",
+        "code2html",
+        "code2frontend"
+      ],
+      "categories": [],
+      "lang": "zh",
+      "prompt_bucket": "M",
+      "source_group": "Vibe3D 纯文输入",
+      "track_count": 3,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "x25-H-12": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "x_batch_2026-11-25",
+      "primary": "3D",
+      "primary_track": "3d",
+      "tracks": [
+        "3d",
+        "animation-video",
+        "frontend"
+      ],
+      "tech": [
+        "code23d",
+        "code2video",
+        "code2html",
+        "code2frontend"
+      ],
+      "categories": [],
+      "lang": "zh",
+      "prompt_bucket": "S",
+      "source_group": "Vibe3D 纯文输入",
+      "track_count": 3,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "x25-H-13": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "x_batch_2026-11-25",
+      "primary": "3D",
+      "primary_track": "3d",
+      "tracks": [
+        "3d",
+        "animation-video",
+        "frontend"
+      ],
+      "tech": [
+        "code23d",
+        "code2video",
+        "code2html",
+        "code2frontend"
+      ],
+      "categories": [],
+      "lang": "zh",
+      "prompt_bucket": "S",
+      "source_group": "Vibe3D 纯文输入",
+      "track_count": 3,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "x25-H-14": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "x_batch_2026-11-25",
+      "primary": "3D",
+      "primary_track": "3d",
+      "tracks": [
+        "3d",
+        "animation-video",
+        "frontend"
+      ],
+      "tech": [
+        "code23d",
+        "code2video",
+        "code2world",
+        "code2html",
+        "code2frontend"
+      ],
+      "categories": [],
+      "lang": "zh",
+      "prompt_bucket": "S",
+      "source_group": "Vibe3D 纯文输入",
+      "track_count": 3,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "x25-H-15": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "x_batch_2026-11-25",
+      "primary": "3D",
+      "primary_track": "3d",
+      "tracks": [
+        "3d",
+        "frontend"
+      ],
+      "tech": [
+        "code23d",
+        "code2html",
+        "code2frontend"
+      ],
+      "categories": [],
+      "lang": "zh",
+      "prompt_bucket": "S",
+      "source_group": "Vibe3D 纯文输入",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "x25-H-16": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "x_batch_2026-11-25",
+      "primary": "3D",
+      "primary_track": "3d",
+      "tracks": [
+        "3d",
+        "animation-video",
+        "frontend"
+      ],
+      "tech": [
+        "code23d",
+        "code2video",
+        "code2world",
+        "code2html",
+        "code2frontend"
+      ],
+      "categories": [],
+      "lang": "zh",
+      "prompt_bucket": "S",
+      "source_group": "Vibe3D 纯文输入",
+      "track_count": 3,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "x25-H-17": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "x_batch_2026-11-25",
+      "primary": "3D",
+      "primary_track": "3d",
+      "tracks": [
+        "3d",
+        "frontend"
+      ],
+      "tech": [
+        "code23d",
+        "code2world",
+        "code2html",
+        "code2frontend"
+      ],
+      "categories": [],
+      "lang": "zh",
+      "prompt_bucket": "S",
+      "source_group": "Vibe3D 纯文输入",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "x25-H-18": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "x_batch_2026-11-25",
+      "primary": "3D",
+      "primary_track": "3d",
+      "tracks": [
+        "3d",
+        "animation-video",
+        "frontend"
+      ],
+      "tech": [
+        "code23d",
+        "code2video",
+        "code2html",
+        "code2frontend"
+      ],
+      "categories": [],
+      "lang": "zh",
+      "prompt_bucket": "S",
+      "source_group": "Vibe3D 纯文输入",
+      "track_count": 3,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "x25-H-19": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "x_batch_2026-11-25",
+      "primary": "3D",
+      "primary_track": "3d",
+      "tracks": [
+        "3d",
+        "frontend"
+      ],
+      "tech": [
+        "code23d",
+        "code2html",
+        "code2frontend"
+      ],
+      "categories": [],
+      "lang": "zh",
+      "prompt_bucket": "S",
+      "source_group": "Vibe3D 纯文输入",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "x25-H-20": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "x_batch_2026-11-25",
+      "primary": "3D",
+      "primary_track": "3d",
+      "tracks": [
+        "3d",
+        "frontend"
+      ],
+      "tech": [
+        "code23d",
+        "code2html",
+        "code2frontend"
+      ],
+      "categories": [],
+      "lang": "zh",
+      "prompt_bucket": "S",
+      "source_group": "Vibe3D 纯文输入",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "x25-H-21": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "x_batch_2026-11-25",
+      "primary": "3D",
+      "primary_track": "3d",
+      "tracks": [
+        "3d",
+        "animation-video",
+        "frontend"
+      ],
+      "tech": [
+        "code23d",
+        "code2video",
+        "code2html",
+        "code2frontend"
+      ],
+      "categories": [],
+      "lang": "zh",
+      "prompt_bucket": "S",
+      "source_group": "Vibe3D 纯文输入",
+      "track_count": 3,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "x25-H-22": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "x_batch_2026-11-25",
+      "primary": "生成艺术",
+      "primary_track": "svg-art",
+      "tracks": [
+        "3d",
+        "animation-video",
+        "frontend",
+        "visualization"
+      ],
+      "tech": [
+        "code23d",
+        "code2video",
+        "code2canvas",
+        "code2html",
+        "code2frontend",
+        "code2css"
+      ],
+      "categories": [],
+      "lang": "zh",
+      "prompt_bucket": "S",
+      "source_group": "Vibe3D 纯文输入",
+      "track_count": 4,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "x25-H-23": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "x_batch_2026-11-25",
+      "primary": "生成艺术",
+      "primary_track": "svg-art",
+      "tracks": [
+        "3d",
+        "animation-video",
+        "frontend",
+        "visualization"
+      ],
+      "tech": [
+        "code23d",
+        "code2video",
+        "code2canvas",
+        "code2html",
+        "code2frontend",
+        "code2css"
+      ],
+      "categories": [],
+      "lang": "zh",
+      "prompt_bucket": "S",
+      "source_group": "Vibe3D 纯文输入",
+      "track_count": 4,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "x25-H-24": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "x_batch_2026-11-25",
+      "primary": "生成艺术",
+      "primary_track": "svg-art",
+      "tracks": [
+        "3d",
+        "animation-video",
+        "frontend",
+        "visualization"
+      ],
+      "tech": [
+        "code23d",
+        "code2video",
+        "code2canvas",
+        "code2html",
+        "code2frontend",
+        "code2css"
+      ],
+      "categories": [],
+      "lang": "zh",
+      "prompt_bucket": "S",
+      "source_group": "Vibe3D 纯文输入",
+      "track_count": 4,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "x25-H-25": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "x_batch_2026-11-25",
+      "primary": "生成艺术",
+      "primary_track": "svg-art",
+      "tracks": [
+        "3d",
+        "animation-video",
+        "frontend",
+        "visualization"
+      ],
+      "tech": [
+        "code23d",
+        "code2video",
+        "code2canvas",
+        "code2html",
+        "code2frontend",
+        "code2css"
+      ],
+      "categories": [],
+      "lang": "zh",
+      "prompt_bucket": "S",
+      "source_group": "Vibe3D 纯文输入",
+      "track_count": 4,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "x25-H-26": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "x_batch_2026-11-25",
+      "primary": "生成艺术",
+      "primary_track": "svg-art",
+      "tracks": [
+        "3d",
+        "animation-video",
+        "frontend",
+        "visualization"
+      ],
+      "tech": [
+        "code23d",
+        "code2video",
+        "code2canvas",
+        "code2html",
+        "code2frontend",
+        "code2css"
+      ],
+      "categories": [],
+      "lang": "zh",
+      "prompt_bucket": "S",
+      "source_group": "Vibe3D 纯文输入",
+      "track_count": 4,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "x25-H-27": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "x_batch_2026-11-25",
+      "primary": "生成艺术",
+      "primary_track": "svg-art",
+      "tracks": [
+        "3d",
+        "animation-video",
+        "frontend",
+        "visualization"
+      ],
+      "tech": [
+        "code23d",
+        "code2video",
+        "code2canvas",
+        "code2html",
+        "code2frontend",
+        "code2css"
+      ],
+      "categories": [],
+      "lang": "zh",
+      "prompt_bucket": "S",
+      "source_group": "Vibe3D 纯文输入",
+      "track_count": 4,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "x25-H-28": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "x_batch_2026-11-25",
+      "primary": "生成艺术",
+      "primary_track": "svg-art",
+      "tracks": [
+        "3d",
+        "animation-video",
+        "frontend",
+        "visualization"
+      ],
+      "tech": [
+        "code23d",
+        "code2video",
+        "code2canvas",
+        "code2html",
+        "code2frontend",
+        "code2css"
+      ],
+      "categories": [],
+      "lang": "zh",
+      "prompt_bucket": "S",
+      "source_group": "Vibe3D 纯文输入",
+      "track_count": 4,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "x25-H-29": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "x_batch_2026-11-25",
+      "primary": "网页",
+      "primary_track": "frontend",
+      "tracks": [
+        "animation-video",
+        "frontend"
+      ],
+      "tech": [
+        "code2video",
+        "code2html",
+        "code2frontend",
+        "code2css"
+      ],
+      "categories": [],
+      "lang": "zh",
+      "prompt_bucket": "S",
+      "source_group": "Vibe3D 纯文输入",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "x25-H-30": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "x_batch_2026-11-25",
+      "primary": "网页",
+      "primary_track": "frontend",
+      "tracks": [
+        "animation-video",
+        "frontend"
+      ],
+      "tech": [
+        "code2video",
+        "code2html",
+        "code2frontend",
+        "code2css"
+      ],
+      "categories": [],
+      "lang": "zh",
+      "prompt_bucket": "S",
+      "source_group": "Vibe3D 纯文输入",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "x25-H-31": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "x_batch_2026-11-25",
+      "primary": "网页",
+      "primary_track": "frontend",
+      "tracks": [
+        "animation-video",
+        "frontend"
+      ],
+      "tech": [
+        "code2video",
+        "code2html",
+        "code2frontend",
+        "code2css"
+      ],
+      "categories": [],
+      "lang": "zh",
+      "prompt_bucket": "S",
+      "source_group": "Vibe3D 纯文输入",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "x25-H-32": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "x_batch_2026-11-25",
+      "primary": "网页",
+      "primary_track": "frontend",
+      "tracks": [
+        "animation-video",
+        "frontend"
+      ],
+      "tech": [
+        "code2video",
+        "code2html",
+        "code2frontend",
+        "code2css"
+      ],
+      "categories": [],
+      "lang": "zh",
+      "prompt_bucket": "S",
+      "source_group": "Vibe3D 纯文输入",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "x25-H-33": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "x_batch_2026-11-25",
+      "primary": "3D",
+      "primary_track": "3d",
+      "tracks": [
+        "3d",
+        "frontend"
+      ],
+      "tech": [
+        "code23d",
+        "code2html"
+      ],
+      "categories": [],
+      "lang": "zh",
+      "prompt_bucket": "S",
+      "source_group": "Vibe3D 纯文输入",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "x25-H-34": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "x_batch_2026-11-25",
+      "primary": "3D",
+      "primary_track": "3d",
+      "tracks": [
+        "3d",
+        "frontend"
+      ],
+      "tech": [
+        "code23d",
+        "code2html",
+        "code2frontend"
+      ],
+      "categories": [],
+      "lang": "zh",
+      "prompt_bucket": "S",
+      "source_group": "Vibe3D 纯文输入",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "x25-H-35": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "x_batch_2026-11-25",
+      "primary": "3D",
+      "primary_track": "3d",
+      "tracks": [
+        "3d",
+        "game"
+      ],
+      "tech": [
+        "code2game",
+        "code23d"
+      ],
+      "categories": [],
+      "lang": "zh",
+      "prompt_bucket": "S",
+      "source_group": "Vibe3D 纯文输入",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "x25-H-36": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "x_batch_2026-11-25",
+      "primary": "游戏",
+      "primary_track": "game",
+      "tracks": [
+        "3d",
+        "frontend"
+      ],
+      "tech": [
+        "code23d",
+        "code2html",
+        "code2frontend"
+      ],
+      "categories": [],
+      "lang": "en",
+      "prompt_bucket": "S",
+      "source_group": "Vibe3D 纯文输入",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "x25-H-37": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "x_batch_2026-11-25",
+      "primary": "网页",
+      "primary_track": "frontend",
+      "tracks": [
+        "3d",
+        "frontend"
+      ],
+      "tech": [
+        "code23d",
+        "code2html",
+        "code2frontend"
+      ],
+      "categories": [],
+      "lang": "en",
+      "prompt_bucket": "S",
+      "source_group": "Vibe3D 纯文输入",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "x25-H-39": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "x_batch_2026-11-25",
+      "primary": "游戏",
+      "primary_track": "game",
+      "tracks": [
+        "3d",
+        "frontend"
+      ],
+      "tech": [
+        "code23d",
+        "code2html",
+        "code2frontend"
+      ],
+      "categories": [],
+      "lang": "zh",
+      "prompt_bucket": "S",
+      "source_group": "Vibe3D 纯文输入",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "x25-H-40": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "x_batch_2026-11-25",
+      "primary": "生成艺术",
+      "primary_track": "svg-art",
+      "tracks": [
+        "frontend",
+        "svg-art"
+      ],
+      "tech": [
+        "code2svg",
+        "code2html"
+      ],
+      "categories": [],
+      "lang": "zh",
+      "prompt_bucket": "S",
+      "source_group": "Vibe3D 纯文输入",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "x25-H-41": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "x_batch_2026-11-25",
+      "primary": "可视化",
+      "primary_track": "visualization",
+      "tracks": [
+        "3d",
+        "visualization"
+      ],
+      "tech": [
+        "code23d",
+        "code2canvas"
+      ],
+      "categories": [],
+      "lang": "zh",
+      "prompt_bucket": "S",
+      "source_group": "Vibe3D 纯文输入",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "x25-H-42": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "x_batch_2026-11-25",
+      "primary": "工具",
+      "primary_track": "frontend",
+      "tracks": [
+        "3d",
+        "frontend"
+      ],
+      "tech": [
+        "code23d",
+        "code2html"
+      ],
+      "categories": [],
+      "lang": "zh",
+      "prompt_bucket": "S",
+      "source_group": "Vibe3D 纯文输入",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "x25-H-43": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "x_batch_2026-11-25",
+      "primary": "可视化",
+      "primary_track": "visualization",
+      "tracks": [
+        "3d",
+        "animation-video",
+        "frontend"
+      ],
+      "tech": [
+        "code23d",
+        "code2video",
+        "code2html",
+        "code2frontend"
+      ],
+      "categories": [],
+      "lang": "zh",
+      "prompt_bucket": "S",
+      "source_group": "Vibe3D 纯文输入",
+      "track_count": 3,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "x25-H-44": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "x_batch_2026-11-25",
+      "primary": "生成艺术",
+      "primary_track": "svg-art",
+      "tracks": [
+        "3d",
+        "audio"
+      ],
+      "tech": [
+        "code23d",
+        "code2audio"
+      ],
+      "categories": [],
+      "lang": "zh",
+      "prompt_bucket": "S",
+      "source_group": "Vibe3D 纯文输入",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "x25-H-45": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "x_batch_2026-11-25",
+      "primary": "工具",
+      "primary_track": "frontend",
+      "tracks": [
+        "3d",
+        "frontend"
+      ],
+      "tech": [
+        "code23d",
+        "code2html"
+      ],
+      "categories": [],
+      "lang": "zh",
+      "prompt_bucket": "S",
+      "source_group": "Vibe3D 纯文输入",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "x25-H-46": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "x_batch_2026-11-25",
+      "primary": "工具",
+      "primary_track": "frontend",
+      "tracks": [
+        "3d",
+        "visualization"
+      ],
+      "tech": [
+        "code23d",
+        "code2viz",
+        "code2world"
+      ],
+      "categories": [],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Vibe3D 纯文输入",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "x25-H-48": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "x_batch_2026-11-25",
+      "primary": "生成艺术",
+      "primary_track": "svg-art",
+      "tracks": [
+        "3d",
+        "frontend"
+      ],
+      "tech": [
+        "code23d",
+        "code2html"
+      ],
+      "categories": [],
+      "lang": "zh",
+      "prompt_bucket": "S",
+      "source_group": "Vibe3D 纯文输入",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "x25-H-50": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "x_batch_2026-11-25",
+      "primary": "前端",
+      "primary_track": "frontend",
+      "tracks": [
+        "3d",
+        "animation-video",
+        "frontend",
+        "visualization"
+      ],
+      "tech": [
+        "code23d",
+        "code2video",
+        "code2canvas",
+        "code2html",
+        "code2frontend"
+      ],
+      "categories": [],
+      "lang": "en",
+      "prompt_bucket": "S",
+      "source_group": "Vibe3D 纯文输入",
+      "track_count": 4,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "x25-H-51": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "x_batch_2026-11-25",
+      "primary": "前端",
+      "primary_track": "frontend",
+      "tracks": [
+        "3d",
+        "frontend"
+      ],
+      "tech": [
+        "code23d",
+        "code2html"
+      ],
+      "categories": [],
+      "lang": "en",
+      "prompt_bucket": "S",
+      "source_group": "Vibe3D 纯文输入",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "x25-H-52": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "x_batch_2026-11-25",
+      "primary": "可视化",
+      "primary_track": "visualization",
+      "tracks": [
+        "3d",
+        "frontend"
+      ],
+      "tech": [
+        "code23d",
+        "code2html",
+        "code2frontend"
+      ],
+      "categories": [],
+      "lang": "en",
+      "prompt_bucket": "S",
+      "source_group": "Vibe3D 纯文输入",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "x25-H-54": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "x_batch_2026-11-25",
+      "primary": "可视化",
+      "primary_track": "visualization",
+      "tracks": [
+        "frontend",
+        "visualization"
+      ],
+      "tech": [
+        "code2viz",
+        "code2html"
+      ],
+      "categories": [],
+      "lang": "zh",
+      "prompt_bucket": "S",
+      "source_group": "Vibe3D 纯文输入",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "x25-H-58": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "x_batch_2026-11-25",
+      "primary": "可视化",
+      "primary_track": "visualization",
+      "tracks": [
+        "frontend",
+        "visualization"
+      ],
+      "tech": [
+        "code2viz",
+        "code2html",
+        "code2frontend"
+      ],
+      "categories": [],
+      "lang": "zh",
+      "prompt_bucket": "S",
+      "source_group": "Vibe3D 纯文输入",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "x25-H-65": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "x_batch_2026-11-25",
+      "primary": "可视化",
+      "primary_track": "visualization",
+      "tracks": [
+        "3d",
+        "frontend"
+      ],
+      "tech": [
+        "code23d",
+        "code2html",
+        "code2frontend"
+      ],
+      "categories": [],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Vibe3D 纯文输入",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "x25-H-66": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "x_batch_2026-11-25",
+      "primary": "3D",
+      "primary_track": "3d",
+      "tracks": [
+        "frontend"
+      ],
+      "tech": [
+        "code2frontend",
+        "code2html"
+      ],
+      "categories": [],
+      "lang": "en",
+      "prompt_bucket": "S",
+      "source_group": "Vibe3D 纯文输入",
+      "track_count": 1,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "x25-H-67": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "x_batch_2026-11-25",
+      "primary": "3D",
+      "primary_track": "3d",
+      "tracks": [
+        "3d",
+        "frontend"
+      ],
+      "tech": [
+        "code23d",
+        "code2html"
+      ],
+      "categories": [],
+      "lang": "zh",
+      "prompt_bucket": "S",
+      "source_group": "Vibe3D 纯文输入",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "x25-H-68": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "x_batch_2026-11-25",
+      "primary": "动画",
+      "primary_track": "animation-video",
+      "tracks": [
+        "3d",
+        "animation-video"
+      ],
+      "tech": [
+        "code23d",
+        "code2video"
+      ],
+      "categories": [],
+      "lang": "zh",
+      "prompt_bucket": "S",
+      "source_group": "Vibe3D 纯文输入",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "x25-H-69": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "x_batch_2026-11-25",
+      "primary": "动画",
+      "primary_track": "animation-video",
+      "tracks": [
+        "3d",
+        "frontend"
+      ],
+      "tech": [
+        "code23d",
+        "code2html"
+      ],
+      "categories": [],
+      "lang": "zh",
+      "prompt_bucket": "S",
+      "source_group": "Vibe3D 纯文输入",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "x25-H-70": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "x_batch_2026-11-25",
+      "primary": "工具",
+      "primary_track": "frontend",
+      "tracks": [
+        "3d",
+        "animation-video"
+      ],
+      "tech": [
+        "code23d",
+        "code2video"
+      ],
+      "categories": [],
+      "lang": "zh",
+      "prompt_bucket": "S",
+      "source_group": "Vibe3D 纯文输入",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "x25-H-71": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "x_batch_2026-11-25",
+      "primary": "3D",
+      "primary_track": "3d",
+      "tracks": [
+        "3d",
+        "frontend"
+      ],
+      "tech": [
+        "code23d",
+        "code2html"
+      ],
+      "categories": [],
+      "lang": "zh",
+      "prompt_bucket": "S",
+      "source_group": "Vibe3D 纯文输入",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "x25-H-75": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "x_batch_2026-11-25",
+      "primary": "游戏",
+      "primary_track": "game",
+      "tracks": [
+        "3d",
+        "game"
+      ],
+      "tech": [
+        "code2game",
+        "code23d",
+        "code2world"
+      ],
+      "categories": [],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Vibe3D 纯文输入",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "x25-H-76": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "x_batch_2026-11-25",
+      "primary": "3D",
+      "primary_track": "3d",
+      "tracks": [
+        "3d",
+        "animation-video",
+        "frontend"
+      ],
+      "tech": [
+        "code23d",
+        "code2video",
+        "code2html",
+        "code2frontend"
+      ],
+      "categories": [],
+      "lang": "en",
+      "prompt_bucket": "S",
+      "source_group": "Vibe3D 纯文输入",
+      "track_count": 3,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "x25-H-77": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "x_batch_2026-11-25",
+      "primary": "3D",
+      "primary_track": "3d",
+      "tracks": [
+        "3d",
+        "animation-video"
+      ],
+      "tech": [
+        "code23d",
+        "code2video"
+      ],
+      "categories": [],
+      "lang": "zh",
+      "prompt_bucket": "S",
+      "source_group": "Vibe3D 纯文输入",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "x25-H-78": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "x_batch_2026-11-25",
+      "primary": "游戏",
+      "primary_track": "game",
+      "tracks": [
+        "3d",
+        "game"
+      ],
+      "tech": [
+        "code2game",
+        "code23d"
+      ],
+      "categories": [],
+      "lang": "en",
+      "prompt_bucket": "S",
+      "source_group": "Vibe3D 纯文输入",
+      "track_count": 2,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "x25-H-79": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "x_batch_2026-11-25",
+      "primary": "游戏",
+      "primary_track": "game",
+      "tracks": [
+        "3d",
+        "frontend",
+        "game"
+      ],
+      "tech": [
+        "code2game",
+        "code23d",
+        "code2html",
+        "code2frontend"
+      ],
+      "categories": [],
+      "lang": "zh",
+      "prompt_bucket": "S",
+      "source_group": "Vibe3D 纯文输入",
+      "track_count": 3,
+      "replay": false,
+      "meta_test": "n/a",
+      "assertion_count": 9
+    },
+    "x25-H-80": {
+      "set": "extended",
+      "set_label": "Extended",
+      "reference_kind": "post-only",
+      "source_origin": "x_batch_2026-11-25",
+      "primary": "3D",
+      "primary_track": "3d",
+      "tracks": [
+        "3d"
+      ],
+      "tech": [
+        "code23d",
+        "code2world"
+      ],
+      "categories": [],
+      "lang": "en",
+      "prompt_bucket": "M",
+      "source_group": "Vibe3D 纯文输入",
+      "track_count": 1,
       "replay": false,
       "meta_test": "n/a",
       "assertion_count": 9

@@ -125,10 +125,10 @@ def load_prompts_from_packs(task_set: str = "all",
     are admitted on verbatim-prompt evidence alone. They have
     ``has_reference_oracle=false`` (no reference-as-oracle meta-test), but
     L0/L1 assertions still run against every generated artifact, so the
-    generate -> assert -> score chain is complete for all 180 tasks.
+    generate -> assert -> score chain is complete for all 258 tasks.
 
     ``task_set``: ``core`` (111, paper's full-measurement census),
-    ``extended`` (69), or ``all`` (180). POST/PRE contamination is still
+    ``extended`` (147), or ``all`` (258). POST/PRE contamination is still
     computed per configuration at run time, never statically here.
     """
     root = Path(tasks_root) if tasks_root else ROOT / "tasks"

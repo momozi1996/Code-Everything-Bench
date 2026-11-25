@@ -105,3 +105,35 @@ via the paper's own `DOMAIN_MAP`.
 - `cebench/evaluation.py::load_prompts_from_packs` — runner task source for all 180 packs
 - `scripts/run_evaluation.py --task-set {core,extended,all}` — tier switch (default `all`)
 - `docs/task-catalog.{html,md,csv}` + `tasks/taxonomy.json` — rebuilt for 180 tasks
+
+
+---
+
+## 2026-11-25 update (v0.8) — second Extended batch
+
+This section is an **append-only update**; every number above describes the
+2026-11-23 111→180 expansion and is left unchanged.
+
+A second batch of 115 owner-supplied X / Vibe3D rows (A-01..A-36,
+H-01..H-80) was triaged and admitted under owner-approved "scale B":
+
+| Step | Count |
+|---|---:|
+| supplied rows | 115 |
+| passed the verbatim-prompt / HTML-carryable gate | 84 (53 full + 31 short) |
+| duplicate prompt hashes vs. the 180-task bank | 6 (`A-01`, `A-12`, `A-13`, `A-19`, `A-22`, `A-24`) |
+| **actually admitted** | **78** |
+| Extended tier after | **147** |
+| **full bank after** | **258** |
+
+Selection differs deliberately from the CV²-greedy rule above: no CV² pruning
+was applied, and a new `short_verbatim` tier admits complete verbatim prompts
+below the 80-char floor (30 of the 78). Consequently primary max/min ratio
+rises from **1.81 → 3.39**; `3d` track 68 → 134, `frontend` 96 → 158. This is
+the owner's explicit trade-off, not an oversight.
+
+All 78 new tasks are `post-only`, `has_reference_oracle=false`,
+`meta_test_applicable=false`, `meta_test=N/A`; they do not enter the meta-test
+pass-rate denominator. The paper's headline census remains Core-111. See
+`docs/x-batch-triage.md` (per-row rejections) and
+`docs/x-batch-import-report.md` (import, label deltas, honesty notes).

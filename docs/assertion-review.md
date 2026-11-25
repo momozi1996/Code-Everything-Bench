@@ -247,3 +247,20 @@ python3 scripts/run_evaluation.py --models config/models.harness.example.json --
 python3 scripts/rescore_artifacts.py          # offline re-score of existing artifacts
 python3 scripts/build_results_dashboard.py    # refresh the evidence board
 ```
+
+
+---
+
+## 2026-11-25 update (v0.8) — assertion packs for the new batch
+
+The scan above covered the historical 180-task bank and its numbers are kept
+verbatim. On 2026-11-25, 78 new X / Vibe3D Extended packs were added (bank
+size 258). All 78 received L1 assertions via
+`python3 scripts/generate_assertions.py --batch 2026-11-25`
+(`min=8`, `max=8`, `mean=8.0`, all above the ≥8 auto-assertion floor) and a
+`meta_test.json` with `status=not_applicable_no_reference`. The
+`--batch` switch was added to that script precisely so a new batch can be
+derived without re-deriving (and overwriting) the older Extended-69 packs.
+Extended meta-test count is now **147 not-applicable**, still excluded from
+the pass-rate denominator. Core-111's 86/111 reference-clean result is
+unchanged. See `docs/x-batch-import-report.md`.

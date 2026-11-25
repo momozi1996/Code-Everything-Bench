@@ -1,0 +1,3 @@
+<!-- verbatim prompt from data/corpus/x_batch_2026-11-25.jsonl (id=x25-H-65, set=extended) -->
+
+Build SpaceX Launch Atlas — an interactive 3D globe in the browser. 708 real SpaceX launches, March 2006 → July 2026, pulled from Launch Library 2. 4 sites mapped: Cape Canaveral 465, Vandenberg 216, Starbase 22, Omelek 5. Every rocket family: Falcon 9 669, Starship 22, Falcon Heavy 12, Falcon 1 5, plus 11 failures. 20 years of launches replayed in ~75 seconds — live counters, launch beams firing off the globe, color-coded by rocket. React 19 + TypeScript + Three.js, GLSL shaders on the GPU, NASA Blue Marble texture, NASA-style UI.

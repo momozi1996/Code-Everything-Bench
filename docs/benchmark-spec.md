@@ -75,18 +75,31 @@ reference-as-oracle meta-test is meaningful and POST/PRE coverage is 111/111.
 All paper numbers (Table 9, §7 stratified reporting, figure captions) refer to
 this tier and are unchanged.
 
-A second tier, **Extended-69**, was added to reduce label skew
-(`tasks/manifest_extended.json`; see `docs/expansion-report.md`). It admits
-records that have a verbatim prompt but no pinned `.html` reference — 63 from
-the 194 records rejected by S2, plus 6 newly parsed from a Feishu prompt
-export. Selection minimised the squared coefficient of variation of the
-`primary` / `track` / `tech` label counts. The full bank is **180** packs.
+A second tier, **Extended-147**, was added to the bank
+(`tasks/manifest_extended.json`; see `docs/expansion-report.md` and
+`docs/x-batch-import-report.md`). It admits records that have a verbatim
+prompt but no pinned `.html` reference:
+
+* **2026-11-23 (69 tasks)** — 63 from the 194 records rejected by S2 plus 6
+  newly parsed from a Feishu prompt export. Selection minimised the squared
+  coefficient of variation of the `primary` / `track` / `tech` label counts.
+* **2026-11-25 (78 tasks)** — an owner-supplied X / Vibe3D prompt batch of
+  115 rows, admitted under an owner-approved "scale B" rule: every row with a
+  complete verbatim prompt whose deliverable a single-file HTML can carry,
+  duplicates removed by normalised prompt hash (6 rows were already in the
+  bank). This batch deliberately introduces a `short_verbatim` tier for
+  complete instructions shorter than 80 characters, and **no CV² pruning**
+  was applied — it worsens three-axis label balance (primary max/min ratio
+  rises from 1.81 to 3.39). That trade-off is the owner's explicit choice and
+  is recorded in `docs/x-batch-import-report.md`.
+
+The full bank is **258** packs.
 
 Extended tasks have `has_reference_oracle=false` and
 `meta_test_applicable=false`. They **do not** enter the meta-test pass-rate
 denominator, and the M2/M3 reference-mutation path is not available for them.
 L0/L1 assertions still run against every generated artifact, so M1
-generation → assert → score is complete for all 180 tasks. Runs must report the
+generation → assert → score is complete for all 258 tasks. Runs must report the
 two tiers separately; the paper's headline census remains Core-111 unless
 explicitly restated as two-tier.
 
@@ -94,7 +107,7 @@ explicitly restated as two-tier.
 
 | Tier | Count | Nature | Cost |
 |---|---:|---|---|
-| **L0** global | 8 | static source checks (6) + browser runtime (2) | written once, all 180 tasks |
+| **L0** global | 8 | static source checks (6) + browser runtime (2) | written once, all 258 tasks |
 | **L1** task-specific | 4–12 | Playwright interaction scripts + harness-side state probes | per task, from 8 domain templates |
 | **L2** visual | closed questions | multimodal judge on interaction recordings | only for passing runs / top configurations |
 
@@ -127,7 +140,7 @@ Score = 1[Gate] × min(0.35·F + 0.30·R + 0.20·V + 0.15·E, Cap)
 120-minute wall-clock budget; the judge stays at 8192 tokens. The cap is a
 ceiling, not a target, and is identical across models and across both harness
 regimes so it cannot explain a leaderboard difference. Cost is deliberately
-not optimised for the full 180-task batch. `finish_reason=length` and
+not optimised for the full 258-task batch. `finish_reason=length` and
 `completion_tokens >= cap` are recorded as `truncated`.
 
 - **Gate** (multiplicative veto, five rules): does not load · core interaction

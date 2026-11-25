@@ -68,7 +68,7 @@ CAP_CORE_INTERACTION_FAIL = 0.5
 # reasoning. Providers fall back to this value when a model entry omits params.
 #
 # v0.7: raised 96k -> 512k. Cost is deliberately not a constraint for the
-# full 180-task batch; the priority is that every task can deliver a complete
+# full 258-task batch; the priority is that every task can deliver a complete
 # single-file artifact. This is a *cap*, not a target — the model may stop
 # much earlier. It must stay equal to `budget.max_output_tokens` in every run
 # plan and to `params.max_tokens` on every target (tests/test_providers.py

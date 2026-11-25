@@ -1,0 +1,6 @@
+{
+  "task_id": "x25-H-28",
+  "status": "not_applicable_no_reference",
+  "meta_test_applicable": false,
+  "note": "post-only evidence: verbatim prompt and source post are pinned, but no runnable third-party artifact is available. L0/L1 assertions still evaluate each generated artifact normally."
+}

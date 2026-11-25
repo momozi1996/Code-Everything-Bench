@@ -10,7 +10,7 @@
     # 3. one real task (prompt comes from the materialised task pack)
     python3 scripts/run_evaluation.py --task case-001 --limit 1
 
-    # 4. the full 180-task batch (Core-111 + Extended-69)
+    # 4. the full 258-task batch (Core-111 + Extended-147)
     python3 scripts/run_evaluation.py
 
     # 4b. a single tier (paper census / label-balanced extension)
@@ -70,7 +70,7 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--run", default=str(ROOT / "config" / "run.json"))
     ap.add_argument("--corpus", default=None,
                     help="legacy Core-111 loader from a raw corpus jsonl; "
-                         "default is the materialised 180-task pack bank")
+                         "default is the materialised 258-task pack bank")
     ap.add_argument("--task-set", choices=["core", "extended", "all"], default=None,
                     help="task bank tier (default: run.json task_set, else all)")
     ap.add_argument("--check", action="store_true", help="validate config only; no API call")

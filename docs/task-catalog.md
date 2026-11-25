@@ -1,7 +1,7 @@
-# CE-Bench 180 题总表与分类标签
+# CE-Bench 258 题总表与分类标签
 
-> 生成时间：2026-11-23T22:05:44+08:00 ｜ 任务数：**180**（Core-111 111 + Extended 69）
-> 数据源：`tasks/manifest.json` + `tasks/manifest_extended.json` + pinned `data/corpus/cases.jsonl` / `extension.jsonl` + 任务包。
+> 生成时间：2026-11-25T17:44:25+08:00 ｜ 任务数：**258**（Core-111 111 + Extended 147）
+> 数据源：`tasks/manifest.json` + `tasks/manifest_extended.json` + pinned `data/corpus/cases.jsonl` / `extension.jsonl` / `x_batch_2026-11-25.jsonl` + 任务包。
 > Core-111 有可运行 `.html` 参考产物；Extended 仅有逐字 Prompt 与原帖，无 reference oracle，参考自检标记为 `n/a`。
 
 ## 一、分类标签体系（三轴）
@@ -10,50 +10,50 @@
 
 | 赛道 | 中文 | 题数 | 占比 | 建议评审维度 | 说明 |
 |---|---|---:|---:|---|---|
-| `visualization` | 数据可视化 | 94 | 52.2% | Frontend | 图表、物理模拟、数据映射与信息呈现 |
-| `frontend` | 前端 / 网页 | 96 | 53.3% | Frontend | 页面结构、UI 组件、布局与交互界面 |
-| `svg-art` | SVG 生成艺术 | 58 | 32.2% | Frontend | 矢量程序化艺术、图形构成与几何美学 |
-| `3d` | 3D / WebGL | 68 | 37.8% | 3D | 三维场景、相机、光照、材质与实时渲染 |
-| `audio` | 音频 | 55 | 30.6% | Animation | 声音合成、音频可视化与节奏驱动 |
-| `animation-video` | 动画 / 视频 | 53 | 29.4% | Animation | 时间轴动效、过渡、镜头与逐帧输出 |
-| `game` | 游戏 | 52 | 28.9% | Game | 可玩规则、输入处理、状态机与胜负判定 |
-| `composite` | 复合任务 | 15 | 8.3% | Overall | 跨多类、需整体评定的复合交付物 |
+| `visualization` | 数据可视化 | 107 | 41.5% | Frontend | 图表、物理模拟、数据映射与信息呈现 |
+| `frontend` | 前端 / 网页 | 158 | 61.2% | Frontend | 页面结构、UI 组件、布局与交互界面 |
+| `svg-art` | SVG 生成艺术 | 61 | 23.6% | Frontend | 矢量程序化艺术、图形构成与几何美学 |
+| `3d` | 3D / WebGL | 134 | 51.9% | 3D | 三维场景、相机、光照、材质与实时渲染 |
+| `audio` | 音频 | 57 | 22.1% | Animation | 声音合成、音频可视化与节奏驱动 |
+| `animation-video` | 动画 / 视频 | 85 | 32.9% | Animation | 时间轴动效、过渡、镜头与逐帧输出 |
+| `game` | 游戏 | 60 | 23.3% | Game | 可玩规则、输入处理、状态机与胜负判定 |
+| `composite` | 复合任务 | 15 | 5.8% | Overall | 跨多类、需整体评定的复合交付物 |
 
-> 多标签，题数之和大于 180。`rubric_hint` 为建议映射，非强制评分口径。
+> 多标签，题数之和大于 258。`rubric_hint` 为建议映射，非强制评分口径。
 
 **轴 2 · 唯一主类 `primary`**（中文 8 类，来自上游语料）
 
 | 主类 | 题数 | 建议赛道 | 说明 |
 |---|---:|---|---|
-| 生成艺术 | 24 | `svg-art` | 程序化生成艺术为主 |
-| 可视化 | 22 | `visualization` | 数据/现象可视化为主 |
-| 网页 | 21 | `frontend` | 完整网页与站点 |
-| 3D | 26 | `3d` | 三维场景 |
-| 动画 | 29 | `animation-video` | 时间轴动效 |
-| 工具 | 16 | `frontend` | 实用工具与应用 |
-| 前端 | 16 | `frontend` | 前端组件与界面 |
-| 游戏 | 26 | `game` | 可玩游戏 |
+| 生成艺术 | 37 | `svg-art` | 程序化生成艺术为主 |
+| 可视化 | 28 | `visualization` | 数据/现象可视化为主 |
+| 网页 | 27 | `frontend` | 完整网页与站点 |
+| 3D | 61 | `3d` | 三维场景 |
+| 动画 | 34 | `animation-video` | 时间轴动效 |
+| 工具 | 20 | `frontend` | 实用工具与应用 |
+| 前端 | 18 | `frontend` | 前端组件与界面 |
+| 游戏 | 33 | `game` | 可玩游戏 |
 
 **轴 3 · 技术标签 `tech`**（12 个，来自 `code2Tags` 信号抽取）
 
 | 标签 | 题数 | 归属赛道 | 说明 |
 |---|---:|---|---|
-| `code2frontend` | 80 | `frontend` | HTML/CSS/JS 前端实现 |
-| `code2viz` | 64 | `visualization` | 可视化与数据映射 |
-| `code2svg` | 58 | `svg-art` | SVG 矢量图形 |
-| `code2canvas` | 56 | `visualization` | Canvas 2D 绘制 |
-| `code23d` | 65 | `3d` | Three.js / WebGL / 三维 |
-| `code2audio` | 55 | `audio` | Web Audio / 声音 |
-| `code2video` | 53 | `animation-video` | 视频 / 镜头 / 帧输出 |
-| `code2game` | 52 | `game` | 游戏机制与交互规则 |
-| `code2css` | 32 | `frontend` | CSS 样式与布局 |
-| `code2world` | 15 | `3d` | 世界 / 地形 / 场景生成 |
-| `code2html` | 29 | `frontend` | HTML 结构 |
+| `code2frontend` | 127 | `frontend` | HTML/CSS/JS 前端实现 |
+| `code2viz` | 68 | `visualization` | 可视化与数据映射 |
+| `code2svg` | 61 | `svg-art` | SVG 矢量图形 |
+| `code2canvas` | 65 | `visualization` | Canvas 2D 绘制 |
+| `code23d` | 131 | `3d` | Three.js / WebGL / 三维 |
+| `code2audio` | 57 | `audio` | Web Audio / 声音 |
+| `code2video` | 85 | `animation-video` | 视频 / 镜头 / 帧输出 |
+| `code2game` | 60 | `game` | 游戏机制与交互规则 |
+| `code2css` | 44 | `frontend` | CSS 样式与布局 |
+| `code2world` | 24 | `3d` | 世界 / 地形 / 场景生成 |
+| `code2html` | 91 | `frontend` | HTML 结构 |
 | `code2deck` | 8 | `frontend` | 演示文稿 / 幻灯片 |
 
 **派生标签**：语言（zh/en/mixed）、长度档（S/M/L/XL）、Prompt 状态、证据级别（A/B）、来源组、集合（Core-111 / Extended）、参考类型、Replay、L1 断言数、参考自检（pass/review/n-a）、复合度（track_count）。POST/PRE 污染切分为运行时按 `training_cutoff` 计算，不静态写入。
 
-## 二、180 题详细总表
+## 二、258 题详细总表
 
 | 序号 | ID | 集合 | 题目 | 主类 | 赛道 | 技术标签 | 语言 | 字数 | 档 | Prompt | 证据 | 来源组 | 模型 | 作者 | 日期 | Replay | 断言 | 自检 | 授权 | Demo | 原帖 |
 |---:|---|---|---|---|---|---|---|---:|---|---|---|---|---|---|---|---|:---:|---:|---|---|---|---|---|
@@ -237,17 +237,95 @@
 | 178 | `md-1445-A-04` | Extended | 发布首日三个可直接抄作业的案例 | 游戏 | `3d`, `animation-video`, `audio`, `game` | `code2game`, `code23d`, `code2video`, `code2audio`, `code2world` | 英文 | 224 | S | 完整原文 | B | Claude Fable 5.2（含 Felix Rieseberg 原帖） | Claude Fable 5.2（含 Felix Rieseberg 原帖） | @bruc3van | 2026-11-11 |  | 9 | N/A | CC-BY-NC-4.0 |  | [原帖](https://x.com/bruc3van/status/2120398269356364250) |
 | 179 | `md-1465-A-13` | Extended | 黎明埃及神庙群（含挖掘/刷扫工具、昼夜循环、墓室解谜） | 游戏 | `3d`, `animation-video`, `game` | `code2game`, `code23d`, `code2video` | 英文 | 163 | S | 完整原文 | B | Kimi K3.1 Pro | Kimi K3.1 Pro | @sakatayasha | 2026-10-25 |  | 9 | N/A | CC-BY-NC-4.0 |  | [原帖](https://x.com/sakatayasha/status/2114330266986799169) |
 | 180 | `md-1475-A-22` | Extended | 《昆仑》60 秒概念片（1920×1080 / 30fps） | 3D | `3d`, `animation-video`, `audio` | `code23d`, `code2video`, `code2audio` | 中文 | 232 | S | 完整原文 | B | GPT-6.1 Sol Max | GPT-6.1 Sol Max | @YFeng2022 | 2026-11-14 |  | 9 | N/A | CC-BY-NC-4.0 |  | [原帖](https://x.com/YFeng2022/status/2121583392089071970) |
+| 181 | `x25-A-05` | Extended | 火星上骑单车的鹈鹕（SVG） | 生成艺术 | `animation-video`, `svg-art` | `code2svg`, `code2video` | 中文 | 47 | S | short_verbatim | B | GPT-6.2 Sol | GPT-6.2 Sol | @mspd4100 | 2026-11-09 |  | 9 | N/A | CC-BY-NC-4.0 |  | [原帖](https://x.com/mspd4100/status/2119680610222686458) |
+| 182 | `x25-A-06` | Extended | 游戏控制器骑自行车，再骑鹈鹕（SVG） | 生成艺术 | `animation-video`, `game`, `svg-art` | `code2game`, `code2svg`, `code2video` | 中文 | 39 | S | short_verbatim | B | GPT-6.2 Sol | GPT-6.2 Sol | @SongyuKite | 2026-11-09 |  | 9 | N/A | CC-BY-NC-4.0 |  | [原帖](https://x.com/SongyuKite/status/2119729206888145162) |
+| 183 | `x25-A-07` | Extended | 照片 → 湖畔古堡 3D 单页 HTML | 3D | `3d`, `frontend` | `code23d`, `code2html`, `code2frontend` | 中文 | 17 | S | short_verbatim | B | GPT-6.2 Sol | GPT-6.2 Sol | @cfenghub | 2026-11-09 |  | 9 | N/A | CC-BY-NC-4.0 |  | [原帖](https://x.com/cfenghub/status/2119736756585074976) |
+| 184 | `x25-A-08` | Extended | 体素赛车短片（30-40 秒，单页 HTML） | 动画 | `3d`, `animation-video`, `frontend` | `code23d`, `code2video`, `code2html`, `code2frontend` | 中文 | 52 | S | short_verbatim | B | GPT-6.2 Sol | GPT-6.2 Sol | @cfenghub | 2026-11-10 |  | 9 | N/A | CC-BY-NC-4.0 |  | [原帖](https://x.com/cfenghub/status/2120024150114713936) |
+| 185 | `x25-A-09` | Extended | 雨后的罗马斗兽场（无任何外部资产） | 3D | `3d`, `frontend` | `code23d`, `code2html` | 中英混合 | 23 | S | short_verbatim | B | GPT-6.2 Sol | GPT-6.2 Sol | @cfenghub | 2026-11-10 |  | 9 | N/A | CC-BY-NC-4.0 |  | [原帖](https://x.com/cfenghub/status/2120069654437921152) |
+| 186 | `x25-A-10` | Extended | 几分钟从零产出的可玩 3D 游戏 | 游戏 | `3d`, `game` | `code2game`, `code23d` | 英文 | 39 | S | short_verbatim | B | GPT-6.2 Sol | GPT-6.2 Sol | @TheAstrayDev | 2026-11-15 |  | 9 | N/A | CC-BY-NC-4.0 |  | [原帖](https://x.com/TheAstrayDev/status/2121975150685901040) |
+| 187 | `x25-A-11` | Extended | 《Otherwhere》可交互程序化 3D 世界 | 3D | `3d` | `code23d`, `code2world` | 英文 | 47 | S | short_verbatim | B | Kimi K3.1 Pro | Kimi K3.1 Pro | @shitunote | 2026-10-27 |  | 9 | N/A | CC-BY-NC-4.0 |  | [原帖](https://x.com/shitunote/status/2115076399895826533) |
+| 188 | `x25-A-14` | Extended | 日本像素风街角 | 生成艺术 | `frontend` | `code2frontend`, `code2html` | 英文 | 70 | S | short_verbatim | B | Kimi K3.1 Pro | Kimi K3.1 Pro | @gmi_cloud | 2026-10-27 |  | 9 | N/A | CC-BY-NC-4.0 |  | [原帖](https://x.com/gmi_cloud/status/2114877816311541921) |
+| 189 | `x25-A-15` | Extended | 飞行中的 Tesla Roadster 主题 3D 游戏 | 游戏 | `3d`, `game` | `code2game`, `code23d` | 英文 | 48 | S | short_verbatim | B | Kimi K3.1 Pro | Kimi K3.1 Pro | @AbdoKerdawy | 2026-10-30 |  | 9 | N/A | CC-BY-NC-4.0 |  | [原帖](https://x.com/AbdoKerdawy/status/2115957714203332616) |
+| 190 | `x25-A-16` | Extended | 四模型同题「3D 车祸」 | 动画 | `3d`, `frontend` | `code23d`, `code2html` | 英文 | 55 | S | short_verbatim | B | GPT-6.1 Sol | GPT-6.1 Sol | @melvynx | 2026-10-16 |  | 9 | N/A | CC-BY-NC-4.0 |  | [原帖](https://x.com/melvynx/status/2111081760369107300) |
+| 191 | `x25-A-17` | Extended | 樱花树环绕的日式 3D 房屋 | 3D | `3d`, `frontend` | `code23d`, `code2html` | 英文 | 60 | S | short_verbatim | B | GPT-6.1 Sol | GPT-6.1 Sol | @dpratyush02 | 2026-10-14 |  | 9 | N/A | CC-BY-NC-4.0 |  | [原帖](https://x.com/dpratyush02/status/2110347694447509797) |
+| 192 | `x25-A-18` | Extended | 交互式 3D 喷气发动机剖切 | 3D | `3d`, `frontend` | `code23d`, `code2html` | 英文 | 54 | S | short_verbatim | B | GPT-6.1 Sol | GPT-6.1 Sol | @olezhavich | 2026-10-21 |  | 9 | N/A | CC-BY-NC-4.0 |  | [原帖](https://x.com/olezhavich/status/2112897791022264814) |
+| 193 | `x25-A-21` | Extended | 三桅木帆船（单页 HTML + 程序化配乐） | 3D | `3d`, `audio`, `frontend` | `code23d`, `code2audio`, `code2html`, `code2frontend` | 中文 | 257 | S | 完整原文 | B | GPT-6.1 Sol | GPT-6.1 Sol | @YFeng2022 | 2026-11-10 |  | 9 | N/A | CC-BY-NC-4.0 |  | [原帖](https://x.com/YFeng2022/status/2120089605752193173) |
+| 194 | `x25-A-23` | Extended | 开放式「让我惊讶」3D 题（Sol vs Gemini 4 Carbon） | 3D | `3d`, `frontend` | `code23d`, `code2html` | 中文 | 35 | S | short_verbatim | B | GPT-6.1 Sol | GPT-6.1 Sol | @cfenghub | 2026-11-12 |  | 9 | N/A | CC-BY-NC-4.0 |  | [原帖](https://x.com/cfenghub/status/2120723760500166712) |
+| 195 | `x25-A-34` | Extended | 「九重天宫」电影级 Three.js + GLSL 场景 | 3D | `3d`, `animation-video`, `frontend` | `code23d`, `code2video`, `code2html`, `code2frontend` | 中文 | 579 | M | 完整原文 | B | GPT-6.2 Astra | GPT-6.2 Astra | @cfenghub | 2026-11-19 |  | 9 | N/A | CC-BY-NC-4.0 |  | [原帖](https://x.com/i/status/2123162154132242885) |
+| 196 | `x25-A-35` | Extended | 《烟雨江南：雨巷八重境》Three.js 短片 | 动画 | `3d`, `animation-video` | `code23d`, `code2video` | 中文 | 207 | S | 完整原文 | B | GPT-6.2 Astra | GPT-6.2 Astra | @YFeng2022 | 2026-11-16 |  | 9 | N/A | CC-BY-NC-4.0 |  | [原帖](https://x.com/i/status/2122213756952351017) |
+| 197 | `x25-H-01` | Extended | 2030 月球中国基地建设场景 | 3D | `3d`, `frontend` | `code23d`, `code2html`, `code2frontend` | 中文 | 399 | S | 完整原文 | B | Vibe3D 纯文输入 | Vibe3D 纯文输入 | owner collection | 2026-11-25 |  | 9 | N/A | CC-BY-NC-4.0 |  |  |
+| 198 | `x25-H-02` | Extended | 还原星际穿越五维空间 | 3D | `3d`, `frontend`, `visualization` | `code23d`, `code2viz`, `code2html`, `code2frontend` | 中文 | 367 | S | 完整原文 | B | Vibe3D 纯文输入 | Vibe3D 纯文输入 | owner collection | 2026-11-25 |  | 9 | N/A | CC-BY-NC-4.0 |  |  |
+| 199 | `x25-H-03` | Extended | 三体：三体舰队与人类太阳系舰队对峙 | 3D | `3d`, `frontend` | `code23d`, `code2html`, `code2frontend` | 中文 | 389 | S | 完整原文 | B | Vibe3D 纯文输入 | Vibe3D 纯文输入 | owner collection | 2026-11-25 |  | 9 | N/A | CC-BY-NC-4.0 |  |  |
+| 200 | `x25-H-04` | Extended | 三体 二向箔降维打击：太阳系坍缩为梵高星空 | 3D | `3d`, `animation-video`, `frontend` | `code23d`, `code2video`, `code2html`, `code2frontend` | 中文 | 380 | S | 完整原文 | B | Vibe3D 纯文输入 | Vibe3D 纯文输入 | owner collection | 2026-11-25 |  | 9 | N/A | CC-BY-NC-4.0 |  |  |
+| 201 | `x25-H-05` | Extended | 云球：完整球体 3D Agent 生态世界 | 3D | `3d`, `frontend`, `game` | `code2game`, `code23d`, `code2world`, `code2html`, `code2frontend` | 中文 | 411 | M | 完整原文 | B | Vibe3D 纯文输入 | Vibe3D 纯文输入 | owner collection | 2026-11-25 |  | 9 | N/A | CC-BY-NC-4.0 |  |  |
+| 202 | `x25-H-06` | Extended | 鬼灭之刃：无限城 3D 交互空间 | 3D | `3d`, `animation-video`, `frontend` | `code23d`, `code2video`, `code2html`, `code2frontend` | 中文 | 371 | S | 完整原文 | B | Vibe3D 纯文输入 | Vibe3D 纯文输入 | owner collection | 2026-11-25 |  | 9 | N/A | CC-BY-NC-4.0 |  |  |
+| 203 | `x25-H-09` | Extended | 珍珠项链（写实 3D 商品展示） | 3D | `3d`, `frontend` | `code23d`, `code2html`, `code2frontend` | 中文 | 441 | M | 完整原文 | B | Vibe3D 纯文输入 | Vibe3D 纯文输入 | owner collection | 2026-11-25 |  | 9 | N/A | CC-BY-NC-4.0 |  |  |
+| 204 | `x25-H-10` | Extended | 纯 CSS 实现「四季变换」场景动画 | 网页 | `animation-video`, `frontend` | `code2video`, `code2html`, `code2frontend`, `code2css` | 中文 | 217 | S | 完整原文 | B | Vibe3D 纯文输入 | Vibe3D 纯文输入 | owner collection | 2026-11-25 |  | 9 | N/A | CC-BY-NC-4.0 |  |  |
+| 205 | `x25-H-11` | Extended | 流浪地球｜行星发动机点火，地球飞出太阳系 | 3D | `3d`, `animation-video`, `frontend` | `code23d`, `code2video`, `code2world`, `code2html`, `code2frontend` | 中文 | 411 | M | 完整原文 | B | Vibe3D 纯文输入 | Vibe3D 纯文输入 | owner collection | 2026-11-25 |  | 9 | N/A | CC-BY-NC-4.0 |  |  |
+| 206 | `x25-H-12` | Extended | 阿凡达｜潘多拉悬浮哈利路亚群山 | 3D | `3d`, `animation-video`, `frontend` | `code23d`, `code2video`, `code2html`, `code2frontend` | 中文 | 350 | S | 完整原文 | B | Vibe3D 纯文输入 | Vibe3D 纯文输入 | owner collection | 2026-11-25 |  | 9 | N/A | CC-BY-NC-4.0 |  |  |
+| 207 | `x25-H-13` | Extended | 2001 太空漫游｜黑色方碑 Monolith 与星门穿越 | 3D | `3d`, `animation-video`, `frontend` | `code23d`, `code2video`, `code2html`, `code2frontend` | 中文 | 343 | S | 完整原文 | B | Vibe3D 纯文输入 | Vibe3D 纯文输入 | owner collection | 2026-11-25 |  | 9 | N/A | CC-BY-NC-4.0 |  |  |
+| 208 | `x25-H-14` | Extended | 指环王｜魔多末日火山与索伦巨眼 | 3D | `3d`, `animation-video`, `frontend` | `code23d`, `code2video`, `code2world`, `code2html`, `code2frontend` | 中文 | 331 | S | 完整原文 | B | Vibe3D 纯文输入 | Vibe3D 纯文输入 | owner collection | 2026-11-25 |  | 9 | N/A | CC-BY-NC-4.0 |  |  |
+| 209 | `x25-H-15` | Extended | 复仇者联盟｜纽约大战奇塔瑞传送门 | 3D | `3d`, `frontend` | `code23d`, `code2html`, `code2frontend` | 中文 | 332 | S | 完整原文 | B | Vibe3D 纯文输入 | Vibe3D 纯文输入 | owner collection | 2026-11-25 |  | 9 | N/A | CC-BY-NC-4.0 |  |  |
+| 210 | `x25-H-16` | Extended | 哈尔的移动城堡｜行走的机械移动城堡 | 3D | `3d`, `animation-video`, `frontend` | `code23d`, `code2video`, `code2world`, `code2html`, `code2frontend` | 中文 | 320 | S | 完整原文 | B | Vibe3D 纯文输入 | Vibe3D 纯文输入 | owner collection | 2026-11-25 |  | 9 | N/A | CC-BY-NC-4.0 |  |  |
+| 211 | `x25-H-17` | Extended | 星际｜土星环巨型旋转环形空间站 | 3D | `3d`, `frontend` | `code23d`, `code2world`, `code2html`, `code2frontend` | 中文 | 309 | S | 完整原文 | B | Vibe3D 纯文输入 | Vibe3D 纯文输入 | owner collection | 2026-11-25 |  | 9 | N/A | CC-BY-NC-4.0 |  |  |
+| 212 | `x25-H-18` | Extended | 进击的巨人｜超大型巨人破墙 | 3D | `3d`, `animation-video`, `frontend` | `code23d`, `code2video`, `code2html`, `code2frontend` | 中文 | 287 | S | 完整原文 | B | Vibe3D 纯文输入 | Vibe3D 纯文输入 | owner collection | 2026-11-25 |  | 9 | N/A | CC-BY-NC-4.0 |  |  |
+| 213 | `x25-H-19` | Extended | 银河护卫队｜Knowhere 天神族头颅空间站 | 3D | `3d`, `frontend` | `code23d`, `code2html`, `code2frontend` | 中文 | 303 | S | 完整原文 | B | Vibe3D 纯文输入 | Vibe3D 纯文输入 | owner collection | 2026-11-25 |  | 9 | N/A | CC-BY-NC-4.0 |  |  |
+| 214 | `x25-H-20` | Extended | 攻壳机动队｜赛博朋克全息雨夜都市 | 3D | `3d`, `frontend` | `code23d`, `code2html`, `code2frontend` | 中文 | 294 | S | 完整原文 | B | Vibe3D 纯文输入 | Vibe3D 纯文输入 | owner collection | 2026-11-25 |  | 9 | N/A | CC-BY-NC-4.0 |  |  |
+| 215 | `x25-H-21` | Extended | 哈利波特｜霍格沃茨城堡与摄魂怪黑雾来袭 | 3D | `3d`, `animation-video`, `frontend` | `code23d`, `code2video`, `code2html`, `code2frontend` | 中文 | 292 | S | 完整原文 | B | Vibe3D 纯文输入 | Vibe3D 纯文输入 | owner collection | 2026-11-25 |  | 9 | N/A | CC-BY-NC-4.0 |  |  |
+| 216 | `x25-H-22` | Extended | 千与千寻｜海上列车镜面水面（Canvas 2D） | 生成艺术 | `3d`, `animation-video`, `frontend`, `visualization` | `code23d`, `code2video`, `code2canvas`, `code2html`, `code2frontend`, `code2css` | 中文 | 317 | S | 完整原文 | B | Vibe3D 纯文输入 | Vibe3D 纯文输入 | owner collection | 2026-11-25 |  | 9 | N/A | CC-BY-NC-4.0 |  |  |
+| 217 | `x25-H-23` | Extended | EVA｜第三次冲击 生命之树红色粒子 | 生成艺术 | `3d`, `animation-video`, `frontend`, `visualization` | `code23d`, `code2video`, `code2canvas`, `code2html`, `code2frontend`, `code2css` | 中文 | 295 | S | 完整原文 | B | Vibe3D 纯文输入 | Vibe3D 纯文输入 | owner collection | 2026-11-25 |  | 9 | N/A | CC-BY-NC-4.0 |  |  |
+| 218 | `x25-H-24` | Extended | 你的名字｜彗星分裂坠落夜空 | 生成艺术 | `3d`, `animation-video`, `frontend`, `visualization` | `code23d`, `code2video`, `code2canvas`, `code2html`, `code2frontend`, `code2css` | 中文 | 271 | S | 完整原文 | B | Vibe3D 纯文输入 | Vibe3D 纯文输入 | owner collection | 2026-11-25 |  | 9 | N/A | CC-BY-NC-4.0 |  |  |
+| 219 | `x25-H-25` | Extended | 黑客帝国｜数字雨矩阵代码雨 | 生成艺术 | `3d`, `animation-video`, `frontend`, `visualization` | `code23d`, `code2video`, `code2canvas`, `code2html`, `code2frontend`, `code2css` | 中文 | 262 | S | 完整原文 | B | Vibe3D 纯文输入 | Vibe3D 纯文输入 | owner collection | 2026-11-25 |  | 9 | N/A | CC-BY-NC-4.0 |  |  |
+| 220 | `x25-H-26` | Extended | 咒术回战｜无量空处 领域展开网格 | 生成艺术 | `3d`, `animation-video`, `frontend`, `visualization` | `code23d`, `code2video`, `code2canvas`, `code2html`, `code2frontend`, `code2css` | 中文 | 263 | S | 完整原文 | B | Vibe3D 纯文输入 | Vibe3D 纯文输入 | owner collection | 2026-11-25 |  | 9 | N/A | CC-BY-NC-4.0 |  |  |
+| 221 | `x25-H-27` | Extended | 天气之子｜穿透云层的光柱，漂浮雨水反转 | 生成艺术 | `3d`, `animation-video`, `frontend`, `visualization` | `code23d`, `code2video`, `code2canvas`, `code2html`, `code2frontend`, `code2css` | 中文 | 265 | S | 完整原文 | B | Vibe3D 纯文输入 | Vibe3D 纯文输入 | owner collection | 2026-11-25 |  | 9 | N/A | CC-BY-NC-4.0 |  |  |
+| 222 | `x25-H-28` | Extended | 哪吒｜混天绫漫天翻涌，红莲火焰扩散 | 生成艺术 | `3d`, `animation-video`, `frontend`, `visualization` | `code23d`, `code2video`, `code2canvas`, `code2html`, `code2frontend`, `code2css` | 中文 | 246 | S | 完整原文 | B | Vibe3D 纯文输入 | Vibe3D 纯文输入 | owner collection | 2026-11-25 |  | 9 | N/A | CC-BY-NC-4.0 |  |  |
+| 223 | `x25-H-29` | Extended | 纯 CSS 海边日落潮汐涨落 | 网页 | `animation-video`, `frontend` | `code2video`, `code2html`, `code2frontend`, `code2css` | 中文 | 251 | S | 完整原文 | B | Vibe3D 纯文输入 | Vibe3D 纯文输入 | owner collection | 2026-11-25 |  | 9 | N/A | CC-BY-NC-4.0 |  |  |
+| 224 | `x25-H-30` | Extended | 纯 CSS 萤火森林夜晚 | 网页 | `animation-video`, `frontend` | `code2video`, `code2html`, `code2frontend`, `code2css` | 中文 | 235 | S | 完整原文 | B | Vibe3D 纯文输入 | Vibe3D 纯文输入 | owner collection | 2026-11-25 |  | 9 | N/A | CC-BY-NC-4.0 |  |  |
+| 225 | `x25-H-31` | Extended | 纯 CSS 樱花飘落山坡 | 网页 | `animation-video`, `frontend` | `code2video`, `code2html`, `code2frontend`, `code2css` | 中文 | 217 | S | 完整原文 | B | Vibe3D 纯文输入 | Vibe3D 纯文输入 | owner collection | 2026-11-25 |  | 9 | N/A | CC-BY-NC-4.0 |  |  |
+| 226 | `x25-H-32` | Extended | 纯 CSS 篝火夜晚露营 | 网页 | `animation-video`, `frontend` | `code2video`, `code2html`, `code2frontend`, `code2css` | 中文 | 224 | S | 完整原文 | B | Vibe3D 纯文输入 | Vibe3D 纯文输入 | owner collection | 2026-11-25 |  | 9 | N/A | CC-BY-NC-4.0 |  |  |
+| 227 | `x25-H-33` | Extended | 超写实的旧金山金门大桥交互式 3D 体验 | 3D | `3d`, `frontend` | `code23d`, `code2html` | 中文 | 321 | S | 完整原文 | B | Vibe3D 纯文输入 | Vibe3D 纯文输入 | owner collection | 2026-11-25 |  | 9 | N/A | CC-BY-NC-4.0 |  |  |
+| 228 | `x25-H-34` | Extended | 交互式 3D 还原山西应县木塔 | 3D | `3d`, `frontend` | `code23d`, `code2html`, `code2frontend` | 中文 | 189 | S | 完整原文 | B | Vibe3D 纯文输入 | Vibe3D 纯文输入 | owner collection | 2026-11-25 |  | 9 | N/A | CC-BY-NC-4.0 |  |  |
+| 229 | `x25-H-35` | Extended | 一艘可完全探索的星舰 | 3D | `3d`, `game` | `code2game`, `code23d` | 中文 | 76 | S | short_verbatim | B | Vibe3D 纯文输入 | Vibe3D 纯文输入 | owner collection | 2026-11-25 |  | 9 | N/A | CC-BY-NC-4.0 |  |  |
+| 230 | `x25-H-36` | Extended | 3D Rubik's Cube simulation（自动求解） | 游戏 | `3d`, `frontend` | `code23d`, `code2html`, `code2frontend` | 英文 | 161 | S | 完整原文 | B | Vibe3D 纯文输入 | Vibe3D 纯文输入 | owner collection | 2026-11-25 |  | 9 | N/A | CC-BY-NC-4.0 |  |  |
+| 231 | `x25-H-37` | Extended | Solar System Explorer 单页应用 | 网页 | `3d`, `frontend` | `code23d`, `code2html`, `code2frontend` | 英文 | 292 | S | 完整原文 | B | Vibe3D 纯文输入 | Vibe3D 纯文输入 | owner collection | 2026-11-25 |  | 9 | N/A | CC-BY-NC-4.0 |  |  |
+| 232 | `x25-H-39` | Extended | 3D 乐高拼砖沙盒 | 游戏 | `3d`, `frontend` | `code23d`, `code2html`, `code2frontend` | 中文 | 87 | S | short_verbatim | B | Vibe3D 纯文输入 | Vibe3D 纯文输入 | owner collection | 2026-11-25 |  | 9 | N/A | CC-BY-NC-4.0 |  |  |
+| 233 | `x25-H-40` | Extended | 纯 SVG 等距互动岛屿地图 | 生成艺术 | `frontend`, `svg-art` | `code2svg`, `code2html` | 中文 | 105 | S | short_verbatim | B | Vibe3D 纯文输入 | Vibe3D 纯文输入 | owner collection | 2026-11-25 |  | 9 | N/A | CC-BY-NC-4.0 |  |  |
+| 234 | `x25-H-41` | Extended | 太阳系模拟器（N 体数值积分） | 可视化 | `3d`, `visualization` | `code23d`, `code2canvas` | 中文 | 125 | S | short_verbatim | B | Vibe3D 纯文输入 | Vibe3D 纯文输入 | owner collection | 2026-11-25 |  | 9 | N/A | CC-BY-NC-4.0 |  |  |
+| 235 | `x25-H-42` | Extended | 浏览器内 3D CAD 编辑器 + STL 导出 | 工具 | `3d`, `frontend` | `code23d`, `code2html` | 中文 | 131 | S | short_verbatim | B | Vibe3D 纯文输入 | Vibe3D 纯文输入 | owner collection | 2026-11-25 |  | 9 | N/A | CC-BY-NC-4.0 |  |  |
+| 236 | `x25-H-43` | Extended | WebGL 流体模拟（节拍同步） | 可视化 | `3d`, `animation-video`, `frontend` | `code23d`, `code2video`, `code2html`, `code2frontend` | 中文 | 87 | S | short_verbatim | B | Vibe3D 纯文输入 | Vibe3D 纯文输入 | owner collection | 2026-11-25 |  | 9 | N/A | CC-BY-NC-4.0 |  |  |
+| 237 | `x25-H-44` | Extended | 3D 椋鸟群飞 boids + 手势 + 生成式配乐 | 生成艺术 | `3d`, `audio` | `code23d`, `code2audio` | 中文 | 129 | S | short_verbatim | B | Vibe3D 纯文输入 | Vibe3D 纯文输入 | owner collection | 2026-11-25 |  | 9 | N/A | CC-BY-NC-4.0 |  |  |
+| 238 | `x25-H-45` | Extended | 3D 体素玩具箱应用 | 工具 | `3d`, `frontend` | `code23d`, `code2html` | 中文 | 99 | S | short_verbatim | B | Vibe3D 纯文输入 | Vibe3D 纯文输入 | owner collection | 2026-11-25 |  | 9 | N/A | CC-BY-NC-4.0 |  |  |
+| 239 | `x25-H-46` | Extended | Biome Lab 程序化生态沙盒 | 工具 | `3d`, `visualization` | `code23d`, `code2viz`, `code2world` | 英文 | 982 | M | 完整原文 | B | Vibe3D 纯文输入 | Vibe3D 纯文输入 | owner collection | 2026-11-25 |  | 9 | N/A | CC-BY-NC-4.0 |  |  |
+| 240 | `x25-H-48` | Extended | twigl 新哥特式塔楼城市着色器 | 生成艺术 | `3d`, `frontend` | `code23d`, `code2html` | 中文 | 68 | S | short_verbatim | B | Vibe3D 纯文输入 | Vibe3D 纯文输入 | owner collection | 2026-11-25 |  | 9 | N/A | CC-BY-NC-4.0 |  |  |
+| 241 | `x25-H-50` | Extended | Three.js 粒子背景（5000 粒子 + bloom） | 前端 | `3d`, `animation-video`, `frontend`, `visualization` | `code23d`, `code2video`, `code2canvas`, `code2html`, `code2frontend` | 英文 | 178 | S | 完整原文 | B | Vibe3D 纯文输入 | Vibe3D 纯文输入 | owner collection | 2026-11-25 |  | 9 | N/A | CC-BY-NC-4.0 |  |  |
+| 242 | `x25-H-51` | Extended | Three.js 等距场景射线拾取 | 前端 | `3d`, `frontend` | `code23d`, `code2html` | 英文 | 163 | S | 完整原文 | B | Vibe3D 纯文输入 | Vibe3D 纯文输入 | owner collection | 2026-11-25 |  | 9 | N/A | CC-BY-NC-4.0 |  |  |
+| 243 | `x25-H-52` | Extended | Three.js 点云场景 | 可视化 | `3d`, `frontend` | `code23d`, `code2html`, `code2frontend` | 英文 | 215 | S | 完整原文 | B | Vibe3D 纯文输入 | Vibe3D 纯文输入 | owner collection | 2026-11-25 |  | 9 | N/A | CC-BY-NC-4.0 |  |  |
+| 244 | `x25-H-54` | Extended | 「城市命脉」Metaball 数据艺术 | 可视化 | `frontend`, `visualization` | `code2viz`, `code2html` | 中文 | 78 | S | short_verbatim | B | Vibe3D 纯文输入 | Vibe3D 纯文输入 | owner collection | 2026-11-25 |  | 9 | N/A | CC-BY-NC-4.0 |  |  |
+| 245 | `x25-H-58` | Extended | 推理芯片四十二年周期交互研究网页 | 可视化 | `frontend`, `visualization` | `code2viz`, `code2html`, `code2frontend` | 中文 | 333 | S | 完整原文 | B | Vibe3D 纯文输入 | Vibe3D 纯文输入 | owner collection | 2026-11-25 |  | 9 | N/A | CC-BY-NC-4.0 |  |  |
+| 246 | `x25-H-65` | Extended | SpaceX Launch Atlas 交互式 3D 地球 | 可视化 | `3d`, `frontend` | `code23d`, `code2html`, `code2frontend` | 英文 | 537 | M | 完整原文 | B | Vibe3D 纯文输入 | Vibe3D 纯文输入 | owner collection | 2026-11-25 |  | 9 | N/A | CC-BY-NC-4.0 |  |  |
+| 247 | `x25-H-66` | Extended | 1660 年新阿姆斯特丹历史地图复刻 | 3D | `frontend` | `code2frontend`, `code2html` | 英文 | 110 | S | short_verbatim | B | Vibe3D 纯文输入 | Vibe3D 纯文输入 | owner collection | 2026-11-25 |  | 9 | N/A | CC-BY-NC-4.0 |  |  |
+| 248 | `x25-H-67` | Extended | 实时交互 3D 粒子银河系 | 3D | `3d`, `frontend` | `code23d`, `code2html` | 中文 | 25 | S | short_verbatim | B | Vibe3D 纯文输入 | Vibe3D 纯文输入 | owner collection | 2026-11-25 |  | 9 | N/A | CC-BY-NC-4.0 |  |  |
+| 249 | `x25-H-68` | Extended | 指环王开篇第一段 3D 动画 | 动画 | `3d`, `animation-video` | `code23d`, `code2video` | 中文 | 39 | S | short_verbatim | B | Vibe3D 纯文输入 | Vibe3D 纯文输入 | owner collection | 2026-11-25 |  | 9 | N/A | CC-BY-NC-4.0 |  |  |
+| 250 | `x25-H-69` | Extended | 指环王开篇第一段 Three.js 渲染 | 动画 | `3d`, `frontend` | `code23d`, `code2html` | 中文 | 24 | S | short_verbatim | B | Vibe3D 纯文输入 | Vibe3D 纯文输入 | owner collection | 2026-11-25 |  | 9 | N/A | CC-BY-NC-4.0 |  |  |
+| 251 | `x25-H-70` | Extended | 音乐封面 3D 浏览器 | 工具 | `3d`, `animation-video` | `code23d`, `code2video` | 中文 | 71 | S | short_verbatim | B | Vibe3D 纯文输入 | Vibe3D 纯文输入 | owner collection | 2026-11-25 |  | 9 | N/A | CC-BY-NC-4.0 |  |  |
+| 252 | `x25-H-71` | Extended | 复刻 Karpathy 指环王 3D Demo 呈现桃花源记 | 3D | `3d`, `frontend` | `code23d`, `code2html` | 中文 | 36 | S | short_verbatim | B | Vibe3D 纯文输入 | Vibe3D 纯文输入 | owner collection | 2026-11-25 |  | 9 | N/A | CC-BY-NC-4.0 |  |  |
+| 253 | `x25-H-75` | Extended | Mini World 给 4 岁半孩子的小星球 3D 游戏 | 游戏 | `3d`, `game` | `code2game`, `code23d`, `code2world` | 英文 | 1029 | M | 完整原文 | B | Vibe3D 纯文输入 | Vibe3D 纯文输入 | owner collection | 2026-11-25 |  | 9 | N/A | CC-BY-NC-4.0 |  |  |
+| 254 | `x25-H-76` | Extended | 电动机工作原理 3D 动画（磁场/电子） | 3D | `3d`, `animation-video`, `frontend` | `code23d`, `code2video`, `code2html`, `code2frontend` | 英文 | 171 | S | 完整原文 | B | Vibe3D 纯文输入 | Vibe3D 纯文输入 | owner collection | 2026-11-25 |  | 9 | N/A | CC-BY-NC-4.0 |  |  |
+| 255 | `x25-H-77` | Extended | 雨夜便利店街角微缩 3D 场景 | 3D | `3d`, `animation-video` | `code23d`, `code2video` | 中文 | 360 | S | 完整原文 | B | Vibe3D 纯文输入 | Vibe3D 纯文输入 | owner collection | 2026-11-25 |  | 9 | N/A | CC-BY-NC-4.0 |  |  |
+| 256 | `x25-H-78` | Extended | Sunset Bay 霓虹海岸驾驶游戏 | 游戏 | `3d`, `game` | `code2game`, `code23d` | 英文 | 124 | S | short_verbatim | B | Vibe3D 纯文输入 | Vibe3D 纯文输入 | owner collection | 2026-11-25 |  | 9 | N/A | CC-BY-NC-4.0 |  |  |
+| 257 | `x25-H-79` | Extended | 3D 机甲展示 + 可玩射击网页游戏 | 游戏 | `3d`, `frontend`, `game` | `code2game`, `code23d`, `code2html`, `code2frontend` | 中文 | 173 | S | 完整原文 | B | Vibe3D 纯文输入 | Vibe3D 纯文输入 | owner collection | 2026-11-25 |  | 9 | N/A | CC-BY-NC-4.0 |  |  |
+| 258 | `x25-H-80` | Extended | 云顶天宫：浮空岛上的中国寺庙像素方块世界 | 3D | `3d` | `code23d`, `code2world` | 英文 | 488 | M | 完整原文 | B | Vibe3D 纯文输入 | Vibe3D 纯文输入 | owner collection | 2026-11-25 |  | 9 | N/A | CC-BY-NC-4.0 |  |  |
 
 ## 三、分层统计
 
-- 语言：{'中文': 27, '英文': 153}
-- 长度档：{'长 (1500–2999)': 11, '中 (400–1499)': 123, '短 (<400)': 35, '超长 (≥3000)': 11}
-- Prompt 状态：{'完整原文': 124, '上下文推断': 17, '仓库摘录': 13, 'thread': 16, '转录': 5, 'original': 4, 'partial': 1}
-- 证据级别：{'A': 102, 'B': 78}
-- 来源组：{'社区单帖': 47, 'Claude Sonnet 5.5': 2, 'GPT-6 · Astra': 17, 'GPT-6 · Sol': 2, 'Opus-100 合辑': 100, 'Claude Haiku 5.5': 2, 'Gemini 4 Argon': 3, 'GPT-6 · Luna': 1, 'Claude Fable 5.2': 3, 'Claude Fable 5.2（含 Felix Rieseberg 原帖）': 1, 'Kimi K3.1 Pro': 1, 'GPT-6.1 Sol Max': 1}
-- 集合：{'Core-111': 111, 'Extended': 69}
-- 参考类型：{'runnable-html': 111, 'post-only': 69}
-- 参考自检：{'review': 25, 'n/a': 69, 'pass': 86}（n/a 不计入通过率）
-- 复合度（命中赛道数）：{1: 26, 2: 59, 3: 53, 4: 27, 5: 11, 6: 3, 7: 1}
+- 语言：{'中文': 85, '英文': 172, '中英混合': 1}
+- 长度档：{'长 (1500–2999)': 11, '中 (400–1499)': 131, '短 (<400)': 105, '超长 (≥3000)': 11}
+- Prompt 状态：{'完整原文': 172, '上下文推断': 17, '仓库摘录': 13, 'thread': 16, '转录': 5, 'original': 4, 'partial': 1, 'short_verbatim': 30}
+- 证据级别：{'A': 102, 'B': 156}
+- 来源组：{'社区单帖': 47, 'Claude Sonnet 5.5': 2, 'GPT-6 · Astra': 17, 'GPT-6 · Sol': 2, 'Opus-100 合辑': 100, 'Claude Haiku 5.5': 2, 'Gemini 4 Argon': 3, 'GPT-6 · Luna': 1, 'Claude Fable 5.2': 3, 'Claude Fable 5.2（含 Felix Rieseberg 原帖）': 1, 'Kimi K3.1 Pro': 4, 'GPT-6.1 Sol Max': 1, 'GPT-6.2 Sol': 6, 'GPT-6.1 Sol': 5, 'GPT-6.2 Astra': 2, 'Vibe3D 纯文输入': 62}
+- 集合：{'Core-111': 111, 'Extended': 147}
+- 参考类型：{'runnable-html': 111, 'post-only': 147}
+- 参考自检：{'review': 25, 'n/a': 147, 'pass': 86}（n/a 不计入通过率）
+- 复合度（命中赛道数）：{1: 30, 2: 107, 3: 71, 4: 35, 5: 11, 6: 3, 7: 1}
 
 > 机读版见 `tasks/taxonomy.json`；可筛选/可展开 Prompt 全文的交互版见 `docs/task-catalog.html`（另含「分类标签」页与交叉矩阵）。

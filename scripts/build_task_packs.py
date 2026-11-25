@@ -3,8 +3,9 @@
 
 Default: `tasks/manifest.json` + `data/corpus/cases.jsonl`. With
 `--extended-only`: `tasks/manifest_extended.json` + `cases.jsonl` +
-`data/corpus/extension.jsonl`. The two modes never touch each other's packs,
-so the paper's reproducible Core-111 census is preserved.
+`data/corpus/extension.jsonl` + the versioned 2026-11-25 X/Vibe3D batch
+(`data/corpus/x_batch_2026-11-25.jsonl`). The two modes never touch each
+other's packs, so the paper's reproducible Core-111 census is preserved.
 
 This script only writes *derived* files; it never invents prompt text and never
 copies a third-party artifact into the repository.
@@ -33,6 +34,7 @@ MANIFEST = ROOT / "tasks" / "manifest.json"
 EXT_MANIFEST = ROOT / "tasks" / "manifest_extended.json"
 CORPUS = ROOT / "data" / "corpus" / "cases.jsonl"
 EXT_CORPUS = ROOT / "data" / "corpus" / "extension.jsonl"
+X_BATCH_CORPUS = ROOT / "data" / "corpus" / "x_batch_2026-11-25.jsonl"
 TASKS = ROOT / "tasks"
 
 # Conservative default. Contamination split is recomputed at run time against
@@ -167,7 +169,7 @@ def build(dry_run: bool, keep_assertions: bool, force_assertions: bool,
                   "Run scripts/expand_tasks.py --apply first.", file=sys.stderr)
             return 2
         manifest = json.loads(EXT_MANIFEST.read_text(encoding="utf-8"))
-        cases = load_jsonl(CORPUS, EXT_CORPUS)
+        cases = load_jsonl(CORPUS, EXT_CORPUS, X_BATCH_CORPUS)
         corpus_label = "data/corpus/extension.jsonl + cases.jsonl"
     else:
         manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
@@ -210,11 +212,23 @@ def build(dry_run: bool, keep_assertions: bool, force_assertions: bool,
         if not ref_dir.is_dir():
             ref_dir.mkdir(parents=True)
 
+        # Provenance comment stays stable for the pinned Core-111 / Extended-147
+        # packs (so a refresh is byte-idempotent) while naming the actual
+        # corpus file for any later admitted batch. The prompt is pinned by `id`.
+        if mrec.get("source_origin") == "x_batch_2026-11-25":
+            provenance = "data/corpus/x_batch_2026-11-25.jsonl"
+        else:
+            provenance = corpus_label
         (tdir / "prompt.md").write_text(
-            f"<!-- verbatim prompt from {corpus_label} "
+            f"<!-- verbatim prompt from {provenance} "
             f"(id={tid}, set={'extended' if is_ext else 'core'}) -->\n\n"
             f"{prompt.strip()}\n", encoding="utf-8")
 
+        # `generate_assertions.py` owns assertion_target / full_measurement.
+        # A refresh must preserve them, not reset them to template defaults.
+        prev_pack = tdir / "task.json"
+        prev = json.loads(prev_pack.read_text(encoding="utf-8")) \
+            if prev_pack.is_file() else {}
         dims = infer_four_dimensions(prompt, mrec.get("code2_tags") or [])
         task_json = {
             "task_id": tid,
@@ -237,8 +251,8 @@ def build(dry_run: bool, keep_assertions: bool, force_assertions: bool,
             "contamination_split_note": (
                 f"computed at run time against each configuration's training_cutoff "
                 f"(cebench/evaluation.py); baseline cutoff for documentation: {BASELINE_CUTOFF}"),
-            "assertion_target": 12,
-            "full_measurement": False,
+            "assertion_target": prev.get("assertion_target", 12),
+            "full_measurement": prev.get("full_measurement", False),
             "license": rec.get("contentLicense") or "see reference/SOURCE.md",
             "attribution": rec.get("attribution") or {},
             "notes": "Prompt text is fetched from the pinned corpus and is not vendored upstream; "

@@ -9,7 +9,8 @@ Inputs (all local, pinned):
     tasks/manifest.json              Core-111 (funnel 739 -> 305 -> 111)
     tasks/manifest_extended.json      Extended set (verbatim-prompt evidence only)
     data/corpus/cases.jsonl          pinned upstream corpus (739 records)
-    data/corpus/extension.jsonl      Extended prompt records
+    data/corpus/extension.jsonl      Extended prompt records (2026-11-23)
+    data/corpus/x_batch_2026-11-25.jsonl  X/Vibe3D Extended batch (2026-11-25)
     tasks/<id>/task.json             materialised pack metadata
     tasks/<id>/assertions/task.json per-task L1 assertions
     tasks/<id>/assertions/meta_test.json  reference-as-oracle check
@@ -138,7 +139,8 @@ def load() -> list[dict]:
 
     corpus: dict[str, dict] = {}
     for corpus_file in (ROOT / "data" / "corpus" / "cases.jsonl",
-                        ROOT / "data" / "corpus" / "extension.jsonl"):
+                        ROOT / "data" / "corpus" / "extension.jsonl",
+                        ROOT / "data" / "corpus" / "x_batch_2026-11-25.jsonl"):
         if not corpus_file.is_file():
             continue
         for line in corpus_file.read_text(encoding="utf-8").splitlines():
@@ -341,7 +343,8 @@ def write_md(rows: list[dict], tax: dict) -> None:
         f"（Core-111 {sum(1 for r in rows if r['set']=='core')} + "
         f"Extended {sum(1 for r in rows if r['set']=='extended')}）",
         "> 数据源：`tasks/manifest.json` + `tasks/manifest_extended.json` + "
-        "pinned `data/corpus/cases.jsonl` / `extension.jsonl` + 任务包。",
+        "pinned `data/corpus/cases.jsonl` / `extension.jsonl` / "
+        "`x_batch_2026-11-25.jsonl` + 任务包。",
         "> Core-111 有可运行 `.html` 参考产物；Extended 仅有逐字 Prompt 与原帖，"
         "无 reference oracle，参考自检标记为 `n/a`。",
         "",
@@ -552,7 +555,7 @@ tr.pick:hover td,tr.pick:hover th{background:var(--accent-soft)}
 <header>
   <h1>CE-Bench · __TOTAL__ 题总表与分类标签</h1>
   <p>数据源：<code>tasks/manifest.json</code>（Core-111）＋ <code>tasks/manifest_extended.json</code>（Extended）
-     ＋ pinned 语料 <code>data/corpus/cases.jsonl</code> / <code>extension.jsonl</code> ＋ __TOTAL__ 个任务包 ｜
+     ＋ pinned 语料 <code>data/corpus/cases.jsonl</code> / <code>extension.jsonl</code> / <code>x_batch_2026-11-25.jsonl</code> ＋ __TOTAL__ 个任务包 ｜
      生成：<span id="stamp"></span> ｜ 三轴标签：赛道 / 主类 / 技术标签</p>
   <p class="tiny">两层集合：<b>Core-111</b> 有可运行 <code>.html</code> 参考产物，可做 reference-oracle 自检；
      <b>Extended</b> 仅凭逐字 Prompt 纳入，无 oracle，自检标记 <code>N/A</code>（不进入 PASS 率分母）。可下拉筛选。</p>

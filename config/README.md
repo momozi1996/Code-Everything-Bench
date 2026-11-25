@@ -40,7 +40,7 @@ set -a; source .env; set +a
 
 **v0.7 (2026-11-24):** the target cap was raised 96k → **512k** and the per-request
 timeout to **3600 s**; cost is explicitly not a constraint for the full batch, the
-priority is that all 180 tasks can deliver a complete artifact. The cap is a ceiling,
+priority is that all 258 tasks can deliver a complete artifact. The cap is a ceiling,
 not a target — models normally stop far earlier. If a provider rejects a 512k
 `max_tokens` (some expose a smaller hard limit), override `params.max_tokens` for
 that one model and record the deviation in the run plan. Published `results/<run-id>/config.json`
@@ -61,9 +61,9 @@ model; the two regimes produce two separate leaderboards that are never merged.
 python3 scripts/run_evaluation.py --check         # schema + no literal keys + env vars present
 python3 scripts/run_evaluation.py --dry-run       # full pipeline, no network, no results written
 python3 scripts/run_evaluation.py --task case-085 --limit 1   # one real task first
-python3 scripts/run_evaluation.py                 # full 180 x N x repetitions batch (all)
+python3 scripts/run_evaluation.py                 # full 258 x N x repetitions batch (all)
 python3 scripts/run_evaluation.py --task-set core  # paper census: 111 tasks
-python3 scripts/run_evaluation.py --task-set extended  # 69 label-balanced tasks
+python3 scripts/run_evaluation.py --task-set extended  # 147 extended tasks
 ```
 
 `--check` never calls an API. `--dry-run` uses a stub client whose output is
